@@ -122,13 +122,6 @@ const SarvasvaConfigs: UIConfig = {
           label: 'Sabha Hall',
           state: '33',
         },
-        event: {
-          kind: 'toggle',
-          title: 'Source',
-          icon: icon({ name: 'tent' }),
-          label: 'Spare',
-          state: '34',
-        },
       },
     },
     VIDEO: {
