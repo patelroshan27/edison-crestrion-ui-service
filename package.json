@@ -1,0 +1,117 @@
+{
+  "name": "@msalia/crestron-ch5-react",
+  "version": "0.2.0",
+  "author": "Mukund Salia <msalia>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/msalia/crestron-ch5-react.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "@crestron/ch5-crcomlib": "^1.0.0",
+    "@crestron/ch5-utilities-cli": "^0.1.47",
+    "@crestron/ch5-webxpanel": "^1.0.3",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^1.7.15",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.1",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.27",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "axios": "^1.4.0",
+    "classnames": "^2.3.1",
+    "fast-xml-parser": "^4.2.5",
+    "moment": "^2.29.3",
+    "moment-timezone": "^0.5.34",
+    "prettier": "^2.8.8",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.3.1",
+    "react-jss": "^10.9.0",
+    "react-range": "^1.8.13",
+    "react-scripts": "5.0.1",
+    "recoil": "^0.7.2",
+    "tailwindcss": "^3.3.2",
+    "typescript": "*",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+    "shayona:build": "REACT_APP_ROOM_CONFIG_NAME=shayona react-scripts build",
+    "shayona:archive": "REACT_APP_ROOM_CONFIG_NAME=shayona ch5-cli archive -p shayona -d build -o publish",
+    "shayona:deploy": "REACT_APP_ROOM_CONFIG_NAME=shayona ch5-cli deploy -H tshostname -t touchscreen publish/shayona.ch5z",
+    "studio:build": "REACT_APP_ROOM_CONFIG_NAME=studio react-scripts build",
+    "studio:archive": "REACT_APP_ROOM_CONFIG_NAME=studio ch5-cli archive -p studio -d build -o publish",
+    "studio:deploy": "REACT_APP_ROOM_CONFIG_NAME=studio ch5-cli deploy -H tshostname -t touchscreen publish/studio.ch5z",
+    "theater:build": "REACT_APP_ROOM_CONFIG_NAME=theater react-scripts build",
+    "theater:archive": "REACT_APP_ROOM_CONFIG_NAME=theater ch5-cli archive -p theater -d build -o publish",
+    "theater:deploy": "REACT_APP_ROOM_CONFIG_NAME=theater ch5-cli deploy -H tshostname -t touchscreen publish/theater.ch5z",
+    "aksharpith:build": "REACT_APP_ROOM_CONFIG_NAME=aksharpith react-scripts build",
+    "aksharpith:archive": "REACT_APP_ROOM_CONFIG_NAME=aksharpith ch5-cli archive -p aksharpith -d build -o publish",
+    "aksharpith:deploy": "REACT_APP_ROOM_CONFIG_NAME=aksharpith ch5-cli deploy -H tshostname -t touchscreen publish/aksharpith.ch5z",
+    "haveli:build": "REACT_APP_ROOM_CONFIG_NAME=haveli react-scripts build",
+    "haveli:archive": "REACT_APP_ROOM_CONFIG_NAME=haveli ch5-cli archive -p haveli -d build -o publish",
+    "haveli:deploy": "REACT_APP_ROOM_CONFIG_NAME=haveli ch5-cli deploy -H tshostname -t touchscreen publish/haveli.ch5z",
+    "sarvasvaBedroom:build": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaBedroom react-scripts build",
+    "sarvasvaBedroom:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaBedroom ch5-cli archive -p sarvasvaBedroom -d build -o publish",
+    "sarvasvaBedroom:deploy": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaBedroom ch5-cli deploy -H 10.21.21.203 -t touchscreen publish/sarvasvaBedroom.ch5z --slow-mode",
+    "sarvasvaBedroom": "yarn sarvasvaBedroom:build; yarn sarvasvaBedroom:archive; yarn sarvasvaBedroom:deploy",
+    "sarvasvaStudyRoom:build": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaStudyRoom react-scripts build",
+    "sarvasvaStudyRoom:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaStudyRoom ch5-cli archive -p sarvasvaStudyRoom -d build -o publish",
+    "sarvasvaStudyRoom:deploy": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaStudyRoom ch5-cli deploy -H 10.21.21.201 -t touchscreen publish/sarvasvaStudyRoom.ch5z --slow-mode",
+    "sarvasvaStudyRoom": "yarn sarvasvaStudyRoom:build; yarn sarvasvaStudyRoom:archive; yarn sarvasvaStudyRoom:deploy",
+    "sarvasvaSunRoom:build": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaSunRoom react-scripts build",
+    "sarvasvaSunRoom:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaSunRoom ch5-cli archive -p sarvasvaSunRoom -d build -o publish",
+    "sarvasvaSunRoom:deploy": "REACT_APP_ROOM_CONFIG_NAME=sarvasvaSunRoom ch5-cli deploy -H 10.21.21.202 -t touchscreen publish/sarvasvaSunRoom.ch5z --slow-mode",
+    "sarvasvaSunRoom": "yarn sarvasvaSunRoom:build; yarn sarvasvaSunRoom:archive; yarn sarvasvaSunRoom:deploy"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "babelMacros": {
+    "fontawesome-svg-core": {
+      "license": "free"
+    }
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^36.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "node-env-run": "^4.0.2"
+  }
+}
