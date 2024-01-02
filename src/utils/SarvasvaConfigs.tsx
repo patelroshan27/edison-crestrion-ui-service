@@ -35,7 +35,7 @@ const SarvasvaConfigs: UIConfig = {
         pharos: {
           kind: 'light',
           icon: icon({ name: 'power-off' }),
-          title: 'Pharos Lights',
+          title: 'LED Lights',
           label: 'On/Off',
           state: '1',
           stateOff: '20',

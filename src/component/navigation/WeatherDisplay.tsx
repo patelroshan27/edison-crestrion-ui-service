@@ -9,8 +9,8 @@ import classNames from 'classnames';
 const SUN_CHECK_HOUR = 22;
 
 const WEATHER_URL = new URL('https://api.open-meteo.com/v1/forecast');
-WEATHER_URL.searchParams.set('latitude', '40.21');
-WEATHER_URL.searchParams.set('longitude', '-74.62');
+WEATHER_URL.searchParams.set('latitude', '40.52');
+WEATHER_URL.searchParams.set('longitude', '-74.41');
 WEATHER_URL.searchParams.set('current_weather', 'true');
 WEATHER_URL.searchParams.set('timezone', 'America/New_York');
 WEATHER_URL.searchParams.set('daily', 'sunrise,sunset');

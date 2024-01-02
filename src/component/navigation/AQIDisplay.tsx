@@ -6,8 +6,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 const AQI_URL = new URL(
   'https://air-quality-api.open-meteo.com/v1/air-quality',
 );
-AQI_URL.searchParams.set('latitude', '40.21');
-AQI_URL.searchParams.set('longitude', '-74.62');
+AQI_URL.searchParams.set('latitude', '40.52');
+AQI_URL.searchParams.set('longitude', '-74.41');
 AQI_URL.searchParams.set('hourly', 'us_aqi');
 AQI_URL.searchParams.set('timezone', 'America/New_York');
 
