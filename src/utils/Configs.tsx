@@ -9,6 +9,7 @@ import SarvasvaBedroomConfigs from 'utils/SarvasvaBedroomConfigs';
 import SarvasvaStudyRoomConfigs from './SarvasvaStudyRoomConfigs';
 import SarvasvaSunRoomConfigs from './SarvasvaSunRoomConfigs';
 import { type IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import SarvasvaConfigs from './SarvasvaConfigs';
 
 export interface CrestronConfigs {
   host: string;
@@ -117,6 +118,8 @@ export function getConfigs(): UIConfig {
       return SarvasvaStudyRoomConfigs;
     case 'sarvasvaSunRoom':
       return SarvasvaSunRoomConfigs;
+    case 'sarvasva':
+      return SarvasvaConfigs;
     // ADD CASES BELOW TO HANDLE OTHER CONFIGS
   }
   return DefaultConfigs;
