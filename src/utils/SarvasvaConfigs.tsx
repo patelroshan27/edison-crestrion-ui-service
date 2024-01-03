@@ -96,14 +96,14 @@ const SarvasvaConfigs: UIConfig = {
         },
         bluetooth: {
           kind: 'toggle',
-          icon: icon({ name: 'signal' }),
+          icon: icon({ name: 'music' }),
           title: 'Source',
           label: 'Bluetooth',
           state: '31',
         },
         media: {
           kind: 'toggle',
-          icon: icon({ name: 'signal' }),
+          icon: icon({ name: 'circle-play' }),
           title: 'Source',
           label: 'Media Player',
           state: '31',
