@@ -60,9 +60,9 @@ const Body: React.FC<Props> = ({ className }: Props) => {
                     setActivePage(pageKey);
                   }}
                   className={classNames(
-                    'flex gap-2 items-center rounded-md px-3 py-2 text-md font-medium',
+                    'flex gap-2 items-center rounded-md px-3 py-2 text-3xl font-medium',
                     isActive
-                      ? 'bg-indigo-100 text-indigo-700'
+                      ? 'bg-indigo-400 text-indigo-900'
                       : 'text-slate-500',
                   )}>
                   <FontAwesomeIcon

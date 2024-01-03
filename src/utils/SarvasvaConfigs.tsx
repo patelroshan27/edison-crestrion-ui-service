@@ -6,7 +6,7 @@ const SarvasvaConfigs: UIConfig = {
   proximityActivity: '71',
   touchActivity: '72',
   crestronConfigs: {
-    host: '10.21.21.202',
+    host: '10.25.20.80',
     ipID: 19,
     port: 41794,
   },
