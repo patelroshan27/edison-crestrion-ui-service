@@ -20,7 +20,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
       <div
         className="flex items-center justify-center rounded-xl shadow-xl"
         style={{ backgroundColor: '#E5DECF' }}>
-        <img alt="hero" src={logoImage} />
+        <img className="max-w-[80%]" alt="hero" src={logoImage} />
       </div>
       <TimeDisplay />
       <div className="h-full flex flex-col gap-3 justify-end w-full">

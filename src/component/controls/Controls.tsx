@@ -17,7 +17,7 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
   return (
     <div
       className={classNames(
-        'grid grid-cols-[repeat(4,minmax(200px,1fr))] auto-rows-[minmax(200px,1fr)]  gap-4',
+        'grid grid-cols-[repeat(4,minmax(200px,1fr))] gap-4 h-full',
         className,
       )}
       style={style}>

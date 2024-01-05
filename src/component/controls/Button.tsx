@@ -1,6 +1,6 @@
 import type { Intensity, LightControlData } from 'utils/Configs';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ConversionValues } from 'utils/Constants';
 import classNames from 'classnames';
 import {
@@ -72,11 +72,14 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
   const feedback = useAnalogState(analogFeedback);
   const hasAnalogFeedback = analogFeedback.length > 0;
 
+  const signalNames = useMemo(() => {
+    return (intensityStates ?? []).map((intensity) =>
+      typeof intensity === 'string' ? intensity : intensity.state,
+    );
+  }, [intensityStates]);
   const feedbacksForIntensities = useMultipleSignalStates(
     'boolean',
-    (intensityStates ?? []).map((intensity) =>
-      typeof intensity === 'string' ? intensity : intensity.state,
-    ),
+    signalNames,
   );
   const hasAtleastOneFeedbackOn = Object.entries(feedbacksForIntensities).some(
     ([, isFeedbackOn]) => isFeedbackOn,
@@ -145,7 +148,7 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
         </div>
       </button>
       {intensities.length > 0 ? (
-        <div className="grid grid-cols-1 gap-2 w-full">
+        <div className="grid grid-cols-2 gap-2 w-full">
           {intensities.map((intensity) => {
             return (
               <ButtonVerySimpleImpl
