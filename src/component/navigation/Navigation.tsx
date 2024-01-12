@@ -11,7 +11,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex flex-col gap-4 px-5 py-6 w-[22rem] items-start bg-slate-900',
+        'flex flex-col gap-4 px-5 py-6 w-[12rem] items-start bg-slate-900',
         className,
       )}>
       <TimeDisplay />

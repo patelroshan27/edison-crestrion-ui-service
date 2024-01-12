@@ -11,8 +11,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@crestron/ch5-crcomlib": "^1.0.0",
-    "@crestron/ch5-utilities-cli": "^0.1.47",
+    "@crestron/ch5-crcomlib": "^1.2.0",
+    "@crestron/ch5-utilities-cli": "^0.1.52",
     "@crestron/ch5-webxpanel": "^1.0.3",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -31,6 +31,7 @@
     "fast-xml-parser": "^4.2.5",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
+    "patch-package": "^8.0.0",
     "prettier": "^2.8.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -49,6 +50,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+    "postinstall": "patch-package",
     "sarvasva:build": "REACT_APP_ROOM_CONFIG_NAME=sarvasva react-scripts build",
     "sarvasva:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli archive -p sarvasva -d build -o publish",
     "sarvasva:deploy": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli deploy -H 10.25.20.81 -t touchscreen publish/sarvasva.ch5z --slow-mode",
