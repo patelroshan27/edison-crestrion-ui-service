@@ -52,7 +52,7 @@
     "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "postinstall": "patch-package",
     "sarvasva:build": "REACT_APP_ROOM_CONFIG_NAME=sarvasva react-scripts build",
-    "sarvasva:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli archive -p sarvasva -d build -o publish",
+    "sarvasva:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli archive -p sarvasva -P sampleSource=sarvasva -d build -o publish",
     "sarvasva:deploy": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli deploy -H 10.25.20.81 -t touchscreen publish/sarvasva.ch5z --slow-mode",
     "sarvasva": "yarn sarvasva:build && yarn sarvasva:archive && yarn sarvasva:deploy"
   },

@@ -16,6 +16,8 @@ import 'index.css';
 import App from 'component/app/App';
 import { getConfigs } from 'utils/Configs';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 declare global {
   interface Window {
     CrComLib: any;
