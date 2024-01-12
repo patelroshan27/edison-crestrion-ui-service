@@ -16,7 +16,6 @@ export function useMultipleSignalStates<T extends TSignalValue>(
   useEffect(() => {
     const subscriptionIDs: Record<string, string> = {};
     for (const signalName of signalNames) {
-      console.log('subscribing');
       const subscriptionID = CrComLib.subscribeState(
         type,
         signalName,

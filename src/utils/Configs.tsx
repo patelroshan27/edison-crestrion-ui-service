@@ -1,13 +1,5 @@
 import { useMemo } from 'react';
-import AksharpithConfigs from 'utils/AksharpithConfigs';
 import DefaultConfigs from 'utils/DefaultConfigs';
-import ShayonaConfigs from 'utils/ShayonaConfigs';
-import StudioConfigs from 'utils/StudioConfigs';
-import TheaterConfigs from 'utils/TheaterConfigs';
-import HaveliConfigs from 'utils/HaveliConfigs';
-import SarvasvaBedroomConfigs from 'utils/SarvasvaBedroomConfigs';
-import SarvasvaStudyRoomConfigs from './SarvasvaStudyRoomConfigs';
-import SarvasvaSunRoomConfigs from './SarvasvaSunRoomConfigs';
 import { type IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import SarvasvaConfigs from './SarvasvaConfigs';
 
@@ -102,22 +94,6 @@ export interface UIConfig {
 
 export function getConfigs(): UIConfig {
   switch (process.env.REACT_APP_ROOM_CONFIG_NAME) {
-    case 'shayona':
-      return ShayonaConfigs;
-    case 'studio':
-      return StudioConfigs;
-    case 'theater':
-      return TheaterConfigs;
-    case 'aksharpith':
-      return AksharpithConfigs;
-    case 'haveli':
-      return HaveliConfigs;
-    case 'sarvasvaBedroom':
-      return SarvasvaBedroomConfigs;
-    case 'sarvasvaStudyRoom':
-      return SarvasvaStudyRoomConfigs;
-    case 'sarvasvaSunRoom':
-      return SarvasvaSunRoomConfigs;
     case 'sarvasva':
       return SarvasvaConfigs;
     // ADD CASES BELOW TO HANDLE OTHER CONFIGS

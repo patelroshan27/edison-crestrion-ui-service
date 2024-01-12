@@ -23,7 +23,7 @@ module.exports = {
     ],
     "rules": {
         "prettier/prettier": 2,
-        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off"
     },
     settings: {
         "import/parsers": {
