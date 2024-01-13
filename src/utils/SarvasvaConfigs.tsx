@@ -3,8 +3,8 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const SarvasvaConfigs: UIConfig = {
   id: 123,
-  proximityActivity: '71',
-  touchActivity: '72',
+  // proximityActivity: '71',
+  // touchActivity: '72',
   crestronConfigs: {
     host: '10.25.20.81',
     ipID: 19,

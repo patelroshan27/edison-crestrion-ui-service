@@ -22,8 +22,9 @@
     "baseUrl": "src"
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "src",
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "exclude": [
     "node_modules"
