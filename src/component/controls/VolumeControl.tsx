@@ -14,8 +14,8 @@ import {
   type IRenderTrackParams,
   type IRenderThumbParams,
 } from 'react-range/lib/types';
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import FlatButton from './FlatButton';
+import { Mic, MicOff, Volume1, Volume2 } from 'lucide-react';
 
 const MAX = 100;
 const MIN = 0;
@@ -166,14 +166,14 @@ const VolumeControl: React.FC<Props> = ({
         <div className="flex flex-col gap-4">
           <FlatButton
             label="Up"
-            iconDef={icon({ name: 'volume-high' })}
+            iconDef={Volume2}
             onClick={() => {
               onLevelUp();
             }}
           />
           <FlatButton
             label="Down"
-            iconDef={icon({ name: 'volume-low' })}
+            iconDef={Volume1}
             onClick={() => {
               onLevelDown();
             }}
@@ -185,11 +185,7 @@ const VolumeControl: React.FC<Props> = ({
                 : 'bg-red-200 border border-red-400 text-red-700'
             }
             label={isPlaying ? pauseLabel : playLabel}
-            iconDef={
-              isPlaying
-                ? icon({ name: 'microphone-lines' })
-                : icon({ name: 'microphone-lines-slash' })
-            }
+            iconDef={isPlaying ? Mic : MicOff}
             onClick={() => {
               onToggle();
             }}

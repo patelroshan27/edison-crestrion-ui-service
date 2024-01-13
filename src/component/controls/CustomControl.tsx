@@ -2,7 +2,6 @@ import type { CustomControlData } from 'utils/Configs';
 
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {
   className?: string;
@@ -51,7 +50,7 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
               ? 'bg-indigo-500 text-slate-100'
               : 'bg-slate-100 text-slate-900',
           )}>
-          <FontAwesomeIcon icon={config.icon} />
+          <config.icon className="h-4 w-4" />
         </div>
       </div>
       <div className={classNames('w-full text-start flex flex-col gap-1.5')}>

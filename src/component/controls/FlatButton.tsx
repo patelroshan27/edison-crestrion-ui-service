@@ -1,19 +1,18 @@
-import { type IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { type LucideIcon } from 'lucide-react';
 import React from 'react';
 
 interface Props {
   className?: string;
   label: string;
-  iconDef: IconDefinition;
+  iconDef: LucideIcon;
   onClick: () => any;
 }
 
 const FlatButton: React.FC<Props> = ({
   className,
   label,
-  iconDef,
+  iconDef: Icon,
   onClick,
 }: Props) => {
   return (
@@ -26,7 +25,7 @@ const FlatButton: React.FC<Props> = ({
       onClick={() => {
         onClick();
       }}>
-      <FontAwesomeIcon icon={iconDef} />
+      <Icon className="w-4 h-4" />
       <p>{label}</p>
     </button>
   );

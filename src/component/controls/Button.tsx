@@ -9,8 +9,7 @@ import {
   useMultipleSignalStates,
   usePublishDigital,
 } from 'utils/hooks';
-import { type IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { type LucideIcon } from 'lucide-react';
 
 interface ButtonVerySimpleProps {
   label: string;
@@ -48,7 +47,7 @@ const ButtonVerySimpleImpl: React.FC<ButtonVerySimpleProps> = ({
 interface ButtonCommonProps {
   analogFeedback?: string;
   intensityStates?: Intensity[];
-  icon: IconDefinition;
+  icon: LucideIcon;
   label: string;
   inverted?: boolean;
   title?: string;
@@ -61,7 +60,7 @@ interface ButtonImplProps extends ButtonCommonProps {
 
 const ButtonImpl: React.FC<ButtonImplProps> = ({
   analogFeedback = '',
-  icon,
+  icon: Icon,
   label,
   inverted,
   intensityStates,
@@ -118,7 +117,7 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
                 ? 'bg-indigo-500 text-slate-100'
                 : 'bg-slate-100 text-slate-900',
             )}>
-            <FontAwesomeIcon icon={icon} />
+            <Icon className="w-4 h-4" />
           </div>
           {hasAnalogFeedback ? (
             <div

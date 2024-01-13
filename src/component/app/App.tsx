@@ -2,7 +2,6 @@ import React from 'react';
 import Body from 'component/Body';
 import Navigation from 'component/navigation/Navigation';
 
-import '@fortawesome/fontawesome-svg-core/styles.css';
 import classNames from 'classnames';
 import { getConfigs } from 'utils/Configs';
 import LogoScreenSaver from 'component/LogoScreenSaver';
@@ -26,7 +25,7 @@ const App: React.FC<Props> = ({ className }) => {
       ) : null}
       <div
         className={classNames(
-          'w-screen h-screen overflow-hidden flex',
+          'w-screen h-screen overflow-hidden flex flex-col',
           className,
         )}>
         <Navigation className="grow-0 shrink-0" />

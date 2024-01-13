@@ -8,6 +8,7 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'react-jss';
 import 'index.css';
 import App from 'component/app/App';
+import { NextUIProvider } from '@nextui-org/react';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -44,8 +45,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <ThemeProvider theme={theme}>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <NextUIProvider>
+      <RecoilRoot>
+        <main className="dark text-foreground bg-background">
+          <App />
+        </main>
+      </RecoilRoot>
+    </NextUIProvider>
   </ThemeProvider>,
 );

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import DefaultConfigs from 'utils/DefaultConfigs';
-import { type IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import SarvasvaConfigs from './SarvasvaConfigs';
+import { type LucideIcon } from 'lucide-react';
 
 export interface CrestronConfigs {
   host: string;
@@ -19,7 +19,7 @@ export interface Intensity {
 
 export interface LightControlData {
   kind: 'light' | 'toggle';
-  icon: IconDefinition;
+  icon: LucideIcon;
   title?: string;
   label: string;
   state: string;
@@ -33,7 +33,7 @@ export interface LightControlData {
 
 export interface AudioControlData {
   kind: 'audio';
-  icon: IconDefinition;
+  icon: LucideIcon;
   title?: string;
   label: string;
   lock: string;
@@ -53,7 +53,7 @@ export interface TemperatureControlData {
 
 export interface CustomControlData {
   kind: 'custom';
-  icon: IconDefinition;
+  icon: LucideIcon;
   label: string;
   title?: string;
   isActive: () => Promise<boolean>;
@@ -70,16 +70,10 @@ export type ControlData =
 export interface PageData {
   code?: string;
   name: string;
-  icon: IconDefinition;
+  icon: LucideIcon;
   className?: string;
   controls: { [key in string]: ControlData };
   style?: React.CSSProperties;
-}
-
-export interface LayoutConfigs {
-  bodyColor?: string;
-  foregroundColor?: string;
-  navColor?: string;
 }
 
 export interface UIConfig {
@@ -88,7 +82,6 @@ export interface UIConfig {
   screenOff?: string;
   proximityActivity?: string;
   touchActivity?: string;
-  layout: LayoutConfigs;
   pages: { [key in Page]: PageData };
 }
 

@@ -23,19 +23,18 @@ const TimeDisplay: React.FC<Props> = ({ className }: Props) => {
   const currTime = useTime('America/New_York');
 
   return (
-    <div
-      className={classNames('text-slate-200 flex flex-col gap-2', className)}>
+    <div className={classNames('flex gap-4 items-center', className)}>
       <div className="flex flex-col gap-1">
-        <p className="text-lg font-semibold leading-none text-slate-300">
+        <p className="text-xl font-semibold leading-none text-yellow-500">
           {currTime.format('dddd')}
         </p>
-        <p className="text-sm font-light leading-none text-slate-300">
+        <p className="text-md font-light leading-none text-yellow-100">
           {currTime.format('MMMM Do YYYY')}
         </p>
       </div>
-      <h3 className="text-3xl text-indigo-400 font-semibold">
-        {currTime.format('h:mm A')}
-        <span className="text-lg font-light text-slate-500 ml-1">
+      <h3 className="text-5xl text-white font-semibold">
+        {currTime.format('h:mma')}
+        <span className="text-lg font-light text-yellow-100 ml-1">
           {currTime.format('z')}
         </span>
       </h3>

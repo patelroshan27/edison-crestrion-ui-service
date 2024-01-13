@@ -1,7 +1,7 @@
+import { Lightbulb, ListMusic, Music2, Sun } from 'lucide-react';
 import type { UIConfig } from 'utils/Configs';
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-const SarvasvaConfigs: UIConfig = {
+const Configs: UIConfig = {
   id: 123,
   // proximityActivity: '71',
   // touchActivity: '72',
@@ -10,19 +10,14 @@ const SarvasvaConfigs: UIConfig = {
     ipID: 19,
     port: 41794,
   },
-  layout: {
-    bodyColor: '#ecf0f1',
-    foregroundColor: '#ecf0f1',
-    navColor: '#2c3e50',
-  },
   pages: {
     LIGHTS: {
       name: 'Lights',
-      icon: icon({ name: 'lightbulb' }),
+      icon: Sun,
       controls: {
         off: {
           kind: 'light',
-          icon: icon({ name: 'power-off' }),
+          icon: Lightbulb,
           title: 'Lights',
           label: 'On/Off',
           state: '1',
@@ -34,7 +29,7 @@ const SarvasvaConfigs: UIConfig = {
         },
         pharos: {
           kind: 'light',
-          icon: icon({ name: 'power-off' }),
+          icon: Lightbulb,
           title: 'LED Lights',
           label: 'On/Off',
           state: '1',
@@ -55,13 +50,13 @@ const SarvasvaConfigs: UIConfig = {
         },
       },
     },
-    SOURCE: {
+    AUDIO: {
       name: 'Audio',
-      icon: icon({ name: 'music' }),
+      icon: Music2,
       controls: {
         speaker: {
           kind: 'audio',
-          icon: icon({ name: 'tent' }),
+          icon: Music2,
           label: 'Master',
           play: '46',
           pause: '45',
@@ -75,7 +70,7 @@ const SarvasvaConfigs: UIConfig = {
         },
         microphone: {
           kind: 'audio',
-          icon: icon({ name: 'tent' }),
+          icon: Music2,
           label: 'Mic',
           play: '52',
           pause: '51',
@@ -90,54 +85,54 @@ const SarvasvaConfigs: UIConfig = {
         mic: {
           kind: 'toggle',
           title: 'Source',
-          icon: icon({ name: 'microphone-lines' }),
+          icon: Music2,
           label: 'Mic',
           state: '35',
         },
         bluetooth: {
           kind: 'toggle',
-          icon: icon({ name: 'music' }),
+          icon: Music2,
           title: 'Source',
           label: 'Bluetooth',
           state: '31',
         },
         media: {
           kind: 'toggle',
-          icon: icon({ name: 'circle-play' }),
+          icon: Music2,
           title: 'Source',
           label: 'Media Player',
           state: '31',
         },
         mandir: {
           kind: 'toggle',
-          icon: icon({ name: 'om' }),
+          icon: Music2,
           title: 'Source',
           label: 'Mandir',
           state: '32',
         },
         sabhahall: {
           kind: 'toggle',
-          icon: icon({ name: 'people-roof' }),
+          icon: Music2,
           title: 'Source',
           label: 'Sabha Hall',
           state: '33',
         },
       },
     },
-    VIDEO: {
-      name: 'Video',
-      icon: icon({ name: 'video' }),
+    MEDIA: {
+      name: 'Media',
+      icon: ListMusic,
       controls: {
         mandir: {
           kind: 'toggle',
-          icon: icon({ name: 'om' }),
+          icon: ListMusic,
           title: 'Source',
           label: 'Mandir',
           state: '21',
         },
         sabhahall: {
           kind: 'toggle',
-          icon: icon({ name: 'people-roof' }),
+          icon: ListMusic,
           title: 'Source',
           label: 'Sabha Hall',
           state: '22',
@@ -147,4 +142,4 @@ const SarvasvaConfigs: UIConfig = {
   },
 };
 
-export default SarvasvaConfigs;
+export default Configs;
