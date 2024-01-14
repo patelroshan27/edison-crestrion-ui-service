@@ -20,7 +20,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex justify-between px-6 py-4 w-full items-center bg-black',
+        'flex justify-between px-6 py-4 w-full items-center bg-black border-b border-primary',
         className,
       )}>
       <TimeDisplay />

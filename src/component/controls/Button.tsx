@@ -1,7 +1,6 @@
 import type { Intensity, LightControlData } from 'utils/Configs';
 
 import React, { useMemo } from 'react';
-import { ConversionValues } from 'utils/Constants';
 import classNames from 'classnames';
 import {
   useAnalogState,
@@ -12,6 +11,8 @@ import {
 import { type LucideIcon } from 'lucide-react';
 
 interface ButtonVerySimpleProps {
+  className?: string;
+  icon?: LucideIcon;
   label: string;
   state: string;
   stateOff: string;
@@ -20,7 +21,9 @@ interface ButtonVerySimpleProps {
 const ButtonVerySimpleImpl: React.FC<ButtonVerySimpleProps> = ({
   state,
   stateOff,
+  icon: Icon,
   label,
+  className,
 }: ButtonVerySimpleProps) => {
   const isOn = useDigitalState(state);
   const publishOn = usePublishDigital(state);
@@ -30,16 +33,26 @@ const ButtonVerySimpleImpl: React.FC<ButtonVerySimpleProps> = ({
     isOn ? publishOff() : publishOn();
   };
 
+  const iconDisplay = Icon != null ? <Icon className="h-6 w-6" /> : null;
+
   return (
     <button
       className={classNames(
-        'rounded-lg p-2 font-semibold',
-        isOn ? 'bg-indigo-500 text-slate-100' : 'bg-slate-100 text-slate-900',
+        'aspect-square rounded-lg font-semibold flex items-center justify-center',
+        isOn ? 'text-black' : null,
+        className,
       )}
       onClick={() => {
         handleToggle();
       }}>
-      {label}
+      <div
+        className={classNames(
+          'aspect-square rounded-lg w-full m-0.5 flex items-center justify-center',
+          isOn ? 'border-primary bg-black text-primary' : 'border-black',
+        )}>
+        {' '}
+        {iconDisplay ?? label}
+      </div>
     </button>
   );
 };
@@ -98,14 +111,12 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
   return (
     <div
       className={classNames(
-        'rounded-2xl flex p-6 justify-between',
-        isButtonActive
-          ? 'bg-slate-900 text-slate-100'
-          : 'bg-slate-200 text-slate-900',
-        intensities.length > 0 ? 'col-span-2 ' : 'aspect-square',
+        'transition-all rounded-2xl flex p-6 justify-between border border-primary',
+        isButtonActive ? 'bg-primary text-black' : 'bg-black text-primary',
+        'aspect-square',
       )}>
       <button
-        className="flex flex-col justify-between h-full w-full"
+        className="flex flex-col justify-between dh-full w-full"
         onClick={() => {
           onClick(!isButtonActive);
         }}>
@@ -114,46 +125,43 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
             className={classNames(
               'flex w-14 aspect-square items-center justify-center text-2xl rounded-full',
               isButtonActive
-                ? 'bg-indigo-500 text-slate-100'
-                : 'bg-slate-100 text-slate-900',
+                ? 'bg-black text-primary'
+                : 'bg-primary text-black',
             )}>
-            <Icon className="w-4 h-4" />
+            <Icon className="w-6 h-6" />
           </div>
-          {hasAnalogFeedback ? (
-            <div
-              className={classNames(
-                'flex gap-2 items-center text-sm font-semibold mr-2',
-                isButtonActive ? 'text-indigo-500' : 'text-slate-400',
-              )}>
-              <p className={classNames('text-sm')}>
-                {`${Math.round(
-                  (feedback / ConversionValues.MAX_DECIMAL) * 100,
-                )}%`}
-              </p>
-            </div>
-          ) : null}
         </div>
         <div className={classNames('w-full text-start flex flex-col gap-1.5')}>
-          <p className="text-sm leading-none font-semibold text-slate-500">
+          <p
+            className={classNames(
+              'text-sm leading-none font-semibold',
+              isButtonActive ? 'text-black' : 'text-secondary',
+            )}>
             {title ?? 'Button'}
           </p>
           <p
             className={classNames(
               'text-2xl leading-none',
-              isButtonActive ? 'text-slate-200' : 'text-slate-900',
+              isButtonActive ? 'text-black' : 'text-primary',
             )}>
             {label}
           </p>
         </div>
       </button>
       {intensities.length > 0 ? (
-        <div className="grid grid-cols-1 gap-2 w-full">
+        <div className="grid grid-cols-1 gap-2 w-32">
           {intensities.map((intensity) => {
             return (
               <ButtonVerySimpleImpl
+                className={
+                  isButtonActive
+                    ? 'border-3 border-black'
+                    : 'border-1 border-primary text-primary'
+                }
                 key={intensity.state}
                 state={intensity.state}
                 stateOff={intensity.stateOff}
+                icon={intensity.icon}
                 label={intensity.name}
               />
             );

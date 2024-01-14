@@ -19,13 +19,13 @@ const FlatButton: React.FC<Props> = ({
     <button
       type="button"
       className={classNames(
-        'flex flex-col gap-1 rounded-lg py-3 text-lg font-semibold items-center justify-center h-full',
-        className ?? 'bg-slate-100 text-slate-900',
+        'aspect-square flex flex-col gap-1 rounded-lg py-3 text-md items-center justify-center h-full',
+        className ?? 'bg-black text-primary border border-primary',
       )}
       onClick={() => {
         onClick();
       }}>
-      <Icon className="w-4 h-4" />
+      <Icon className="w-6 h-6" />
       <p>{label}</p>
     </button>
   );

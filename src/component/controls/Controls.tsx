@@ -4,6 +4,7 @@ import React from 'react';
 import Button from 'component/controls/Button';
 import VolumeControl from 'component/controls/VolumeControl';
 import CustomControl from 'component/controls/CustomControl';
+import PharosControl from 'component/controls/PharosControl';
 import classNames from 'classnames';
 
 interface Props {
@@ -16,7 +17,7 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
   return (
     <div
       className={classNames(
-        'grid grid-cols-[repeat(4,minmax(200px,1fr))] auto-rows-[minmax(200px,1fr)]  gap-4',
+        'grid grid-cols-4 auto-rows-[230px_230px] gap-x-4 gap-y-3',
         className,
       )}
       style={style}>
@@ -30,6 +31,14 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
           );
         } else if (data.kind === 'custom') {
           return <CustomControl key={key} config={data} />;
+        } else if (data.kind === 'pharos') {
+          return (
+            <PharosControl
+              className="row-span-2 col-span-3"
+              key={key}
+              config={data}
+            />
+          );
         }
         return null;
       })}

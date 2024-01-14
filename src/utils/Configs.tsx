@@ -12,9 +12,22 @@ export interface CrestronConfigs {
 export type Page = string;
 
 export interface Intensity {
+  icon?: LucideIcon;
   state: string;
   stateOff: string;
   name: string;
+}
+
+export interface ColorIntensity {
+  state: string;
+  name: string;
+  icon?: LucideIcon;
+  color: string;
+}
+
+export interface PharosControlData {
+  kind: 'pharos';
+  colorStates: ColorIntensity[];
 }
 
 export interface LightControlData {
@@ -63,6 +76,7 @@ export interface CustomControlData {
 
 export type ControlData =
   | LightControlData
+  | PharosControlData
   | AudioControlData
   | TemperatureControlData
   | CustomControlData;
