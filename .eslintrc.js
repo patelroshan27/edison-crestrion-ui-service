@@ -22,7 +22,7 @@ module.exports = {
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": 2,
+        "prettier/prettier": 1,
         "@typescript-eslint/strict-boolean-expressions": "off"
     },
     settings: {

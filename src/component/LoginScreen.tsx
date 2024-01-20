@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react';
 import classNames from 'classnames';
 import { Check, Loader2 } from 'lucide-react';
+import LOGIN_API from 'api/api';
+import { useRecoilState } from 'recoil';
+import { isLoggedInState } from 'state/navigation';
 
 interface Props {
   authProviderURL: string;
@@ -11,6 +14,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const passWordRef = useRef<HTMLDivElement>(null);
+  const [, setIsLoggedIn] = useRecoilState(isLoggedInState);
 
   const handleInvalidPassword = (): void => {
     passWordRef.current?.classList.add('animate-once', 'animate-shake');
@@ -47,10 +51,14 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
     authID: string,
     pass: string,
   ): Promise<void> => {
-    await new Promise((resolve, reject) => {
-      console.log(authID, pass);
-      setTimeout(reject, 1000);
-    });
+
+    const response = await LOGIN_API.get(`${authProviderURL}?name=${authID}&passcode=${pass}`);
+    if(response.status === 200) {
+      setIsLoading(false);
+      setIsLoggedIn(true);
+    }
+      
+
   };
 
   return (
@@ -59,7 +67,6 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
         'flex items-center justify-center fixed top-0 left-0 h-screen w-screen z-10',
         'bg-black',
       )}>
-      {authID} {authProviderURL}
       <div className="flex flex-col items-center justify-center">
         <p className="text-xs">BAPS Shri Swaminarayan Mandir</p>
         <p className="text-5xl font-semibold">Edison, NJ</p>
