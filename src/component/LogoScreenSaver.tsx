@@ -2,8 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import { useDigitalState } from 'utils/hooks';
 
-import logoImage from '../assets/logo-light.png';
-
 interface Props {
   proximityState: string;
   touchState: string;
@@ -25,7 +23,7 @@ const LogoScreenSaver: React.FC<Props> = ({
         'flex items-center justify-center fixed top-0 left-0 h-screen w-screen z-10',
         'bg-[#2D2926]',
       )}>
-      <img alt="hero" className="w-[50%]" src={logoImage} />
+      TEST
     </div>
   );
 };

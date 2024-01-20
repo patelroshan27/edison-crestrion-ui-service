@@ -15,21 +15,23 @@ module.exports = {
     }
   },
   darkMode: "class",
-  plugins: [nextui({
-    themes: {
-      dark: {
-        colors: {
-          active: "#F5A524",
-          primary: {
-            foreground: "#000000",
-            DEFAULT: "#F5A524",
+  plugins: [
+    require('tailwindcss-animated'),
+    nextui({
+      themes: {
+        dark: {
+          colors: {
+            active: "#F5A524",
+            primary: {
+              foreground: "#000000",
+              DEFAULT: "#F5A524",
+            },
+            secondary: {
+              foreground: "#3f3f46",
+              DEFAULT: '#FEFCE8',
+            }
           },
-          secondary: {
-            foreground: "#3f3f46",
-            DEFAULT: '#FEFCE8',
-          }
-        },
+        }
       }
-    }
-  })],
+    })],
 }

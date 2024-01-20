@@ -91,6 +91,8 @@ export interface PageData {
 }
 
 export interface UIConfig {
+  authProviderURL?: string;
+  authID?: string;
   crestronConfigs: CrestronConfigs;
   id?: number | string;
   screenOff?: string;
