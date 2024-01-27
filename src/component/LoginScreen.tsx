@@ -107,7 +107,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
               <button
                 key={digit}
                 className={classNames(
-                  'rounded-full h-32 w-32 flex items-center justify-center',
+                  'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
                   'text-5xl font-medium active:bg-white/20 hover:bg-white/20',
                   digit === -1 ? 'bg-emerald-600 text-white' : 'bg-white/10',
                 )}
