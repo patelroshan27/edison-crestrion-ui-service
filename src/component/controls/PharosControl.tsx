@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useDigitalState, usePublishDigital } from 'utils/hooks';
 
-const MAX_ROWS = 3;
+const MAX_ROWS = 4;
 
 const PharosColorControl: React.FC<ColorIntensity> = ({
   state,
@@ -16,27 +16,19 @@ const PharosColorControl: React.FC<ColorIntensity> = ({
 
   const iconDisplay =
     Icon != null ? (
-      <Icon
-        className={classNames(
-          'h-8 w-8 text-primary',
-          isOn ? 'text-black' : null,
-        )}
-      />
+      <Icon className={classNames('h-8 w-8 text-primary')} />
     ) : null;
 
   return (
     <button
       className={classNames(
-        'flex items-center justify-center',
-        'transition aspect-square rounded-[50%] overflow-hidden w-full max-w-[8rem]',
-        isOn
-          ? 'ring-4 ring-offset-4 ring-offset-black ring-primary scale-100'
-          : 'scale-90',
-        'text-black bg-primary',
+        'outline-none focus:outline-none flex items-center justify-center',
+        'transition h-full rounded-[50%] overflow-hidden w-full max-w-[9rem] max-h-[9rem]',
+        isOn ? 'border-8 scale-100' : 'scale-90',
       )}
       type="button"
       style={{
-        backgroundColor: isOn && iconDisplay != null ? undefined : color,
+        backgroundColor: iconDisplay != null ? 'rgba(255,255,255,0.1)' : color,
       }}
       onClick={publishOn}>
       {iconDisplay}
@@ -52,14 +44,14 @@ interface Props {
 const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
   const rowModulous = Math.min(
     Math.ceil(config.colorStates.length / MAX_ROWS),
-    3,
+    4,
   );
 
   const rows: ColorIntensity[][] = config.colorStates.reduce<
     ColorIntensity[][]
   >((acc, item, index) => {
     const rowIndex = index % rowModulous;
-    if (acc.at(rowIndex) == null) {
+    if (acc[rowIndex] == null) {
       acc[rowIndex] = [];
     }
     acc[rowIndex].push(item);
@@ -74,7 +66,7 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
 
   const getPlaceholder = (id: string): JSX.Element => (
     <div
-      className="aspect-square rounded-full overflow-hidden w-full max-w-[8rem] bg-white/10"
+      className="rounded-full overflow-hidden w-full h-full bg-white/10 max-w-[9rem] max-h-[9rem]"
       key={id}
     />
   );
@@ -114,12 +106,12 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
         'flex w-full h-full items-center justify-center',
         className,
       )}>
-      <div className="grid py-12 gap-2 w-full">
+      <div className="grid gap-2 w-full">
         {elegantColorPalettes.map((row, index) => {
           return (
             <div
               key={`row-${index}`}
-              className="flex items-center justify-center gap-3">
+              className="h-[9rem] flex items-center justify-center space-x-3">
               {row}
             </div>
           );

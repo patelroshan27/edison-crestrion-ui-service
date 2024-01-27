@@ -17,7 +17,7 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
   return (
     <div
       className={classNames(
-        'grid grid-cols-4 auto-rows-[230px_230px] gap-x-4 gap-y-3',
+        'grid grid-cols-4 grid-rows-[1fr_1fr_1fr_1fr] gap-x-4 gap-y-3 h-full',
         className,
       )}
       style={style}>
@@ -27,17 +27,27 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
           return <Button key={key} config={data} />;
         } else if (data.kind === 'audio') {
           return (
-            <VolumeControl className="row-span-2" key={key} config={data} />
+            <VolumeControl className="row-span-4" key={key} config={data} />
           );
         } else if (data.kind === 'custom') {
           return <CustomControl key={key} config={data} />;
         } else if (data.kind === 'pharos') {
           return (
             <PharosControl
-              className="row-span-2 col-span-3"
+              className="row-span-4 col-span-3"
               key={key}
               config={data}
             />
+          );
+        } else if (data.kind === 'group') {
+          return (
+            <div
+              key={key}
+              className="row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-4">
+              {data.controls.map((button) => {
+                return <Button key={button.label} config={button} />;
+              })}
+            </div>
           );
         }
         return null;

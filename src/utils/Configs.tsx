@@ -33,8 +33,10 @@ export interface PharosControlData {
 export interface LightControlData {
   kind: 'light' | 'toggle';
   icon: LucideIcon;
+  iconOff?: LucideIcon;
   title?: string;
   label: string;
+  labelOff?: string;
   state: string;
   stateOff?: string;
   intensityStates?: Intensity[];
@@ -74,11 +76,17 @@ export interface CustomControlData {
   onToggleOff: () => Promise<void>;
 }
 
+export interface GroupControlData {
+  kind: 'group';
+  controls: LightControlData[];
+}
+
 export type ControlData =
   | LightControlData
   | PharosControlData
   | AudioControlData
   | TemperatureControlData
+  | GroupControlData
   | CustomControlData;
 
 export interface PageData {

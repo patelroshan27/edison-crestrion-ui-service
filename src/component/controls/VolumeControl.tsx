@@ -20,6 +20,7 @@ import { Mic, MicOff, Volume1, Volume2 } from 'lucide-react';
 const MAX = 100;
 const MIN = 0;
 const STEP = 2;
+const VOLUME_STEP = ConversionValues.MAX_DECIMAL / 100;
 
 function getDbToPercent(db: number): number {
   return Math.round((db / ConversionValues.MAX_DECIMAL) * 100);
@@ -56,8 +57,8 @@ const VolumeControl: React.FC<Props> = ({
   const playing = useDigitalState(play);
   const paused = useDigitalState(pause);
   const onToggle = usePublishDigital(toggle);
-  const onLevelUp = usePublishDigital(levelUp);
-  const onLevelDown = usePublishDigital(levelDown);
+  const onLevelUp = usePublishAnalog(levelUp);
+  const onLevelDown = usePublishAnalog(levelDown);
 
   const [level, setLevel] = useState(getDbToPercent(feedback));
 
@@ -70,30 +71,32 @@ const VolumeControl: React.FC<Props> = ({
   return (
     <div
       className={classNames(
-        'bg-black border border-primary rounded-2xl p-6 w-full h-full flex flex-col gap-6 items-center',
+        'bg-black border border-primary rounded-2xl p-6 w-full h-full flex flex-col space-y-6 items-center',
         className,
       )}>
       <div className="flex justify-between items-center w-full">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center space-x-3">
           <div
             className={classNames(
-              'flex w-14 shrink-0 grow-0 aspect-square items-center justify-center text-2xl rounded-full',
+              'flex w-14 h-14 shrink-0 grow-0 items-center justify-center text-2xl rounded-full',
               'bg-primary text-black',
             )}>
             <p className="text-xl font-semibold">{level}</p>
           </div>
           <div
-            className={classNames('w-full text-start flex flex-col gap-1.5')}>
+            className={classNames(
+              'w-full text-start flex flex-col space-y-1.5',
+            )}>
             <p className="text-sm leading-none font-semibold text-sexondary">
               {title ?? 'Volume'}
             </p>
-            <p className={classNames('text-lg leading-none text-primary')}>
+            <p className={classNames('text-xl leading-none text-primary')}>
               {label}
             </p>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-[3.75rem,1fr] gap-4 h-full w-full">
+      <div className="grid grid-cols-[3.75rem_1fr] gap-4 grow w-full">
         <Range
           direction={Direction.Up}
           step={STEP}
@@ -147,19 +150,19 @@ const VolumeControl: React.FC<Props> = ({
             />
           )}
         />
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col space-y-4">
           <FlatButton
             label="Up"
             iconDef={Volume2}
             onClick={() => {
-              onLevelUp();
+              onLevelUp(level + VOLUME_STEP);
             }}
           />
           <FlatButton
             label="Down"
             iconDef={Volume1}
             onClick={() => {
-              onLevelDown();
+              onLevelDown(level - VOLUME_STEP);
             }}
           />
           <FlatButton
