@@ -63,6 +63,22 @@ const Configs: UIConfig = {
               label: 'Off',
               state: '20',
             },
+            {
+              kind: 'light',
+              icon: Lightbulb,
+              title: 'Lights',
+              label: 'All On',
+              state: '18',
+              stateOff: '20',
+            },
+            {
+              kind: 'light',
+              icon: LightbulbOff,
+              title: 'Lights',
+              label: 'All Off',
+              state: '19',
+              stateOff: '20',
+            },
           ],
         },
         pharos: {
