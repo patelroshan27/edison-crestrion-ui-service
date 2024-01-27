@@ -32,8 +32,8 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
           }}>
           <Lock className="mr-3 h-6 w-6 text-lg" />
           <div className="text-left flex flex-col">
-            <span className="leading-none text-md">Lock</span>
-            <span className="text-xs">#{configs.authID}</span>
+            <span className="leading-none text-3xl">Lock</span>
+            <span className="text-2xl">{configs.authID}</span>
           </div>
         </button>
         <TimeDisplay />
@@ -47,7 +47,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               key={page}
               type="button"
               className={classNames(
-                'px-6 py-4 flex items-center rounded-lg text-lg',
+                'px-4 py-4 flex items-center rounded-lg text-4xl',
                 activeTab === page
                   ? 'bg-primary text-black'
                   : 'bg-white/10 text-white',

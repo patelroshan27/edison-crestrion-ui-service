@@ -36,7 +36,7 @@ const Configs: UIConfig = {
               kind: 'light',
               icon: Lightbulb,
               title: 'Lights',
-              label: 'All On',
+              label: 'On',
               state: '1',
               stateOff: '20',
             },
@@ -60,7 +60,7 @@ const Configs: UIConfig = {
               kind: 'light',
               icon: LightbulbOff,
               title: 'Lights',
-              label: 'All Off',
+              label: 'Off',
               state: '20',
             },
           ],
@@ -154,7 +154,7 @@ const Configs: UIConfig = {
           label: 'Mandir',
           state: '34',
         },
-        sabha: {
+        sabhahall: {
           kind: 'toggle',
           icon: Speech,
           title: 'Source',

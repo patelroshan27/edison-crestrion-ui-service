@@ -67,30 +67,29 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
         'bg-black',
       )}>
       <div className="flex flex-col items-center justify-center space-x-1">
-        <p className="text-lg">BAPS Shri Swaminarayan Mandir</p>
-        <p className="text-7xl font-semibold">Edison, NJ</p>
+        <p className="text-4xl font-semibold">BAPS Shri Swaminarayan Mandir, Edison, NJ</p>
         <div
           className={classNames(
             'rounded-full px-6 py-2 bg-emerald-300 flex-col items-center justify-center',
-            'text-black text-md font-semibold my-4',
+            'text-black text-3xl font-semibold my-4',
           )}>
-          Room #{authID}
+          {authID}
         </div>
         <div
           ref={passWordRef}
           className={classNames(
-            'my-6 h-20 flex items-center justify-center space-x-3',
+            'h-5 flex items-center justify-center space-x-3',
           )}>
           {password.split('').map((char, index) => {
             return (
               <div
-                className="rounded-full bg-white h-6 w-6"
+                className="rounded-full bg-white h-4 w-4"
                 key={`pass-char-${char}-${index}`}
               />
             );
           })}
         </div>
-        <div className="flex flex-wrap max-w-[70%] space-x-3 space-y-3 items-center justify-center">
+        <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1].map((digit) => {
             let display: React.ReactNode = digit;
             switch (digit) {
