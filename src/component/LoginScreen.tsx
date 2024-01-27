@@ -84,7 +84,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
           {password.split('').map((char, index) => {
             return (
               <div
-                className="rounded-full bg-white h-4 w-4"
+                className="rounded-full bg-white h-6 w-6"
                 key={`pass-char-${char}-${index}`}
               />
             );
