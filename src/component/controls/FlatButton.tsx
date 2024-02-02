@@ -21,7 +21,7 @@ const FlatButton: React.FC<Props> = ({
       className={classNames(
         'flex flex-col space-x-1 rounded-lg py-3 text-xl items-center justify-center h-full',
         'outline-none focus:outline-none',
-        className ?? 'bg-black text-primary border border-primary',
+        className ?? 'text-primary border border-primary',
       )}
       onClick={() => {
         onClick();

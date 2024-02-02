@@ -71,7 +71,7 @@ const VolumeControl: React.FC<Props> = ({
   return (
     <div
       className={classNames(
-        'bg-black border border-primary rounded-2xl p-6 w-full h-full flex flex-col space-y-6 items-center',
+        'border border-primary rounded-2xl p-6 w-full h-full flex flex-col space-y-6 items-center',
         className,
       )}>
       <div className="flex justify-between items-center w-full">

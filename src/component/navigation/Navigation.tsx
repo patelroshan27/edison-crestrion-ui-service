@@ -20,22 +20,25 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex justify-between px-6 py-4 w-full items-center bg-black border-b border-primary',
+        'flex justify-between space-x-2 px-6 py-4 w-full items-center border-b border-primary',
         className,
       )}>
       <div className="flex items-center space-x-4">
-        <button
-          type="button"
-          className="px-4 py-3 flex items-center bg-red-500 text-white rounded-lg"
-          onClick={() => {
-            setIsLoggedIn(false);
-          }}>
-          <Lock className="mr-3 h-6 w-6 text-lg" />
-          <div className="text-left flex flex-col">
-            <span className="leading-none text-3xl">Lock</span>
-            <span className="text-2xl">{configs.authID}</span>
+
+      <button
+              type="button"
+              className={classNames(
+                'px-4 py-4 flex items-center rounded-lg text-4xl bg-primary text-black')}
+              onClick={() => {
+                setIsLoggedIn(false);
+              }}>
+              <Lock className="mr-3 h-6 w-6 text-lg" />
+              <div className="text-left flex flex-col">
+            <span className="leading-none text-xl">Lock</span>
+            <span className="text-lg">{configs.authID}</span>
           </div>
-        </button>
+      </button>
+
         <TimeDisplay />
       </div>
       <div className="flex items-center space-x-2">
@@ -50,7 +53,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
                 'px-4 py-4 flex items-center rounded-lg text-4xl',
                 activeTab === page
                   ? 'bg-primary text-black'
-                  : 'bg-white/10 text-white',
+                  : 'bg-white/10 text-primary',
               )}
               onClick={() => {
                 setActivePage(page);
