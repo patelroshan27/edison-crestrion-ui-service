@@ -43,7 +43,10 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
           return (
             <div
               key={key}
-              className="row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-4">
+              className={classNames(
+                'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-4',
+                data.className,
+              )}>
               {data.controls.map((button) => {
                 return <Button key={button.label} config={button} />;
               })}

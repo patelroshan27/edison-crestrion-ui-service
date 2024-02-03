@@ -30,6 +30,16 @@ export interface PharosControlData {
   colorStates: ColorIntensity[];
 }
 
+export interface CrestronWebrelayPayload {
+  authId: 'MenGym' | 'WomenGym';
+  name: 'leftHoop' | 'rightHoop' | 'curtain';
+  action: 'UP' | 'DOWN';
+}
+
+export interface CrestronWebrelayConfig {
+  payload: CrestronWebrelayPayload;
+}
+
 export interface LightControlData {
   kind: 'light' | 'toggle';
   icon: LucideIcon;
@@ -41,6 +51,7 @@ export interface LightControlData {
   stateOff?: string;
   intensityStates?: Intensity[];
   analogFeedback?: string;
+  webRelayConfig?: CrestronWebrelayConfig;
   color?: string;
   inverted?: boolean;
   hasFeedback?: boolean;
@@ -78,6 +89,7 @@ export interface CustomControlData {
 
 export interface GroupControlData {
   kind: 'group';
+  className?: string;
   controls: LightControlData[];
 }
 
@@ -100,6 +112,7 @@ export interface PageData {
 
 export interface UIConfig {
   authProviderURL?: string;
+  webRelayURL?: string;
   authID?: string;
   crestronConfigs: CrestronConfigs;
   id?: number | string;

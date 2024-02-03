@@ -64,9 +64,11 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   return (
     <div
       className={classNames(
-        'flex items-center justify-center bg-background fixed top-0 left-0 h-screen w-screen z-10',      )}>
+        'flex items-center justify-center fixed top-0 left-0 h-screen w-screen z-10',
+        '',
+      )}>
       <div className="flex flex-col items-center justify-center space-x-1">
-        <p className="text-4xl font-semibold bg-primary rounded-full px-5 py-5">BAPS Shri Swaminarayan Mandir, Edison, NJ</p>
+        <p className="text-4xl font-semibold">BAPS Shri Swaminarayan Mandir, Edison, NJ</p>
         <div
           className={classNames(
             'rounded-full px-6 py-2 bg-primary flex-col items-center justify-center',

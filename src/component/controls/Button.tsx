@@ -1,13 +1,20 @@
-import type { Intensity, LightControlData } from 'utils/Configs';
+import type {
+  CrestronWebrelayConfig,
+  Intensity,
+  LightControlData,
+} from 'utils/Configs';
 
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import {
   useAnalogState,
   useDigitalState,
   usePublishDigital,
+  useWebRelayApiState,
 } from 'utils/hooks';
 import { type LucideIcon } from 'lucide-react';
+import { useRecoilState } from 'recoil';
+import { webRelayPendingState } from 'state/navigation';
 
 interface ButtonCommonProps {
   className?: string;
@@ -24,6 +31,7 @@ interface ButtonCommonProps {
 interface ButtonImplProps extends ButtonCommonProps {
   isOn: boolean;
   onClick: (toggle: boolean) => void;
+  disabled?: boolean;
 }
 
 const ButtonImpl: React.FC<ButtonImplProps> = ({
@@ -37,6 +45,7 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
   isOn,
   title,
   onClick,
+  disabled,
 }: ButtonImplProps) => {
   const feedback = useAnalogState(analogFeedback);
   const hasAnalogFeedback = analogFeedback.length > 0;
@@ -54,10 +63,11 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
 
   return (
     <button
+      disabled={disabled}
       className={classNames(
         'transition-all rounded-lg flex px-4 py-4 justify-between border border-primary',
         'focus:outline-none outline-none space-x-4 items-center',
-        isButtonActive ? 'bg-primary text-black' : 'text-primary',
+        isButtonActive ? 'bg-primary text-primary' : 'bg-black text-primary',
         className,
       )}
       onClick={() => {
@@ -131,6 +141,37 @@ const ButtonOnOffImpl: React.FC<ButtonOnOffImplProps> = ({
   return <ButtonImpl isOn={isOn} onClick={handleToggle} {...rest} />;
 };
 
+interface ButtonRelayImplProps extends ButtonCommonProps {
+  webRelayConfig: CrestronWebrelayConfig;
+}
+
+const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = (props) => {
+  const [active, setActive] = useState(false);
+  const [webRelayPending, setWebRelayPending] =
+    useRecoilState(webRelayPendingState);
+  const sendWebRelay = useWebRelayApiState();
+
+  return (
+    <ButtonImpl
+      disabled={webRelayPending}
+      isOn={active}
+      onClick={() => {
+        setWebRelayPending(true);
+        setActive(true);
+        sendWebRelay(props.webRelayConfig.payload)
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            setActive(false);
+            setWebRelayPending(false);
+          });
+      }}
+      {...props}
+    />
+  );
+};
+
 interface Props {
   className?: string;
   config: LightControlData;
@@ -148,8 +189,23 @@ const Button: React.FC<Props> = ({
     stateOff,
     intensityStates,
     analogFeedback,
+    webRelayConfig,
   },
 }: Props) => {
+  if (webRelayConfig) {
+    return (
+      <ButtonWebrelayImpl
+        className={className}
+        title={title}
+        label={label}
+        labelOff={labelOff}
+        icon={icon}
+        iconOff={iconOff}
+        webRelayConfig={webRelayConfig}
+      />
+    );
+  }
+
   if (stateOff != null) {
     return (
       <ButtonOnOffImpl
