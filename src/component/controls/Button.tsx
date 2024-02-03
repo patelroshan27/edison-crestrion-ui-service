@@ -67,7 +67,7 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
       className={classNames(
         'transition-all rounded-lg flex px-4 py-4 justify-between border border-primary',
         'focus:outline-none outline-none space-x-4 items-center',
-        isButtonActive ? 'bg-primary text-primary' : 'bg-black text-primary',
+        isButtonActive ? 'bg-primary text-primary' : 'bg-background text-primary',
         className,
       )}
       onClick={() => {
