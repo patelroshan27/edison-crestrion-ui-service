@@ -21,11 +21,11 @@ module.exports = {
       themes: {
         dark: {
           colors: {
-            active: "#FFA500",
-            background: 'gray',
+            active: "#E5BF14",
+            background: '#767D7D',
             primary: {
               foreground: "#000000",
-              DEFAULT: "#FFA500",
+              DEFAULT: "#E5BF14",
             },
             secondary: {
               foreground: "#3f3f46",

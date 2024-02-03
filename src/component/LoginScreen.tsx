@@ -69,10 +69,11 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
       )}>
       <div className="flex flex-col items-center justify-center space-x-1">
         <p className="text-4xl font-semibold bg-primary rounded-full px-5 py-5">BAPS Shri Swaminarayan Mandir, Edison, NJ</p>
+        <div className="flex flex-row items-center justify-center space-x-1">
         <div
           className={classNames(
             'rounded-full px-6 py-2 bg-primary flex-col items-center justify-center',
-            'text-3xl font-semibold my-4',
+            'text-3xl font-semibold my-4 mx-4',
           )}>
           {authID}
         </div>
@@ -89,6 +90,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
               />
             );
           })}
+        </div>
         </div>
         <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1].map((digit) => {
