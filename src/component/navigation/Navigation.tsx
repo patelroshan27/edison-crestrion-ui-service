@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import TimeDisplay from 'component/navigation/TimeDisplay';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isLoggedInState, pageState } from 'state/navigation';
 import { getConfigs } from 'utils/Configs';
@@ -24,22 +23,20 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
         className,
       )}>
       <div className="flex items-center space-x-4">
-
-      <button
-              type="button"
-              className={classNames(
-                'px-4 py-4 flex items-center rounded-lg text-4xl bg-primary text-black')}
-              onClick={() => {
-                setIsLoggedIn(false);
-              }}>
-              <Lock className="mr-3 h-6 w-6 text-lg" />
-              <div className="text-left flex flex-col">
+        <button
+          type="button"
+          className={classNames(
+            'px-4 py-4 flex items-center rounded-lg text-4xl bg-primary text-black',
+          )}
+          onClick={() => {
+            setIsLoggedIn(false);
+          }}>
+          <Lock className="mr-3 h-6 w-6 text-lg" />
+          <div className="text-left flex flex-col">
             <span className="leading-none text-xl">Lock</span>
             <span className="text-lg">{configs.authID}</span>
           </div>
-      </button>
-
-        <TimeDisplay />
+        </button>
       </div>
       <div className="flex items-center space-x-2">
         {pages.map((page) => {

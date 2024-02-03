@@ -4,7 +4,11 @@ import type {
 } from '@crestron/ch5-crcomlib';
 
 import * as CrComLib from '@crestron/ch5-crcomlib';
+import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
+import { getConfigs, type CrestronWebrelayPayload } from './Configs';
+
+const { webRelayURL } = getConfigs();
 
 // Generic hook to handle common logic of send and receive
 export function useMultipleSignalStates<T extends TSignalValue>(
@@ -114,4 +118,18 @@ export function usePublishString(signalName: string): (value: string) => void {
     },
     [signalName],
   );
+}
+
+function useApiState<T>(
+  url: string,
+): (data: CrestronWebrelayPayload) => Promise<T> {
+  return useCallback(async (data: CrestronWebrelayPayload) => {
+    return await axios.post(url, data).then((res) => res.data as T);
+  }, []);
+}
+
+export function useWebRelayApiState(): (
+  data: CrestronWebrelayPayload,
+) => Promise<unknown> {
+  return useApiState<unknown>(webRelayURL as string);
 }
