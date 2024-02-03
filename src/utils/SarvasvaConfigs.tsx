@@ -18,7 +18,7 @@ const Configs: UIConfig = {
   // proximityActivity: '71',
   // touchActivity: '72',
   authProviderURL: 'http://10.25.20.40:4000/crestron/passcodes/validate',
-  authID: 'sarvasva',
+  authID: 'Sarvasva',
   crestronConfigs: {
     host: '10.25.20.81',
     ipID: 19,

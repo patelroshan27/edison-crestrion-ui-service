@@ -51,6 +51,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
     authID: string,
     pass: string,
   ): Promise<void> => {
+    setIsLoggedIn(true);
     const response = await axios.get(
       `${authProviderURL}?name=${authID}&passcode=${pass}`,
     );
@@ -63,14 +64,12 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   return (
     <div
       className={classNames(
-        'flex items-center justify-center fixed top-0 left-0 h-screen w-screen z-10',
-        '',
-      )}>
+        'flex items-center justify-center bg-background fixed top-0 left-0 h-screen w-screen z-10',      )}>
       <div className="flex flex-col items-center justify-center space-x-1">
-        <p className="text-4xl font-semibold">BAPS Shri Swaminarayan Mandir, Edison, NJ</p>
+        <p className="text-4xl font-semibold bg-primary rounded-full px-5 py-5">BAPS Shri Swaminarayan Mandir, Edison, NJ</p>
         <div
           className={classNames(
-            'rounded-full px-6 py-2 bg-primary-300 flex-col items-center justify-center',
+            'rounded-full px-6 py-2 bg-primary flex-col items-center justify-center',
             'text-3xl font-semibold my-4',
           )}>
           {authID}
@@ -83,7 +82,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
           {password.split('').map((char, index) => {
             return (
               <div
-                className="rounded-full bg-primary h-4 w-4"
+                className="rounded-full h-4 w-4 bg-primary"
                 key={`pass-char-${char}-${index}`}
               />
             );
@@ -107,8 +106,8 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
                 key={digit}
                 className={classNames(
                   'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
-                  'text-5xl font-medium active:bg-primary/20 hover:bg-primary/20',
-                  digit === -1 ? 'bg-emerald-600 text-white' : 'bg-white/10',
+                  'text-5xl font-medium active:bg-primary hover:bg-primary',
+                  digit === -1 ? 'bg-primary text-white' : 'bg-secondary/10',
                 )}
                 disabled={isLoading}
                 onClick={() => {
