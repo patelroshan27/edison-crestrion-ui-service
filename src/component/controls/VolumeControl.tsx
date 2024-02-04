@@ -79,7 +79,7 @@ const VolumeControl: React.FC<Props> = ({
           <div
             className={classNames(
               'flex w-14 h-14 shrink-0 grow-0 items-center justify-center text-2xl rounded-full',
-              'bg-primary text-black',
+              'bg-primary text-primary-foreground',
             )}>
             <p className="text-xl font-semibold">{level}</p>
           </div>

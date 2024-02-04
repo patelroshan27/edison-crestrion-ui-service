@@ -26,7 +26,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
         <button
           type="button"
           className={classNames(
-            'px-4 py-4 flex items-center rounded-lg text-4xl bg-primary text-black',
+            'px-4 py-4 flex items-center rounded-lg text-4xl bg-primary text-primary-foreground',
           )}
           onClick={() => {
             setIsLoggedIn(false);
@@ -49,7 +49,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               className={classNames(
                 'px-4 py-4 flex items-center rounded-lg text-4xl',
                 activeTab === page
-                  ? 'bg-primary text-black'
+                  ? 'bg-primary text-primary-foreground'
                   : 'bg-white/10 text-primary',
               )}
               onClick={() => {

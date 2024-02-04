@@ -76,21 +76,21 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
       <IconDisplay
         className={classNames(
           'h-10 w-10',
-          isButtonActive ? 'text-black' : 'text-primary',
+          isButtonActive ? 'text-primary-foreground' : 'text-primary',
         )}
       />
       <div className={classNames('w-full text-start flex flex-col space-y-1')}>
         <p
           className={classNames(
             'text-lg leading-none font-semibold',
-            isButtonActive ? 'text-black' : 'text-secondary',
+            isButtonActive ? 'text-primary-foreground' : 'text-secondary',
           )}>
           {title ?? 'Button'}
         </p>
         <p
           className={classNames(
             'text-3xl leading-none',
-            isButtonActive ? 'text-black' : 'text-primary',
+            isButtonActive ? 'text-primary-foreground' : 'text-primary',
           )}>
           {isButtonActive ? label : offLabel}
         </p>

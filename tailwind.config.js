@@ -21,18 +21,18 @@ module.exports = {
       themes: {
         dark: {
           colors: {
-            active: "#E5BF14",
-            background: '#767D7D',
+            active: "#ffffff",
+            background: '#706D6F',
             primary: {
-              foreground: "#000000",
-              DEFAULT: "#E5BF14",
+              foreground: "#6D696B",
+              DEFAULT: "#ffffff",
             },
             secondary: {
               foreground: "#3f3f46",
               DEFAULT: '#FEFCE8',
             }
           },
-        }
+        },
       }
     })],
 }
