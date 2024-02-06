@@ -2,17 +2,20 @@ import type { ColorIntensity, PharosControlData } from 'utils/Configs';
 
 import React from 'react';
 import classNames from 'classnames';
-import { useDigitalState, usePublishDigital } from 'utils/hooks';
+import { useDigitalState, usePharosApiState } from 'utils/hooks';
 
 const MAX_ROWS = 4;
 
-const PharosColorControl: React.FC<ColorIntensity> = ({
+const PharosColorControl: React.FC<ColorIntensity & { room: string }> = ({
   state,
   icon: Icon,
   color,
-}: ColorIntensity) => {
+  room,
+  scene,
+}) => {
+  const sendPharosCmd = usePharosApiState();
+  // TODO need to figure out current active scene
   const isOn = useDigitalState(state);
-  const publishOn = usePublishDigital(state);
 
   const iconDisplay =
     Icon != null ? (
@@ -30,7 +33,9 @@ const PharosColorControl: React.FC<ColorIntensity> = ({
       style={{
         backgroundColor: iconDisplay != null ? 'rgba(255,255,255,0.1)' : color,
       }}
-      onClick={publishOn}>
+      onClick={() => {
+        sendPharosCmd({ room, scene }).catch((err) => console.log(err));
+      }}>
       {iconDisplay}
     </button>
   );
@@ -60,7 +65,9 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
 
   const colorPalettes = rows.map((row, index) => {
     return row.map((item) => {
-      return <PharosColorControl {...item} key={item.state} />;
+      return (
+        <PharosColorControl {...item} room={config.room} key={item.state} />
+      );
     });
   });
 

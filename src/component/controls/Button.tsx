@@ -67,7 +67,9 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
       className={classNames(
         'transition-all rounded-lg flex px-4 py-4 justify-between border border-primary',
         'focus:outline-none outline-none space-x-4 items-center',
-        isButtonActive ? 'bg-primary text-primary' : 'bg-background text-primary',
+        isButtonActive
+          ? 'bg-primary text-primary'
+          : 'bg-background text-primary',
         className,
       )}
       onClick={() => {
@@ -145,7 +147,10 @@ interface ButtonRelayImplProps extends ButtonCommonProps {
   webRelayConfig: CrestronWebrelayConfig;
 }
 
-const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = (props) => {
+const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
+  webRelayConfig,
+  ...props
+}) => {
   const [active, setActive] = useState(false);
   const [webRelayPending, setWebRelayPending] =
     useRecoilState(webRelayPendingState);
@@ -153,12 +158,12 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = (props) => {
 
   return (
     <ButtonImpl
-      disabled={webRelayPending}
+      disabled={webRelayConfig.payload.action !== 'STOP' && webRelayPending}
       isOn={active}
       onClick={() => {
         setWebRelayPending(true);
         setActive(true);
-        sendWebRelay(props.webRelayConfig.payload)
+        sendWebRelay(webRelayConfig.payload)
           .catch((err) => {
             console.log(err);
           })
