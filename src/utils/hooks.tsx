@@ -4,11 +4,15 @@ import type {
 } from '@crestron/ch5-crcomlib';
 
 import * as CrComLib from '@crestron/ch5-crcomlib';
-import axios from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { getConfigs, type CrestronWebrelayPayload } from './Configs';
+import {
+  getConfigs,
+  type CrestronWebrelayPayload,
+  type PharosCmd,
+} from './Configs';
 
-const { webRelayURL } = getConfigs();
+const { webRelayURL, pharosURL } = getConfigs();
 
 // Generic hook to handle common logic of send and receive
 export function useMultipleSignalStates<T extends TSignalValue>(
@@ -120,16 +124,20 @@ export function usePublishString(signalName: string): (value: string) => void {
   );
 }
 
-function useApiState<T>(
-  url: string,
-): (data: CrestronWebrelayPayload) => Promise<T> {
-  return useCallback(async (data: CrestronWebrelayPayload) => {
-    return await axios.post(url, data).then((res) => res.data as T);
+function useApiState<D, R>(url: string): (data: D) => Promise<R> {
+  return useCallback(async (data: D) => {
+    return await axios
+      .post<R, AxiosResponse<R>, D>(url, data)
+      .then((res) => res.data);
   }, []);
 }
 
 export function useWebRelayApiState(): (
   data: CrestronWebrelayPayload,
 ) => Promise<unknown> {
-  return useApiState<unknown>(webRelayURL as string);
+  return useApiState<CrestronWebrelayPayload, unknown>(webRelayURL as string);
+}
+
+export function usePharosApiState(): (data: PharosCmd) => Promise<unknown> {
+  return useApiState<PharosCmd, unknown>(pharosURL as string);
 }

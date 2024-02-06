@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import DefaultConfigs from 'utils/DefaultConfigs';
 import SarvasvaConfigs from './SarvasvaConfigs';
+import MenGymConfig from './MenGymConfig';
 import { type LucideIcon } from 'lucide-react';
 
 export interface CrestronConfigs {
@@ -23,17 +24,24 @@ export interface ColorIntensity {
   name: string;
   icon?: LucideIcon;
   color: string;
+  scene: string;
 }
 
 export interface PharosControlData {
   kind: 'pharos';
+  room: string;
   colorStates: ColorIntensity[];
 }
 
 export interface CrestronWebrelayPayload {
   authId: 'MenGym' | 'WomenGym';
   name: 'leftHoop' | 'rightHoop' | 'curtain';
-  action: 'UP' | 'DOWN';
+  action: 'UP' | 'DOWN' | 'STOP';
+}
+
+export interface PharosCmd {
+  room: string;
+  scene: string;
 }
 
 export interface CrestronWebrelayConfig {
@@ -113,6 +121,7 @@ export interface PageData {
 export interface UIConfig {
   authProviderURL?: string;
   webRelayURL?: string;
+  pharosURL?: string;
   authID?: string;
   crestronConfigs: CrestronConfigs;
   id?: number | string;
@@ -126,6 +135,8 @@ export function getConfigs(): UIConfig {
   switch (process.env.REACT_APP_ROOM_CONFIG_NAME) {
     case 'sarvasva':
       return SarvasvaConfigs;
+    case 'mengym':
+      return MenGymConfig;
     // ADD CASES BELOW TO HANDLE OTHER CONFIGS
   }
   return DefaultConfigs;

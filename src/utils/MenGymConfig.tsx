@@ -1,13 +1,6 @@
 import {
-  Bluetooth,
-  Flower2,
   Lightbulb,
   LightbulbOff,
-  ListMusic,
-  Mic2,
-  Music2,
-  PowerOff,
-  Speech,
   Sun,
   SunDim,
   ArrowUpToLine,
@@ -54,6 +47,9 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Stop',
               state: '153',
+              webRelayConfig: {
+                payload: { authId: 'MenGym', name: 'leftHoop', action: 'STOP' },
+              },
             },
             {
               kind: 'toggle',
@@ -72,7 +68,7 @@ const Configs: UIConfig = {
           className: '!grid-rows-[1fr_1fr_1fr_1fr]',
           controls: [
             {
-              kind: 'light',
+              kind: 'toggle',
               icon: ArrowUpToLine,
               title: 'Curtains',
               label: 'Up',
@@ -82,14 +78,17 @@ const Configs: UIConfig = {
               },
             },
             {
-              kind: 'light',
+              kind: 'toggle',
               icon: PauseOctagon,
               title: 'Curtains',
               label: 'Stop',
               state: '159',
+              webRelayConfig: {
+                payload: { authId: 'MenGym', name: 'curtain', action: 'STOP' },
+              },
             },
             {
-              kind: 'light',
+              kind: 'toggle',
               icon: ArrowDownToLine,
               title: 'Curtains',
               label: 'Down',
@@ -105,7 +104,7 @@ const Configs: UIConfig = {
           className: '!grid-rows-[1fr_1fr_1fr_1fr]',
           controls: [
             {
-              kind: 'light',
+              kind: 'toggle',
               icon: ArrowUpToLine,
               title: 'Right Hoop',
               label: 'Up',
@@ -115,14 +114,21 @@ const Configs: UIConfig = {
               },
             },
             {
-              kind: 'light',
+              kind: 'toggle',
               icon: PauseOctagon,
               title: 'Right Hoop',
               label: 'Stop',
               state: '165',
+              webRelayConfig: {
+                payload: {
+                  authId: 'MenGym',
+                  name: 'rightHoop',
+                  action: 'STOP',
+                },
+              },
             },
             {
-              kind: 'light',
+              kind: 'toggle',
               icon: ArrowDownToLine,
               title: 'Right Hoop',
               label: 'Down',
@@ -194,9 +200,9 @@ const Configs: UIConfig = {
               stateOff: '20',
             },
           ],
-        }
+        },
       },
-    }
+    },
   },
 };
 
