@@ -1,21 +1,26 @@
 import type { ColorIntensity, PharosControlData } from 'utils/Configs';
 
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import { useDigitalState, usePharosApiState } from 'utils/hooks';
+import { usePharosApiState } from 'utils/hooks';
 
 const MAX_ROWS = 4;
 
-const PharosColorControl: React.FC<ColorIntensity & { room: string }> = ({
-  state,
+interface PharosColorControlProps extends ColorIntensity {
+  room: string;
+  activeScene?: string;
+  onPharosCmd: (scene: string) => void;
+}
+
+const PharosColorControl: React.FC<PharosColorControlProps> = ({
   icon: Icon,
   color,
   room,
   scene,
+  activeScene,
+  onPharosCmd,
 }) => {
   const sendPharosCmd = usePharosApiState();
-  // TODO need to figure out current active scene
-  const isOn = useDigitalState(state);
 
   const iconDisplay =
     Icon != null ? (
@@ -27,14 +32,16 @@ const PharosColorControl: React.FC<ColorIntensity & { room: string }> = ({
       className={classNames(
         'outline-none focus:outline-none flex items-center justify-center',
         'transition h-full rounded-[50%] overflow-hidden w-full max-w-[9rem] max-h-[9rem]',
-        isOn ? 'border-8 scale-100' : 'scale-90',
+        activeScene === scene ? 'border-8 scale-100' : 'scale-90',
       )}
       type="button"
       style={{
         backgroundColor: iconDisplay != null ? 'rgba(255,255,255,0.1)' : color,
       }}
       onClick={() => {
-        sendPharosCmd({ room, scene }).catch((err) => console.log(err));
+        sendPharosCmd({ room, scene })
+          .then(() => onPharosCmd(scene))
+          .catch((err) => console.log(err));
       }}>
       {iconDisplay}
     </button>
@@ -47,6 +54,7 @@ interface Props {
 }
 
 const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
+  const [activeScene, setActiveScene] = useState<string>();
   const rowModulous = Math.min(
     Math.ceil(config.colorStates.length / MAX_ROWS),
     4,
@@ -66,7 +74,13 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
   const colorPalettes = rows.map((row, index) => {
     return row.map((item) => {
       return (
-        <PharosColorControl {...item} room={config.room} key={item.state} />
+        <PharosColorControl
+          {...item}
+          room={config.room}
+          key={`${config.room}${item.scene}`}
+          activeScene={activeScene}
+          onPharosCmd={setActiveScene}
+        />
       );
     });
   });
