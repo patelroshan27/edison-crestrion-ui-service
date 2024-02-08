@@ -9,10 +9,11 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   getConfigs,
   type CrestronWebrelayPayload,
-  type PharosCmd,
+  type LightsApiPayload,
+  type ApiCommand,
 } from './Configs';
 
-const { webRelayURL, pharosURL } = getConfigs();
+const { webRelayURL, pharosURL, zumURL } = getConfigs();
 
 // Generic hook to handle common logic of send and receive
 export function useMultipleSignalStates<T extends TSignalValue>(
@@ -138,6 +139,33 @@ export function useWebRelayApiState(): (
   return useApiState<CrestronWebrelayPayload, unknown>(webRelayURL as string);
 }
 
-export function usePharosApiState(): (data: PharosCmd) => Promise<unknown> {
-  return useApiState<PharosCmd, unknown>(pharosURL as string);
+export function usePharosApiState(): (
+  data: LightsApiPayload,
+) => Promise<unknown> {
+  return useApiState<LightsApiPayload, unknown>(pharosURL as string);
+}
+
+export function useZumApiState(): (data: LightsApiPayload) => Promise<unknown> {
+  return useApiState<LightsApiPayload, unknown>(zumURL as string);
+}
+
+export function useApiCommands(): (commands: ApiCommand[]) => Promise<unknown> {
+  const sendPharosCmd = usePharosApiState();
+  const sendZumCmd = useZumApiState();
+  const sendWebRelayCmd = useWebRelayApiState();
+
+  return useCallback((commands: ApiCommand[]) => {
+    const promises = commands
+      .map((command) => {
+        if (command.type === 'pharos') return sendPharosCmd(command.payload);
+        if (command.type === 'zum') return sendZumCmd(command.payload);
+        if (command.type === 'webrelay')
+          return sendWebRelayCmd(command.payload);
+
+        return undefined;
+      })
+      .filter((x) => Boolean(x));
+
+    return Promise.all(promises);
+  }, []);
 }
