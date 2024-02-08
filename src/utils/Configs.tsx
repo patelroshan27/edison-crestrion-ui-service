@@ -11,6 +11,28 @@ export interface CrestronConfigs {
 }
 
 export type Page = string;
+export type LightApiType = 'zum' | 'pharos';
+
+export interface LightsApiPayload {
+  room: string;
+  scene: string;
+}
+
+export interface CrestronWebrelayPayload {
+  authId: 'MenGym' | 'WomenGym';
+  name: 'leftHoop' | 'rightHoop' | 'curtain';
+  action: 'UP' | 'DOWN' | 'STOP';
+}
+
+export interface WebrelayApiCommand {
+  type: 'webrelay';
+  payload: CrestronWebrelayPayload;
+}
+
+export interface LightsApiCommand {
+  type: LightApiType;
+  payload: LightsApiPayload;
+}
 
 export interface Intensity {
   icon?: LucideIcon;
@@ -33,20 +55,11 @@ export interface PharosControlData {
   colorStates: ColorIntensity[];
 }
 
-export interface CrestronWebrelayPayload {
-  authId: 'MenGym' | 'WomenGym';
-  name: 'leftHoop' | 'rightHoop' | 'curtain';
-  action: 'UP' | 'DOWN' | 'STOP';
-}
-
-export interface PharosCmd {
-  room: string;
-  scene: string;
-}
-
 export interface CrestronWebrelayConfig {
   payload: CrestronWebrelayPayload;
 }
+
+export type ApiCommand = LightsApiCommand | WebrelayApiCommand;
 
 export interface LightControlData {
   kind: 'light' | 'toggle';
@@ -63,6 +76,7 @@ export interface LightControlData {
   color?: string;
   inverted?: boolean;
   hasFeedback?: boolean;
+  apiCommands?: ApiCommand[];
 }
 
 export interface AudioControlData {
@@ -122,6 +136,7 @@ export interface UIConfig {
   authProviderURL?: string;
   webRelayURL?: string;
   pharosURL?: string;
+  zumURL?: string;
   authID?: string;
   crestronConfigs: CrestronConfigs;
   id?: number | string;

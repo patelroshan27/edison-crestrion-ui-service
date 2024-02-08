@@ -18,7 +18,8 @@ const Configs: UIConfig = {
   // proximityActivity: '71',
   // touchActivity: '72',
   authProviderURL: 'http://10.25.20.40:4000/crestron/passcodes/validate',
-  pharosURL: 'http://localhost:4000/pharos/cmd',
+  pharosURL: 'http://localhost:4000/pharos/send',
+  zumURL: 'http://localhost:4000/zum/send',
   authID: 'Sarvasva',
   crestronConfigs: {
     host: '10.25.20.81',
@@ -40,6 +41,9 @@ const Configs: UIConfig = {
               label: 'On',
               state: '1',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '?', scene: '?' } },
+              ],
             },
             {
               kind: 'light',
@@ -48,6 +52,9 @@ const Configs: UIConfig = {
               label: 'Medium',
               state: '2',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '?', scene: '?' } },
+              ],
             },
             {
               kind: 'light',
@@ -56,6 +63,9 @@ const Configs: UIConfig = {
               label: 'Low',
               state: '3',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '?', scene: '?' } },
+              ],
             },
             {
               kind: 'light',
@@ -63,6 +73,9 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Off',
               state: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '?', scene: '?' } },
+              ],
             },
             {
               kind: 'light',
@@ -71,6 +84,10 @@ const Configs: UIConfig = {
               label: 'All On',
               state: '18',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '?', scene: '?' } },
+                { type: 'pharos', payload: { room: '?', scene: '?' } },
+              ],
             },
             {
               kind: 'light',
@@ -79,6 +96,10 @@ const Configs: UIConfig = {
               label: 'All Off',
               state: '19',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '?', scene: '?' } },
+                { type: 'pharos', payload: { room: '?', scene: '?' } },
+              ],
             },
           ],
         },

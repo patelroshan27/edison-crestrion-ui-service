@@ -1,4 +1,5 @@
 import type {
+  ApiCommand,
   CrestronWebrelayConfig,
   Intensity,
   LightControlData,
@@ -8,6 +9,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import {
   useAnalogState,
+  useApiCommands,
   useDigitalState,
   usePublishDigital,
   useWebRelayApiState,
@@ -177,6 +179,27 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
   );
 };
 
+interface ApiCommandButtonProps extends ButtonCommonProps {
+  apiCommands: ApiCommand[];
+}
+
+const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
+  apiCommands,
+  ...props
+}) => {
+  const sendCommands = useApiCommands();
+
+  return (
+    <ButtonImpl
+      {...props}
+      isOn={false}
+      onClick={() => {
+        sendCommands(apiCommands).catch((err) => console.log(err));
+      }}
+    />
+  );
+};
+
 interface Props {
   className?: string;
   config: LightControlData;
@@ -195,8 +218,24 @@ const Button: React.FC<Props> = ({
     intensityStates,
     analogFeedback,
     webRelayConfig,
+    apiCommands,
   },
 }: Props) => {
+  if (apiCommands) {
+    return (
+      <ApiCommandButton
+        className={className}
+        title={title}
+        label={label}
+        labelOff={labelOff}
+        icon={icon}
+        iconOff={iconOff}
+        apiCommands={apiCommands}
+      />
+    );
+  }
+
+  // TODO integrate below using ApiCommandButton component
   if (webRelayConfig) {
     return (
       <ButtonWebrelayImpl
