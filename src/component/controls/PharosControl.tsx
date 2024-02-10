@@ -112,9 +112,9 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
     }
 
     if (lastInsert === 1) {
-      row.unshift(...fillers);
+//      row.unshift(...fillers);
     } else {
-      row.push(...fillers);
+  //    row.push(...fillers);
     }
     lastInsert *= -1;
 
