@@ -94,7 +94,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             })}
           </div>
         </div>
-        <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 text-primary-foreground items-center justify-center">
+        <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1].map((digit) => {
             let display: React.ReactNode = digit;
             switch (digit) {
@@ -112,10 +112,10 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
                 key={digit}
                 className={classNames(
                   'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
-                  'text-5xl font-medium active:bg-primary hover:bg-primary',
+                  'text-5xl font-medium bg-primary text-primary',
                   digit === -1
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary/10',
+                    ? 'bg-primary/10'
+                    : 'bg-primary/10',
                 )}
                 disabled={isLoading}
                 onClick={() => {
