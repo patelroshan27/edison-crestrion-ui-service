@@ -51,7 +51,6 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
     authID: string,
     pass: string,
   ): Promise<void> => {
-    setIsLoggedIn(true);
     const response = await axios.get(
       `${authProviderURL}?name=${authID}&passcode=${pass}`,
     );
@@ -112,7 +111,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
                 key={digit}
                 className={classNames(
                   'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
-                  'text-5xl font-medium bg-primary text-primary',
+                  'text-5xl font-medium text-primary active:text-secondary',
                   digit === -1
                     ? 'bg-primary/10'
                     : 'bg-primary/10',

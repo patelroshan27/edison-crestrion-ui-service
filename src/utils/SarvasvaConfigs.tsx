@@ -18,8 +18,8 @@ const Configs: UIConfig = {
   // proximityActivity: '71',
   // touchActivity: '72',
   authProviderURL: 'http://10.25.20.40:4000/crestron/passcodes/validate',
-  pharosURL: 'http://localhost:4000/pharos/send',
-  zumURL: 'http://localhost:4000/zum/send',
+  pharosURL: 'http://10.25.20.40:4000/pharos/send',
+  zumURL: 'http://10.25.20.40:4000/zum/send',
   authID: 'Sarvasva',
   crestronConfigs: {
     host: '10.25.20.81',
