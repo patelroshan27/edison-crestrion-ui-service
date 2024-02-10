@@ -188,13 +188,13 @@ const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
   ...props
 }) => {
   const sendCommands = useApiCommands();
-
+  const [active, setActive] = useState(false);
   return (
     <ButtonImpl
       {...props}
-      isOn={false}
+      isOn={active}
       onClick={() => {
-        sendCommands(apiCommands).catch((err) => console.log(err));
+        sendCommands(apiCommands).then(()=> setActive(true)).catch((err) => setActive(true));
       }}
     />
   );

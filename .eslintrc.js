@@ -22,6 +22,7 @@ module.exports = {
         "prettier"
     ],
     "rules": {
+        "n/handle-callback-err": "warn",
         "prettier/prettier": 1,
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-confusing-void-expression": "off",
