@@ -32,7 +32,7 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
       className={classNames(
         'outline-none focus:outline-none border-4 flex items-center justify-center',
         'transition h-full rounded-[50%] border-primary overflow-hidden w-full max-w-[9rem] max-h-[9rem]',
-        activeScene === scene ? 'scale-100' : 'opacity-[0.6] scale-80',
+        activeScene === scene ? 'scale-100' : 'scale-80',
       )}
       type="button"
       style={{
