@@ -181,20 +181,26 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
 
 interface ApiCommandButtonProps extends ButtonCommonProps {
   apiCommands: ApiCommand[];
+  activeValue?: string | number;
+  setActiveValue?: (val: string | number) => void;
 }
 
 const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
   apiCommands,
+  activeValue,
+  setActiveValue,
   ...props
 }) => {
   const sendCommands = useApiCommands();
-  const [active, setActive] = useState(false);
+
   return (
     <ButtonImpl
       {...props}
-      isOn={active}
+      isOn={activeValue === props.label}
       onClick={() => {
-        sendCommands(apiCommands).then(()=> setActive(true)).catch((err) => setActive(true));
+        sendCommands(apiCommands)
+          .then(() => setActiveValue?.(props.label))
+          .catch((err) => console.log(err));
       }}
     />
   );
@@ -203,6 +209,8 @@ const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
 interface Props {
   className?: string;
   config: LightControlData;
+  activeValue?: string | number;
+  setActiveValue?: (val: string | number) => void;
 }
 
 const Button: React.FC<Props> = ({
@@ -220,6 +228,8 @@ const Button: React.FC<Props> = ({
     webRelayConfig,
     apiCommands,
   },
+  activeValue,
+  setActiveValue,
 }: Props) => {
   if (apiCommands) {
     return (
@@ -231,6 +241,8 @@ const Button: React.FC<Props> = ({
         icon={icon}
         iconOff={iconOff}
         apiCommands={apiCommands}
+        activeValue={activeValue}
+        setActiveValue={setActiveValue}
       />
     );
   }
