@@ -87,7 +87,7 @@ const VolumeControl: React.FC<Props> = ({
             className={classNames(
               'w-full text-start flex flex-col space-y-1.5',
             )}>
-            <p className="text-sm leading-none font-semibold text-sexondary">
+            <p className="text-sm leading-none font-semibold text-primary">
               {title ?? 'Volume'}
             </p>
             <p className={classNames('text-xl leading-none text-primary')}>

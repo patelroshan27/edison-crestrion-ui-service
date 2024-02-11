@@ -87,7 +87,7 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
         <p
           className={classNames(
             'text-lg leading-none font-semibold',
-            isButtonActive ? 'text-primary-foreground' : 'text-secondary',
+            isButtonActive ? 'text-primary-foreground' : 'text-primary',
           )}>
           {title ?? 'Button'}
         </p>
