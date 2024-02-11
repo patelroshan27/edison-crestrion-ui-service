@@ -127,7 +127,12 @@ const Configs: UIConfig = {
               scene: '02',
             },
             { state: '103', name: 'Blue', color: 'rgb(2,0,255)', scene: '03' },
-            { state: '104', name: 'Gold', color: 'rgb(166,156,0)', scene: '04' },
+            {
+              state: '104',
+              name: 'Gold',
+              color: 'rgb(166,156,0)',
+              scene: '04',
+            },
             {
               state: '105',
               name: 'Yellow',
@@ -164,7 +169,12 @@ const Configs: UIConfig = {
               color: 'rgb(255,255,255)',
               scene: '10',
             },
-            { state: '154', name: 'Mint', color: 'rgb(40,162,125)', scene: '11' },
+            {
+              state: '154',
+              name: 'Mint',
+              color: 'rgb(40,162,125)',
+              scene: '11',
+            },
             {
               state: '112',
               name: 'Dark Pink',

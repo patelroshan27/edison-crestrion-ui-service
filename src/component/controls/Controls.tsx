@@ -6,6 +6,7 @@ import VolumeControl from 'component/controls/VolumeControl';
 import CustomControl from 'component/controls/CustomControl';
 import PharosControl from 'component/controls/PharosControl';
 import classNames from 'classnames';
+import { ButtonGroup } from './ButtonGroup';
 
 interface Props {
   className?: string;
@@ -40,18 +41,7 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
             />
           );
         } else if (data.kind === 'group') {
-          return (
-            <div
-              key={key}
-              className={classNames(
-                'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-4',
-                data.className,
-              )}>
-              {data.controls.map((button) => {
-                return <Button key={button.label} config={button} />;
-              })}
-            </div>
-          );
+          return <ButtonGroup key={key} data={data} />;
         }
         return null;
       })}
