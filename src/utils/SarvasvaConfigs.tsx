@@ -1,6 +1,4 @@
 import {
-  ArrowDownToLine,
-  ArrowUpToLine,
   Bluetooth,
   Flower2,
   Lightbulb,
@@ -8,7 +6,6 @@ import {
   ListMusic,
   Mic2,
   Music2,
-  PauseOctagon,
   PowerOff,
   Speech,
   Sun,
@@ -20,9 +17,10 @@ const Configs: UIConfig = {
   id: 123,
   // proximityActivity: '71',
   // touchActivity: '72',
-  authProviderURL: 'http://10.25.20.40:4000/crestron/passcodes/validate',
-  pharosURL: 'http://10.25.20.40:4000/pharos/send',
-  zumURL: 'http://10.25.20.40:4000/zum/send',
+  authProviderURL: '/crestron/passcodes/validate',
+  pharosApiPath: '/pharos/send',
+  zumApiPath: '/zum/send',
+  audioApiPath: '/audio/send',
   authID: 'Sarvasva',
   crestronConfigs: {
     host: '10.25.20.81',
@@ -243,10 +241,10 @@ const Configs: UIConfig = {
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
         },
-        mediaplayer: {
+        microphone: {
           kind: 'audio',
           icon: Music2,
-          label: 'Media Player',
+          label: 'Mic',
           play: '52',
           pause: '51',
           toggle: '50',
@@ -264,9 +262,9 @@ const Configs: UIConfig = {
           label: 'Bluetooth',
           state: '31',
           apiCommands: [
-            { type: 'CS', payload: { controlNumber: '2', controlPosition: '00000' } },
-          ]
-          },
+            { type: 'audio', payload: { channel: '2', value: '00000' } },
+          ],
+        },
         media: {
           kind: 'toggle',
           icon: ListMusic,
@@ -274,8 +272,8 @@ const Configs: UIConfig = {
           label: 'Media Player',
           state: '32',
           apiCommands: [
-            { type: 'CS', payload: { controlNumber: '2', controlPosition: '13107' } },
-          ]
+            { type: 'audio', payload: { channel: '2', value: '13107' } },
+          ],
         },
         mic: {
           kind: 'toggle',
@@ -284,8 +282,8 @@ const Configs: UIConfig = {
           label: 'Mic',
           state: '33',
           apiCommands: [
-            { type: 'CS', payload: { controlNumber: '2', controlPosition: '26214' } },
-          ]
+            { type: 'audio', payload: { channel: '2', value: '26214' } },
+          ],
         },
         mandir: {
           kind: 'toggle',
@@ -294,8 +292,8 @@ const Configs: UIConfig = {
           label: 'Mandir',
           state: '34',
           apiCommands: [
-            { type: 'CS', payload: { controlNumber: '2', controlPosition: '39321' } },
-          ]
+            { type: 'audio', payload: { channel: '2', value: '39321' } },
+          ],
         },
         sabhahall: {
           kind: 'toggle',
@@ -304,8 +302,8 @@ const Configs: UIConfig = {
           label: 'Sabha Hall',
           state: '35',
           apiCommands: [
-            { type: 'CS', payload: { controlNumber: '2', controlPosition: '52428' } },
-          ]
+            { type: 'audio', payload: { channel: '2', value: '52428' } },
+          ],
         },
       },
     },
