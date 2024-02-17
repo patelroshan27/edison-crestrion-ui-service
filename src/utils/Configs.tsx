@@ -24,6 +24,11 @@ export interface CrestronWebrelayPayload {
   action: 'UP' | 'DOWN' | 'STOP';
 }
 
+export interface AudioApiPaylod {
+  channel: string;
+  value: string;
+}
+
 export interface WebrelayApiCommand {
   type: 'webrelay';
   payload: CrestronWebrelayPayload;
@@ -32,6 +37,11 @@ export interface WebrelayApiCommand {
 export interface LightsApiCommand {
   type: LightApiType;
   payload: LightsApiPayload;
+}
+
+export interface AudioApiCommand {
+  type: 'audio';
+  payload: AudioApiPaylod;
 }
 
 export interface Intensity {
@@ -59,7 +69,10 @@ export interface CrestronWebrelayConfig {
   payload: CrestronWebrelayPayload;
 }
 
-export type ApiCommand = LightsApiCommand | WebrelayApiCommand;
+export type ApiCommand =
+  | LightsApiCommand
+  | WebrelayApiCommand
+  | AudioApiCommand;
 
 export interface LightControlData {
   kind: 'light' | 'toggle';
@@ -134,9 +147,10 @@ export interface PageData {
 
 export interface UIConfig {
   authProviderURL?: string;
-  webRelayURL?: string;
-  pharosURL?: string;
-  zumURL?: string;
+  webRelayApiPath?: string;
+  pharosApiPath?: string;
+  zumApiPath?: string;
+  audioApiPath?: string;
   authID?: string;
   crestronConfigs: CrestronConfigs;
   id?: number | string;
