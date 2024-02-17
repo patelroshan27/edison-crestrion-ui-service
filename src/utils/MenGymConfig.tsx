@@ -14,7 +14,7 @@ const Configs: UIConfig = {
   // proximityActivity: '71',
   // touchActivity: '72',
   authProviderURL: 'http://10.25.20.40:4000/crestron/passcodes/validate',
-  webRelayURL: 'http://10.25.20.40:4000/crestron/webrelays/send',
+  webRelayApiPath: '/crestron/webrelays/send',
   authID: 'MenGym',
   crestronConfigs: {
     host: '10.25.20.81',

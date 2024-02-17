@@ -11,9 +11,12 @@ import {
   type CrestronWebrelayPayload,
   type LightsApiPayload,
   type ApiCommand,
+  type AudioApiPaylod,
 } from './Configs';
 
-const { webRelayURL, pharosURL, zumURL } = getConfigs();
+const { webRelayApiPath, pharosApiPath, zumApiPath, audioApiPath } =
+  getConfigs();
+const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 // Generic hook to handle common logic of send and receive
 export function useMultipleSignalStates<T extends TSignalValue>(
@@ -125,10 +128,10 @@ export function usePublishString(signalName: string): (value: string) => void {
   );
 }
 
-function useApiState<D, R>(url: string): (data: D) => Promise<R> {
+function useApiState<D, R>(path: string): (data: D) => Promise<R> {
   return useCallback(async (data: D) => {
     return await axios
-      .post<R, AxiosResponse<R>, D>(url, data)
+      .post<R, AxiosResponse<R>, D>(`${apiBaseUrl}${path}`, data)
       .then((res) => res.data);
   }, []);
 }
@@ -136,29 +139,37 @@ function useApiState<D, R>(url: string): (data: D) => Promise<R> {
 export function useWebRelayApiState(): (
   data: CrestronWebrelayPayload,
 ) => Promise<unknown> {
-  return useApiState<CrestronWebrelayPayload, unknown>(webRelayURL as string);
+  return useApiState<CrestronWebrelayPayload, unknown>(
+    webRelayApiPath as string,
+  );
 }
 
 export function usePharosApiState(): (
   data: LightsApiPayload,
 ) => Promise<unknown> {
-  return useApiState<LightsApiPayload, unknown>(pharosURL as string);
+  return useApiState<LightsApiPayload, unknown>(pharosApiPath as string);
 }
 
 export function useZumApiState(): (data: LightsApiPayload) => Promise<unknown> {
-  return useApiState<LightsApiPayload, unknown>(zumURL as string);
+  return useApiState<LightsApiPayload, unknown>(zumApiPath as string);
+}
+
+export function useAudioApiState(): (data: AudioApiPaylod) => Promise<unknown> {
+  return useApiState<AudioApiPaylod, unknown>(audioApiPath as string);
 }
 
 export function useApiCommands(): (commands: ApiCommand[]) => Promise<unknown> {
   const sendPharosCmd = usePharosApiState();
   const sendZumCmd = useZumApiState();
   const sendWebRelayCmd = useWebRelayApiState();
+  const sendAudioCmd = useAudioApiState();
 
   return useCallback((commands: ApiCommand[]) => {
     const promises = commands
       .map((command) => {
         if (command.type === 'pharos') return sendPharosCmd(command.payload);
         if (command.type === 'zum') return sendZumCmd(command.payload);
+        if (command.type === 'audio') return sendAudioCmd(command.payload);
         if (command.type === 'webrelay')
           return sendWebRelayCmd(command.payload);
 
