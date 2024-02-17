@@ -12,6 +12,7 @@ export interface CrestronConfigs {
 
 export type Page = string;
 export type LightApiType = 'zum' | 'pharos';
+export type AudioApiType = 'CS' | 'LP' | 'GS';
 
 export interface LightsApiPayload {
   room: string;
@@ -25,8 +26,9 @@ export interface CrestronWebrelayPayload {
 }
 
 export interface AudioApiPaylod {
-  channel: string;
-  value: string;
+  type: AudioApiType;
+  controlNumber: string;
+  controlPosition: string;
 }
 
 export interface WebrelayApiCommand {

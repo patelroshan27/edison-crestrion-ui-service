@@ -15,6 +15,8 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const passWordRef = useRef<HTMLDivElement>(null);
   const [, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
+
 
   const handleInvalidPassword = (): void => {
     passWordRef.current?.classList.add('animate-once', 'animate-shake');
@@ -52,7 +54,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
     pass: string,
   ): Promise<void> => {
     const response = await axios.get(
-      `${authProviderURL}?name=${authID}&passcode=${pass}`,
+      `${apiBaseUrl}${authProviderURL}?name=${authID}&passcode=${pass}`,
     );
     if (response.status === 200) {
       setIsLoading(false);
