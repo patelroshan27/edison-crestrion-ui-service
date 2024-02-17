@@ -1,4 +1,6 @@
 import {
+  ArrowDownToLine,
+  ArrowUpToLine,
   Bluetooth,
   Flower2,
   Lightbulb,
@@ -6,6 +8,7 @@ import {
   ListMusic,
   Mic2,
   Music2,
+  PauseOctagon,
   PowerOff,
   Speech,
   Sun,
@@ -240,10 +243,10 @@ const Configs: UIConfig = {
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
         },
-        microphone: {
+        mediaplayer: {
           kind: 'audio',
           icon: Music2,
-          label: 'Mic',
+          label: 'Media Player',
           play: '52',
           pause: '51',
           toggle: '50',
@@ -260,13 +263,19 @@ const Configs: UIConfig = {
           title: 'Source',
           label: 'Bluetooth',
           state: '31',
-        },
+          apiCommands: [
+            { type: 'CS', payload: { controlNumber: '2', controlPosition: '00000' } },
+          ]
+          },
         media: {
           kind: 'toggle',
           icon: ListMusic,
           title: 'Source',
           label: 'Media Player',
           state: '32',
+          apiCommands: [
+            { type: 'CS', payload: { controlNumber: '2', controlPosition: '13107' } },
+          ]
         },
         mic: {
           kind: 'toggle',
@@ -274,6 +283,9 @@ const Configs: UIConfig = {
           icon: Mic2,
           label: 'Mic',
           state: '33',
+          apiCommands: [
+            { type: 'CS', payload: { controlNumber: '2', controlPosition: '26214' } },
+          ]
         },
         mandir: {
           kind: 'toggle',
@@ -281,6 +293,9 @@ const Configs: UIConfig = {
           title: 'Source',
           label: 'Mandir',
           state: '34',
+          apiCommands: [
+            { type: 'CS', payload: { controlNumber: '2', controlPosition: '39321' } },
+          ]
         },
         sabhahall: {
           kind: 'toggle',
@@ -288,6 +303,9 @@ const Configs: UIConfig = {
           title: 'Source',
           label: 'Sabha Hall',
           state: '35',
+          apiCommands: [
+            { type: 'CS', payload: { controlNumber: '2', controlPosition: '52428' } },
+          ]
         },
       },
     },
