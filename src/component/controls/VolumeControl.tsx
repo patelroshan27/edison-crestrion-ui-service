@@ -2,12 +2,6 @@ import type { AudioControlData } from 'utils/Configs';
 
 import React, { useEffect, useState } from 'react';
 import { ConversionValues } from 'utils/Constants';
-import {
-  useAnalogState,
-  useDigitalState,
-  usePublishAnalog,
-  usePublishDigital,
-} from 'utils/hooks';
 import { Direction, Range } from 'react-range';
 import classNames from 'classnames';
 import {
@@ -39,26 +33,27 @@ const VolumeControl: React.FC<Props> = ({
   className,
   config: {
     label,
-    lock,
-    play,
-    pause,
-    toggle,
-    levelUp,
-    levelDown,
-    state,
+    // lock,
+    // play,
+    // pause,
+    // toggle,
+    // levelUp,
+    // levelDown,
+    // state,
     playLabel = 'PLAY',
     pauseLabel = 'PAUSE',
     title,
   },
 }: Props) => {
-  const feedback = useAnalogState(state);
-  const onPublish = usePublishAnalog(state);
+  // TODO
+  const feedback = 1; // useAnalogState(state);
+  const onPublish = (num: number): null => null; // usePublishAnalog(state);
   // const onUnlock = usePublishDigital(lock);
-  const playing = useDigitalState(play);
-  const paused = useDigitalState(pause);
-  const onToggle = usePublishDigital(toggle);
-  const onLevelUp = usePublishAnalog(levelUp);
-  const onLevelDown = usePublishAnalog(levelDown);
+  const playing = false; // useDigitalState(play);
+  const paused = false; // useDigitalState(pause);
+  const onToggle = (): null => null; // usePublishDigital(toggle);
+  const onLevelUp = (num: number): null => null; // usePublishAnalog(levelUp);
+  const onLevelDown = (num: number): null => null; // usePublishAnalog(levelDown);
 
   const [level, setLevel] = useState(getDbToPercent(feedback));
 

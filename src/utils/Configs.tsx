@@ -14,7 +14,13 @@ export interface CrestronConfigs {
 export type Page = string;
 export type LightApiType = 'zum' | 'pharos';
 export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
-export type AudioApiCmdName = 'Source' | 'Vol Up' | 'Vol Down' | 'Vol Reset' | 'Vol Mute' | 'Vol Unmute';
+export type AudioApiCmdName =
+  | 'Source'
+  | 'Vol Up'
+  | 'Vol Down'
+  | 'Vol Reset'
+  | 'Vol Mute'
+  | 'Vol Unmute';
 
 export interface LightsApiPayload {
   room: string;
@@ -57,7 +63,6 @@ export interface Intensity {
 }
 
 export interface ColorIntensity {
-  state: string;
   name: string;
   icon?: LucideIcon;
   color: string;
@@ -86,14 +91,8 @@ export interface LightControlData {
   title?: string;
   label: string;
   labelOff?: string;
-  state: string;
-  stateOff?: string;
-  intensityStates?: Intensity[];
-  analogFeedback?: string;
   webRelayConfig?: CrestronWebrelayConfig;
   color?: string;
-  inverted?: boolean;
-  hasFeedback?: boolean;
   apiCommands?: ApiCommand[];
 }
 
