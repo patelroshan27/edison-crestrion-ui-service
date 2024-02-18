@@ -3,7 +3,6 @@ import type { ControlData } from 'utils/Configs';
 import React from 'react';
 import Button from 'component/controls/Button';
 import VolumeControl from 'component/controls/VolumeControl';
-import CustomControl from 'component/controls/CustomControl';
 import PharosControl from 'component/controls/PharosControl';
 import classNames from 'classnames';
 import { ButtonGroup } from './ButtonGroup';
@@ -30,8 +29,6 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
           return (
             <VolumeControl className="row-span-4" key={key} config={data} />
           );
-        } else if (data.kind === 'custom') {
-          return <CustomControl key={key} config={data} />;
         } else if (data.kind === 'pharos') {
           return (
             <PharosControl

@@ -17,7 +17,6 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   const [, setIsLoggedIn] = useRecoilState(isLoggedInState);
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-
   const handleInvalidPassword = (): void => {
     passWordRef.current?.classList.add('animate-once', 'animate-shake');
     setTimeout(() => {

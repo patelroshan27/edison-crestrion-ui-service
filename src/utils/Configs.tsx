@@ -14,7 +14,12 @@ export interface CrestronConfigs {
 export type Page = string;
 export type LightApiType = 'zum' | 'pharos';
 export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
-export type AudioApiCmdName = 'Source' | 'Vol Up' | 'Vol Down' | 'Vol Reset' | 'Vol Mute' | 'Vol Unmute';
+export type AudioApiCmdName =
+  | 'Source'
+  | 'Vol Change'
+  | 'Vol Reset'
+  | 'Vol Mute'
+  | 'Vol Unmute';
 
 export interface LightsApiPayload {
   room: string;
@@ -49,15 +54,7 @@ export interface AudioApiCommand {
   payload: AudioApiPaylod;
 }
 
-export interface Intensity {
-  icon?: LucideIcon;
-  state: string;
-  stateOff: string;
-  name: string;
-}
-
 export interface ColorIntensity {
-  state: string;
   name: string;
   icon?: LucideIcon;
   color: string;
@@ -86,14 +83,8 @@ export interface LightControlData {
   title?: string;
   label: string;
   labelOff?: string;
-  state: string;
-  stateOff?: string;
-  intensityStates?: Intensity[];
-  analogFeedback?: string;
   webRelayConfig?: CrestronWebrelayConfig;
   color?: string;
-  inverted?: boolean;
-  hasFeedback?: boolean;
   apiCommands?: ApiCommand[];
 }
 
@@ -102,29 +93,12 @@ export interface AudioControlData {
   icon: LucideIcon;
   title?: string;
   label: string;
-  lock: string;
-  play: string;
-  pause: string;
-  toggle: string;
-  levelUp: string;
-  levelDown: string;
   playLabel?: string;
   pauseLabel?: string;
-  state: string;
-}
-
-export interface TemperatureControlData {
-  kind: 'temperature';
-}
-
-export interface CustomControlData {
-  kind: 'custom';
-  icon: LucideIcon;
-  label: string;
-  title?: string;
-  isActive: () => Promise<boolean>;
-  onToggleOn: () => Promise<void>;
-  onToggleOff: () => Promise<void>;
+  volChangeCmd: AudioApiCommand;
+  resetCmd?: AudioApiCommand;
+  muteCmd?: AudioApiCommand;
+  unMuteCmd?: AudioApiCommand;
 }
 
 export interface GroupControlData {
@@ -137,9 +111,7 @@ export type ControlData =
   | LightControlData
   | PharosControlData
   | AudioControlData
-  | TemperatureControlData
-  | GroupControlData
-  | CustomControlData;
+  | GroupControlData;
 
 export interface PageData {
   code?: string;
@@ -173,7 +145,7 @@ export function getConfigs(): UIConfig {
       return MenGymConfig;
     case 'womengym':
       return WomenGymConfig;
-      // ADD CASES BELOW TO HANDLE OTHER CONFIGS
+    // ADD CASES BELOW TO HANDLE OTHER CONFIGS
   }
   return DefaultConfigs;
 }
