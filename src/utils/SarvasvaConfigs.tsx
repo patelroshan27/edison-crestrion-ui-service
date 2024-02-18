@@ -75,7 +75,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '1' } },
+                { type: 'zum', payload: { room: '154', scene: '2' } },
                 { type: 'pharos', payload: { room: '154', scene: '01' } },
               ],
             },
