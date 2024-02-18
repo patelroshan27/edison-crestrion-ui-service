@@ -16,8 +16,7 @@ export type LightApiType = 'zum' | 'pharos';
 export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
 export type AudioApiCmdName =
   | 'Source'
-  | 'Vol Up'
-  | 'Vol Down'
+  | 'Vol Change'
   | 'Vol Reset'
   | 'Vol Mute'
   | 'Vol Unmute';
@@ -101,15 +100,12 @@ export interface AudioControlData {
   icon: LucideIcon;
   title?: string;
   label: string;
-  lock: string;
-  play: string;
-  pause: string;
-  toggle: string;
-  levelUp: string;
-  levelDown: string;
   playLabel?: string;
   pauseLabel?: string;
-  state: string;
+  volChangeCmd: AudioApiCommand;
+  resetCmd?: AudioApiCommand;
+  muteCmd?: AudioApiCommand;
+  unMuteCmd?: AudioApiCommand;
 }
 
 export interface TemperatureControlData {

@@ -1,6 +1,6 @@
 import type { AudioControlData } from 'utils/Configs';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ConversionValues } from 'utils/Constants';
 import { Direction, Range } from 'react-range';
 import classNames from 'classnames';
@@ -9,16 +9,12 @@ import {
   type IRenderThumbParams,
 } from 'react-range/lib/types';
 import FlatButton from './FlatButton';
-import { Mic, MicOff, Volume1, Volume2 } from 'lucide-react';
+import { Mic, MicOff, Volume1, Volume2, TimerReset } from 'lucide-react';
+import { useApiCommands } from 'utils/hooks';
 
 const MAX = 100;
 const MIN = 0;
-const STEP = 2;
-const VOLUME_STEP = ConversionValues.MAX_DECIMAL / 100;
-
-function getDbToPercent(db: number): number {
-  return Math.round((db / ConversionValues.MAX_DECIMAL) * 100);
-}
+const STEP = 10;
 
 function getPercentToDB(percent: number): number {
   return Math.round((percent / 100) * ConversionValues.MAX_DECIMAL);
@@ -33,35 +29,35 @@ const VolumeControl: React.FC<Props> = ({
   className,
   config: {
     label,
-    // lock,
-    // play,
-    // pause,
-    // toggle,
-    // levelUp,
-    // levelDown,
-    // state,
     playLabel = 'PLAY',
     pauseLabel = 'PAUSE',
     title,
+    volChangeCmd,
+    muteCmd,
+    unMuteCmd,
+    resetCmd,
   },
 }: Props) => {
-  // TODO
-  const feedback = 1; // useAnalogState(state);
-  const onPublish = (num: number): null => null; // usePublishAnalog(state);
-  // const onUnlock = usePublishDigital(lock);
-  const playing = false; // useDigitalState(play);
-  const paused = false; // useDigitalState(pause);
-  const onToggle = (): null => null; // usePublishDigital(toggle);
-  const onLevelUp = (num: number): null => null; // usePublishAnalog(levelUp);
-  const onLevelDown = (num: number): null => null; // usePublishAnalog(levelDown);
+  const sendCommands = useApiCommands();
 
-  const [level, setLevel] = useState(getDbToPercent(feedback));
+  const [level, setLevel] = useState(50);
+  const [playing, setPlaying] = useState(false);
 
-  useEffect(() => {
-    setLevel(getDbToPercent(feedback));
-  }, [setLevel, feedback]);
+  const handleVolChange = (newLevel: number): void => {
+    if (newLevel < MIN || newLevel > MAX) return;
 
-  const isPlaying = playing || !paused;
+    sendCommands([
+      {
+        type: volChangeCmd.type,
+        payload: {
+          ...volChangeCmd.payload,
+          controlPosition: getPercentToDB(newLevel).toString(),
+        },
+      },
+    ])
+      .then(() => setLevel(newLevel))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div
@@ -98,25 +94,14 @@ const VolumeControl: React.FC<Props> = ({
           min={MIN}
           max={MAX}
           values={[level]}
-          onChange={(values) => {
-            onPublish(getPercentToDB(values[0]));
-            // setLevel(values[0]);
-          }}
+          onChange={(values) => handleVolChange(values[0])}
           renderTrack={({ props, children }: IRenderTrackParams) => (
             <div
               className={classNames(
                 'grow-1 flex h-full items-center justify-center w-14',
-                // 'bg-slate-100/60 rounded-xl border border-slate-300',
               )}>
               <div
-                onMouseDown={(...args) => {
-                  // onUnlock();
-                  // props.onMouseDown(...args);
-                }}
-                onTouchStart={(...args) => {
-                  // onUnlock();
-                  // props.onTouchStart(...args);
-                }}
+                {...props}
                 className="grow-1 flex h-full"
                 style={{
                   ...props.style,
@@ -149,29 +134,34 @@ const VolumeControl: React.FC<Props> = ({
           <FlatButton
             label="Up"
             iconDef={Volume2}
-            onClick={() => {
-              onLevelUp(level + VOLUME_STEP);
-            }}
+            onClick={() => handleVolChange(level + STEP)}
           />
           <FlatButton
             label="Down"
             iconDef={Volume1}
-            onClick={() => {
-              onLevelDown(level - VOLUME_STEP);
-            }}
+            onClick={() => handleVolChange(level - STEP)}
           />
-          <FlatButton
-            className={
-              // isPlaying
-              //   ? 'bg-indigo-200 border border-indigo-400 text-indigo-700'
-              'bg-red-700 text-red-200'
-            }
-            label={isPlaying ? pauseLabel : playLabel}
-            iconDef={isPlaying ? Mic : MicOff}
-            onClick={() => {
-              onToggle();
-            }}
-          />
+          {muteCmd && unMuteCmd && (
+            <FlatButton
+              className="bg-red-700 text-red-200"
+              label={playing ? pauseLabel : playLabel}
+              iconDef={playing ? Mic : MicOff}
+              onClick={() => {
+                sendCommands([playing ? muteCmd : unMuteCmd])
+                  .then(() => setPlaying(!playing))
+                  .catch((err) => console.log(err));
+              }}
+            />
+          )}
+          {resetCmd && (
+            <FlatButton
+              label="Reset"
+              iconDef={TimerReset}
+              onClick={() => {
+                sendCommands([resetCmd]).catch((err) => console.log(err));
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
