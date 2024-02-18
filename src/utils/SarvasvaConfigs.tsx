@@ -241,10 +241,10 @@ const Configs: UIConfig = {
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
         },
-        microphone: {
+        mediaplayer: {
           kind: 'audio',
           icon: Music2,
-          label: 'Mic',
+          label: 'Media Player',
           play: '52',
           pause: '51',
           toggle: '50',
@@ -262,7 +262,7 @@ const Configs: UIConfig = {
           label: 'Bluetooth',
           state: '31',
           apiCommands: [
-            { type: 'audio', payload: { type: 'CS', controlNumber: '2', controlPosition: '00000' } },
+            { type: 'audio', payload: { cmdType: 'CS', cmdName: 'Source', controlNumber: '2', controlPosition: '00000' } },
           ],
         },
         media: {
@@ -272,7 +272,7 @@ const Configs: UIConfig = {
           label: 'Media Player',
           state: '32',
           apiCommands: [
-            { type: 'audio', payload: { type: 'CS', controlNumber: '2', controlPosition: '13107' } },
+            { type: 'audio', payload: { cmdType: 'CS', cmdName: 'Source', controlNumber: '2', controlPosition: '13107' } },
           ],
         },
         mic: {
@@ -282,7 +282,7 @@ const Configs: UIConfig = {
           label: 'Mic',
           state: '33',
           apiCommands: [
-            { type: 'audio', payload: { type: 'CS', controlNumber: '2', controlPosition: '26214' } },
+            { type: 'audio', payload: { cmdType: 'CS', cmdName: 'Source', controlNumber: '2', controlPosition: '26214' } },
           ],
         },
         mandir: {
@@ -292,7 +292,7 @@ const Configs: UIConfig = {
           label: 'Mandir',
           state: '34',
           apiCommands: [
-            { type: 'audio', payload: { type: 'CS', controlNumber: '2', controlPosition: '39321' } },
+            { type: 'audio', payload: { cmdType: 'CS', cmdName: 'Source', controlNumber: '2', controlPosition: '39321' } },
           ],
         },
         sabhahall: {
@@ -302,7 +302,7 @@ const Configs: UIConfig = {
           label: 'Sabha Hall',
           state: '35',
           apiCommands: [
-            { type: 'audio', payload: { type: 'CS', controlNumber: '2', controlPosition: '52428' } },
+            { type: 'audio', payload: { cmdType: 'CS', cmdName: 'Source', controlNumber: '2', controlPosition: '52428' } },
           ],
         },
       },

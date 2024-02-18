@@ -12,7 +12,8 @@ export interface CrestronConfigs {
 
 export type Page = string;
 export type LightApiType = 'zum' | 'pharos';
-export type AudioApiType = 'CS' | 'LP' | 'GS';
+export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
+export type AudioApiCmdName = 'Source' | 'Vol Up' | 'Vol Down' | 'Vol Reset' | 'Vol Mute' | 'Vol Unmute';
 
 export interface LightsApiPayload {
   room: string;
@@ -26,7 +27,8 @@ export interface CrestronWebrelayPayload {
 }
 
 export interface AudioApiPaylod {
-  type: AudioApiType;
+  cmdType: AudioApiCmdType;
+  cmdName: AudioApiCmdName;
   controlNumber: string;
   controlPosition: string;
 }
