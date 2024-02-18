@@ -13,8 +13,9 @@ const Configs: UIConfig = {
   id: 123,
   // proximityActivity: '71',
   // touchActivity: '72',
-  authProviderURL: 'http://10.25.20.40:4000/crestron/passcodes/validate',
+  authProviderURL: '/crestron/passcodes/validate',
   webRelayApiPath: '/crestron/webrelays/send',
+  zumApiPath: '/zum/send',
   authID: 'MenGym',
   crestronConfigs: {
     host: '10.25.20.81',
@@ -159,6 +160,9 @@ const Configs: UIConfig = {
               label: 'On',
               state: '1',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '8A7298CE', scene: '1' } },
+              ],
             },
             {
               kind: 'light',
@@ -167,6 +171,9 @@ const Configs: UIConfig = {
               label: 'Medium',
               state: '2',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '8A7298CE', scene: '2' } },
+              ],
             },
             {
               kind: 'light',
@@ -175,6 +182,9 @@ const Configs: UIConfig = {
               label: 'Low',
               state: '3',
               stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '8A7298CE', scene: '3' } },
+              ],
             },
             {
               kind: 'light',
@@ -182,25 +192,12 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Off',
               state: '20',
-            },
-            {
-              kind: 'light',
-              icon: Lightbulb,
-              title: 'Lights',
-              label: 'All On',
-              state: '18',
-              stateOff: '20',
-            },
-            {
-              kind: 'light',
-              icon: LightbulbOff,
-              title: 'Lights',
-              label: 'All Off',
-              state: '19',
-              stateOff: '20',
+              apiCommands: [
+                { type: 'zum', payload: { room: '8A7298CE', scene: '16' } },
+              ],
             },
           ],
-        },
+        }
       },
     },
   },
