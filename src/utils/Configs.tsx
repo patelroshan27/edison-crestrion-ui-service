@@ -3,6 +3,7 @@ import DefaultConfigs from 'utils/DefaultConfigs';
 import SarvasvaConfigs from './SarvasvaConfigs';
 import MenGymConfig from './MenGymConfig';
 import { type LucideIcon } from 'lucide-react';
+import WomenGymConfig from './WomenGymConfig';
 
 export interface CrestronConfigs {
   host: string;
@@ -170,7 +171,9 @@ export function getConfigs(): UIConfig {
       return SarvasvaConfigs;
     case 'mengym':
       return MenGymConfig;
-    // ADD CASES BELOW TO HANDLE OTHER CONFIGS
+    case 'womengym':
+      return WomenGymConfig;
+      // ADD CASES BELOW TO HANDLE OTHER CONFIGS
   }
   return DefaultConfigs;
 }

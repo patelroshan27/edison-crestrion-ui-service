@@ -16,9 +16,9 @@ const Configs: UIConfig = {
   authProviderURL: '/crestron/passcodes/validate',
   webRelayApiPath: '/crestron/webrelays/send',
   zumApiPath: '/zum/send',
-  authID: 'MenGym',
+  authID: 'WomenGym',
   crestronConfigs: {
-    host: '10.25.20.96',
+    host: '10.25.20.97',
     ipID: 19,
     port: 41794,
   },
@@ -39,7 +39,7 @@ const Configs: UIConfig = {
               label: 'Up',
               state: '151',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'leftHoop', action: 'UP' },
+                payload: { authId: 'WomenGym', name: 'leftHoop', action: 'UP' },
               },
             },
             {
@@ -49,7 +49,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               state: '153',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'leftHoop', action: 'STOP' },
+                payload: { authId: 'WomenGym', name: 'leftHoop', action: 'STOP' },
               },
             },
             {
@@ -59,7 +59,7 @@ const Configs: UIConfig = {
               label: 'Down',
               state: '155',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'leftHoop', action: 'DOWN' },
+                payload: { authId: 'WomenGym', name: 'leftHoop', action: 'DOWN' },
               },
             },
           ],
@@ -75,7 +75,7 @@ const Configs: UIConfig = {
               label: 'Up',
               state: '157',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'curtain', action: 'UP' },
+                payload: { authId: 'WomenGym', name: 'curtain', action: 'UP' },
               },
             },
             {
@@ -85,7 +85,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               state: '159',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'curtain', action: 'STOP' },
+                payload: { authId: 'WomenGym', name: 'curtain', action: 'STOP' },
               },
             },
             {
@@ -95,7 +95,7 @@ const Configs: UIConfig = {
               label: 'Down',
               state: '161',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'curtain', action: 'DOWN' },
+                payload: { authId: 'WomenGym', name: 'curtain', action: 'DOWN' },
               },
             },
           ],
@@ -111,7 +111,7 @@ const Configs: UIConfig = {
               label: 'Up',
               state: '163',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'rightHoop', action: 'UP' },
+                payload: { authId: 'WomenGym', name: 'rightHoop', action: 'UP' },
               },
             },
             {
@@ -122,7 +122,7 @@ const Configs: UIConfig = {
               state: '165',
               webRelayConfig: {
                 payload: {
-                  authId: 'MenGym',
+                  authId: 'WomenGym',
                   name: 'rightHoop',
                   action: 'STOP',
                 },
@@ -136,7 +136,7 @@ const Configs: UIConfig = {
               state: '167',
               webRelayConfig: {
                 payload: {
-                  authId: 'MenGym',
+                  authId: 'WomenGym',
                   name: 'rightHoop',
                   action: 'DOWN',
                 },
@@ -161,7 +161,7 @@ const Configs: UIConfig = {
               state: '1',
               stateOff: '20',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '1' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '1' } },
               ],
             },
             {
@@ -172,7 +172,7 @@ const Configs: UIConfig = {
               state: '2',
               stateOff: '20',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '2' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '2' } },
               ],
             },
             {
@@ -183,7 +183,7 @@ const Configs: UIConfig = {
               state: '3',
               stateOff: '20',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '3' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '3' } },
               ],
             },
             {
@@ -193,11 +193,11 @@ const Configs: UIConfig = {
               label: 'Off',
               state: '20',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '16' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '16' } },
               ],
             },
           ],
-        },
+        }
       },
     },
   },
