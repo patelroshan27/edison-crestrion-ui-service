@@ -54,13 +54,6 @@ export interface AudioApiCommand {
   payload: AudioApiPaylod;
 }
 
-export interface Intensity {
-  icon?: LucideIcon;
-  state: string;
-  stateOff: string;
-  name: string;
-}
-
 export interface ColorIntensity {
   name: string;
   icon?: LucideIcon;
@@ -108,20 +101,6 @@ export interface AudioControlData {
   unMuteCmd?: AudioApiCommand;
 }
 
-export interface TemperatureControlData {
-  kind: 'temperature';
-}
-
-export interface CustomControlData {
-  kind: 'custom';
-  icon: LucideIcon;
-  label: string;
-  title?: string;
-  isActive: () => Promise<boolean>;
-  onToggleOn: () => Promise<void>;
-  onToggleOff: () => Promise<void>;
-}
-
 export interface GroupControlData {
   kind: 'group';
   className?: string;
@@ -132,9 +111,7 @@ export type ControlData =
   | LightControlData
   | PharosControlData
   | AudioControlData
-  | TemperatureControlData
-  | GroupControlData
-  | CustomControlData;
+  | GroupControlData;
 
 export interface PageData {
   code?: string;

@@ -1,7 +1,6 @@
 import type {
   ApiCommand,
   CrestronWebrelayConfig,
-  Intensity,
   LightControlData,
 } from 'utils/Configs';
 
@@ -14,7 +13,6 @@ import { webRelayPendingState } from 'state/navigation';
 
 interface ButtonCommonProps {
   className?: string;
-  intensityStates?: Intensity[];
   icon: LucideIcon;
   iconOff?: LucideIcon;
   label: string;
