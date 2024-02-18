@@ -5,7 +5,7 @@ import type {
   LightControlData,
 } from 'utils/Configs';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useApiCommands, useWebRelayApiState } from 'utils/hooks';
 import { type LucideIcon } from 'lucide-react';
@@ -50,6 +50,8 @@ const ButtonImpl: React.FC<ButtonImplProps> = ({
         'transition-all rounded-lg flex px-4 py-4 justify-between border border-primary',
         'focus:outline-none outline-none space-x-4 items-center',
         isOn ? 'bg-primary text-primary' : 'bg-background text-primary',
+        disabled && 'cursor-default',
+        disabled && !isOn && 'bg-slate-600',
         className,
       )}
       onClick={() => {
@@ -94,6 +96,10 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
     useRecoilState(webRelayPendingState);
   const sendWebRelay = useWebRelayApiState();
 
+  useEffect(() => {
+    if (!webRelayPending && active) setActive(false);
+  }, [webRelayPending]);
+
   return (
     <ButtonImpl
       disabled={webRelayConfig.payload.action !== 'STOP' && webRelayPending}
@@ -105,10 +111,7 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
           .catch((err) => {
             console.log(err);
           })
-          .finally(() => {
-            setActive(false);
-            setWebRelayPending(false);
-          });
+          .finally(() => setWebRelayPending(false));
       }}
       {...props}
     />
