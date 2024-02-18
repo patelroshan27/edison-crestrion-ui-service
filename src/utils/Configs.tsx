@@ -168,7 +168,7 @@ export function getConfigs(): UIConfig {
       return MenGymConfig;
     case 'womengym':
       return WomenGymConfig;
-      // ADD CASES BELOW TO HANDLE OTHER CONFIGS
+    // ADD CASES BELOW TO HANDLE OTHER CONFIGS
   }
   return DefaultConfigs;
 }
