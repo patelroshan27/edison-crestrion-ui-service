@@ -195,6 +195,7 @@ const Configs: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
+      className: '!grid-cols-[1fr_1fr_2fr]',
       controls: {
         speaker: {
           kind: 'audio',
@@ -224,88 +225,94 @@ const Configs: UIConfig = {
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
         },
-        bluetooth: {
-          kind: 'toggle',
-          icon: Bluetooth,
-          title: 'Source',
-          label: 'Bluetooth',
-          apiCommands: [
+        sources: {
+          kind: 'group',
+          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          controls: [
             {
-              type: 'audio',
-              payload: {
-                cmdType: 'CS',
-                cmdName: 'Source',
-                controlNumber: '2',
-                controlPosition: '00000',
-              },
+              kind: 'toggle',
+              icon: Bluetooth,
+              title: 'Source',
+              label: 'Bluetooth',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '00000',
+                  },
+                },
+              ],
             },
-          ],
-        },
-        media: {
-          kind: 'toggle',
-          icon: ListMusic,
-          title: 'Source',
-          label: 'Media Player',
-          apiCommands: [
             {
-              type: 'audio',
-              payload: {
-                cmdType: 'CS',
-                cmdName: 'Source',
-                controlNumber: '2',
-                controlPosition: '13107',
-              },
+              kind: 'toggle',
+              icon: ListMusic,
+              title: 'Source',
+              label: 'Media Player',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '13107',
+                  },
+                },
+              ],
             },
-          ],
-        },
-        mic: {
-          kind: 'toggle',
-          title: 'Source',
-          icon: Mic2,
-          label: 'Mic',
-          apiCommands: [
             {
-              type: 'audio',
-              payload: {
-                cmdType: 'CS',
-                cmdName: 'Source',
-                controlNumber: '2',
-                controlPosition: '26214',
-              },
+              kind: 'toggle',
+              title: 'Source',
+              icon: Mic2,
+              label: 'Mic',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '26214',
+                  },
+                },
+              ],
             },
-          ],
-        },
-        mandir: {
-          kind: 'toggle',
-          icon: Flower2,
-          title: 'Source',
-          label: 'Mandir',
-          apiCommands: [
             {
-              type: 'audio',
-              payload: {
-                cmdType: 'CS',
-                cmdName: 'Source',
-                controlNumber: '2',
-                controlPosition: '39321',
-              },
+              kind: 'toggle',
+              icon: Flower2,
+              title: 'Source',
+              label: 'Mandir',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '39321',
+                  },
+                },
+              ],
             },
-          ],
-        },
-        sabhahall: {
-          kind: 'toggle',
-          icon: Speech,
-          title: 'Source',
-          label: 'Sabha Hall',
-          apiCommands: [
             {
-              type: 'audio',
-              payload: {
-                cmdType: 'CS',
-                cmdName: 'Source',
-                controlNumber: '2',
-                controlPosition: '52428',
-              },
+              kind: 'toggle',
+              icon: Speech,
+              title: 'Source',
+              label: 'Sabha Hall',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '52428',
+                  },
+                },
+              ],
             },
           ],
         },
