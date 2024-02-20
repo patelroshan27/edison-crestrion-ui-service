@@ -203,6 +203,15 @@ const Configs: UIConfig = {
           label: 'Master',
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '11',
+              controlPosition: '',
+            },
+          },
           volChangeCmd: {
             type: 'audio',
             payload: {
@@ -246,6 +255,15 @@ const Configs: UIConfig = {
           label: 'Media Player',
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '25',
+              controlPosition: '',
+            },
+          },
           volChangeCmd: {
             type: 'audio',
             payload: {

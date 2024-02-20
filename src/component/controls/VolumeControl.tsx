@@ -20,6 +20,13 @@ function getPercentToDB(percent: number): number {
   return Math.round((percent / 100) * ConversionValues.MAX_DECIMAL);
 }
 
+function getDBToPercentage(db: number): number {
+  const dbValue = Math.round((db * 100) / ConversionValues.MAX_DECIMAL);
+  const remainder = dbValue % 10;
+  return remainder >= 5 ? dbValue + dbValue : dbValue - remainder;
+}
+
+
 interface Props {
   className: string;
   config: AudioControlData;
@@ -32,6 +39,7 @@ const VolumeControl: React.FC<Props> = ({
     playLabel = 'PLAY',
     pauseLabel = 'PAUSE',
     title,
+    getVolCmd,
     volChangeCmd,
     muteCmd,
     unMuteCmd,
@@ -57,6 +65,17 @@ const VolumeControl: React.FC<Props> = ({
     ])
       .then(() => setLevel(newLevel))
       .catch((err) => console.log(err));
+  };
+
+  const handleVolReset = () : void => {
+    sendCommands([resetCmd!]).then(() => {
+      setTimeout(() => {
+        sendCommands([getVolCmd]).then((data) => {
+          const resetLevel = getDBToPercentage(Number(data));
+          setLevel(resetLevel);
+      }).catch((err) => console.log(err));
+      }, 250);
+    }).catch((err) => console.log(err));
   };
 
   return (
@@ -157,9 +176,7 @@ const VolumeControl: React.FC<Props> = ({
             <FlatButton
               label="Reset"
               iconDef={TimerReset}
-              onClick={() => {
-                sendCommands([resetCmd]).catch((err) => console.log(err));
-              }}
+              onClick={() => handleVolReset() }
             />
           )}
         </div>

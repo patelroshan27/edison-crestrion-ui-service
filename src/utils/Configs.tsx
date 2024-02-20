@@ -16,6 +16,7 @@ export type LightApiType = 'zum' | 'pharos';
 export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
 export type AudioApiCmdName =
   | 'Source'
+  | 'Get Vol'
   | 'Vol Change'
   | 'Vol Reset'
   | 'Vol Mute'
@@ -95,6 +96,7 @@ export interface AudioControlData {
   label: string;
   playLabel?: string;
   pauseLabel?: string;
+  getVolCmd: AudioApiCommand;
   volChangeCmd: AudioApiCommand;
   resetCmd?: AudioApiCommand;
   muteCmd?: AudioApiCommand;
