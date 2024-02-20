@@ -14,14 +14,15 @@ import { useApiCommands } from 'utils/hooks';
 
 const MAX = 100;
 const MIN = 0;
-const STEP = 10;
+const STEP = 2;
+const MAX_DB_DECIMAL = 50000;
 
 function getPercentToDB(percent: number): number {
-  return Math.round((percent / 100) * ConversionValues.MAX_DECIMAL);
+  return Math.round((percent / 100) * MAX_DB_DECIMAL);
 }
 
 function getDBToPercentage(db: number): number {
-  const dbValue = Math.round((db * 100) / ConversionValues.MAX_DECIMAL);
+  const dbValue = Math.round((db * 100) / MAX_DB_DECIMAL);
   const remainder = dbValue % 10;
   return remainder >= 5 ? dbValue + dbValue : dbValue - remainder;
 }
