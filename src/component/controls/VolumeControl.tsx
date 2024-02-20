@@ -22,9 +22,9 @@ function getPercentToDB(percent: number): number {
 }
 
 function getDBToPercentage(db: number): number {
-  const dbValue = Math.round((db * 100) / MAX_DB_DECIMAL);
-  const remainder = dbValue % 10;
-  return remainder >= 5 ? dbValue + dbValue : dbValue - remainder;
+  const percentValue = Math.round((db * 100) / MAX_DB_DECIMAL);
+  const remainder = percentValue % 10;
+  return remainder >= 5 ? percentValue + remainder : percentValue - remainder;
 }
 
 interface Props {
