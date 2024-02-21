@@ -1,6 +1,6 @@
 import type { AudioControlData } from 'utils/Configs';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConversionValues } from 'utils/Constants';
 import { Direction, Range } from 'react-range';
 import classNames from 'classnames';
@@ -14,7 +14,7 @@ import { useApiCommands } from 'utils/hooks';
 
 const MAX = 100;
 const MIN = 0;
-const STEP = 2;
+const STEP = 1;
 const MAX_DB_DECIMAL = 50000;
 
 function getPercentToDB(percent: number): number {
@@ -22,9 +22,7 @@ function getPercentToDB(percent: number): number {
 }
 
 function getDBToPercentage(db: number): number {
-  const percentValue = Math.round((db * 100) / MAX_DB_DECIMAL);
-  const remainder = percentValue % 10;
-  return remainder >= 5 ? percentValue + remainder : percentValue - remainder;
+  return Math.round((db * 100) / MAX_DB_DECIMAL);
 }
 
 interface Props {
@@ -49,7 +47,18 @@ const VolumeControl: React.FC<Props> = ({
   const sendCommands = useApiCommands();
 
   const [level, setLevel] = useState(50);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
+
+
+  useEffect(() => {
+    sendCommands([getVolCmd])
+    .then((data) => {
+      setLevel(getDBToPercentage(Number(data)));
+    })
+    .catch((err) => console.log(err));
+  }, []);
+
+
 
   const handleVolChange = (newLevel: number): void => {
     if (newLevel < MIN || newLevel > MAX) return;
