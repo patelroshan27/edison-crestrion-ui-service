@@ -99,7 +99,7 @@ export interface AudioControlData {
   getVolCmd: AudioApiCommand;
   volChangeCmd: AudioApiCommand;
   resetCmd?: AudioApiCommand;
-  muteCmd?: AudioApiCommand;
+  muteCmd: AudioApiCommand;
   unMuteCmd?: AudioApiCommand;
 }
 

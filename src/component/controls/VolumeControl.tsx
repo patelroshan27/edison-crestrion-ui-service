@@ -46,19 +46,20 @@ const VolumeControl: React.FC<Props> = ({
 }: Props) => {
   const sendCommands = useApiCommands();
 
-  const [level, setLevel] = useState(50);
+  const [level, setLevel] = useState(0);
   const [playing, setPlaying] = useState(true);
-
 
   useEffect(() => {
     sendCommands([getVolCmd])
-    .then((data) => {
-      setLevel(getDBToPercentage(Number(data)));
-    })
-    .catch((err) => console.log(err));
+      .then((data) => {
+        setLevel(getDBToPercentage(Number(data)));
+      })
+      .catch((err) => console.log(err));
+
+    sendCommands([muteCmd])
+      .then(() => setPlaying(false))
+      .catch((err) => console.log(err));
   }, []);
-
-
 
   const handleVolChange = (newLevel: number): void => {
     if (newLevel < MIN || newLevel > MAX) return;

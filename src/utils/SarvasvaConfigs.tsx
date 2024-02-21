@@ -264,6 +264,15 @@ const Configs: UIConfig = {
               controlPosition: '',
             },
           },
+          muteCmd: {
+            type: 'audio',
+            payload: {
+              cmdType: 'LP',
+              cmdName: 'Vol Mute',
+              controlNumber: '25',
+              controlPosition: '',
+            },
+          },
           volChangeCmd: {
             type: 'audio',
             payload: {
