@@ -54,14 +54,14 @@
     "sarvasva:archive": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli archive -p sarvasva -P sampleSource=sarvasva -d build -o publish",
     "sarvasva:deploy": "REACT_APP_ROOM_CONFIG_NAME=sarvasva ch5-cli deploy -H 10.25.20.81 -t touchscreen publish/sarvasva.ch5z",
     "sarvasva": "yarn sarvasva:build && yarn sarvasva:archive && yarn sarvasva:deploy",
-    "mengym:build": "REACT_APP_ROOM_CONFIG_NAME=mengym react-scripts build",
-    "mengym:archive": "REACT_APP_ROOM_CONFIG_NAME=mengym ch5-cli archive -p mengym -P sampleSource=mengym -d build -o publish",
-    "mengym:deploy": "REACT_APP_ROOM_CONFIG_NAME=mengym ch5-cli deploy -H 10.25.20.96 -t touchscreen publish/mengym.ch5z",
-    "mengym": "yarn mengym:build && yarn mengym:archive && yarn mengym:deploy",
-    "womengym:build": "REACT_APP_ROOM_CONFIG_NAME=womengym react-scripts build",
-    "womengym:archive": "REACT_APP_ROOM_CONFIG_NAME=womengym ch5-cli archive -p womengym -P sampleSource=womengym -d build -o publish",
-    "womengym:deploy": "REACT_APP_ROOM_CONFIG_NAME=womengym ch5-cli deploy -H 10.25.20.97 -t touchscreen publish/womengym.ch5z",
-    "womengym": "yarn womengym:build && yarn womengym:archive && yarn womengym:deploy"
+    "boysgym:build": "REACT_APP_ROOM_CONFIG_NAME=boysgym react-scripts build",
+    "boysgym:archive": "REACT_APP_ROOM_CONFIG_NAME=boysgym ch5-cli archive -p boysgym -P sampleSource=boysgym -d build -o publish",
+    "boysgym:deploy": "REACT_APP_ROOM_CONFIG_NAME=boysgym ch5-cli deploy -H 10.25.20.96 -t touchscreen publish/boysgym.ch5z",
+    "boysgym": "yarn boysgym:build && yarn boysgym:archive && yarn boysgym:deploy",
+    "girlsgym:build": "REACT_APP_ROOM_CONFIG_NAME=girlsgym react-scripts build",
+    "girlsgym:archive": "REACT_APP_ROOM_CONFIG_NAME=girlsgym ch5-cli archive -p girlsgym -P sampleSource=girlsgym -d build -o publish",
+    "girlsgym:deploy": "REACT_APP_ROOM_CONFIG_NAME=girlsgym ch5-cli deploy -H 10.25.20.97 -t touchscreen publish/girlsgym.ch5z",
+    "girlsgym": "yarn girlsgym:build && yarn girlsgym:archive && yarn girlsgym:deploy"
   },
   "eslintConfig": {
     "extends": [

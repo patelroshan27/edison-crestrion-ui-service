@@ -16,7 +16,7 @@ const Configs: UIConfig = {
   authProviderURL: '/crestron/passcodes/validate',
   webRelayApiPath: '/crestron/webrelays/send',
   zumApiPath: '/zum/send',
-  authID: 'WomenGym',
+  authID: 'GirlsGym',
   crestronConfigs: {
     host: '10.25.20.97',
     ipID: 19,
@@ -38,7 +38,7 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'WomenGym', name: 'leftHoop', action: 'UP' },
+                payload: { authId: 'GirlsGym', name: 'leftHoop', action: 'UP' },
               },
             },
             {
@@ -48,7 +48,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'leftHoop',
                   action: 'STOP',
                 },
@@ -61,7 +61,7 @@ const Configs: UIConfig = {
               label: 'Down',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'leftHoop',
                   action: 'DOWN',
                 },
@@ -79,7 +79,7 @@ const Configs: UIConfig = {
               title: 'Curtains',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'WomenGym', name: 'curtain', action: 'UP' },
+                payload: { authId: 'GirlsGym', name: 'curtain', action: 'UP' },
               },
             },
             {
@@ -89,7 +89,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'curtain',
                   action: 'STOP',
                 },
@@ -102,7 +102,7 @@ const Configs: UIConfig = {
               label: 'Down',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'curtain',
                   action: 'DOWN',
                 },
@@ -121,7 +121,7 @@ const Configs: UIConfig = {
               label: 'Up',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'rightHoop',
                   action: 'UP',
                 },
@@ -134,7 +134,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'rightHoop',
                   action: 'STOP',
                 },
@@ -147,7 +147,7 @@ const Configs: UIConfig = {
               label: 'Down',
               webRelayConfig: {
                 payload: {
-                  authId: 'WomenGym',
+                  authId: 'GirlsGym',
                   name: 'rightHoop',
                   action: 'DOWN',
                 },

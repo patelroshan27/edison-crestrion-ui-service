@@ -16,7 +16,7 @@ const Configs: UIConfig = {
   authProviderURL: '/crestron/passcodes/validate',
   webRelayApiPath: '/crestron/webrelays/send',
   zumApiPath: '/zum/send',
-  authID: 'MenGym',
+  authID: 'BoysGym',
   crestronConfigs: {
     host: '10.25.20.96',
     ipID: 19,
@@ -24,7 +24,7 @@ const Configs: UIConfig = {
   },
   pages: {
     'H&C': {
-      name: 'Hoops & Curtains',
+      name: 'Hoops & Curtain',
       icon: Sun,
       className: '!grid-cols-3',
       controls: {
@@ -38,7 +38,7 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'leftHoop', action: 'UP' },
+                payload: { authId: 'BoysGym', name: 'leftHoop', action: 'UP' },
               },
             },
             {
@@ -47,7 +47,7 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Stop',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'leftHoop', action: 'STOP' },
+                payload: { authId: 'BoysGym', name: 'leftHoop', action: 'STOP' },
               },
             },
             {
@@ -56,7 +56,7 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Down',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'leftHoop', action: 'DOWN' },
+                payload: { authId: 'BoysGym', name: 'leftHoop', action: 'DOWN' },
               },
             },
           ],
@@ -68,28 +68,28 @@ const Configs: UIConfig = {
             {
               kind: 'toggle',
               icon: ArrowUpToLine,
-              title: 'Curtains',
+              title: 'Curtain',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'curtain', action: 'UP' },
+                payload: { authId: 'BoysGym', name: 'curtain', action: 'UP' },
               },
             },
             {
               kind: 'toggle',
               icon: PauseOctagon,
-              title: 'Curtains',
+              title: 'Curtain',
               label: 'Stop',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'curtain', action: 'STOP' },
+                payload: { authId: 'BoysGym', name: 'curtain', action: 'STOP' },
               },
             },
             {
               kind: 'toggle',
               icon: ArrowDownToLine,
-              title: 'Curtains',
+              title: 'Curtain',
               label: 'Down',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'curtain', action: 'DOWN' },
+                payload: { authId: 'BoysGym', name: 'curtain', action: 'DOWN' },
               },
             },
           ],
@@ -104,7 +104,7 @@ const Configs: UIConfig = {
               title: 'Right Hoop',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'MenGym', name: 'rightHoop', action: 'UP' },
+                payload: { authId: 'BoysGym', name: 'rightHoop', action: 'UP' },
               },
             },
             {
@@ -114,7 +114,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               webRelayConfig: {
                 payload: {
-                  authId: 'MenGym',
+                  authId: 'BoysGym',
                   name: 'rightHoop',
                   action: 'STOP',
                 },
@@ -127,7 +127,7 @@ const Configs: UIConfig = {
               label: 'Down',
               webRelayConfig: {
                 payload: {
-                  authId: 'MenGym',
+                  authId: 'BoysGym',
                   name: 'rightHoop',
                   action: 'DOWN',
                 },

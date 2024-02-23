@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import DefaultConfigs from 'utils/DefaultConfigs';
 import SarvasvaConfigs from './SarvasvaConfigs';
-import MenGymConfig from './MenGymConfig';
+import BoysGymConfig from './BoysGymConfig';
 import { type LucideIcon } from 'lucide-react';
-import WomenGymConfig from './WomenGymConfig';
+import GirlsGymConfig from './GirlsGymConfig';
 
 export interface CrestronConfigs {
   host: string;
@@ -28,7 +28,7 @@ export interface LightsApiPayload {
 }
 
 export interface CrestronWebrelayPayload {
-  authId: 'MenGym' | 'WomenGym';
+  authId: 'BoysGym' | 'GirlsGym';
   name: 'leftHoop' | 'rightHoop' | 'curtain';
   action: 'UP' | 'DOWN' | 'STOP';
 }
@@ -143,10 +143,10 @@ export function getConfigs(): UIConfig {
   switch (process.env.REACT_APP_ROOM_CONFIG_NAME) {
     case 'sarvasva':
       return SarvasvaConfigs;
-    case 'mengym':
-      return MenGymConfig;
-    case 'womengym':
-      return WomenGymConfig;
+    case 'boysgym':
+      return BoysGymConfig;
+    case 'girlsgym':
+      return GirlsGymConfig;
     // ADD CASES BELOW TO HANDLE OTHER CONFIGS
   }
   return DefaultConfigs;
