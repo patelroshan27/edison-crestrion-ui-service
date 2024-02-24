@@ -13,7 +13,7 @@ export const isLoggedInState = atom({
   default: false,
 });
 
-export const webRelayPendingState = atom({
-  key: 'webRelayPendingState',
-  default: false,
+export const webRelayPendingActionState = atom({
+  key: 'webRelayPendingActionState',
+  default: '',
 });

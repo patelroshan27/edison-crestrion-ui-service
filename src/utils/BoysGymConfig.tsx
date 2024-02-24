@@ -47,7 +47,11 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Stop',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'leftHoop', action: 'STOP' },
+                payload: {
+                  authId: 'BoysGym',
+                  name: 'leftHoop',
+                  action: 'STOP',
+                },
               },
             },
             {
@@ -56,7 +60,11 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Down',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'leftHoop', action: 'DOWN' },
+                payload: {
+                  authId: 'BoysGym',
+                  name: 'leftHoop',
+                  action: 'DOWN',
+                },
               },
             },
           ],

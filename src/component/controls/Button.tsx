@@ -4,12 +4,12 @@ import type {
   LightControlData,
 } from 'utils/Configs';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useApiCommands, useWebRelayApiState } from 'utils/hooks';
 import { type LucideIcon } from 'lucide-react';
 import { useRecoilState } from 'recoil';
-import { webRelayPendingState } from 'state/navigation';
+import { webRelayPendingActionState } from 'state/navigation';
 
 interface ButtonCommonProps {
   className?: string;
@@ -89,27 +89,39 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
   webRelayConfig,
   ...props
 }) => {
+  const pendingActionRef = useRef('');
   const [active, setActive] = useState(false);
-  const [webRelayPending, setWebRelayPending] =
-    useRecoilState(webRelayPendingState);
+  const [pendingAction, setPendingAction] = useRecoilState(
+    webRelayPendingActionState,
+  );
   const sendWebRelay = useWebRelayApiState();
+  const actionKey = props.title ?? props.label;
 
   useEffect(() => {
-    if (!webRelayPending && active) setActive(false);
-  }, [webRelayPending]);
+    pendingActionRef.current = pendingAction;
+    if (!pendingAction && active) setActive(false);
+  }, [pendingAction]);
+
+  const shouldUpdate = (): boolean =>
+    !pendingActionRef.current || pendingActionRef.current === actionKey;
 
   return (
     <ButtonImpl
-      disabled={webRelayConfig.payload.action !== 'STOP' && webRelayPending}
+      disabled={
+        active ||
+        (Boolean(pendingAction) && webRelayConfig.payload.action !== 'STOP')
+      }
       isOn={active}
       onClick={() => {
-        setWebRelayPending(true);
+        shouldUpdate() && setPendingAction(actionKey);
         setActive(true);
         sendWebRelay(webRelayConfig.payload)
           .catch((err) => {
             console.log(err);
           })
-          .finally(() => setWebRelayPending(false));
+          .finally(() => {
+            shouldUpdate() && setPendingAction('');
+          });
       }}
       {...props}
     />
@@ -120,23 +132,26 @@ interface ApiCommandButtonProps extends ButtonCommonProps {
   apiCommands: ApiCommand[];
   activeValue?: string | number;
   setActiveValue?: (val: string | number) => void;
+  parseActiveValueKey?: (cmd: ApiCommand) => string;
 }
 
 const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
   apiCommands,
   activeValue,
   setActiveValue,
+  parseActiveValueKey,
   ...props
 }) => {
   const sendCommands = useApiCommands();
+  const valueKey = parseActiveValueKey?.(apiCommands[0]) ?? props.label;
 
   return (
     <ButtonImpl
       {...props}
-      isOn={activeValue === props.label}
+      isOn={activeValue === valueKey}
       onClick={() => {
         sendCommands(apiCommands)
-          .then(() => setActiveValue?.(props.label))
+          .then(() => setActiveValue?.(valueKey))
           .catch((err) => console.log(err));
       }}
     />
@@ -148,6 +163,7 @@ interface Props {
   config: LightControlData;
   activeValue?: string | number;
   setActiveValue?: (val: string | number) => void;
+  parseActiveValueKey?: (cmd: ApiCommand) => string;
 }
 
 const Button: React.FC<Props> = ({
@@ -163,6 +179,7 @@ const Button: React.FC<Props> = ({
   },
   activeValue,
   setActiveValue,
+  parseActiveValueKey,
 }: Props) => {
   if (apiCommands) {
     return (
@@ -176,6 +193,7 @@ const Button: React.FC<Props> = ({
         apiCommands={apiCommands}
         activeValue={activeValue}
         setActiveValue={setActiveValue}
+        parseActiveValueKey={parseActiveValueKey}
       />
     );
   }
