@@ -11,7 +11,10 @@ import {
   Sun,
   SunDim,
 } from 'lucide-react';
-import type { UIConfig } from 'utils/Configs';
+import type {
+  ApiCommand,
+  UIConfig,
+} from 'utils/Configs';
 
 const Configs: UIConfig = {
   id: 123,
@@ -286,6 +289,23 @@ const Configs: UIConfig = {
         sources: {
           kind: 'group',
           className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          getActiveValue: (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            return sendCommands([
+              {
+                type: 'audio',
+                payload: {
+                  cmdType: 'GS',
+                  cmdName: 'Source',
+                  controlNumber: '2',
+                  controlPosition: '',
+                },
+              },
+            ]).then((results) => results[0] as string);
+          },
+          parseActiveValueKey: (cmd: ApiCommand) =>
+            cmd.type === 'audio' ? cmd.payload.controlPosition : '',
           controls: [
             {
               kind: 'toggle',

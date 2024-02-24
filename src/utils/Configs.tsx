@@ -107,6 +107,10 @@ export interface GroupControlData {
   kind: 'group';
   className?: string;
   controls: LightControlData[];
+  getActiveValue?: (
+    sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+  ) => Promise<string>;
+  parseActiveValueKey?: (cmd: ApiCommand) => string;
 }
 
 export type ControlData =
