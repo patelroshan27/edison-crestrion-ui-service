@@ -1,7 +1,6 @@
 import type { AudioControlData } from 'utils/Configs';
 
 import React, { useEffect, useState } from 'react';
-import { ConversionValues } from 'utils/Constants';
 import { Direction, Range } from 'react-range';
 import classNames from 'classnames';
 import {
@@ -11,6 +10,7 @@ import {
 import FlatButton from './FlatButton';
 import { Mic, MicOff, Volume1, Volume2, TimerReset } from 'lucide-react';
 import { useApiCommands } from 'utils/hooks';
+import { AUDIO_RESET_EVENT } from 'utils/events';
 
 const MAX = 100;
 const MIN = 0;
@@ -50,14 +50,29 @@ const VolumeControl: React.FC<Props> = ({
   const [playing, setPlaying] = useState(true);
 
   useEffect(() => {
+    const onResetEvent = (): void => {
+      setTimeout(() => {
+        sendCommands([getVolCmd])
+          .then((data) => {
+            const resetLevel = getDBToPercentage(Number(data));
+            setLevel(resetLevel);
+          })
+          .catch((err) => console.log(err));
+      }, 250);
+    };
+
+    document.addEventListener(AUDIO_RESET_EVENT, onResetEvent);
+
+    return () => {
+      document.removeEventListener(AUDIO_RESET_EVENT, onResetEvent);
+    };
+  }, []);
+
+  useEffect(() => {
     sendCommands([getVolCmd])
       .then((data) => {
         setLevel(getDBToPercentage(Number(data)));
       })
-      .catch((err) => console.log(err));
-
-    sendCommands([muteCmd])
-      .then(() => setPlaying(false))
       .catch((err) => console.log(err));
   }, []);
 
@@ -78,18 +93,12 @@ const VolumeControl: React.FC<Props> = ({
   };
 
   const handleVolReset = (): void => {
-    sendCommands([resetCmd!])
-      .then(() => {
-        setTimeout(() => {
-          sendCommands([getVolCmd])
-            .then((data) => {
-              const resetLevel = getDBToPercentage(Number(data));
-              setLevel(resetLevel);
-            })
-            .catch((err) => console.log(err));
-        }, 250);
-      })
-      .catch((err) => console.log(err));
+    resetCmd &&
+      sendCommands([resetCmd])
+        .then(() => {
+          document.dispatchEvent(new CustomEvent(AUDIO_RESET_EVENT));
+        })
+        .catch((err) => console.log(err));
   };
 
   return (
@@ -190,7 +199,7 @@ const VolumeControl: React.FC<Props> = ({
             <FlatButton
               label="Reset"
               iconDef={TimerReset}
-              onClick={() => handleVolReset()}
+              onClick={handleVolReset}
             />
           )}
         </div>
