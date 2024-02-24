@@ -132,23 +132,26 @@ interface ApiCommandButtonProps extends ButtonCommonProps {
   apiCommands: ApiCommand[];
   activeValue?: string | number;
   setActiveValue?: (val: string | number) => void;
+  parseActiveValueKey?: (cmd: ApiCommand) => string;
 }
 
 const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
   apiCommands,
   activeValue,
   setActiveValue,
+  parseActiveValueKey,
   ...props
 }) => {
   const sendCommands = useApiCommands();
+  const valueKey = parseActiveValueKey?.(apiCommands[0]) ?? props.label;
 
   return (
     <ButtonImpl
       {...props}
-      isOn={activeValue === props.label}
+      isOn={activeValue === valueKey}
       onClick={() => {
         sendCommands(apiCommands)
-          .then(() => setActiveValue?.(props.label))
+          .then(() => setActiveValue?.(valueKey))
           .catch((err) => console.log(err));
       }}
     />
@@ -160,6 +163,7 @@ interface Props {
   config: LightControlData;
   activeValue?: string | number;
   setActiveValue?: (val: string | number) => void;
+  parseActiveValueKey?: (cmd: ApiCommand) => string;
 }
 
 const Button: React.FC<Props> = ({
@@ -175,6 +179,7 @@ const Button: React.FC<Props> = ({
   },
   activeValue,
   setActiveValue,
+  parseActiveValueKey,
 }: Props) => {
   if (apiCommands) {
     return (
@@ -188,6 +193,7 @@ const Button: React.FC<Props> = ({
         apiCommands={apiCommands}
         activeValue={activeValue}
         setActiveValue={setActiveValue}
+        parseActiveValueKey={parseActiveValueKey}
       />
     );
   }
