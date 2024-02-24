@@ -77,7 +77,9 @@ export function useAudioApiState(): (data: AudioApiPaylod) => Promise<unknown> {
   return useApiState<AudioApiPaylod, unknown>(audioApiPath as string);
 }
 
-export function useApiCommands(): (commands: ApiCommand[]) => Promise<unknown> {
+export function useApiCommands(): (
+  commands: ApiCommand[],
+) => Promise<unknown[]> {
   const sendPharosCmd = usePharosApiState();
   const sendZumCmd = useZumApiState();
   const sendWebRelayCmd = useWebRelayApiState();
