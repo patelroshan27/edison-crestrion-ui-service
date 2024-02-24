@@ -11,10 +11,7 @@ import {
   Sun,
   SunDim,
 } from 'lucide-react';
-import type {
-  ApiCommand,
-  UIConfig,
-} from 'utils/Configs';
+import type { ApiCommand, UIConfig } from 'utils/Configs';
 
 const Configs: UIConfig = {
   id: 123,
