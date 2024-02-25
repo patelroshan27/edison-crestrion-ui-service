@@ -1,20 +1,25 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { isLoggedInState, pageState } from 'state/navigation';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  activeConfigState,
+  isLoggedInState,
+  pageState,
+} from 'state/navigation';
 import { getConfigs } from 'utils/Configs';
 import { Lock } from 'lucide-react';
 
-const configs = getConfigs();
+const defaultConfig = getConfigs();
 
 interface Props {
   className?: string;
 }
 
 const Navigation: React.FC<Props> = ({ className }: Props) => {
+  const activeConfig = useRecoilValue(activeConfigState);
   const [activeTab, setActivePage] = useRecoilState(pageState);
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
-  const pages = Object.keys(configs.pages);
+  const pages = Object.keys(activeConfig.pages);
 
   return (
     <div
@@ -34,13 +39,13 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
           <Lock className="mr-3 h-6 w-6 text-lg" />
           <div className="text-left flex flex-col">
             <span className="leading-none text-xl">Lock</span>
-            <span className="text-lg">{configs.authID}</span>
+            <span className="text-lg">{defaultConfig.authID}</span>
           </div>
         </button>
       </div>
       <div className="flex items-center space-x-2">
         {pages.map((page) => {
-          const pageData = configs.pages[page];
+          const pageData = activeConfig.pages[page];
           const Icon = pageData.icon;
           return (
             <button

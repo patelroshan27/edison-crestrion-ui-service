@@ -7,15 +7,29 @@ import * as CrComLib from '@crestron/ch5-crcomlib';
 import axios, { type AxiosResponse } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import {
-  getConfigs,
   type CrestronWebrelayPayload,
   type LightsApiPayload,
   type ApiCommand,
   type AudioApiPaylod,
 } from './Configs';
+import { useRecoilValue } from 'recoil';
+import { activeConfigState } from 'state/navigation';
 
-const { webRelayApiPath, pharosApiPath, zumApiPath, audioApiPath } =
-  getConfigs();
+// axios.interceptors.response.use(
+//   function (response) {
+//     // Any status code that lie within the range of 2xx cause this function to trigger
+//     // Do something with response data
+//     return response;
+//   },
+//   function (error) {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve({ data: '13107' });
+//       }, 100);
+//     });
+//   },
+// );
+
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
 // Generic hook to handle common logic of send and receive
@@ -58,23 +72,27 @@ function useApiState<D, R>(path: string): (data: D) => Promise<R> {
 export function useWebRelayApiState(): (
   data: CrestronWebrelayPayload,
 ) => Promise<unknown> {
+  const config = useRecoilValue(activeConfigState);
   return useApiState<CrestronWebrelayPayload, unknown>(
-    webRelayApiPath as string,
+    config.webRelayApiPath as string,
   );
 }
 
 export function usePharosApiState(): (
   data: LightsApiPayload,
 ) => Promise<unknown> {
-  return useApiState<LightsApiPayload, unknown>(pharosApiPath as string);
+  const config = useRecoilValue(activeConfigState);
+  return useApiState<LightsApiPayload, unknown>(config.pharosApiPath as string);
 }
 
 export function useZumApiState(): (data: LightsApiPayload) => Promise<unknown> {
-  return useApiState<LightsApiPayload, unknown>(zumApiPath as string);
+  const config = useRecoilValue(activeConfigState);
+  return useApiState<LightsApiPayload, unknown>(config.zumApiPath as string);
 }
 
 export function useAudioApiState(): (data: AudioApiPaylod) => Promise<unknown> {
-  return useApiState<AudioApiPaylod, unknown>(audioApiPath as string);
+  const config = useRecoilValue(activeConfigState);
+  return useApiState<AudioApiPaylod, unknown>(config.audioApiPath as string);
 }
 
 export function useApiCommands(): (

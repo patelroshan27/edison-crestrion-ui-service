@@ -1,11 +1,16 @@
 import { atom } from 'recoil';
 import { getConfigs } from 'utils/Configs';
 
-const configs = getConfigs();
+const defaultConfig = getConfigs();
 
 export const pageState = atom({
   key: 'nav/pageState',
-  default: Object.keys(configs.pages)[0],
+  default: Object.keys(defaultConfig.pages)[0],
+});
+
+export const activeConfigState = atom({
+  key: 'activeConfigState',
+  default: defaultConfig,
 });
 
 export const isLoggedInState = atom({

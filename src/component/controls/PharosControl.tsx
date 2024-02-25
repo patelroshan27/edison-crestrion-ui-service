@@ -85,42 +85,6 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
     });
   });
 
-  const getPlaceholder = (id: string): JSX.Element => (
-    <div
-      className="rounded-full overflow-hidden w-full h-full bg-white/10 max-w-[9rem] max-h-[9rem]"
-      key={id}
-    />
-  );
-
-  let lastInsert = 1;
-  const elegantColorPalettes = colorPalettes.map((row, index) => {
-    if (index === 0) {
-      return row;
-    }
-
-    const lastRowLength = colorPalettes[index - 1].length;
-    const delta = lastRowLength - row.length;
-    let fillers: JSX.Element[] = [];
-    if (lastRowLength === row.length) {
-      fillers = [getPlaceholder(`placeholder-${index}`)];
-    } else if (delta > 1) {
-      fillers = new Array(delta - 1)
-        .fill(0)
-        .map((_, i) => getPlaceholder(`placeholder-${index}-${i}`));
-    } else {
-      return row;
-    }
-
-    if (lastInsert === 1) {
-      //      row.unshift(...fillers);
-    } else {
-      //    row.push(...fillers);
-    }
-    lastInsert *= -1;
-
-    return row;
-  });
-
   return (
     <div
       className={classNames(
@@ -128,7 +92,7 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
         className,
       )}>
       <div className="grid gap-2 w-full">
-        {elegantColorPalettes.map((row, index) => {
+        {colorPalettes.map((row, index) => {
           return (
             <div
               key={`row-${index}`}

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import DefaultConfigs from 'utils/DefaultConfigs';
 import SarvasvaConfigs from './SarvasvaConfigs';
 import BoysGymConfig from './BoysGymConfig';
@@ -128,7 +127,14 @@ export interface PageData {
   style?: React.CSSProperties;
 }
 
+export type RoomKey = 'sarvasva' | 'boysgym' | 'girlsgym';
+export interface Room {
+  key: RoomKey;
+  title: string;
+}
+
 export interface UIConfig {
+  rooms: Room[];
   authProviderURL?: string;
   webRelayApiPath?: string;
   pharosApiPath?: string;
@@ -143,19 +149,14 @@ export interface UIConfig {
   pages: { [key in Page]: PageData };
 }
 
-export function getConfigs(): UIConfig {
-  switch (process.env.REACT_APP_ROOM_CONFIG_NAME) {
-    case 'sarvasva':
-      return SarvasvaConfigs;
-    case 'boysgym':
-      return BoysGymConfig;
-    case 'girlsgym':
-      return GirlsGymConfig;
-    // ADD CASES BELOW TO HANDLE OTHER CONFIGS
-  }
-  return DefaultConfigs;
-}
+export const CONFIGS: Record<RoomKey, UIConfig> = {
+  sarvasva: SarvasvaConfigs,
+  boysgym: BoysGymConfig,
+  girlsgym: GirlsGymConfig,
+};
 
-export function useConfigs(): UIConfig {
-  return useMemo(() => getConfigs(), []);
+export function getConfigs(
+  roomKey = process.env.REACT_APP_ROOM_CONFIG_NAME,
+): UIConfig {
+  return CONFIGS[roomKey as RoomKey] || DefaultConfigs;
 }

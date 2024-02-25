@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Body from 'component/Body';
 import Navigation from 'component/navigation/Navigation';
 
 import classNames from 'classnames';
-import { getConfigs } from 'utils/Configs';
+import { type RoomKey, getConfigs } from 'utils/Configs';
 import LogoScreenSaver from 'component/LogoScreenSaver';
-import { useRecoilValue } from 'recoil';
-import { isLoggedInState } from 'state/navigation';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  activeConfigState,
+  isLoggedInState,
+  pageState,
+} from 'state/navigation';
 import LoginScreen from 'component/LoginScreen';
+import { Tabs, Tab } from '@nextui-org/react';
 
+const defaultConfig = getConfigs();
 const { authProviderURL, authID, proximityActivity, touchActivity } =
-  getConfigs();
+  defaultConfig;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -19,8 +25,21 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ className }) => {
+  const [activePage, setActivePage] = useRecoilState(pageState);
+  const [, setActiveConfig] = useRecoilState(activeConfigState);
+  const [roomKey, setRoomKey] = useState<RoomKey>(defaultConfig.rooms[0]?.key);
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const shouldAskForLogin = authProviderURL != null && authID != null;
+
+  useEffect(() => {
+    const newConfig = getConfigs(roomKey);
+    setActiveConfig(newConfig);
+
+    // if current page doesn't exist in new room than set first tab of new config
+    if (!newConfig.pages[activePage]) {
+      setActivePage(Object.keys(newConfig.pages)[0]);
+    }
+  }, [roomKey]);
 
   const panelContent = (
     <div
@@ -29,7 +48,20 @@ const App: React.FC<Props> = ({ className }) => {
         className,
       )}>
       <Navigation className="grow-0 shrink-0" />
-      <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
+      {defaultConfig.rooms.length === 0 && (
+        <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
+      )}
+      <Tabs
+        aria-label="Options"
+        size="lg"
+        className="justify-end mr-6 mt-2"
+        onSelectionChange={(r) => setRoomKey(r as RoomKey)}>
+        {defaultConfig.rooms.map((room) => (
+          <Tab key={room.key} title={room.title}>
+            <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
+          </Tab>
+        ))}
+      </Tabs>
     </div>
   );
 

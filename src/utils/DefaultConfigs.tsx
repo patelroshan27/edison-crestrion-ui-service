@@ -2,6 +2,7 @@ import type { UIConfig } from 'utils/Configs';
 import { Lightbulb } from 'lucide-react';
 
 const DefaultConfigs: UIConfig = {
+  rooms: [],
   crestronConfigs: {
     host: '192.168.1.1',
     ipID: 10,
