@@ -99,7 +99,13 @@ const ButtonWebrelayImpl: React.FC<ButtonRelayImplProps> = ({
 
   useEffect(() => {
     pendingActionRef.current = pendingAction;
-    if (!pendingAction && active) setActive(false);
+    if (!pendingAction && active) {
+      if (webRelayConfig.payload.action === 'STOP') {
+        setTimeout(() => setActive(false), 2000);
+      } else {
+        setActive(false);
+      }
+    }
   }, [pendingAction]);
 
   const shouldUpdate = (): boolean =>
