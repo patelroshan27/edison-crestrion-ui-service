@@ -299,7 +299,7 @@ const Configs: UIConfig = {
                   controlPosition: '',
                 },
               },
-            ]).then((results) => results[0] as string);
+            ]).then((results) =>  (results[0] as number).toString() );
           },
           parseActiveValueKey: (cmd: ApiCommand) =>
             cmd.type === 'audio' ? cmd.payload.controlPosition : '',
