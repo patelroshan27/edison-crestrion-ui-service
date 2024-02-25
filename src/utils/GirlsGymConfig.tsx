@@ -25,7 +25,7 @@ const Configs: UIConfig = {
   },
   pages: {
     'H&C': {
-      name: 'Hoops & Curtains',
+      name: 'Hoops & Curtain',
       icon: Sun,
       className: '!grid-cols-3',
       controls: {
@@ -77,7 +77,7 @@ const Configs: UIConfig = {
             {
               kind: 'toggle',
               icon: ArrowUpToLine,
-              title: 'Curtains',
+              title: 'Curtain',
               label: 'Up',
               webRelayConfig: {
                 payload: { authId: 'GirlsGym', name: 'curtain', action: 'UP' },
@@ -86,7 +86,7 @@ const Configs: UIConfig = {
             {
               kind: 'toggle',
               icon: PauseOctagon,
-              title: 'Curtains',
+              title: 'Curtain',
               label: 'Stop',
               webRelayConfig: {
                 payload: {
@@ -99,7 +99,7 @@ const Configs: UIConfig = {
             {
               kind: 'toggle',
               icon: ArrowDownToLine,
-              title: 'Curtains',
+              title: 'Curtain',
               label: 'Down',
               webRelayConfig: {
                 payload: {
