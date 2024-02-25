@@ -14,6 +14,11 @@ import {
 import type { ApiCommand, UIConfig } from 'utils/Configs';
 
 const Configs: UIConfig = {
+  rooms: [
+    { key: 'sarvasva', title: 'Sarvasva' },
+    { key: 'boysgym', title: 'Boys Gym' },
+    { key: 'girlsgym', title: 'Girls Gym' },
+  ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',

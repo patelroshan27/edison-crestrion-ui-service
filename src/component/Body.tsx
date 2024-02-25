@@ -1,19 +1,17 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { getConfigs } from 'utils/Configs';
-import { pageState } from 'state/navigation';
+import { activeConfigState, pageState } from 'state/navigation';
 import Controls from 'component/controls/Controls';
 import classNames from 'classnames';
-
-const configs = getConfigs();
 
 interface Props {
   className?: string;
 }
 
 const Body: React.FC<Props> = ({ className }: Props) => {
+  const activeConfig = useRecoilValue(activeConfigState);
   const activePage = useRecoilValue(pageState);
-  const activeConfigs = configs.pages[activePage];
+  const page = activeConfig.pages[activePage];
 
   return (
     <div
@@ -22,9 +20,9 @@ const Body: React.FC<Props> = ({ className }: Props) => {
         className,
       )}>
       <Controls
-        configs={activeConfigs.controls}
-        className={activeConfigs.className}
-        style={activeConfigs.style}
+        configs={page.controls}
+        className={page.className}
+        style={page.style}
       />
     </div>
   );

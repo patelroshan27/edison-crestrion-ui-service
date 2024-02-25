@@ -10,6 +10,7 @@ import {
 import type { UIConfig } from 'utils/Configs';
 
 const Configs: UIConfig = {
+  rooms: [],
   id: 123,
   // proximityActivity: '71',
   // touchActivity: '72',

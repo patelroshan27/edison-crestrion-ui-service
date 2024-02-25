@@ -14,6 +14,21 @@ import {
   type AudioApiPaylod,
 } from './Configs';
 
+// axios.interceptors.response.use(
+//   function (response) {
+//     // Any status code that lie within the range of 2xx cause this function to trigger
+//     // Do something with response data
+//     return response;
+//   },
+//   function (error) {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve({ data: '13107' });
+//       }, 100);
+//     });
+//   },
+// );
+
 const { webRelayApiPath, pharosApiPath, zumApiPath, audioApiPath } =
   getConfigs();
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
