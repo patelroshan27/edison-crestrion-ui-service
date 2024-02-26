@@ -127,7 +127,13 @@ export interface PageData {
   style?: React.CSSProperties;
 }
 
-export type RoomKey = 'sarvasva' | 'boysgym' | 'girlsgym';
+export const CONFIGS = {
+  sarvasva: SarvasvaConfigs,
+  boysgym: BoysGymConfig,
+  girlsgym: GirlsGymConfig,
+} as const;
+
+export type RoomKey = keyof typeof CONFIGS;
 export interface Room {
   key: RoomKey;
   title: string;
@@ -149,14 +155,8 @@ export interface UIConfig {
   pages: { [key in Page]: PageData };
 }
 
-export const CONFIGS: Record<RoomKey, UIConfig> = {
-  sarvasva: SarvasvaConfigs,
-  boysgym: BoysGymConfig,
-  girlsgym: GirlsGymConfig,
-};
-
 export function getConfigs(
-  roomKey = process.env.REACT_APP_ROOM_CONFIG_NAME,
+  roomKey = process.env.REACT_APP_ROOM_CONFIG_NAME as RoomKey,
 ): UIConfig {
-  return CONFIGS[roomKey as RoomKey] || DefaultConfigs;
+  return CONFIGS[roomKey] || DefaultConfigs;
 }
