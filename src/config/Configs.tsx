@@ -1,8 +1,13 @@
-import DefaultConfigs from 'utils/DefaultConfigs';
-import SarvasvaConfigs from './SarvasvaConfigs';
-import BoysGymConfig from './BoysGymConfig';
+import DefaultConfigs from 'config/DefaultConfigs';
+import Sarvasva from './first-floor/santnivas/Sarvasva';
+import BoysGym from './second-floor/BoysGym';
 import { type LucideIcon } from 'lucide-react';
-import GirlsGymConfig from './GirlsGymConfig';
+import GirlsGym from './second-floor/GirlsGym';
+import Branhamanad from './first-floor/santnivas/Branhamanad';
+import SantOffice1 from './first-floor/santnivas/SantOffice1';
+import SantOffice2 from './first-floor/santnivas/SantOffice2';
+import SantCorridor from './first-floor/santnivas/SantCorridor';
+import SantKitchen from './first-floor/santnivas/SantKitchen';
 
 export interface CrestronConfigs {
   host: string;
@@ -127,7 +132,7 @@ export interface PageData {
   style?: React.CSSProperties;
 }
 
-export type RoomKey = 'sarvasva' | 'boysgym' | 'girlsgym';
+export type RoomKey = 'sarvasva' | 'branhamanad' | 'santoffice1' | 'santoffice2' | 'santkitchen' | 'santcorridor' | 'boysgym' | 'girlsgym';
 export interface Room {
   key: RoomKey;
   title: string;
@@ -150,9 +155,14 @@ export interface UIConfig {
 }
 
 export const CONFIGS: Record<RoomKey, UIConfig> = {
-  sarvasva: SarvasvaConfigs,
-  boysgym: BoysGymConfig,
-  girlsgym: GirlsGymConfig,
+  sarvasva: Sarvasva,
+  boysgym: BoysGym,
+  girlsgym: GirlsGym,
+  branhamanad: Branhamanad,
+  santoffice1: SantOffice1,
+  santoffice2: SantOffice2,
+  santcorridor: SantCorridor,
+  santkitchen: SantKitchen
 };
 
 export function getConfigs(

@@ -11,7 +11,7 @@ import {
   type LightsApiPayload,
   type ApiCommand,
   type AudioApiPaylod,
-} from './Configs';
+} from '../config/Configs';
 import { useRecoilValue } from 'recoil';
 import { activeConfigState } from 'state/navigation';
 

@@ -1,4 +1,4 @@
-import type { AudioControlData } from 'utils/Configs';
+import type { AudioControlData } from 'config/Configs';
 
 import React, { useEffect, useState } from 'react';
 import { Direction, Range } from 'react-range';

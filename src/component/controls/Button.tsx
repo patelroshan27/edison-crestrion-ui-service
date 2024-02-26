@@ -2,7 +2,7 @@ import type {
   ApiCommand,
   CrestronWebrelayConfig,
   LightControlData,
-} from 'utils/Configs';
+} from 'config/Configs';
 
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';

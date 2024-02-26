@@ -7,9 +7,9 @@ import {
   PauseOctagon,
   ArrowDownToLine,
 } from 'lucide-react';
-import type { UIConfig } from 'utils/Configs';
+import type { UIConfig } from 'config/Configs';
 
-const Configs: UIConfig = {
+const GirlsGym: UIConfig = {
   rooms: [],
   id: 123,
   // proximityActivity: '71',
@@ -17,9 +17,9 @@ const Configs: UIConfig = {
   authProviderURL: '/crestron/passcodes/validate',
   webRelayApiPath: '/crestron/webrelays/send',
   zumApiPath: '/zum/send',
-  authID: 'BoysGym',
+  authID: 'GirlsGym',
   crestronConfigs: {
-    host: '10.25.20.96',
+    host: '10.25.20.97',
     ipID: 19,
     port: 41794,
   },
@@ -39,7 +39,7 @@ const Configs: UIConfig = {
               title: 'Left Hoop',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'leftHoop', action: 'UP' },
+                payload: { authId: 'GirlsGym', name: 'leftHoop', action: 'UP' },
               },
             },
             {
@@ -49,7 +49,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               webRelayConfig: {
                 payload: {
-                  authId: 'BoysGym',
+                  authId: 'GirlsGym',
                   name: 'leftHoop',
                   action: 'STOP',
                 },
@@ -62,7 +62,7 @@ const Configs: UIConfig = {
               label: 'Down',
               webRelayConfig: {
                 payload: {
-                  authId: 'BoysGym',
+                  authId: 'GirlsGym',
                   name: 'leftHoop',
                   action: 'DOWN',
                 },
@@ -80,7 +80,7 @@ const Configs: UIConfig = {
               title: 'Curtain',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'curtain', action: 'UP' },
+                payload: { authId: 'GirlsGym', name: 'curtain', action: 'UP' },
               },
             },
             {
@@ -89,7 +89,11 @@ const Configs: UIConfig = {
               title: 'Curtain',
               label: 'Stop',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'curtain', action: 'STOP' },
+                payload: {
+                  authId: 'GirlsGym',
+                  name: 'curtain',
+                  action: 'STOP',
+                },
               },
             },
             {
@@ -98,7 +102,11 @@ const Configs: UIConfig = {
               title: 'Curtain',
               label: 'Down',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'curtain', action: 'DOWN' },
+                payload: {
+                  authId: 'GirlsGym',
+                  name: 'curtain',
+                  action: 'DOWN',
+                },
               },
             },
           ],
@@ -113,7 +121,11 @@ const Configs: UIConfig = {
               title: 'Right Hoop',
               label: 'Up',
               webRelayConfig: {
-                payload: { authId: 'BoysGym', name: 'rightHoop', action: 'UP' },
+                payload: {
+                  authId: 'GirlsGym',
+                  name: 'rightHoop',
+                  action: 'UP',
+                },
               },
             },
             {
@@ -123,7 +135,7 @@ const Configs: UIConfig = {
               label: 'Stop',
               webRelayConfig: {
                 payload: {
-                  authId: 'BoysGym',
+                  authId: 'GirlsGym',
                   name: 'rightHoop',
                   action: 'STOP',
                 },
@@ -136,7 +148,7 @@ const Configs: UIConfig = {
               label: 'Down',
               webRelayConfig: {
                 payload: {
-                  authId: 'BoysGym',
+                  authId: 'GirlsGym',
                   name: 'rightHoop',
                   action: 'DOWN',
                 },
@@ -159,7 +171,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '1' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '1' } },
               ],
             },
             {
@@ -168,7 +180,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '2' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '2' } },
               ],
             },
             {
@@ -177,7 +189,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '3' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '3' } },
               ],
             },
             {
@@ -186,7 +198,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '16' } },
+                { type: 'zum', payload: { room: '8B9288E9', scene: '16' } },
               ],
             },
           ],
@@ -196,4 +208,4 @@ const Configs: UIConfig = {
   },
 };
 
-export default Configs;
+export default GirlsGym;

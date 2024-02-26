@@ -1,4 +1,4 @@
-import type { ColorIntensity, PharosControlData } from 'utils/Configs';
+import type { ColorIntensity, PharosControlData } from 'config/Configs';
 
 import React, { useState } from 'react';
 import classNames from 'classnames';

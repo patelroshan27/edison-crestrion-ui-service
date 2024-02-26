@@ -11,13 +11,16 @@ import {
   Sun,
   SunDim,
 } from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'utils/Configs';
+import type { ApiCommand, UIConfig } from 'config/Configs';
 
 const Configs: UIConfig = {
   rooms: [
     { key: 'sarvasva', title: 'Sarvasva' },
-    { key: 'boysgym', title: 'Boys Gym' },
-    { key: 'girlsgym', title: 'Girls Gym' },
+    { key: 'santoffice1', title: 'Sant Office1' },
+    { key: 'santoffice2', title: 'Sant Office2' },
+    { key: 'branhamanad', title: 'Branhamanad' },
+    { key: 'santcorridor', title: 'Sant Corridor' },
+    { key: 'santkitchen', title: 'Sant Kitchen' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',

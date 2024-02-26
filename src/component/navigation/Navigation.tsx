@@ -6,7 +6,7 @@ import {
   isLoggedInState,
   pageState,
 } from 'state/navigation';
-import { getConfigs } from 'utils/Configs';
+import { getConfigs } from 'config/Configs';
 import { Lock } from 'lucide-react';
 
 const defaultConfig = getConfigs();

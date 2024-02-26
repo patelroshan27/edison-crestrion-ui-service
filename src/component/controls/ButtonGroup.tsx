@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { type GroupControlData } from 'utils/Configs';
+import { type GroupControlData } from 'config/Configs';
 import Button from './Button';
 import { useApiCommands } from 'utils/hooks';
 
