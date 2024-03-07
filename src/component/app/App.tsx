@@ -3,7 +3,7 @@ import Body from 'component/Body';
 import Navigation from 'component/navigation/Navigation';
 
 import classNames from 'classnames';
-import { type RoomKey, getConfigs } from 'utils/Configs';
+import { type RoomKey, getConfigs } from 'config/Configs';
 import LogoScreenSaver from 'component/LogoScreenSaver';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
@@ -13,6 +13,7 @@ import {
 } from 'state/navigation';
 import LoginScreen from 'component/LoginScreen';
 import { Tabs, Tab } from '@nextui-org/react';
+import Rooms from 'component/navigation/Rooms';
 
 const defaultConfig = getConfigs();
 const { authProviderURL, authID, proximityActivity, touchActivity } =
@@ -51,11 +52,17 @@ const App: React.FC<Props> = ({ className }) => {
       {defaultConfig.rooms.length === 0 && (
         <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
       )}
+
+      <Rooms className="grow-0 shrink-0" />
+      {defaultConfig.rooms.length === 0 && (
+        <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
+      )}
+
       <Tabs
         aria-label="Options"
-        size="lg"
+        color="primary"
         className="justify-end mr-6 mt-2"
-        onSelectionChange={(r) => setRoomKey(r as RoomKey)}>
+        onSelectionChange={(roomKey) => setRoomKey(roomKey as RoomKey)}>
         {defaultConfig.rooms.map((room) => (
           <Tab key={room.key} title={room.title}>
             <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />

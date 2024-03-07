@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { type CrestronWebrelayConfig } from 'utils/Configs';
 import { useRecoilState } from 'recoil';
 import { webRelayPendingActionState } from 'state/navigation';
 import { useWebRelayApiState } from 'utils/hooks';
 import { type ButtonCommonProps, SimpleButton } from './SimpleButton';
+import { CrestronWebrelayConfig } from 'config/Configs';
 
 interface ButtonRelayProps extends ButtonCommonProps {
   webRelayConfig: CrestronWebrelayConfig;

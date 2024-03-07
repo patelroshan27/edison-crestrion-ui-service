@@ -1,8 +1,13 @@
-import DefaultConfigs from 'utils/DefaultConfigs';
-import SarvasvaConfigs from './SarvasvaConfigs';
-import BoysGymConfig from './BoysGymConfig';
+import DefaultConfigs from 'config/DefaultConfigs';
+import Sarvasva from './first-floor/santnivas/Sarvasva';
+import BoysGym from './second-floor/BoysGym';
 import { type LucideIcon } from 'lucide-react';
-import GirlsGymConfig from './GirlsGymConfig';
+import GirlsGym from './second-floor/GirlsGym';
+import Branhamanad from './first-floor/santnivas/Branhamanad';
+import SantOffice1 from './first-floor/santnivas/SantOffice1';
+import SantOffice2 from './first-floor/santnivas/SantOffice2';
+import SantCorridor from './first-floor/santnivas/SantCorridor';
+import SantKitchen from './first-floor/santnivas/SantKitchen';
 
 export interface CrestronConfigs {
   host: string;
@@ -128,9 +133,14 @@ export interface PageData {
 }
 
 export const CONFIGS = {
-  sarvasva: SarvasvaConfigs,
-  boysgym: BoysGymConfig,
-  girlsgym: GirlsGymConfig,
+  sarvasva: Sarvasva,
+  boysgym: BoysGym,
+  girlsgym: GirlsGym,
+  branhamanad: Branhamanad,
+  santoffice1: SantOffice1,
+  santoffice2: SantOffice2,
+  santcorridor: SantCorridor,
+  santkitchen: SantKitchen
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

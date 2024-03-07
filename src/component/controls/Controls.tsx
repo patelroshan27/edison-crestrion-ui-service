@@ -1,4 +1,4 @@
-import type { ControlData } from 'utils/Configs';
+import type { ControlData } from 'config/Configs';
 
 import React from 'react';
 import Button from 'component/controls/Button';

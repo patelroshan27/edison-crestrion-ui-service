@@ -6,7 +6,7 @@ import {
   isLoggedInState,
   pageState,
 } from 'state/navigation';
-import { getConfigs } from 'utils/Configs';
+import { getConfigs } from 'config/Configs';
 import { Lock } from 'lucide-react';
 
 const defaultConfig = getConfigs();
@@ -24,25 +24,9 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex justify-between space-x-2 px-6 py-4 w-full items-center border-b border-primary',
+        'flex justify-between space-x-2 px-6 py-1 w-full items-center border-b border-primary',
         className,
       )}>
-      <div className="flex items-center space-x-4">
-        <button
-          type="button"
-          className={classNames(
-            'px-4 py-4 flex items-center rounded-lg text-4xl bg-primary text-primary-foreground',
-          )}
-          onClick={() => {
-            setIsLoggedIn(false);
-          }}>
-          <Lock className="mr-3 h-6 w-6 text-lg" />
-          <div className="text-left flex flex-col">
-            <span className="leading-none text-xl">Lock</span>
-            <span className="text-lg">{defaultConfig.authID}</span>
-          </div>
-        </button>
-      </div>
       <div className="flex items-center space-x-2">
         {pages.map((page) => {
           const pageData = activeConfig.pages[page];
@@ -52,7 +36,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               key={page}
               type="button"
               className={classNames(
-                'px-4 py-4 flex items-center rounded-lg text-4xl',
+                'px-4 py-4 flex items-center rounded-lg text-lg',
                 activeTab === page
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-white/10 text-primary',
@@ -65,6 +49,22 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
             </button>
           );
         })}
+      </div>
+      <div className="flex items-center space-x-4">
+        <button
+          type="button"
+          className={classNames(
+            'px-4 py-4 flex items-center rounded-lg text-lg bg-primary text-primary-foreground',
+          )}
+          onClick={() => {
+            setIsLoggedIn(false);
+          }}>
+          <Lock className="mr-3 h-6 w-6 text-lg" />
+          <div className="text-left flex flex-col">
+            <span className="leading-none text-xl">Lock</span>
+            <span className="text-lg">{defaultConfig.authID}</span>
+          </div>
+        </button>
       </div>
     </div>
   );

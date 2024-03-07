@@ -1,7 +1,7 @@
 import React from 'react';
-import type { ApiCommand, LightControlData } from 'utils/Configs';
 import { ButtonWebrelay } from './ButtonWebrelay';
 import { ApiCommandButton } from './ApiCommandButton';
+import { LightControlData, ApiCommand } from 'config/Configs';
 
 interface Props {
   className?: string;

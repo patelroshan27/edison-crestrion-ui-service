@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { getConfigs } from 'utils/Configs';
+import { getConfigs } from 'config/Configs';
 
 const defaultConfig = getConfigs();
 

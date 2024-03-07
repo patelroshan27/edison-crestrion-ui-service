@@ -1,4 +1,4 @@
-import type { UIConfig } from 'utils/Configs';
+import type { UIConfig } from 'config/Configs';
 import { Lightbulb } from 'lucide-react';
 
 const DefaultConfigs: UIConfig = {
