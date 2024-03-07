@@ -29,7 +29,8 @@ module.exports = {
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/promise-function-async": "off",
         "@typescript-eslint/no-unused-vars": "warn",
-        "@typescript-eslint/no-non-null-assertion" : "warn"
+        "@typescript-eslint/no-non-null-assertion" : "warn",
+        "@typescript-eslint/consistent-type-imports": "warn"
     },
     settings: {
         "import/parsers": {

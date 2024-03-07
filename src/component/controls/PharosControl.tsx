@@ -24,14 +24,14 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
 
   const iconDisplay =
     Icon != null ? (
-      <Icon className={classNames('h-8 w-8 text-primary')} />
+      <Icon className={classNames('h-7 w-7 text-primary')} />
     ) : null;
 
   return (
     <button
       className={classNames(
         'outline-none focus:outline-none border-4 flex items-center justify-center',
-        'transition h-full rounded-[50%] border-primary overflow-hidden w-full max-w-[9rem] max-h-[9rem]',
+        'transition h-full rounded-[50%] border-primary overflow-hidden w-full max-w-[7rem] max-h-[7rem]',
         activeScene === scene ? 'scale-100' : 'scale-80',
       )}
       type="button"
@@ -91,12 +91,12 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
         'flex w-full h-full items-center justify-center',
         className,
       )}>
-      <div className="grid gap-2 w-full">
+      <div className="grid w-full">
         {colorPalettes.map((row, index) => {
           return (
             <div
               key={`row-${index}`}
-              className="h-[9rem] flex items-center justify-center space-x-3">
+              className="h-[7rem] flex items-center space-x-8 justify-center">
               {row}
             </div>
           );
