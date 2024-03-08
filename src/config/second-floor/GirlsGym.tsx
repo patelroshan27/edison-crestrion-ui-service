@@ -171,7 +171,7 @@ const GirlsGym: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payload: { room: '8B9288E9', scene: '1' } },
+                { type: 'zum', payloads: [{ room: '8B9288E9', scene: '1' }] },
               ],
             },
             {
@@ -180,7 +180,7 @@ const GirlsGym: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payload: { room: '8B9288E9', scene: '2' } },
+                { type: 'zum', payloads: [{ room: '8B9288E9', scene: '2' }] },
               ],
             },
             {
@@ -189,7 +189,7 @@ const GirlsGym: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payload: { room: '8B9288E9', scene: '3' } },
+                { type: 'zum', payloads: [{ room: '8B9288E9', scene: '3' }] },
               ],
             },
             {
@@ -198,7 +198,7 @@ const GirlsGym: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '8B9288E9', scene: '16' } },
+                { type: 'zum', payloads: [{ room: '8B9288E9', scene: '16' }] },
               ],
             },
           ],

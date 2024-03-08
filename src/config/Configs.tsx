@@ -51,7 +51,7 @@ export interface WebrelayApiCommand {
 
 export interface LightsApiCommand {
   type: LightApiType;
-  payload: LightsApiPayload;
+  payloads: LightsApiPayload[];
 }
 
 export interface AudioApiCommand {

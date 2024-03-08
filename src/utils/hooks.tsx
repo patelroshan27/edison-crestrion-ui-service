@@ -79,15 +79,15 @@ export function useWebRelayApiState(): (
 }
 
 export function usePharosApiState(): (
-  data: LightsApiPayload,
+  data: LightsApiPayload[],
 ) => Promise<unknown> {
   const config = useRecoilValue(activeConfigState);
-  return useApiState<LightsApiPayload, unknown>(config.pharosApiPath as string);
+  return useApiState<LightsApiPayload[], unknown>(config.pharosApiPath as string);
 }
 
-export function useZumApiState(): (data: LightsApiPayload) => Promise<unknown> {
+export function useZumApiState(): (data: LightsApiPayload[]) => Promise<unknown> {
   const config = useRecoilValue(activeConfigState);
-  return useApiState<LightsApiPayload, unknown>(config.zumApiPath as string);
+  return useApiState<LightsApiPayload[], unknown>(config.zumApiPath as string);
 }
 
 export function useAudioApiState(): (data: AudioApiPaylod) => Promise<unknown> {
@@ -106,8 +106,8 @@ export function useApiCommands(): (
   return useCallback((commands: ApiCommand[]) => {
     const promises = commands
       .map((command) => {
-        if (command.type === 'pharos') return sendPharosCmd(command.payload);
-        if (command.type === 'zum') return sendZumCmd(command.payload);
+        if (command.type === 'pharos') return sendPharosCmd(command.payloads);
+        if (command.type === 'zum') return sendZumCmd(command.payloads);
         if (command.type === 'audio') return sendAudioCmd(command.payload);
         if (command.type === 'webrelay')
           return sendWebRelayCmd(command.payload);
