@@ -134,6 +134,7 @@ export interface PageData {
 }
 
 export const CONFIGS = {
+  santnivas: SantNivas,
   sarvasva: Sarvasva,
   boysgym: BoysGym,
   girlsgym: GirlsGym,
