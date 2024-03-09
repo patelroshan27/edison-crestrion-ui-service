@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApiCommands } from 'utils/hooks';
 import { type ButtonCommonProps, SimpleButton } from './SimpleButton';
-import { ApiCommand } from 'config/Configs';
+import { type ApiCommand } from 'config/Configs';
 
 interface ApiCommandButtonProps extends ButtonCommonProps {
   apiCommands: ApiCommand[];
