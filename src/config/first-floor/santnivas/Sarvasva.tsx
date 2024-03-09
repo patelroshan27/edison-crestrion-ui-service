@@ -47,7 +47,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '1' } },
+                { type: 'zum', payloads: [{ room: '154', scene: '1' }] },
               ],
             },
             {
@@ -56,7 +56,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '2' } },
+                { type: 'zum', payloads: [{ room: '154', scene: '2' }] },
               ],
             },
             {
@@ -65,7 +65,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '3' } },
+                { type: 'zum', payloads: [{ room: '154', scene: '3' }] },
               ],
             },
             {
@@ -74,7 +74,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '16' } },
+                { type: 'zum', payloads: [{ room: '154', scene: '16' }] },
               ],
             },
             {
@@ -83,8 +83,8 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '2' } },
-                { type: 'pharos', payload: { room: '154', scene: '01' } },
+                { type: 'zum', payloads: [{ room: '154', scene: '2' }] },
+                { type: 'pharos', payloads: [{ room: '154', scene: '01' }] },
               ],
             },
             {
@@ -93,8 +93,8 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '154', scene: '16' } },
-                { type: 'pharos', payload: { room: '154', scene: '00' } },
+                { type: 'zum', payloads: [{ room: '154', scene: '16' }] },
+                { type: 'pharos', payloads: [{ room: '154', scene: '00' }] },
               ],
             },
           ],
@@ -307,7 +307,7 @@ const Configs: UIConfig = {
                   controlPosition: '',
                 },
               },
-            ]).then((results) =>  (results[0] as number).toString() );
+            ]).then((results) => (results[0] as number).toString());
           },
           parseActiveValueKey: (cmd: ApiCommand) =>
             cmd.type === 'audio' ? cmd.payload.controlPosition : '',

@@ -1,17 +1,11 @@
 import {
-  Bluetooth,
-  Flower2,
   Lightbulb,
   LightbulbOff,
-  ListMusic,
-  Mic2,
-  Music2,
   PowerOff,
-  Speech,
   Sun,
   SunDim,
 } from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'config/Configs';
+import type { UIConfig } from 'config/Configs';
 
 const SantOffice1: UIConfig = {
   rooms: [],
@@ -40,7 +34,7 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payload: { room: '178', scene: '1' } },
+                { type: 'zum', payloads: [{ room: '178', scene: '1' }] },
               ],
             },
             {
@@ -49,7 +43,7 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payload: { room: '178', scene: '2' } },
+                { type: 'zum', payloads: [{ room: '178', scene: '2' }] },
               ],
             },
             {
@@ -58,7 +52,7 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payload: { room: '178', scene: '3' } },
+                { type: 'zum', payloads: [{ room: '178', scene: '3' }] },
               ],
             },
             {
@@ -67,7 +61,7 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '178', scene: '16' } },
+                { type: 'zum', payloads: [{ room: '178', scene: '16' }] },
               ],
             },
             {
@@ -76,8 +70,8 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payload: { room: '178', scene: '2' } },
-                { type: 'pharos', payload: { room: '178', scene: '01' } },
+                { type: 'zum', payloads: [{ room: '178', scene: '2' }] },
+                { type: 'pharos', payloads: [{ room: '178', scene: '01' }] },
               ],
             },
             {
@@ -86,8 +80,8 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '178', scene: '16' } },
-                { type: 'pharos', payload: { room: '178', scene: '00' } },
+                { type: 'zum', payloads: [{ room: '178', scene: '16' }] },
+                { type: 'pharos', payloads: [{ room: '178', scene: '00' }] },
               ],
             },
           ],

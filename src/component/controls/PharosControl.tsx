@@ -39,7 +39,7 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
         backgroundColor: iconDisplay != null ? 'rgba(255,255,255,0.1)' : color,
       }}
       onClick={() => {
-        sendPharosCmd({ room, scene })
+        sendPharosCmd([{ room, scene }])
           .then(() => onPharosCmd(scene))
           .catch((err) => console.log(err));
       }}>

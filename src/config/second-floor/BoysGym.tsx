@@ -159,7 +159,7 @@ const BoysGym: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '1' } },
+                { type: 'zum', payloads: [{ room: '8A7298CE', scene: '1' }] },
               ],
             },
             {
@@ -168,7 +168,7 @@ const BoysGym: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '2' } },
+                { type: 'zum', payloads: [{ room: '8A7298CE', scene: '2' }] },
               ],
             },
             {
@@ -177,7 +177,7 @@ const BoysGym: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '3' } },
+                { type: 'zum', payloads: [{ room: '8A7298CE', scene: '3' }] },
               ],
             },
             {
@@ -186,7 +186,7 @@ const BoysGym: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payload: { room: '8A7298CE', scene: '16' } },
+                { type: 'zum', payloads: [{ room: '8A7298CE', scene: '16' }] },
               ],
             },
           ],
