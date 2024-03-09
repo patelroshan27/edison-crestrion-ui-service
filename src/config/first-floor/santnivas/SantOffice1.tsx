@@ -2,7 +2,14 @@ import { Lightbulb, LightbulbOff, PowerOff, Sun, SunDim } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 
 const SantOffice1: UIConfig = {
-  rooms: [],
+  rooms: [
+    { key: 'sarvasva', title: 'Sarvasva' },
+    { key: 'santoffice1', title: 'Sant Office1' },
+    { key: 'santoffice2', title: 'Sant Office2' },
+    { key: 'branhamanad', title: 'Branhamanad' },
+    { key: 'santcorridor', title: 'Sant Corridor' },
+    { key: 'santkitchen', title: 'Sant Kitchen' },
+  ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',
@@ -10,7 +17,7 @@ const SantOffice1: UIConfig = {
   audioApiPath: '/audio/send',
   authID: 'SantOffice1',
   crestronConfigs: {
-    host: '10.25.20.81',
+    host: '10.25.20.73',
     ipID: 19,
     port: 41794,
   },

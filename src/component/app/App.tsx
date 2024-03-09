@@ -28,8 +28,8 @@ const App: React.FC<Props> = ({ className }) => {
         'w-screen h-screen overflow-hidden flex flex-col',
         className,
       )}>
-      <Navigation className="grow-0 shrink-0" />
       <RoomSelection className="grow-0 shrink-0" />
+      <Navigation className="grow-0 shrink-0" />
       <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
     </div>
   );

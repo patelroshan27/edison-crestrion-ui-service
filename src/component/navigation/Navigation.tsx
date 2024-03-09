@@ -3,11 +3,9 @@ import classNames from 'classnames';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   activeConfigState,
-  isLoggedInState,
   pageState,
 } from 'state/navigation';
 import { getConfigs } from 'config/Configs';
-import { Lock } from 'lucide-react';
 
 const defaultConfig = getConfigs();
 
@@ -18,7 +16,6 @@ interface Props {
 const Navigation: React.FC<Props> = ({ className }: Props) => {
   const activeConfig = useRecoilValue(activeConfigState);
   const [activeTab, setActivePage] = useRecoilState(pageState);
-  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
   const pages = Object.keys(activeConfig.pages);
 
   return (
@@ -49,22 +46,6 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
             </button>
           );
         })}
-      </div>
-      <div className="flex items-center space-x-4">
-        <button
-          type="button"
-          className={classNames(
-            'px-4 py-[0.57rem] flex items-center rounded-lg text-lg bg-primary text-primary-foreground',
-          )}
-          onClick={() => {
-            setIsLoggedIn(false);
-          }}>
-          <Lock className="mr-3 h-6 w-6 text-lg" />
-          <div className="text-left flex flex-col">
-            <span className="leading-none text-sm">Lock</span>
-            <span className="text-md">{defaultConfig.authID}</span>
-          </div>
-        </button>
       </div>
     </div>
   );

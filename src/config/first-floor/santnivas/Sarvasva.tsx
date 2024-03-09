@@ -15,7 +15,6 @@ import type { ApiCommand, UIConfig } from 'config/Configs';
 
 const Configs: UIConfig = {
   rooms: [
-    { key: 'santnivas', title: 'Sant Nivas' },
     { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice1', title: 'Sant Office1' },
     { key: 'santoffice2', title: 'Sant Office2' },
