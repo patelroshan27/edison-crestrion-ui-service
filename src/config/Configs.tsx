@@ -8,6 +8,7 @@ import SantOffice1 from './first-floor/santnivas/SantOffice1';
 import SantOffice2 from './first-floor/santnivas/SantOffice2';
 import SantCorridor from './first-floor/santnivas/SantCorridor';
 import SantKitchen from './first-floor/santnivas/SantKitchen';
+import SantNivas from './first-floor/santnivas/SantNivas';
 
 export interface CrestronConfigs {
   host: string;
@@ -132,7 +133,7 @@ export interface PageData {
   style?: React.CSSProperties;
 }
 
-export type RoomKey = 'sarvasva' | 'branhamanad' | 'santoffice1' | 'santoffice2' | 'santkitchen' | 'santcorridor' | 'boysgym' | 'girlsgym';
+export type RoomKey = 'santnivas'| 'sarvasva' | 'branhamanad' | 'santoffice1' | 'santoffice2' | 'santkitchen' | 'santcorridor' | 'boysgym' | 'girlsgym';
 export interface Room {
   key: RoomKey;
   title: string;
@@ -155,6 +156,7 @@ export interface UIConfig {
 }
 
 export const CONFIGS: Record<RoomKey, UIConfig> = {
+  santnivas: SantNivas,
   sarvasva: Sarvasva,
   boysgym: BoysGym,
   girlsgym: GirlsGym,
