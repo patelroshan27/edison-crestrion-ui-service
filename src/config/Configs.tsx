@@ -64,6 +64,7 @@ export interface ColorIntensity {
   icon?: LucideIcon;
   color: string;
   scene: string;
+  extraPayloads?: LightsApiPayload[];
 }
 
 export interface PharosControlData {
