@@ -65,6 +65,7 @@ export interface ColorIntensity {
   icon?: LucideIcon;
   color: string;
   scene: string;
+  extraPayloads?: LightsApiPayload[];
 }
 
 export interface PharosControlData {
@@ -142,7 +143,7 @@ export const CONFIGS = {
   santoffice1: SantOffice1,
   santoffice2: SantOffice2,
   santcorridor: SantCorridor,
-  santkitchen: SantKitchen
+  santkitchen: SantKitchen,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

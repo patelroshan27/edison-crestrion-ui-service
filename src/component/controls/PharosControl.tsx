@@ -1,4 +1,8 @@
-import type { ColorIntensity, PharosControlData } from 'config/Configs';
+import type {
+  ColorIntensity,
+  LightsApiPayload,
+  PharosControlData,
+} from 'config/Configs';
 
 import React, { useState } from 'react';
 import classNames from 'classnames';
@@ -9,6 +13,7 @@ const MAX_ROWS = 4;
 interface PharosColorControlProps extends ColorIntensity {
   room: string;
   activeScene?: string;
+  extraPayloads?: LightsApiPayload[];
   onPharosCmd: (scene: string) => void;
 }
 
@@ -18,6 +23,7 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
   room,
   scene,
   activeScene,
+  extraPayloads,
   onPharosCmd,
 }) => {
   const sendPharosCmd = usePharosApiState();
@@ -39,7 +45,7 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
         backgroundColor: iconDisplay != null ? 'rgba(255,255,255,0.1)' : color,
       }}
       onClick={() => {
-        sendPharosCmd([{ room, scene }])
+        sendPharosCmd([{ room, scene }].concat(extraPayloads ?? []))
           .then(() => onPharosCmd(scene))
           .catch((err) => console.log(err));
       }}>
@@ -79,6 +85,7 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
           room={config.room}
           key={`${config.room}${item.scene}`}
           activeScene={activeScene}
+          extraPayloads={item.extraPayloads}
           onPharosCmd={setActiveScene}
         />
       );

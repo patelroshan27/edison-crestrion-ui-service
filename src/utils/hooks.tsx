@@ -82,10 +82,14 @@ export function usePharosApiState(): (
   data: LightsApiPayload[],
 ) => Promise<unknown> {
   const config = useRecoilValue(activeConfigState);
-  return useApiState<LightsApiPayload[], unknown>(config.pharosApiPath as string);
+  return useApiState<LightsApiPayload[], unknown>(
+    config.pharosApiPath as string,
+  );
 }
 
-export function useZumApiState(): (data: LightsApiPayload[]) => Promise<unknown> {
+export function useZumApiState(): (
+  data: LightsApiPayload[],
+) => Promise<unknown> {
   const config = useRecoilValue(activeConfigState);
   return useApiState<LightsApiPayload[], unknown>(config.zumApiPath as string);
 }
