@@ -140,7 +140,7 @@ export const CONFIGS = {
   santoffice1: SantOffice1,
   santoffice2: SantOffice2,
   santcorridor: SantCorridor,
-  santkitchen: SantKitchen
+  santkitchen: SantKitchen,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

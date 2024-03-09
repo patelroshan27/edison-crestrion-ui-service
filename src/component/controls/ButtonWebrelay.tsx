@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { webRelayPendingActionState } from 'state/navigation';
 import { useWebRelayApiState } from 'utils/hooks';
 import { type ButtonCommonProps, SimpleButton } from './SimpleButton';
-import { CrestronWebrelayConfig } from 'config/Configs';
+import { type CrestronWebrelayConfig } from 'config/Configs';
 
 interface ButtonRelayProps extends ButtonCommonProps {
   webRelayConfig: CrestronWebrelayConfig;

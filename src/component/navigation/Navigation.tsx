@@ -54,15 +54,15 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
         <button
           type="button"
           className={classNames(
-            'px-4 py-4 flex items-center rounded-lg text-lg bg-primary text-primary-foreground',
+            'px-4 py-[0.57rem] flex items-center rounded-lg text-lg bg-primary text-primary-foreground',
           )}
           onClick={() => {
             setIsLoggedIn(false);
           }}>
           <Lock className="mr-3 h-6 w-6 text-lg" />
           <div className="text-left flex flex-col">
-            <span className="leading-none text-xl">Lock</span>
-            <span className="text-lg">{defaultConfig.authID}</span>
+            <span className="leading-none text-sm">Lock</span>
+            <span className="text-md">{defaultConfig.authID}</span>
           </div>
         </button>
       </div>

@@ -1,10 +1,4 @@
-import {
-  Lightbulb,
-  LightbulbOff,
-  PowerOff,
-  Sun,
-  SunDim,
-} from 'lucide-react';
+import { Lightbulb, LightbulbOff, PowerOff, Sun, SunDim } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 
 const SantOffice1: UIConfig = {

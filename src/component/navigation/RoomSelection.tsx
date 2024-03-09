@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { useRecoilValue } from 'recoil';
-import {
-  activeConfigState,
-} from 'state/navigation';
-import { RoomKey, getConfigs } from 'config/Configs';
+import { useRecoilState } from 'recoil';
+import { activeConfigState, pageState } from 'state/navigation';
+import { type RoomKey, getConfigs } from 'config/Configs';
 
 const defaultConfig = getConfigs();
 
-interface Props {
+interface RoomSelectionProps {
   className?: string;
 }
 
-const Rooms: React.FC<Props> = ({ className }: Props) => {
-  const activeConfig = useRecoilValue(activeConfigState);
+export const RoomSelection: React.FC<RoomSelectionProps> = ({
+  className,
+}: RoomSelectionProps) => {
+  const [activePage, setActivePage] = useRecoilState(pageState);
+  const [, setActiveConfig] = useRecoilState(activeConfigState);
   const [roomKey, setRoomKey] = useState<RoomKey>(defaultConfig.rooms[0]?.key);
+
+  useEffect(() => {
+    const newConfig = getConfigs(roomKey);
+    setActiveConfig(newConfig);
+
+    // if current page doesn't exist in new room than set first tab of new config
+    if (!newConfig.pages[activePage]) {
+      setActivePage(Object.keys(newConfig.pages)[0]);
+    }
+  }, [roomKey]);
 
   return (
     <div
@@ -47,6 +58,3 @@ const Rooms: React.FC<Props> = ({ className }: Props) => {
     </div>
   );
 };
-
-export default Rooms;
-
