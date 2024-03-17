@@ -21,3 +21,14 @@ export interface Track {
   albumName: string;
   trackDuration: number;
 }
+
+export interface PlayerStatus {
+  playerId: string;
+  trackCurrentTime: string;
+  pause: string;
+  play: string;
+  shuffle: string;
+  repeat: string;
+  playerTrackIndex: string;
+  track: Track;
+}

@@ -1,33 +1,40 @@
-import { type Album, type Playlist, type Track } from './types';
+import {
+  type PlayerStatus,
+  type Album,
+  type Playlist,
+  type Track,
+} from './types';
 import { activeConfigState } from 'state/navigation';
 import { useRecoilValue } from 'recoil';
 import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
 
+type MediaPlayerApiCmdType = 'getAlbums2' | 'getPlaylists3';
+type BasePlayerApiCmdType =
+  | 'getPlayerTracks'
+  | 'clearPlayer'
+  | 'play'
+  | 'pause'
+  | 'stop'
+  | 'prev2'
+  | 'next2'
+  | 'getPlayerStatus';
 type MuseApiCmdType =
-  | 'clearPlayer' // Clear Player Queue
-  | 'getPlayerTracks' // GET all queued tracks for a given player
-  | 'addToPlayer' // Add playlist or album or a specific track to the Player Queue
-  | 'getAlbums2' // Get Albums
-  | 'getPlaylists3' // Get Playlists
-  | 'getTracksById'; // Get all tracks for a given album Ids, playlist ids, track ids,
-// | 'play' //Play the track based on Player Queue and Options, ie Repeat or Shuffle
-// | 'playTrack' //Play the track by trackId and track start time from the player queue
-// | 'pause' //Pause the track from player queue
-// | 'next2' //Go to the next track from player queue
-// | 'prev2' //Go to the previous track from player queue
-// | 'stop' //Stop the currently playing track from player queue
-// | 'repeat' //Repeat the currently playing track, or all the tracks, or repeat OFF from player queue
-// | 'shuffle' //Shuffle all the tracks, or shuffle OFF or TOGGLE from player queue
+  | BasePlayerApiCmdType
+  | MediaPlayerApiCmdType
+  | 'addToPlayer'
+  | 'getTracksById'
+  | 'playTrack'
+  | 'repeat'
+  | 'shuffle';
 // | 'setPlayerTime'  //Set the playing track time for a given player id
 // | 'getPlayerTime'  //Get the playing track time for a given player id
-// | 'getPlayerStatus';  //Get the player status for a given player id
 
 interface MediaPlayerRequest {
   clientId?: string;
 }
 
-interface BasePlayerRequest extends MediaPlayerRequest {
+export interface BasePlayerRequest extends MediaPlayerRequest {
   playerId: string;
 }
 
@@ -38,6 +45,17 @@ interface GetTracksByIdRequest extends MediaPlayerRequest {
 }
 
 type Append = 'OFF' | 'ON';
+type Shuffle = 'OFF' | 'ON' | 'TOGGLE';
+type Repeat = 'OFF' | 'ITEM' | 'ALL';
+
+interface ShuffleRequest extends MediaPlayerRequest, BasePlayerRequest {
+  shuffle: Shuffle;
+}
+
+interface PlayTrackRequest extends MediaPlayerRequest, BasePlayerRequest {
+  trackId: string;
+  trackStartTime: number;
+}
 
 interface AddToPlayerRequest
   extends MediaPlayerRequest,
@@ -46,19 +64,13 @@ interface AddToPlayerRequest
   append: Append;
 }
 
+interface RepeatRequest extends MediaPlayerRequest, BasePlayerRequest {
+  repeat: Repeat;
+}
+
 interface AddToPlayerRequestCmd {
   cmdType: 'addToPlayer';
   payload: AddToPlayerRequest;
-}
-
-interface GetAlbumsRequestCmd {
-  cmdType: 'getAlbums2';
-  payload: MediaPlayerRequest;
-}
-
-interface GetPlaylistsRequestCmd {
-  cmdType: 'getPlaylists3';
-  payload: MediaPlayerRequest;
 }
 
 interface GetTracksByIdRequestCmd {
@@ -66,23 +78,39 @@ interface GetTracksByIdRequestCmd {
   payload: GetTracksByIdRequest;
 }
 
-interface GetPlayerTracksRequestCmd {
-  cmdType: 'getPlayerTracks';
+interface PlayTrackRequestCmd {
+  cmdType: 'playTrack';
+  payload: PlayTrackRequest;
+}
+
+interface MediaPlayerRequestCmd {
+  cmdType: MediaPlayerApiCmdType;
+  payload: MediaPlayerRequest;
+}
+
+interface BasePlayerRequestCmd {
+  cmdType: BasePlayerApiCmdType;
   payload: BasePlayerRequest;
 }
 
-interface ClearPlayerTracksRequestCmd {
-  cmdType: 'clearPlayer';
-  payload: BasePlayerRequest;
+interface ShuffleRequestCmd {
+  cmdType: 'shuffle';
+  payload: ShuffleRequest;
+}
+
+interface RepeatRequestCmd {
+  cmdType: 'repeat';
+  payload: RepeatRequest;
 }
 
 export type MediaPlayerCmd =
   | AddToPlayerRequestCmd
-  | GetAlbumsRequestCmd
-  | GetPlaylistsRequestCmd
   | GetTracksByIdRequestCmd
-  | ClearPlayerTracksRequestCmd
-  | GetPlayerTracksRequestCmd;
+  | MediaPlayerRequestCmd
+  | ShuffleRequestCmd
+  | PlayTrackRequestCmd
+  | RepeatRequestCmd
+  | BasePlayerRequestCmd;
 
 export interface MediaPlayerApiPayload {
   mediaPlayerCmd: MediaPlayerCmd;
@@ -96,7 +124,7 @@ interface UsePaginationResult<T> {
 }
 export const useTablePagination = <T>(
   items: T[],
-  rowsPerPage = 8,
+  rowsPerPage = 6,
 ): UsePaginationResult<T> => {
   const [page, setPage] = useState<number>(1);
 
@@ -127,9 +155,16 @@ function useBuildMediaRequest(): (
         cmdType,
         payload: {
           clientId: config.authID,
-          albumIds: [],
-          playlistIds: [],
-          trackIds: [],
+          ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
+          ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
+          ...(cmdType === 'repeat' ? { repeat: 'ALL' } : {}),
+          ...(cmdType === 'getTracksById' || cmdType === 'addToPlayer'
+            ? {
+                albumIds: [],
+                playlistIds: [],
+                trackIds: [],
+              }
+            : {}),
           ...payload,
         },
       },
@@ -147,34 +182,76 @@ function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
   );
 }
 
-export function useGetAlbumsApi(): () => Promise<Album[]> {
+type MediaApi<R, P = undefined> = (data?: P) => Promise<R>;
+
+export function useGetAlbumsApi(): MediaApi<Album[]> {
   return useMediaApiRequest('getAlbums2');
 }
 
-export function useGetPlaylistsApi(): () => Promise<Playlist[]> {
+export function useGetPlaylistsApi(): MediaApi<Playlist[]> {
   return useMediaApiRequest('getPlaylists3');
 }
 
-export function useGetTracksByIdApi(): (
-  data: Partial<GetTracksByIdRequest>,
-) => Promise<Track[]> {
+export function useGetTracksByIdApi(): MediaApi<
+  Track[],
+  Partial<GetTracksByIdRequest>
+> {
   return useMediaApiRequest('getTracksById');
 }
 
-export function useGetPlayerTracksApi(): (
-  data: BasePlayerRequest,
-) => Promise<Track[]> {
+export function useGetPlayerTracksApi(): MediaApi<
+  Track[],
+  Partial<BasePlayerRequest>
+> {
   return useMediaApiRequest('getPlayerTracks');
 }
 
-export function useAddToPlayerApi(): (
-  data: Partial<AddToPlayerRequest>,
-) => Promise<unknown> {
+export function useAddToPlayerApi(): MediaApi<
+  void,
+  Partial<AddToPlayerRequest>
+> {
   return useMediaApiRequest('addToPlayer');
 }
 
-export function useClearPlayerTracksApi(): (
-  data: BasePlayerRequest,
-) => Promise<unknown> {
+export function useClearPlayerTracksApi(): MediaApi<void, BasePlayerRequest> {
   return useMediaApiRequest('clearPlayer');
+}
+
+export function usePlayerPlayApi(): MediaApi<void, BasePlayerRequest> {
+  return useMediaApiRequest('play');
+}
+
+export function usePlayerPauseApi(): MediaApi<void, BasePlayerRequest> {
+  return useMediaApiRequest('pause');
+}
+
+export function usePlayerStopApi(): MediaApi<void, BasePlayerRequest> {
+  return useMediaApiRequest('stop');
+}
+
+export function usePlayerNextApi(): MediaApi<void, BasePlayerRequest> {
+  return useMediaApiRequest('next2');
+}
+
+export function usePlayerPrevApi(): MediaApi<void, BasePlayerRequest> {
+  return useMediaApiRequest('prev2');
+}
+
+export function useGetPlayerStatusApi(): MediaApi<
+  PlayerStatus,
+  BasePlayerRequest
+> {
+  return useMediaApiRequest('getPlayerStatus');
+}
+
+export function usePlayerPlayTrackApi(): MediaApi<void, PlayTrackRequest> {
+  return useMediaApiRequest('playTrack');
+}
+
+export function usePlayerShuffleApi(): MediaApi<void, Partial<ShuffleRequest>> {
+  return useMediaApiRequest('shuffle');
+}
+
+export function usePlayerRepeatApi(): MediaApi<void, Partial<RepeatRequest>> {
+  return useMediaApiRequest('repeat');
 }

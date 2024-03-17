@@ -32,7 +32,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   onAddToQueue,
   onSelection,
 }) => {
-  const { page, pages, setPage, filteredItems } = useTablePagination(albums);
+  const { page, pages, setPage, filteredItems } = useTablePagination(albums, 8);
 
   const renderAlbumCell = (album: Album, key: string | number): ReactNode => {
     switch (key) {

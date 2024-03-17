@@ -13,8 +13,11 @@ import { TablePagination } from './TablePagination';
 import {
   useClearPlayerTracksApi,
   useGetPlayerTracksApi,
+  usePlayerPlayTrackApi,
   useTablePagination,
 } from './hooks';
+import { PlayIcon } from 'lucide-react';
+import { formatSecondsToMinutes } from './utils';
 
 interface PlayerTracksTableProps {
   playerId: string;
@@ -24,6 +27,7 @@ interface PlayerTracksTableProps {
 const playerTracksColumns = [
   { name: 'Track Name', uid: 'trackName' },
   { name: 'Duration', uid: 'trackDuration' },
+  { name: 'Play', uid: 'play' },
 ];
 
 export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
@@ -31,6 +35,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   tracks,
   topContent,
 }) => {
+  const playTrack = usePlayerPlayTrackApi();
   const clearPlayer = useClearPlayerTracksApi();
   const getPlayerTracks = useGetPlayerTracksApi();
   const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
@@ -39,6 +44,27 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
     clearPlayer({ playerId })
       .then(() => getPlayerTracks({ playerId }))
       .catch((err) => console.log(err));
+  };
+
+  const onPlay = (track: Track): void => {
+    playTrack({ playerId, trackId: track.trackId, trackStartTime: 0 }).catch(
+      (err) => console.log(err),
+    );
+  };
+
+  const renderCell = (track: Track, key: string | number): ReactNode => {
+    switch (key) {
+      case 'trackName':
+        return track[key];
+      case 'trackDuration':
+        return formatSecondsToMinutes(track[key]);
+      case 'play':
+        return (
+          <Button isIconOnly onClick={() => onPlay(track)}>
+            <PlayIcon />
+          </Button>
+        );
+    }
   };
 
   const bottomContent = (
@@ -67,7 +93,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
         {(item) => (
           <TableRow key={item.trackId}>
             {(columnKey) => (
-              <TableCell>{item[columnKey as keyof typeof item]}</TableCell>
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
           </TableRow>
         )}

@@ -13,6 +13,7 @@ import { type SelectedMediaIds } from './MediaPlayer';
 import { PlusIcon } from 'lucide-react';
 import { TablePagination } from './TablePagination';
 import { useTablePagination } from './hooks';
+import { formatSecondsToMinutes } from './utils';
 
 interface TracksTableProps {
   tracks: Track[];
@@ -31,13 +32,14 @@ export const TracksTable: React.FC<TracksTableProps> = ({
   topContent,
   onAddToQueue,
 }) => {
-  const { page, pages, setPage, filteredItems } = useTablePagination(tracks, 6);
+  const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
 
   const renderCell = (track: Track, key: string | number): ReactNode => {
     switch (key) {
       case 'trackName':
-      case 'trackDuration':
         return track[key];
+      case 'trackDuration':
+        return formatSecondsToMinutes(track[key]);
       case 'add':
         return (
           <Button

@@ -32,7 +32,10 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
   onAddToQueue,
   onSelection,
 }) => {
-  const { page, pages, setPage, filteredItems } = useTablePagination(playlists);
+  const { page, pages, setPage, filteredItems } = useTablePagination(
+    playlists,
+    8,
+  );
 
   const renderPlaylistCell = (
     playlist: Playlist,

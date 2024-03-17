@@ -72,7 +72,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
         onAddToQueue={onAddToQueue}
       />
       <div className="flex flex-col w-full gap-2">
-        <PlayerControls />
+        <PlayerControls playerId={playerId} />
         <TracksAndQueue
           playerId={playerId}
           tracks={tracks}
