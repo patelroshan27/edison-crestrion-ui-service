@@ -1,13 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  activeConfigState,
-  pageState,
-} from 'state/navigation';
-import { getConfigs } from 'config/Configs';
-
-const defaultConfig = getConfigs();
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { activeConfigState, pageState } from 'state/navigation';
 
 interface Props {
   className?: string;

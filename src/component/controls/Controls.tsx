@@ -6,6 +6,7 @@ import VolumeControl from 'component/controls/VolumeControl';
 import PharosControl from 'component/controls/PharosControl';
 import classNames from 'classnames';
 import { ButtonGroup } from './ButtonGroup';
+import { MediaPlayer } from 'component/media/MediaPlayer';
 
 interface Props {
   className?: string;
@@ -39,6 +40,8 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
           );
         } else if (data.kind === 'group') {
           return <ButtonGroup key={key} data={data} />;
+        } else if (data.kind === 'mediaPlayer') {
+          return <MediaPlayer key={key} playerId={data.playerId} />;
         }
         return null;
       })}

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { activeConfigState, isLoggedInState, pageState } from 'state/navigation';
+import {
+  activeConfigState,
+  isLoggedInState,
+  pageState,
+} from 'state/navigation';
 import { type RoomKey, getConfigs } from 'config/Configs';
 import { Lock } from 'lucide-react';
 

@@ -27,6 +27,7 @@ const Configs: UIConfig = {
   pharosApiPath: '/pharos/send',
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
+  mediaApiPath: '/mediaplayer/send',
   authID: 'Sarvasva',
   crestronConfigs: {
     host: '10.25.20.81',
@@ -389,6 +390,17 @@ const Configs: UIConfig = {
               ],
             },
           ],
+        },
+      },
+    },
+    MEDIA: {
+      name: 'Media',
+      icon: Music2,
+      className: '!grid-cols-[1fr] !grid-rows-[1fr]',
+      controls: {
+        media: {
+          kind: 'mediaPlayer',
+          playerId: '23',
         },
       },
     },

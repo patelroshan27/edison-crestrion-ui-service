@@ -119,10 +119,16 @@ export interface GroupControlData {
   parseActiveValueKey?: (cmd: ApiCommand) => string;
 }
 
+export interface MediaPlayerControlData {
+  kind: 'mediaPlayer';
+  playerId: string;
+}
+
 export type ControlData =
   | LightControlData
   | PharosControlData
   | AudioControlData
+  | MediaPlayerControlData
   | GroupControlData;
 
 export interface PageData {
@@ -159,6 +165,7 @@ export interface UIConfig {
   pharosApiPath?: string;
   zumApiPath?: string;
   audioApiPath?: string;
+  mediaApiPath?: string;
   authID?: string;
   crestronConfigs: CrestronConfigs;
   id?: number | string;
