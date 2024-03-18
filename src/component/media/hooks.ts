@@ -193,6 +193,9 @@ function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
   );
 }
 
+interface PlayerStatusResponse {
+  playerStatus: PlayerStatus;
+}
 type MediaApi<R, P = undefined> = (data?: P) => Promise<R>;
 export type AlbumsByName = Record<string, Album[]>;
 
@@ -250,7 +253,7 @@ export function usePlayerPrevApi(): MediaApi<void, BasePlayerRequest> {
 }
 
 export function useGetPlayerStatusApi(): MediaApi<
-  PlayerStatus,
+  PlayerStatusResponse,
   BasePlayerRequest
 > {
   return useMediaApiRequest('getPlayerStatus');

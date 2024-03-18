@@ -8,7 +8,7 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import React, { type ReactNode } from 'react';
-import { type PlayerTrack, type Track } from './types';
+import { type PlayerStatus, type PlayerTrack, type Track } from './types';
 import { TablePagination } from './TablePagination';
 import {
   useClearPlayerTracksApi,
@@ -23,7 +23,9 @@ interface PlayerTracksTableProps {
   playerId: string;
   tracks: PlayerTrack[];
   topContent: ReactNode;
+  playerStatus?: PlayerStatus;
   onPlayerTracksChange: () => void;
+  updatePlayerStatus: () => void;
 }
 const playerTracksColumns = [
   { name: 'Track Name', uid: 'trackName' },
@@ -36,7 +38,9 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   playerId,
   tracks,
   topContent,
+  playerStatus,
   onPlayerTracksChange,
+  updatePlayerStatus,
 }) => {
   const playTrack = usePlayerPlayTrackApi();
   const clearPlayer = useClearPlayerTracksApi();
@@ -50,9 +54,9 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   };
 
   const onPlay = (track: Track): void => {
-    playTrack({ playerId, trackId: track.trackId, trackStartTime: 0 }).catch(
-      (err) => console.log(err),
-    );
+    playTrack({ playerId, trackId: track.trackId, trackStartTime: 0 })
+      .then(updatePlayerStatus)
+      .catch((err) => console.log(err));
   };
 
   const onRemove = (index: number): void => {
@@ -67,12 +71,16 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
         return track[key];
       case 'trackDuration':
         return formatSecondsToMinutes(track[key]);
-      case 'play':
+      case 'play': {
+        const isPlaying =
+          playerStatus?.playerTrackIndex === track.index.toString();
+        const color = isPlaying ? 'primary' : 'default';
         return (
-          <Button isIconOnly onClick={() => onPlay(track)}>
+          <Button isIconOnly onClick={() => onPlay(track)} color={color}>
             <PlayIcon />
           </Button>
         );
+      }
       case 'remove':
         return (
           <Button isIconOnly onClick={() => onRemove(track.index)}>
