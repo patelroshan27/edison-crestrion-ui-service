@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { type Album, type Playlist, type Track } from './types';
+import { type PlayerTrack, type Playlist, type Track } from './types';
 import { AlbumsAndPlaylists } from './AlbumsAndPlaylists';
 import { TracksAndQueue } from './TracksAndQueue';
 import { PlayerControls } from './PlayerControls';
 import {
+  type AlbumsByName,
   useAddToPlayerApi,
   useGetAlbumsApi,
   useGetPlayerTracksApi,
@@ -21,11 +22,15 @@ interface MediaPlayerProps {
   playerId: string;
 }
 
+function withIndex(tracks: Track[]): PlayerTrack[] {
+  return tracks.map((t, index) => ({ index, ...t }));
+}
+
 export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
-  const [albums, setAlbums] = useState<Album[]>([]);
+  const [albumsByName, setAlbumsByName] = useState<AlbumsByName>({});
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [tracks, setTracks] = useState<Track[]>([]);
-  const [playerTracks, setPlayerTracks] = useState<Track[]>([]);
+  const [playerTracks, setPlayerTracks] = useState<PlayerTrack[]>([]);
   const [selectedIds, setSelectedIds] = useState<SelectedMediaIds>();
   const getAlbums = useGetAlbumsApi();
   const getPlaylists = useGetPlaylistsApi();
@@ -33,16 +38,21 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
   const getPlayerTracks = useGetPlayerTracksApi();
   const addToPlayer = useAddToPlayerApi();
 
+  const updatePlayerTracks = useCallback((): void => {
+    getPlayerTracks({ playerId })
+      .then(withIndex)
+      .then(setPlayerTracks)
+      .catch((err) => console.log(err));
+  }, [playerId, getPlayerTracks]);
+
   useEffect(() => {
     getAlbums()
-      .then(setAlbums)
+      .then(setAlbumsByName)
       .catch((err) => console.log(err));
     getPlaylists()
       .then(setPlaylists)
       .catch((err) => console.log(err));
-    getPlayerTracks({ playerId })
-      .then(setPlayerTracks)
-      .catch((err) => console.log(err));
+    updatePlayerTracks();
   }, []);
 
   useEffect(() => {
@@ -56,17 +66,20 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
   const onAddToQueue = useCallback(
     (idsToAdd: SelectedMediaIds): void => {
       addToPlayer({ playerId, ...idsToAdd })
-        .then(() => getPlayerTracks({ playerId }))
-        .then(setPlayerTracks)
+        .then(updatePlayerTracks)
         .catch((e) => console.log(e));
     },
     [playerId, addToPlayer, getPlayerTracks],
   );
 
+  const onPlayerTracksChange = useCallback((): void => {
+    updatePlayerTracks();
+  }, [updatePlayerTracks]);
+
   return (
     <div className="flex gap-2">
       <AlbumsAndPlaylists
-        albums={albums}
+        albumsByName={albumsByName}
         playlists={playlists}
         onSelection={setSelectedIds}
         onAddToQueue={onAddToQueue}
@@ -78,6 +91,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
           tracks={tracks}
           playerTracks={playerTracks}
           onAddToQueue={onAddToQueue}
+          onPlayerTracksChange={onPlayerTracksChange}
         />
       </div>
     </div>

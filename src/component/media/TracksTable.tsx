@@ -24,7 +24,7 @@ interface TracksTableProps {
 const tracksColumns = [
   { name: 'Track Name', uid: 'trackName' },
   { name: 'Duration', uid: 'trackDuration' },
-  { name: 'Add', uid: 'add' },
+  { name: 'Add to Queue', uid: 'add' },
 ];
 
 export const TracksTable: React.FC<TracksTableProps> = ({

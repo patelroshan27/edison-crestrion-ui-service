@@ -22,6 +22,10 @@ export interface Track {
   trackDuration: number;
 }
 
+export interface PlayerTrack extends Track {
+  index: number;
+}
+
 export interface PlayerStatus {
   playerId: string;
   trackCurrentTime: string;

@@ -8,41 +8,44 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import React, { type ReactNode } from 'react';
-import { type Track } from './types';
+import { type PlayerTrack, type Track } from './types';
 import { TablePagination } from './TablePagination';
 import {
   useClearPlayerTracksApi,
-  useGetPlayerTracksApi,
+  useDeletePlayerTracksApi,
   usePlayerPlayTrackApi,
   useTablePagination,
 } from './hooks';
-import { PlayIcon } from 'lucide-react';
+import { PlayIcon, TrashIcon } from 'lucide-react';
 import { formatSecondsToMinutes } from './utils';
 
 interface PlayerTracksTableProps {
   playerId: string;
-  tracks: Track[];
+  tracks: PlayerTrack[];
   topContent: ReactNode;
+  onPlayerTracksChange: () => void;
 }
 const playerTracksColumns = [
   { name: 'Track Name', uid: 'trackName' },
   { name: 'Duration', uid: 'trackDuration' },
   { name: 'Play', uid: 'play' },
+  { name: 'Remove from Queue', uid: 'remove' },
 ];
 
 export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   playerId,
   tracks,
   topContent,
+  onPlayerTracksChange,
 }) => {
   const playTrack = usePlayerPlayTrackApi();
   const clearPlayer = useClearPlayerTracksApi();
-  const getPlayerTracks = useGetPlayerTracksApi();
+  const deletePlayerTracks = useDeletePlayerTracksApi();
   const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
 
   const onClear = (): void => {
     clearPlayer({ playerId })
-      .then(() => getPlayerTracks({ playerId }))
+      .then(onPlayerTracksChange)
       .catch((err) => console.log(err));
   };
 
@@ -52,7 +55,13 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
     );
   };
 
-  const renderCell = (track: Track, key: string | number): ReactNode => {
+  const onRemove = (index: number): void => {
+    deletePlayerTracks({ playerId, trackIndexes: [`${index}`] })
+      .then(onPlayerTracksChange)
+      .catch((err) => console.log(err));
+  };
+
+  const renderCell = (track: PlayerTrack, key: string | number): ReactNode => {
     switch (key) {
       case 'trackName':
         return track[key];
@@ -62,6 +71,12 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
         return (
           <Button isIconOnly onClick={() => onPlay(track)}>
             <PlayIcon />
+          </Button>
+        );
+      case 'remove':
+        return (
+          <Button isIconOnly onClick={() => onRemove(track.index)}>
+            <TrashIcon />
           </Button>
         );
     }
