@@ -1,5 +1,6 @@
 import {
   Button,
+  type Selection,
   Table,
   TableBody,
   TableCell,
@@ -17,18 +18,22 @@ import { TablePagination } from './TablePagination';
 interface PlaylistsTableProps {
   playlists: Playlist[];
   topContent: ReactNode;
+  selectedKey?: Selection;
+  setSelectedKey: (key: Selection) => void;
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
 }
 
 const playlistColumns = [
   { name: 'Playlist Name', uid: 'playlistName' },
-  { name: 'Add', uid: 'add' },
+  { name: 'Add to Queue', uid: 'add' },
 ];
 
 export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
   playlists,
   topContent,
+  selectedKey,
+  setSelectedKey,
   onAddToQueue,
   onSelection,
 }) => {
@@ -61,11 +66,14 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
     <Table
       aria-label="Media Player Playlists"
       isHeaderSticky
-      isStriped
       classNames={{
         base: 'inline-flex w-1/2',
         wrapper: 'justify-start',
       }}
+      color="primary"
+      selectionMode="single"
+      defaultSelectedKeys={selectedKey}
+      onSelectionChange={setSelectedKey}
       topContent={topContent}
       bottomContent={
         <TablePagination pages={pages} page={page} setPage={setPage} />
@@ -75,7 +83,9 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
       </TableHeader>
       <TableBody emptyContent={`No playlists found`} items={filteredItems}>
         {(item) => (
-          <TableRow key={item.playlistId}>
+          <TableRow
+            key={item.playlistId}
+            className="border-b-1 border-neutral-700">
             {(columnKey) => (
               <TableCell
                 onClick={() => onSelection({ playlistIds: [item.playlistId] })}>

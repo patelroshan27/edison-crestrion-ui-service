@@ -1,5 +1,6 @@
 import {
   Button,
+  type Selection,
   Table,
   TableBody,
   TableCell,
@@ -7,34 +8,53 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
-import React, { type ReactNode } from 'react';
-import { type Album } from './types';
+import React, { useMemo, type ReactNode } from 'react';
 import { type SelectedMediaIds } from './MediaPlayer';
 import { PlusIcon } from 'lucide-react';
 import { TablePagination } from './TablePagination';
-import { useTablePagination } from './hooks';
+import { type AlbumsByName, useTablePagination } from './hooks';
 
 interface AlbumsTableProps {
-  albums: Album[];
+  albumsByName: AlbumsByName;
   topContent: ReactNode;
+  selectedKey?: Selection;
+  setSelectedKey: (key: Selection) => void;
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
+}
+interface AlbumView {
+  albumName: string;
+  albumIds: string[];
 }
 
 const albumColumns = [
   { name: 'Album Name', uid: 'albumName' },
-  { name: 'Add', uid: 'add' },
+  { name: 'Add to Queue', uid: 'add' },
 ];
 
 export const AlbumsTable: React.FC<AlbumsTableProps> = ({
-  albums,
+  albumsByName,
   topContent,
+  selectedKey,
+  setSelectedKey,
   onAddToQueue,
   onSelection,
 }) => {
-  const { page, pages, setPage, filteredItems } = useTablePagination(albums, 8);
+  const albumsList: AlbumView[] = useMemo(() => {
+    return Object.keys(albumsByName).map((k) => ({
+      albumName: albumsByName[k][0]?.albumName,
+      albumIds: albumsByName[k].map((a) => a.albumId),
+    }));
+  }, [albumsByName]);
+  const { page, pages, setPage, filteredItems } = useTablePagination(
+    albumsList,
+    8,
+  );
 
-  const renderAlbumCell = (album: Album, key: string | number): ReactNode => {
+  const renderAlbumCell = (
+    album: AlbumView,
+    key: string | number,
+  ): ReactNode => {
     switch (key) {
       case 'albumName':
         return album[key];
@@ -42,7 +62,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
         return (
           <Button
             isIconOnly
-            onClick={() => onAddToQueue({ albumIds: [album.albumId] })}>
+            onClick={() => onAddToQueue({ albumIds: album.albumIds })}>
             <PlusIcon />
           </Button>
         );
@@ -53,11 +73,14 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
     <Table
       aria-label="Media Player Albums/Playlists"
       isHeaderSticky
-      isStriped
       classNames={{
         base: 'inline-flex w-1/2',
         wrapper: 'justify-start',
       }}
+      color="primary"
+      selectionMode="single"
+      defaultSelectedKeys={selectedKey}
+      onSelectionChange={setSelectedKey}
       topContent={topContent}
       bottomContent={
         <TablePagination pages={pages} page={page} setPage={setPage} />
@@ -66,12 +89,14 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
       <TableBody emptyContent={`No albums found`} items={filteredItems}>
-        {(item) => (
-          <TableRow key={item.albumId}>
+        {(album) => (
+          <TableRow
+            key={album.albumIds.join()}
+            className="border-b-1 border-neutral-700">
             {(columnKey) => (
               <TableCell
-                onClick={() => onSelection({ albumIds: [item.albumId] })}>
-                {renderAlbumCell(item, columnKey)}
+                onClick={() => onSelection({ albumIds: album.albumIds })}>
+                {renderAlbumCell(album, columnKey)}
               </TableCell>
             )}
           </TableRow>

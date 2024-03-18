@@ -9,7 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
 
-type MediaPlayerApiCmdType = 'getAlbums2' | 'getPlaylists3';
+type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3';
 type BasePlayerApiCmdType =
   | 'getPlayerTracks'
   | 'clearPlayer'
@@ -26,6 +26,7 @@ type MuseApiCmdType =
   | 'getTracksById'
   | 'playTrack'
   | 'repeat'
+  | 'deleteFromPlayer'
   | 'shuffle';
 // | 'setPlayerTime'  //Set the playing track time for a given player id
 // | 'getPlayerTime'  //Get the playing track time for a given player id
@@ -68,6 +69,10 @@ interface RepeatRequest extends MediaPlayerRequest, BasePlayerRequest {
   repeat: Repeat;
 }
 
+interface DeleteTracksPlayerRequest extends BasePlayerRequest {
+  trackIndexes: string[];
+}
+
 interface AddToPlayerRequestCmd {
   cmdType: 'addToPlayer';
   payload: AddToPlayerRequest;
@@ -81,6 +86,11 @@ interface GetTracksByIdRequestCmd {
 interface PlayTrackRequestCmd {
   cmdType: 'playTrack';
   payload: PlayTrackRequest;
+}
+
+interface DeleteTracksPlayerRequestCmd {
+  cmdType: 'deleteFromPlayer';
+  payload: DeleteTracksPlayerRequest;
 }
 
 interface MediaPlayerRequestCmd {
@@ -110,6 +120,7 @@ export type MediaPlayerCmd =
   | ShuffleRequestCmd
   | PlayTrackRequestCmd
   | RepeatRequestCmd
+  | DeleteTracksPlayerRequestCmd
   | BasePlayerRequestCmd;
 
 export interface MediaPlayerApiPayload {
@@ -182,10 +193,14 @@ function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
   );
 }
 
+interface PlayerStatusResponse {
+  playerStatus: PlayerStatus;
+}
 type MediaApi<R, P = undefined> = (data?: P) => Promise<R>;
+export type AlbumsByName = Record<string, Album[]>;
 
-export function useGetAlbumsApi(): MediaApi<Album[]> {
-  return useMediaApiRequest('getAlbums2');
+export function useGetAlbumsApi(): MediaApi<AlbumsByName> {
+  return useMediaApiRequest('getAlbums');
 }
 
 export function useGetPlaylistsApi(): MediaApi<Playlist[]> {
@@ -238,7 +253,7 @@ export function usePlayerPrevApi(): MediaApi<void, BasePlayerRequest> {
 }
 
 export function useGetPlayerStatusApi(): MediaApi<
-  PlayerStatus,
+  PlayerStatusResponse,
   BasePlayerRequest
 > {
   return useMediaApiRequest('getPlayerStatus');
@@ -254,4 +269,11 @@ export function usePlayerShuffleApi(): MediaApi<void, Partial<ShuffleRequest>> {
 
 export function usePlayerRepeatApi(): MediaApi<void, Partial<RepeatRequest>> {
   return useMediaApiRequest('repeat');
+}
+
+export function useDeletePlayerTracksApi(): MediaApi<
+  void,
+  DeleteTracksPlayerRequest
+> {
+  return useMediaApiRequest('deleteFromPlayer');
 }

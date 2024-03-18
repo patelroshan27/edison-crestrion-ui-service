@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button, ButtonGroup, Card, Slider } from '@nextui-org/react';
 import {
   PauseIcon,
@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import {
   type BasePlayerRequest,
-  useGetPlayerStatusApi,
   usePlayerNextApi,
   usePlayerPauseApi,
   usePlayerPlayApi,
@@ -22,11 +21,15 @@ import { type PlayerStatus } from './types';
 
 interface PlayerControlsProps {
   playerId: string;
+  playerStatus?: PlayerStatus;
+  updatePlayerStatus: () => void;
 }
 
-export const PlayerControls: React.FC<PlayerControlsProps> = ({ playerId }) => {
-  const [playerStatus, setPlayerStatus] = useState<PlayerStatus>();
-  const getPlayerStatus = useGetPlayerStatusApi();
+export const PlayerControls: React.FC<PlayerControlsProps> = ({
+  playerId,
+  playerStatus,
+  updatePlayerStatus,
+}) => {
   const playPrevious = usePlayerPrevApi();
   const playNext = usePlayerNextApi();
   const play = usePlayerPlayApi();
@@ -38,14 +41,10 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ playerId }) => {
   const onPlayerAction = (
     handler: (data: BasePlayerRequest) => Promise<void>,
   ): void => {
-    handler({ playerId }).catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    getPlayerStatus({ playerId })
-      .then(setPlayerStatus)
+    handler({ playerId })
+      .then(updatePlayerStatus)
       .catch((err) => console.log(err));
-  }, []);
+  };
 
   return (
     <Card className="h-[100px] w-full justify-center items-center">
@@ -57,13 +56,25 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ playerId }) => {
             onClick={() => onPlayerAction(playPrevious)}>
             <StepBackIcon />
           </Button>
-          <Button isIconOnly size="lg" onClick={() => onPlayerAction(play)}>
+          <Button
+            isIconOnly
+            size="lg"
+            color={playerStatus?.play === 'on' ? 'primary' : 'default'}
+            onClick={() => onPlayerAction(play)}>
             <PlayIcon />
           </Button>
-          <Button isIconOnly size="lg" onClick={() => onPlayerAction(pause)}>
+          <Button
+            isIconOnly
+            size="lg"
+            color={playerStatus?.pause === 'on' ? 'primary' : 'default'}
+            onClick={() => onPlayerAction(pause)}>
             <PauseIcon />
           </Button>
-          <Button isIconOnly size="lg" onClick={() => onPlayerAction(stop)}>
+          <Button
+            isIconOnly
+            size="lg"
+            color={playerStatus?.play === 'off' ? 'primary' : 'default'}
+            onClick={() => onPlayerAction(stop)}>
             <StopCircleIcon />
           </Button>
           <Button isIconOnly size="lg" onClick={() => onPlayerAction(playNext)}>
@@ -71,19 +82,21 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({ playerId }) => {
           </Button>
         </ButtonGroup>
         <div className="text-center w-[200px] truncate">
-          Album 1 <br />
-          Track 1
+          {playerStatus?.track?.albumName} <br />
+          {playerStatus?.track?.trackName}
         </div>
         <ButtonGroup>
           <Button
             size="lg"
             variant="bordered"
+            color={playerStatus?.shuffle === 'on' ? 'primary' : 'default'}
             onClick={() => onPlayerAction(shuffle)}>
             Shuffle
           </Button>
           <Button
             size="lg"
             variant="bordered"
+            color={playerStatus?.repeat === 'on' ? 'primary' : 'default'}
             onClick={() => onPlayerAction(repeat)}>
             Repeat
           </Button>

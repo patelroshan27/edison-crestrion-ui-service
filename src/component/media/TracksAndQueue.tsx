@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup } from '@nextui-org/react';
-import { type MediaItemType, type Track } from './types';
+import {
+  type PlayerTrack,
+  type MediaItemType,
+  type Track,
+  type PlayerStatus,
+} from './types';
 import { TracksTable } from './TracksTable';
 import { PlayerTracksTable } from './PlayerTracksTable';
 import { type SelectedMediaIds } from './MediaPlayer';
@@ -8,15 +13,21 @@ import { type SelectedMediaIds } from './MediaPlayer';
 interface TracksAndQueueProps {
   playerId: string;
   tracks: Track[];
-  playerTracks: Track[];
+  playerTracks: PlayerTrack[];
+  playerStatus?: PlayerStatus;
   onAddToQueue: (params: SelectedMediaIds) => void;
+  onPlayerTracksChange: () => void;
+  updatePlayerStatus: () => void;
 }
 
 export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
   playerId,
   tracks,
   playerTracks,
+  playerStatus,
   onAddToQueue,
+  onPlayerTracksChange,
+  updatePlayerStatus,
 }) => {
   const [itemType, setItemType] = useState<MediaItemType>('track');
 
@@ -48,6 +59,9 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
       playerId={playerId}
       tracks={playerTracks}
       topContent={topContent}
+      playerStatus={playerStatus}
+      onPlayerTracksChange={onPlayerTracksChange}
+      updatePlayerStatus={updatePlayerStatus}
     />
   );
 };
