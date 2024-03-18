@@ -20,7 +20,7 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
   onAddToQueue,
 }) => {
   const [selectedKey, setSelectedKey] = useState<Selection>();
-  const [itemType, setItemType] = useState<MediaItemType>('album');
+  const [itemType, setItemType] = useState<MediaItemType>('playlist');
 
   const topContent = (
     <div className="flex flex-col">

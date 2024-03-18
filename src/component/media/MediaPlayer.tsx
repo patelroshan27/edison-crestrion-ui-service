@@ -55,7 +55,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
 
   const updatePlayerStatus = useCallback((): void => {
     getPlayerStatus({ playerId })
-      .then((res) => setPlayerStatus(res.playerStatus))
+      .then((res) => setPlayerStatus(res))
       .catch((err) => console.log(err));
   }, [playerId, getPlayerStatus]);
 

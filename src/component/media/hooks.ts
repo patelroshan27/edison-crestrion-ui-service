@@ -4,8 +4,6 @@ import {
   type Playlist,
   type Track,
 } from './types';
-import { activeConfigState } from 'state/navigation';
-import { useRecoilValue } from 'recoil';
 import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -31,9 +29,7 @@ type MuseApiCmdType =
 // | 'setPlayerTime'  //Set the playing track time for a given player id
 // | 'getPlayerTime'  //Get the playing track time for a given player id
 
-interface MediaPlayerRequest {
-  clientId?: string;
-}
+interface MediaPlayerRequest {}
 
 export interface BasePlayerRequest extends MediaPlayerRequest {
   playerId: string;
@@ -158,14 +154,11 @@ function useBuildMediaRequest(): (
   cmdType: MuseApiCmdType,
   payload: any,
 ) => MediaPlayerApiPayload {
-  const config = useRecoilValue(activeConfigState);
-
   return (cmdType, payload) => {
     return {
       mediaPlayerCmd: {
         cmdType,
         payload: {
-          clientId: config.authID,
           ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
           ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
           ...(cmdType === 'repeat' ? { repeat: 'ALL' } : {}),
@@ -193,9 +186,7 @@ function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
   );
 }
 
-interface PlayerStatusResponse {
-  playerStatus: PlayerStatus;
-}
+
 type MediaApi<R, P = undefined> = (data?: P) => Promise<R>;
 export type AlbumsByName = Record<string, Album[]>;
 
@@ -253,7 +244,7 @@ export function usePlayerPrevApi(): MediaApi<void, BasePlayerRequest> {
 }
 
 export function useGetPlayerStatusApi(): MediaApi<
-  PlayerStatusResponse,
+  PlayerStatus,
   BasePlayerRequest
 > {
   return useMediaApiRequest('getPlayerStatus');

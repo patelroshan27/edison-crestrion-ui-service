@@ -30,7 +30,8 @@ module.exports = {
         "@typescript-eslint/promise-function-async": "off",
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/no-non-null-assertion" : "warn",
-        "@typescript-eslint/consistent-type-imports": "warn"
+        "@typescript-eslint/consistent-type-imports": "warn",
+        "@typescript-eslint/no-empty-interface": "off"
     },
     settings: {
         "import/parsers": {
