@@ -400,7 +400,7 @@ const Configs: UIConfig = {
       controls: {
         media: {
           kind: 'mediaPlayer',
-          playerId: '23',
+          playerId: '11',
         },
       },
     },
