@@ -3,11 +3,12 @@ import {
   type Album,
   type Playlist,
   type Track,
+  type PlayerTime,
 } from './types';
 import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
 
-type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3';
+type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3' | 'getPlayerTime';
 type BasePlayerApiCmdType =
   | 'getPlayerTracks'
   | 'clearPlayer'
@@ -25,9 +26,8 @@ type MuseApiCmdType =
   | 'playTrack'
   | 'repeat'
   | 'deleteFromPlayer'
+  | 'setPlayerTime'
   | 'shuffle';
-// | 'setPlayerTime'  //Set the playing track time for a given player id
-// | 'getPlayerTime'  //Get the playing track time for a given player id
 
 interface MediaPlayerRequest {}
 
@@ -67,6 +67,15 @@ interface RepeatRequest extends MediaPlayerRequest, BasePlayerRequest {
 
 interface DeleteTracksPlayerRequest extends BasePlayerRequest {
   trackIndexes: string[];
+}
+
+interface SetPlayerTimeRequest extends BasePlayerRequest {
+  time: number;
+}
+
+interface SetPlayerTimeRequestCmd {
+  cmdType: 'setPlayerTime';
+  payload: SetPlayerTimeRequest;
 }
 
 interface AddToPlayerRequestCmd {
@@ -117,6 +126,7 @@ export type MediaPlayerCmd =
   | PlayTrackRequestCmd
   | RepeatRequestCmd
   | DeleteTracksPlayerRequestCmd
+  | SetPlayerTimeRequestCmd
   | BasePlayerRequestCmd;
 
 export interface MediaPlayerApiPayload {
@@ -154,7 +164,7 @@ function useBuildMediaRequest(): (
   cmdType: MuseApiCmdType,
   payload: any,
 ) => MediaPlayerApiPayload {
-  return (cmdType, payload) => {
+  return useCallback((cmdType, payload) => {
     return {
       mediaPlayerCmd: {
         cmdType,
@@ -173,7 +183,7 @@ function useBuildMediaRequest(): (
         },
       },
     };
-  };
+  }, []);
 }
 
 function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
@@ -185,7 +195,6 @@ function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
     [type, sendMediaCmd, buildRequest],
   );
 }
-
 
 type MediaApi<R, P = undefined> = (data?: P) => Promise<R>;
 export type AlbumsByName = Record<string, Album[]>;
@@ -241,6 +250,14 @@ export function usePlayerNextApi(): MediaApi<void, BasePlayerRequest> {
 
 export function usePlayerPrevApi(): MediaApi<void, BasePlayerRequest> {
   return useMediaApiRequest('prev2');
+}
+
+export function useGetPlayerTimeApi(): MediaApi<PlayerTime, BasePlayerRequest> {
+  return useMediaApiRequest('getPlayerTime');
+}
+
+export function useSetPlayerTimeApi(): MediaApi<void, SetPlayerTimeRequest> {
+  return useMediaApiRequest('setPlayerTime');
 }
 
 export function useGetPlayerStatusApi(): MediaApi<
