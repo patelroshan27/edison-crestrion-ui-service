@@ -3,13 +3,14 @@ import {
   type Album,
   type Playlist,
   type Track,
+  type PlayerTime,
 } from './types';
 import { activeConfigState } from 'state/navigation';
 import { useRecoilValue } from 'recoil';
 import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
 
-type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3';
+type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3' | 'getPlayerTime';
 type BasePlayerApiCmdType =
   | 'getPlayerTracks'
   | 'clearPlayer'
@@ -27,9 +28,8 @@ type MuseApiCmdType =
   | 'playTrack'
   | 'repeat'
   | 'deleteFromPlayer'
+  | 'setPlayerTime'
   | 'shuffle';
-// | 'setPlayerTime'  //Set the playing track time for a given player id
-// | 'getPlayerTime'  //Get the playing track time for a given player id
 
 interface MediaPlayerRequest {
   clientId?: string;
@@ -71,6 +71,15 @@ interface RepeatRequest extends MediaPlayerRequest, BasePlayerRequest {
 
 interface DeleteTracksPlayerRequest extends BasePlayerRequest {
   trackIndexes: string[];
+}
+
+interface SetPlayerTimeRequest extends BasePlayerRequest {
+  time: number;
+}
+
+interface SetPlayerTimeRequestCmd {
+  cmdType: 'setPlayerTime';
+  payload: SetPlayerTimeRequest;
 }
 
 interface AddToPlayerRequestCmd {
@@ -121,6 +130,7 @@ export type MediaPlayerCmd =
   | PlayTrackRequestCmd
   | RepeatRequestCmd
   | DeleteTracksPlayerRequestCmd
+  | SetPlayerTimeRequestCmd
   | BasePlayerRequestCmd;
 
 export interface MediaPlayerApiPayload {
@@ -160,27 +170,30 @@ function useBuildMediaRequest(): (
 ) => MediaPlayerApiPayload {
   const config = useRecoilValue(activeConfigState);
 
-  return (cmdType, payload) => {
-    return {
-      mediaPlayerCmd: {
-        cmdType,
-        payload: {
-          clientId: config.authID,
-          ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
-          ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
-          ...(cmdType === 'repeat' ? { repeat: 'ALL' } : {}),
-          ...(cmdType === 'getTracksById' || cmdType === 'addToPlayer'
-            ? {
-                albumIds: [],
-                playlistIds: [],
-                trackIds: [],
-              }
-            : {}),
-          ...payload,
+  return useCallback(
+    (cmdType, payload) => {
+      return {
+        mediaPlayerCmd: {
+          cmdType,
+          payload: {
+            clientId: config.authID,
+            ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
+            ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
+            ...(cmdType === 'repeat' ? { repeat: 'ALL' } : {}),
+            ...(cmdType === 'getTracksById' || cmdType === 'addToPlayer'
+              ? {
+                  albumIds: [],
+                  playlistIds: [],
+                  trackIds: [],
+                }
+              : {}),
+            ...payload,
+          },
         },
-      },
-    };
-  };
+      };
+    },
+    [config.authID],
+  );
 }
 
 function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
@@ -250,6 +263,14 @@ export function usePlayerNextApi(): MediaApi<void, BasePlayerRequest> {
 
 export function usePlayerPrevApi(): MediaApi<void, BasePlayerRequest> {
   return useMediaApiRequest('prev2');
+}
+
+export function useGetPlayerTimeApi(): MediaApi<PlayerTime, BasePlayerRequest> {
+  return useMediaApiRequest('getPlayerTime');
+}
+
+export function useSetPlayerTimeApi(): MediaApi<void, SetPlayerTimeRequest> {
+  return useMediaApiRequest('setPlayerTime');
 }
 
 export function useGetPlayerStatusApi(): MediaApi<

@@ -36,3 +36,8 @@ export interface PlayerStatus {
   playerTrackIndex: string;
   track: Track;
 }
+
+export interface PlayerTime {
+  playerId: string;
+  time: string;
+}
