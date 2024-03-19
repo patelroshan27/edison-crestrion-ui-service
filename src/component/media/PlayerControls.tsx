@@ -1,5 +1,11 @@
-import React from 'react';
-import { Button, ButtonGroup, Card, Slider } from '@nextui-org/react';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  Slider,
+  type SliderValue,
+} from '@nextui-org/react';
 import {
   PauseIcon,
   PlayIcon,
@@ -16,14 +22,70 @@ import {
   usePlayerRepeatApi,
   usePlayerShuffleApi,
   usePlayerStopApi,
+  useGetPlayerTimeApi,
+  useSetPlayerTimeApi,
 } from './hooks';
 import { type PlayerStatus } from './types';
+import { formatSecondsToMinutes } from './utils';
 
 interface PlayerControlsProps {
   playerId: string;
   playerStatus?: PlayerStatus;
   updatePlayerStatus: () => void;
 }
+
+interface PlayerTrackSliderProps {
+  playerId: string;
+  playerStatus?: PlayerStatus;
+}
+
+const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
+  playerId,
+  playerStatus,
+}) => {
+  const [trackTime, setTrackTime] = useState(0);
+  const getPlayerTime = useGetPlayerTimeApi();
+  const setPlayerTime = useSetPlayerTimeApi();
+
+  const updatePlayerTime = useCallback(() => {
+    getPlayerTime()
+      .then((pt) => setTrackTime(Number(pt.time)))
+      .catch((err) => console.log(err));
+  }, [getPlayerTime]);
+
+  const onTimeUpdate = (time: number | number[]): void => {
+    setPlayerTime({ playerId, time: time as number })
+      .then(updatePlayerTime)
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    updatePlayerTime();
+  }, []);
+
+  const trackDuration = playerStatus?.track?.trackDuration;
+  const sliderGetValue = (time: SliderValue): string =>
+    trackDuration
+      ? `${formatSecondsToMinutes(time as number)} of ${formatSecondsToMinutes(
+          trackDuration,
+        )}`
+      : '';
+
+  return (
+    <Slider
+      size="sm"
+      maxValue={playerStatus?.track?.trackDuration ?? 100}
+      minValue={0}
+      label={trackTime > 0 ? 'Playing' : ''}
+      getValue={sliderGetValue}
+      color="foreground"
+      value={trackTime}
+      onChange={(v) => setTrackTime(v as number)}
+      onChangeEnd={onTimeUpdate}
+      className="max-w-md mt-3"
+    />
+  );
+};
 
 export const PlayerControls: React.FC<PlayerControlsProps> = ({
   playerId,
@@ -47,7 +109,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   return (
-    <Card className="h-[100px] w-full justify-center items-center">
+    <Card className="h-[110px] w-full justify-center items-center">
       <div className="inline-flex gap-4 justify-center items-center">
         <ButtonGroup variant="bordered">
           <Button
@@ -102,17 +164,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           </Button>
         </ButtonGroup>
       </div>
-      <Slider
-        size="sm"
-        step={0.01}
-        maxValue={1}
-        minValue={0}
-        color="foreground"
-        showOutline={true}
-        aria-label="Temperature"
-        defaultValue={0.2}
-        className="max-w-md mt-3"
-      />
+      <PlayerTrackSlider playerId={playerId} playerStatus={playerStatus} />
     </Card>
   );
 };
