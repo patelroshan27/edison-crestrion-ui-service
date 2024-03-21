@@ -171,7 +171,6 @@ function useBuildMediaRequest(): (
         payload: {
           ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
           ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
-          ...(cmdType === 'repeat' ? { repeat: 'ALL' } : {}),
           ...(cmdType === 'getTracksById' || cmdType === 'addToPlayer'
             ? {
                 albumIds: [],
@@ -275,7 +274,7 @@ export function usePlayerShuffleApi(): MediaApi<void, Partial<ShuffleRequest>> {
   return useMediaApiRequest('shuffle');
 }
 
-export function usePlayerRepeatApi(): MediaApi<void, Partial<RepeatRequest>> {
+export function usePlayerRepeatApi(): MediaApi<void, RepeatRequest> {
   return useMediaApiRequest('repeat');
 }
 
