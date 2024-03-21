@@ -9,12 +9,13 @@ import {
 import {
   PauseIcon,
   PlayIcon,
+  Repeat2Icon,
+  ShuffleIcon,
   StepBackIcon,
   StepForwardIcon,
   StopCircleIcon,
 } from 'lucide-react';
 import {
-  type BasePlayerRequest,
   usePlayerNextApi,
   usePlayerPauseApi,
   usePlayerPlayApi,
@@ -100,12 +101,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   const shuffle = usePlayerShuffleApi();
   const repeat = usePlayerRepeatApi();
 
-  const onPlayerAction = (
-    handler: (data: BasePlayerRequest) => Promise<void>,
-  ): void => {
-    handler({ playerId })
-      .then(updatePlayerStatus)
-      .catch((err) => console.log(err));
+  const onPlayerAction = (apiPromise: Promise<void>): void => {
+    apiPromise.then(updatePlayerStatus).catch((err) => console.log(err));
   };
 
   return (
@@ -115,35 +112,38 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           <Button
             isIconOnly
             size="lg"
-            onClick={() => onPlayerAction(playPrevious)}>
+            onClick={() => onPlayerAction(playPrevious({ playerId }))}>
             <StepBackIcon />
           </Button>
           <Button
             isIconOnly
             size="lg"
             color={playerStatus?.play === 'on' ? 'primary' : 'default'}
-            onClick={() => onPlayerAction(play)}>
+            onClick={() => onPlayerAction(play({ playerId }))}>
             <PlayIcon />
           </Button>
           <Button
             isIconOnly
             size="lg"
             color={playerStatus?.pause === 'on' ? 'primary' : 'default'}
-            onClick={() => onPlayerAction(pause)}>
+            onClick={() => onPlayerAction(pause({ playerId }))}>
             <PauseIcon />
           </Button>
           <Button
             isIconOnly
             size="lg"
             color={playerStatus?.play === 'off' ? 'primary' : 'default'}
-            onClick={() => onPlayerAction(stop)}>
+            onClick={() => onPlayerAction(stop({ playerId }))}>
             <StopCircleIcon />
           </Button>
-          <Button isIconOnly size="lg" onClick={() => onPlayerAction(playNext)}>
+          <Button
+            isIconOnly
+            size="lg"
+            onClick={() => onPlayerAction(playNext({ playerId }))}>
             <StepForwardIcon />
           </Button>
         </ButtonGroup>
-        <div className="text-center w-[200px] truncate">
+        <div className="text-center w-[300px] truncate">
           {playerStatus?.track?.albumName} <br />
           {playerStatus?.track?.trackName}
         </div>
@@ -151,16 +151,25 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           <Button
             size="lg"
             variant="bordered"
+            isIconOnly
             color={playerStatus?.shuffle === 'on' ? 'primary' : 'default'}
-            onClick={() => onPlayerAction(shuffle)}>
-            Shuffle
+            onClick={() => onPlayerAction(shuffle({ playerId }))}>
+            <ShuffleIcon />
           </Button>
           <Button
             size="lg"
             variant="bordered"
+            isIconOnly
             color={playerStatus?.repeat === 'on' ? 'primary' : 'default'}
-            onClick={() => onPlayerAction(repeat)}>
-            Repeat
+            onClick={() =>
+              onPlayerAction(
+                repeat({
+                  playerId,
+                  repeat: playerStatus?.repeat === 'on' ? 'OFF' : 'ALL',
+                }),
+              )
+            }>
+            <Repeat2Icon />
           </Button>
         </ButtonGroup>
       </div>
