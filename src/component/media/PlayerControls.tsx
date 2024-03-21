@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -29,28 +29,38 @@ import {
 import { type PlayerStatus } from './types';
 import { formatSecondsToMinutes } from './utils';
 
+const STOPPED_UPDATE_INTERVAL = 1000 * 10;
+const PLAYING_UPDATE_INTERVAL = 1000;
+
 interface PlayerControlsProps {
   playerId: string;
   playerStatus?: PlayerStatus;
   updatePlayerStatus: () => void;
 }
 
-interface PlayerTrackSliderProps {
-  playerId: string;
-  playerStatus?: PlayerStatus;
-}
+type PlayerTrackSliderProps = PlayerControlsProps;
 
 const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
   playerId,
   playerStatus,
+  updatePlayerStatus,
 }) => {
   const [trackTime, setTrackTime] = useState(0);
+  const trackTimeRef = useRef<number>(0);
   const getPlayerTime = useGetPlayerTimeApi();
   const setPlayerTime = useSetPlayerTimeApi();
 
   const updatePlayerTime = useCallback(() => {
     getPlayerTime()
-      .then((pt) => setTrackTime(Number(pt.time)))
+      .then((pt) => {
+        const newTime = Number(pt.time);
+        // handle possible track change
+        if (newTime < trackTimeRef.current) {
+          updatePlayerStatus();
+        }
+        trackTimeRef.current = newTime;
+        setTrackTime(newTime);
+      })
       .catch((err) => console.log(err));
   }, [getPlayerTime]);
 
@@ -61,8 +71,16 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
   };
 
   useEffect(() => {
-    updatePlayerTime();
-  }, []);
+    const timeUpdateInterval =
+      playerStatus?.play === 'on'
+        ? PLAYING_UPDATE_INTERVAL
+        : STOPPED_UPDATE_INTERVAL;
+    const interval = setInterval(updatePlayerTime, timeUpdateInterval);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [playerStatus?.play]);
 
   const trackDuration = playerStatus?.track?.trackDuration;
   const sliderGetValue = (time: SliderValue): string =>
@@ -75,6 +93,7 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
   return (
     <Slider
       size="sm"
+      aria-label="player track time"
       maxValue={playerStatus?.track?.trackDuration ?? 100}
       minValue={0}
       label={trackTime > 0 ? 'Playing' : ''}
@@ -173,7 +192,11 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           </Button>
         </ButtonGroup>
       </div>
-      <PlayerTrackSlider playerId={playerId} playerStatus={playerStatus} />
+      <PlayerTrackSlider
+        playerId={playerId}
+        playerStatus={playerStatus}
+        updatePlayerStatus={updatePlayerStatus}
+      />
     </Card>
   );
 };
