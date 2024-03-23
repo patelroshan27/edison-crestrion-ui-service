@@ -27,10 +27,10 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
   const getPlaylists = useGetPlaylistsApi();
 
   useEffect(() => {
-    getAlbums()
+    getAlbums({})
       .then(setAlbumsByName)
       .catch((err) => console.log(err));
-    getPlaylists()
+    getPlaylists({})
       .then(setPlaylists)
       .catch((err) => console.log(err));
   }, []);
