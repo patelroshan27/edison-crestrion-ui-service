@@ -7,6 +7,7 @@ import {
 } from './types';
 import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
+import { getConfigs } from 'config/Configs';
 
 type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3' | 'getPlayerTime';
 type BasePlayerApiCmdType =
@@ -133,6 +134,9 @@ export interface MediaPlayerApiPayload {
   mediaPlayerCmd: MediaPlayerCmd;
 }
 
+const defaultConfig = getConfigs();
+const hasRoomSelection = Boolean(defaultConfig.rooms.length);
+
 interface UsePaginationResult<T> {
   page: number;
   pages: number;
@@ -144,17 +148,18 @@ export const useTablePagination = <T>(
   rowsPerPage = 5,
 ): UsePaginationResult<T> => {
   const [page, setPage] = useState<number>(1);
+  const adjustedRowsPerPage = hasRoomSelection ? rowsPerPage : rowsPerPage + 1;
 
   const filteredItems = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
+    const start = (page - 1) * adjustedRowsPerPage;
+    const end = start + adjustedRowsPerPage;
 
     return items.slice(start, end);
   }, [page, items]);
 
   return {
     page,
-    pages: Math.ceil(items.length / rowsPerPage),
+    pages: Math.ceil(items.length / adjustedRowsPerPage),
     setPage,
     filteredItems,
   };
