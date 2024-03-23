@@ -1,30 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, type Selection } from '@nextui-org/react';
 import { type MediaItemType, type Playlist } from './types';
 import { type SelectedMediaIds } from './MediaPlayer';
 import { AlbumsTable } from './AlbumsTable';
 import { PlaylistsTable } from './PlaylistsTable';
-import { type AlbumsByName } from './hooks';
+import {
+  useGetAlbumsApi,
+  type AlbumsByName,
+  useGetPlaylistsApi,
+} from './hooks';
 
 interface AlbumsAndPlaylistsProps {
-  albumsByName: AlbumsByName;
-  playlists: Playlist[];
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
 }
 
 export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
-  albumsByName,
-  playlists,
   onSelection,
   onAddToQueue,
 }) => {
+  const [albumsByName, setAlbumsByName] = useState<AlbumsByName>({});
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [selectedKey, setSelectedKey] = useState<Selection>();
   const [itemType, setItemType] = useState<MediaItemType>('playlist');
+  const getAlbums = useGetAlbumsApi();
+  const getPlaylists = useGetPlaylistsApi();
+
+  useEffect(() => {
+    getAlbums()
+      .then(setAlbumsByName)
+      .catch((err) => console.log(err));
+    getPlaylists()
+      .then(setPlaylists)
+      .catch((err) => console.log(err));
+  }, []);
 
   const topContent = (
     <div className="flex flex-col">
-      <ButtonGroup>
+      <ButtonGroup size="lg">
         <Button
           onClick={() => setItemType('album')}
           color={itemType === 'album' ? 'primary' : 'default'}>

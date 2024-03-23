@@ -48,7 +48,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   }, [albumsByName]);
   const { page, pages, setPage, filteredItems } = useTablePagination(
     albumsList,
-    8,
+    7,
   );
 
   const renderAlbumCell = (
@@ -63,7 +63,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
           <Button
             isIconOnly
             onClick={() => onAddToQueue({ albumIds: album.albumIds })}>
-            <PlusIcon />
+            <PlusIcon size={30} />
           </Button>
         );
     }
@@ -75,7 +75,9 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
       isHeaderSticky
       classNames={{
         base: 'inline-flex w-1/2',
-        wrapper: 'justify-start',
+        wrapper: 'justify-start h-full',
+        th: 'text-large',
+        td: 'text-large',
       }}
       color="primary"
       selectionMode="single"

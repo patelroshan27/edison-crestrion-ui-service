@@ -77,14 +77,14 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
         const color = isPlaying ? 'primary' : 'default';
         return (
           <Button isIconOnly onClick={() => onPlay(track)} color={color}>
-            <PlayIcon />
+            <PlayIcon size={30} />
           </Button>
         );
       }
       case 'remove':
         return (
           <Button isIconOnly onClick={() => onRemove(track.index)}>
-            <TrashIcon />
+            <TrashIcon size={30} />
           </Button>
         );
     }
@@ -92,7 +92,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   const bottomContent = (
     <TablePagination pages={pages} page={page} setPage={setPage}>
-      <Button className="ml-10" onClick={onClear}>
+      <Button className="ml-10 text-large" onClick={onClear}>
         Clear Player
       </Button>
     </TablePagination>
@@ -106,6 +106,8 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
       classNames={{
         base: 'flex-grow-[1]',
         wrapper: 'h-full justify-start',
+        th: 'text-large',
+        td: 'text-large',
       }}
       topContent={topContent}
       bottomContent={bottomContent}>

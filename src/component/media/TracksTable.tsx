@@ -45,7 +45,7 @@ export const TracksTable: React.FC<TracksTableProps> = ({
           <Button
             isIconOnly
             onClick={() => onAddToQueue({ trackIds: [track.trackId] })}>
-            <PlusIcon />
+            <PlusIcon size={30} />
           </Button>
         );
     }
@@ -59,6 +59,8 @@ export const TracksTable: React.FC<TracksTableProps> = ({
       classNames={{
         base: 'flex-grow-[1]',
         wrapper: 'h-full justify-start',
+        th: 'text-large',
+        td: 'text-large',
       }}
       topContent={topContent}
       bottomContent={

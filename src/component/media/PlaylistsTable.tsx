@@ -39,7 +39,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
 }) => {
   const { page, pages, setPage, filteredItems } = useTablePagination(
     playlists,
-    8,
+    7,
   );
 
   const renderPlaylistCell = (
@@ -56,7 +56,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
             onClick={() =>
               onAddToQueue({ playlistIds: [playlist.playlistId] })
             }>
-            <PlusIcon />
+            <PlusIcon size={30} />
           </Button>
         );
     }
@@ -68,7 +68,9 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
       isHeaderSticky
       classNames={{
         base: 'inline-flex w-1/2',
-        wrapper: 'justify-start',
+        wrapper: 'justify-start h-full',
+        th: 'text-large',
+        td: 'text-large',
       }}
       color="primary"
       selectionMode="single"
