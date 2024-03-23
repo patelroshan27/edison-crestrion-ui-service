@@ -150,7 +150,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   return (
-    <Card className="h-[110px] w-full justify-center items-center">
+    <Card className="h-[120px] w-full justify-center items-center">
       <div className="inline-flex gap-4 justify-center items-center">
         <ButtonGroup variant="bordered">
           <ActionButton

@@ -8,6 +8,7 @@ import LoginScreen from 'component/LoginScreen';
 import { RoomSelection } from 'component/navigation/RoomSelection';
 import { useRecoilValue } from 'recoil';
 import { isLoggedInState } from 'state/navigation';
+import { LockButton } from 'component/navigation/LockButton';
 
 const defaultConfig = getConfigs();
 const { authProviderURL, authID, proximityActivity, touchActivity } =
@@ -30,6 +31,7 @@ const App: React.FC<Props> = ({ className }) => {
       )}>
       <RoomSelection className="grow-0 shrink-0" />
       <Navigation className="grow-0 shrink-0" />
+      <LockButton />
       <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
     </div>
   );
