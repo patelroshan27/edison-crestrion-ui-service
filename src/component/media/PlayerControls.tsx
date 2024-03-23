@@ -97,13 +97,18 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
       aria-label="player track time"
       maxValue={playerStatus?.track?.trackDuration ?? 100}
       minValue={0}
-      label={trackTime > 0 ? 'Playing' : ''}
+      label={playerStatus?.track?.trackName}
       getValue={sliderGetValue}
       color="foreground"
       value={trackTime}
       onChange={(v) => setTrackTime(v as number)}
       onChangeEnd={onTimeUpdate}
-      className="max-w-md mt-3"
+      className="max-w-md mt-3 min-h-[50px] justify-end"
+      classNames={{
+        labelWrapper: 'gap-4',
+        label: 'truncate',
+        value: 'min-w-[50px] text-nowrap',
+      }}
     />
   );
 };
@@ -177,9 +182,8 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
             Icon={StepForwardIcon}
           />
         </ButtonGroup>
-        <div className="text-center w-[280px] truncate">
-          {playerStatus?.track?.albumName} <br />
-          {playerStatus?.track?.trackName}
+        <div className="text-center w-[280px]">
+          {playerStatus?.track?.albumName}
         </div>
         <ButtonGroup>
           <ActionButton
