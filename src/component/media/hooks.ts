@@ -9,7 +9,7 @@ import { useMediaApiState } from 'utils/hooks';
 import { useCallback, useMemo, useState } from 'react';
 import { getConfigs } from 'config/Configs';
 
-type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3' | 'getPlayerTime';
+type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3';
 type BasePlayerApiCmdType =
   | 'getPlayerTracks'
   | 'clearPlayer'
@@ -18,6 +18,7 @@ type BasePlayerApiCmdType =
   | 'stop'
   | 'prev2'
   | 'next2'
+  | 'getPlayerTime'
   | 'getPlayerStatus';
 type MuseApiCmdType =
   | BasePlayerApiCmdType
@@ -190,17 +191,17 @@ function useBuildMediaRequest(): (
   }, []);
 }
 
-function useMediaApiRequest<T>(type: MuseApiCmdType): () => Promise<T> {
-  const sendMediaCmd = useMediaApiState<T>();
+type MediaApi<R, P = Record<string, unknown>> = (data: P) => Promise<R>;
+function useMediaApiRequest<R, P>(type: MuseApiCmdType): MediaApi<R, P> {
+  const sendMediaCmd = useMediaApiState<R>();
   const buildRequest = useBuildMediaRequest();
 
   return useCallback(
-    (data = {}) => sendMediaCmd(buildRequest(type, data)),
+    (data) => sendMediaCmd(buildRequest(type, data)),
     [type, sendMediaCmd, buildRequest],
   );
 }
 
-type MediaApi<R, P = undefined> = (data?: P) => Promise<R>;
 export type AlbumsByName = Record<string, Album[]>;
 
 export function useGetAlbumsApi(): MediaApi<AlbumsByName> {

@@ -52,7 +52,7 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
   const setPlayerTime = useSetPlayerTimeApi();
 
   const updatePlayerTime = useCallback(() => {
-    getPlayerTime()
+    getPlayerTime({ playerId })
       .then((pt) => {
         const newTime = Number(pt.time);
         // handle possible track change
