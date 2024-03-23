@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, ButtonGroup } from '@nextui-org/react';
 import {
   type PlayerTrack,
@@ -15,9 +15,11 @@ interface TracksAndQueueProps {
   tracks: Track[];
   playerTracks: PlayerTrack[];
   playerStatus?: PlayerStatus;
+  tracksView: MediaItemType;
   onAddToQueue: (params: SelectedMediaIds) => void;
   onPlayerTracksChange: () => void;
   updatePlayerStatus: () => void;
+  setTracksView: (item: MediaItemType) => void;
 }
 
 export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
@@ -25,30 +27,30 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
   tracks,
   playerTracks,
   playerStatus,
+  tracksView,
   onAddToQueue,
   onPlayerTracksChange,
   updatePlayerStatus,
+  setTracksView,
 }) => {
-  const [itemType, setItemType] = useState<MediaItemType>('track');
-
   const topContent = (
     <div className="flex flex-col">
-      <ButtonGroup>
+      <ButtonGroup size="lg">
         <Button
-          onClick={() => setItemType('track')}
-          color={itemType === 'track' ? 'primary' : 'default'}>
+          onClick={() => setTracksView('track')}
+          color={tracksView === 'track' ? 'primary' : 'default'}>
           Tracks
         </Button>
         <Button
-          onClick={() => setItemType('playerTrack')}
-          color={itemType === 'playerTrack' ? 'primary' : 'default'}>
+          onClick={() => setTracksView('playerTrack')}
+          color={tracksView === 'playerTrack' ? 'primary' : 'default'}>
           Player Queue ({playerTracks.length})
         </Button>
       </ButtonGroup>
     </div>
   );
 
-  return itemType === 'track' ? (
+  return tracksView === 'track' ? (
     <TracksTable
       tracks={tracks}
       topContent={topContent}
