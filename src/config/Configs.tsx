@@ -160,6 +160,7 @@ export interface Room {
 
 export interface UIConfig {
   rooms: Room[];
+  lockTimeout?: number;
   authProviderURL?: string;
   webRelayApiPath?: string;
   pharosApiPath?: string;

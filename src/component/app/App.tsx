@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import Body from 'component/Body';
 import Navigation from 'component/navigation/Navigation';
@@ -6,13 +6,19 @@ import { getConfigs } from 'config/Configs';
 import LogoScreenSaver from 'component/LogoScreenSaver';
 import LoginScreen from 'component/LoginScreen';
 import { RoomSelection } from 'component/navigation/RoomSelection';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { isLoggedInState } from 'state/navigation';
 import { LockButton } from 'component/navigation/LockButton';
+import { FIVE_MINUTES_IN_MS } from 'utils/Constants';
 
 const defaultConfig = getConfigs();
-const { authProviderURL, authID, proximityActivity, touchActivity } =
-  defaultConfig;
+const {
+  authProviderURL,
+  authID,
+  proximityActivity,
+  touchActivity,
+  lockTimeout = FIVE_MINUTES_IN_MS,
+} = defaultConfig;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -21,7 +27,7 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ className }) => {
-  const isLoggedIn = useRecoilValue(isLoggedInState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
   const shouldAskForLogin = authProviderURL != null && authID != null;
   const panelContent = (
     <div
@@ -35,6 +41,19 @@ const App: React.FC<Props> = ({ className }) => {
       <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
     </div>
   );
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (isLoggedIn) {
+      timeout = setTimeout(() => {
+        setIsLoggedIn(false);
+      }, lockTimeout);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoggedIn]);
 
   return (
     <>

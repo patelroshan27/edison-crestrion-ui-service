@@ -19,3 +19,5 @@ export enum UIColors {
   COLOR_YELLOW = '#f39c12',
   COLOR_GRAY = '#cccccc',
 }
+
+export const FIVE_MINUTES_IN_MS = 5 * 60 * 1000;
