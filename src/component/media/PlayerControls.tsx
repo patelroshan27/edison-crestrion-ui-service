@@ -150,7 +150,10 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   const repeat = usePlayerRepeatApi();
 
   const onPlayerAction = (apiPromise: Promise<void>): void => {
-    apiPromise.then(updatePlayerStatus).catch((err) => console.log(err));
+    apiPromise
+      // wait 1s so muse API returns proper status
+      .then(() => setTimeout(updatePlayerStatus, 1000))
+      .catch((err) => console.log(err));
   };
 
   return (
