@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, type Selection } from '@nextui-org/react';
+import {
+  Button,
+  ButtonGroup,
+  type TableProps,
+  type Selection,
+} from '@nextui-org/react';
 import { type MediaItemType, type Playlist } from './types';
 import { type SelectedMediaIds } from './MediaPlayer';
 import { AlbumsTable } from './AlbumsTable';
@@ -14,6 +19,18 @@ interface AlbumsAndPlaylistsProps {
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
 }
+
+const tableProps: Partial<TableProps> = {
+  layout: 'fixed',
+  hideHeader: true,
+  color: 'primary',
+  selectionMode: 'single',
+  classNames: {
+    base: 'inline-flex w-2/5',
+    wrapper: 'justify-between h-full gap-0',
+    td: 'text-2xl !truncate first:w-[75%]',
+  },
+};
 
 export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
   onSelection,
@@ -39,11 +56,13 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
+          className="text-2xl"
           onClick={() => setItemType('album')}
           color={itemType === 'album' ? 'primary' : 'default'}>
           Albums
         </Button>
         <Button
+          className="text-2xl"
           onClick={() => setItemType('playlist')}
           color={itemType === 'playlist' ? 'primary' : 'default'}>
           Playlists
@@ -54,6 +73,7 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
 
   return itemType === 'album' ? (
     <AlbumsTable
+      tableProps={tableProps}
       selectedKey={selectedKey}
       setSelectedKey={setSelectedKey}
       albumsByName={albumsByName}
@@ -63,6 +83,7 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
     />
   ) : (
     <PlaylistsTable
+      tableProps={tableProps}
       selectedKey={selectedKey}
       setSelectedKey={setSelectedKey}
       playlists={playlists}

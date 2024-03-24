@@ -21,13 +21,12 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
       <div className="flex items-center space-x-2">
         {pages.map((page) => {
           const pageData = activeConfig.pages[page];
-          const Icon = pageData.icon;
           return (
             <button
               key={page}
               type="button"
               className={classNames(
-                'px-4 py-4 flex items-center rounded-lg text-lg',
+                'px-4 py-3 flex items-center rounded-lg text-2xl',
                 activeTab === page
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-white/10 text-primary',
@@ -35,7 +34,6 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               onClick={() => {
                 setActivePage(page);
               }}>
-              <Icon className="mr-2 h-6 w-6" />
               {pageData.name}
             </button>
           );
