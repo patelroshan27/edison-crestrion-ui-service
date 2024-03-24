@@ -152,12 +152,12 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   const onPlayerAction = (apiPromise: Promise<void>): void => {
     apiPromise
       // wait 1s so muse API returns proper status
-      .then(() => setTimeout(updatePlayerStatus, 1000))
+      .then(() => setTimeout(updatePlayerStatus, 200))
       .catch((err) => console.log(err));
   };
 
   return (
-    <Card className="h-[120px] w-full justify-center items-center mt-2">
+    <Card className="h-[120px] w-full justify-center items-center mb-2">
       <div className="inline-flex justify-center items-center">
         <ButtonGroup variant="bordered">
           <ActionButton

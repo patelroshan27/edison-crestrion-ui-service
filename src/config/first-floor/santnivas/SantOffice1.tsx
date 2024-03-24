@@ -4,17 +4,18 @@ import type { UIConfig } from 'config/Configs';
 const SantOffice1: UIConfig = {
   rooms: [
     { key: 'sarvasva', title: 'Sarvasva' },
-    { key: 'santoffice1', title: 'Sant Office1' },
-    { key: 'santoffice2', title: 'Sant Office2' },
+    { key: 'santoffice1', title: 'Office1' },
+    { key: 'santoffice2', title: 'Office2' },
     { key: 'branhamanad', title: 'Branhamanad' },
-    { key: 'santcorridor', title: 'Sant Corridor' },
-    { key: 'santkitchen', title: 'Sant Kitchen' },
+    { key: 'santcorridor', title: 'Corridor' },
+    { key: 'santkitchen', title: 'Kitchen' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
+  mediaApiPath: '/mediaplayer/send',
   authID: 'SantOffice1',
   crestronConfigs: {
     host: '10.25.20.73',

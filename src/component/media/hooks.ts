@@ -131,10 +131,6 @@ export type MediaPlayerCmd =
   | SetPlayerTimeRequestCmd
   | BasePlayerRequestCmd;
 
-export interface MediaPlayerApiPayload {
-  mediaPlayerCmd: MediaPlayerCmd;
-}
-
 const defaultConfig = getConfigs();
 const hasRoomSelection = Boolean(defaultConfig.rooms.length);
 
@@ -169,10 +165,9 @@ export const useTablePagination = <T>(
 function useBuildMediaRequest(): (
   cmdType: MuseApiCmdType,
   payload: any,
-) => MediaPlayerApiPayload {
+) => MediaPlayerCmd {
   return useCallback((cmdType, payload) => {
     return {
-      mediaPlayerCmd: {
         cmdType,
         payload: {
           ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
@@ -186,7 +181,6 @@ function useBuildMediaRequest(): (
             : {}),
           ...payload,
         },
-      },
     };
   }, []);
 }
