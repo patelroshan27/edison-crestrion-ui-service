@@ -9,12 +9,20 @@ import {
 import type { UIConfig } from 'config/Configs';
 
 const Branhamanad: UIConfig = {
-  rooms: [],
+  rooms: [
+    { key: 'sarvasva', title: 'Sarvasva' },
+    { key: 'santoffice1', title: 'Office1' },
+    { key: 'santoffice2', title: 'Office2' },
+    { key: 'branhamanad', title: 'Branhamanad' },
+    { key: 'santcorridor', title: 'Corridor' },
+    { key: 'santkitchen', title: 'Kitchen' },
+  ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
+  mediaApiPath: '/mediaplayer/send',
   authID: 'Branhamanad',
   lockTimeout: 20000000,
   crestronConfigs: {

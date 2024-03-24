@@ -16,11 +16,11 @@ import type { ApiCommand, UIConfig } from 'config/Configs';
 const Configs: UIConfig = {
   rooms: [
     { key: 'sarvasva', title: 'Sarvasva' },
-    { key: 'santoffice1', title: 'Sant Office1' },
-    { key: 'santoffice2', title: 'Sant Office2' },
+    { key: 'santoffice1', title: 'Office1' },
+    { key: 'santoffice2', title: 'Office2' },
     { key: 'branhamanad', title: 'Branhamanad' },
-    { key: 'santcorridor', title: 'Sant Corridor' },
-    { key: 'santkitchen', title: 'Sant Kitchen' },
+    { key: 'santcorridor', title: 'Corridor' },
+    { key: 'santkitchen', title: 'Kitchen' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
