@@ -317,7 +317,7 @@ const Configs: UIConfig = {
                     cmdType: 'CS',
                     cmdName: 'Source',
                     controlNumber: '2',
-                    controlPosition: '00000',
+                    controlPosition: '0',
                   },
                 },
               ],
