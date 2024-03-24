@@ -5,6 +5,7 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
+  type TableProps,
   TableRow,
 } from '@nextui-org/react';
 import React, { type ReactNode } from 'react';
@@ -16,6 +17,7 @@ import { useTablePagination } from './hooks';
 import { formatSecondsToMinutes } from './utils';
 
 interface TracksTableProps {
+  tableProps: Partial<TableProps>;
   tracks: Track[];
   topContent: ReactNode;
   onAddToQueue: (params: SelectedMediaIds) => void;
@@ -28,6 +30,7 @@ const tracksColumns = [
 ];
 
 export const TracksTable: React.FC<TracksTableProps> = ({
+  tableProps,
   tracks,
   topContent,
   onAddToQueue,
@@ -53,15 +56,8 @@ export const TracksTable: React.FC<TracksTableProps> = ({
 
   return (
     <Table
+      {...tableProps}
       aria-label="Media Player Tracks List"
-      isHeaderSticky
-      isStriped
-      classNames={{
-        base: 'flex-grow-[1]',
-        wrapper: 'h-full justify-start',
-        th: 'text-large',
-        td: 'text-large',
-      }}
       topContent={topContent}
       bottomContent={
         <TablePagination pages={pages} page={page} setPage={setPage} />
@@ -71,7 +67,9 @@ export const TracksTable: React.FC<TracksTableProps> = ({
       </TableHeader>
       <TableBody emptyContent={`No tracks found`} items={filteredItems}>
         {(item) => (
-          <TableRow key={item.trackId}>
+          <TableRow
+            key={item.trackId}
+            className="border-b-1 border-neutral-700">
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}

@@ -7,6 +7,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  type TableProps,
 } from '@nextui-org/react';
 import React, { useMemo, type ReactNode } from 'react';
 import { type SelectedMediaIds } from './MediaPlayer';
@@ -15,6 +16,7 @@ import { TablePagination } from './TablePagination';
 import { type AlbumsByName, useTablePagination } from './hooks';
 
 interface AlbumsTableProps {
+  tableProps: Partial<TableProps>;
   albumsByName: AlbumsByName;
   topContent: ReactNode;
   selectedKey?: Selection;
@@ -33,6 +35,7 @@ const albumColumns = [
 ];
 
 export const AlbumsTable: React.FC<AlbumsTableProps> = ({
+  tableProps,
   albumsByName,
   topContent,
   selectedKey,
@@ -48,7 +51,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   }, [albumsByName]);
   const { page, pages, setPage, filteredItems } = useTablePagination(
     albumsList,
-    7,
+    8,
   );
 
   const renderAlbumCell = (
@@ -71,16 +74,8 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
 
   return (
     <Table
-      aria-label="Media Player Albums/Playlists"
-      isHeaderSticky
-      classNames={{
-        base: 'inline-flex w-1/2',
-        wrapper: 'justify-start h-full',
-        th: 'text-large',
-        td: 'text-large',
-      }}
-      color="primary"
-      selectionMode="single"
+      {...tableProps}
+      aria-label="Media Player Albums"
       defaultSelectedKeys={selectedKey}
       onSelectionChange={setSelectedKey}
       topContent={topContent}

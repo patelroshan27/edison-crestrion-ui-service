@@ -29,6 +29,7 @@ const Configs: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Sarvasva',
+  lockTimeout: 2000000,
   crestronConfigs: {
     host: '10.25.20.81',
     ipID: 19,

@@ -5,6 +5,7 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
+  type TableProps,
   TableRow,
 } from '@nextui-org/react';
 import React, { type ReactNode } from 'react';
@@ -20,6 +21,7 @@ import { PlayIcon, TrashIcon } from 'lucide-react';
 import { formatSecondsToMinutes } from './utils';
 
 interface PlayerTracksTableProps {
+  tableProps: Partial<TableProps>;
   playerId: string;
   tracks: PlayerTrack[];
   topContent: ReactNode;
@@ -35,6 +37,7 @@ const playerTracksColumns = [
 ];
 
 export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
+  tableProps,
   playerId,
   tracks,
   topContent,
@@ -92,7 +95,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   const bottomContent = (
     <TablePagination pages={pages} page={page} setPage={setPage}>
-      <Button className="ml-10 text-large" onClick={onClear}>
+      <Button className="ml-10 text-2xl" onClick={onClear} size="lg">
         Clear Player
       </Button>
     </TablePagination>
@@ -100,15 +103,8 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   return (
     <Table
+      {...tableProps}
       aria-label="Media Player Tracks List"
-      isHeaderSticky
-      isStriped
-      classNames={{
-        base: 'flex-grow-[1]',
-        wrapper: 'h-full justify-start',
-        th: 'text-large',
-        td: 'text-large',
-      }}
       topContent={topContent}
       bottomContent={bottomContent}>
       <TableHeader columns={playerTracksColumns}>
@@ -116,7 +112,9 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
       </TableHeader>
       <TableBody emptyContent={`No player tracks found`} items={filteredItems}>
         {(item) => (
-          <TableRow key={item.trackId}>
+          <TableRow
+            key={item.trackId}
+            className="border-b-1 border-neutral-700">
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}

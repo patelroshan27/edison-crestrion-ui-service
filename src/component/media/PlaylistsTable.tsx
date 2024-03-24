@@ -7,6 +7,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  type TableProps,
 } from '@nextui-org/react';
 import React, { type ReactNode } from 'react';
 import { type Playlist } from './types';
@@ -16,6 +17,7 @@ import { useTablePagination } from './hooks';
 import { TablePagination } from './TablePagination';
 
 interface PlaylistsTableProps {
+  tableProps: Partial<TableProps>;
   playlists: Playlist[];
   topContent: ReactNode;
   selectedKey?: Selection;
@@ -30,6 +32,7 @@ const playlistColumns = [
 ];
 
 export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
+  tableProps,
   playlists,
   topContent,
   selectedKey,
@@ -39,7 +42,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
 }) => {
   const { page, pages, setPage, filteredItems } = useTablePagination(
     playlists,
-    7,
+    8,
   );
 
   const renderPlaylistCell = (
@@ -64,16 +67,8 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
 
   return (
     <Table
+      {...tableProps}
       aria-label="Media Player Playlists"
-      isHeaderSticky
-      classNames={{
-        base: 'inline-flex w-1/2',
-        wrapper: 'justify-start h-full',
-        th: 'text-large',
-        td: 'text-large',
-      }}
-      color="primary"
-      selectionMode="single"
       defaultSelectedKeys={selectedKey}
       onSelectionChange={setSelectedKey}
       topContent={topContent}

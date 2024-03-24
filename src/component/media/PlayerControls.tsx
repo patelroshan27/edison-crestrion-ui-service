@@ -103,9 +103,8 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
       value={trackTime}
       onChange={(v) => setTrackTime(v as number)}
       onChangeEnd={onTimeUpdate}
-      className="max-w-md mt-3 min-h-[50px] justify-end"
+      className="max-w-md mt-3 min-h-[50px] justify-end max-w-lg"
       classNames={{
-        labelWrapper: 'gap-4',
         label: 'truncate',
         value: 'min-w-[50px] text-nowrap',
       }}
@@ -130,9 +129,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       size="lg"
       variant="shadow"
       color={active ? 'primary' : 'default'}
-      className="w-14"
+      className="w-14 ml-5 first:ml-0"
       onClick={onClick}>
-      <Icon size={30} />
+      <Icon size={36} />
     </Button>
   );
 };
@@ -151,12 +150,15 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   const repeat = usePlayerRepeatApi();
 
   const onPlayerAction = (apiPromise: Promise<void>): void => {
-    apiPromise.then(updatePlayerStatus).catch((err) => console.log(err));
+    apiPromise
+      // wait 1s so muse API returns proper status
+      .then(() => setTimeout(updatePlayerStatus, 1000))
+      .catch((err) => console.log(err));
   };
 
   return (
-    <Card className="h-[120px] w-full justify-center items-center">
-      <div className="inline-flex gap-4 justify-center items-center">
+    <Card className="h-[120px] w-full justify-center items-center mt-2">
+      <div className="inline-flex justify-center items-center">
         <ButtonGroup variant="bordered">
           <ActionButton
             onClick={() => onPlayerAction(playPrevious({ playerId }))}
@@ -173,7 +175,9 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
             Icon={PauseIcon}
           />
           <ActionButton
-            active={playerStatus?.play === 'off'}
+            active={
+              playerStatus?.play === 'off' && playerStatus?.pause === 'off'
+            }
             onClick={() => onPlayerAction(stop({ playerId }))}
             Icon={StopCircleIcon}
           />
@@ -181,11 +185,6 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
             onClick={() => onPlayerAction(playNext({ playerId }))}
             Icon={StepForwardIcon}
           />
-        </ButtonGroup>
-        <div className="text-center w-[280px]">
-          {playerStatus?.track?.albumName}
-        </div>
-        <ButtonGroup>
           <ActionButton
             active={playerStatus?.shuffle === 'on'}
             onClick={() => onPlayerAction(shuffle({ playerId }))}

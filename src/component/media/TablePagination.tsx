@@ -22,11 +22,13 @@ export const TablePagination: React.FC<TablePaginationProps> = ({
         showControls
         classNames={{
           cursor: 'bg-foreground text-background',
+          item: 'text-xl mx-1',
         }}
         color="default"
         page={page}
         total={pages}
         variant="light"
+        isCompact
         onChange={setPage}
       />
       {children}

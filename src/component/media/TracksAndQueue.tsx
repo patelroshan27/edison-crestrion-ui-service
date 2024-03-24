@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonGroup } from '@nextui-org/react';
+import { Button, ButtonGroup, type TableProps } from '@nextui-org/react';
 import {
   type PlayerTrack,
   type MediaItemType,
@@ -9,6 +9,16 @@ import {
 import { TracksTable } from './TracksTable';
 import { PlayerTracksTable } from './PlayerTracksTable';
 import { type SelectedMediaIds } from './MediaPlayer';
+
+const tableProps: Partial<TableProps> = {
+  hideHeader: true,
+  layout: 'fixed',
+  classNames: {
+    base: 'flex-grow-[1]',
+    wrapper: 'h-full justify-between gap-0',
+    td: 'text-2xl first:truncate first:w-[65%]',
+  },
+};
 
 interface TracksAndQueueProps {
   playerId: string;
@@ -37,11 +47,13 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
+          className="text-2xl"
           onClick={() => setTracksView('track')}
           color={tracksView === 'track' ? 'primary' : 'default'}>
           Tracks
         </Button>
         <Button
+          className="text-2xl"
           onClick={() => setTracksView('playerTrack')}
           color={tracksView === 'playerTrack' ? 'primary' : 'default'}>
           Player Queue ({playerTracks.length})
@@ -52,12 +64,14 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
 
   return tracksView === 'track' ? (
     <TracksTable
+      tableProps={tableProps}
       tracks={tracks}
       topContent={topContent}
       onAddToQueue={onAddToQueue}
     />
   ) : (
     <PlayerTracksTable
+      tableProps={tableProps}
       playerId={playerId}
       tracks={playerTracks}
       topContent={topContent}

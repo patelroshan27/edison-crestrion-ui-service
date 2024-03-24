@@ -83,17 +83,12 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
   }, [updatePlayerTracks]);
 
   return (
-    <div className="flex gap-2">
+    <div className="flex">
       <AlbumsAndPlaylists
         onSelection={setSelectedIds}
         onAddToQueue={onAddToQueue}
       />
-      <div className="flex flex-col w-full gap-2">
-        <PlayerControls
-          playerId={playerId}
-          playerStatus={playerStatus}
-          updatePlayerStatus={updatePlayerStatus}
-        />
+      <div className="flex flex-col w-full ml-2">
         <TracksAndQueue
           playerId={playerId}
           tracks={tracks}
@@ -104,6 +99,11 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
           onPlayerTracksChange={onPlayerTracksChange}
           updatePlayerStatus={updatePlayerStatus}
           setTracksView={setTracksView}
+        />
+        <PlayerControls
+          playerId={playerId}
+          playerStatus={playerStatus}
+          updatePlayerStatus={updatePlayerStatus}
         />
       </div>
     </div>
