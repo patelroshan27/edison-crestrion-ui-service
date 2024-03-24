@@ -50,7 +50,7 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
           className="text-2xl"
           onClick={() => setTracksView('track')}
           color={tracksView === 'track' ? 'primary' : 'default'}>
-          Tracks
+          Tracks ({tracks.length})
         </Button>
         <Button
           className="text-2xl"

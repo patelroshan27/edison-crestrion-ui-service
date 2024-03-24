@@ -1,4 +1,11 @@
-import { Lightbulb, LightbulbOff, PowerOff, Sun, SunDim } from 'lucide-react';
+import {
+  Lightbulb,
+  LightbulbOff,
+  Music2,
+  PowerOff,
+  Sun,
+  SunDim,
+} from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 
 const Branhamanad: UIConfig = {
@@ -9,8 +16,9 @@ const Branhamanad: UIConfig = {
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   authID: 'Branhamanad',
+  lockTimeout: 20000000,
   crestronConfigs: {
-    host: '10.25.20.81',
+    host: '10.25.20.71',
     ipID: 19,
     port: 41794,
   },
@@ -178,6 +186,17 @@ const Branhamanad: UIConfig = {
               scene: '19',
             },
           ],
+        },
+      },
+    },
+    MEDIA: {
+      name: 'Media Player',
+      icon: Music2,
+      className: '!grid-cols-[1fr] !grid-rows-[1fr]',
+      controls: {
+        media: {
+          kind: 'mediaPlayer',
+          playerId: '10',
         },
       },
     },
