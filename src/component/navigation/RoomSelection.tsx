@@ -22,9 +22,10 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
     setActiveConfig(newConfig);
 
     // if current page doesn't exist in new room than set first tab of new config
-    if (!newConfig.pages[activePage]) {
-      setActivePage(Object.keys(newConfig.pages)[0]);
-    }
+    // if (!newConfig.pages[activePage]) {
+    // }
+    // always select first tab in case of multiple rooms
+    setActivePage(Object.keys(newConfig.pages)[0]);
   }, [roomKey]);
 
   if (!defaultConfig.rooms.length) return null;
