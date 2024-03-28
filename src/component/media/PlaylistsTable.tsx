@@ -15,7 +15,6 @@ import { type SelectedMediaIds } from './MediaPlayer';
 import { PlusIcon } from 'lucide-react';
 import { useTablePagination } from './hooks';
 import { TablePagination } from './TablePagination';
-import classNames from 'classnames';
 
 interface PlaylistsTableProps {
   tableProps: Partial<TableProps>;
@@ -68,9 +67,6 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
 
   return (
     <Table
-      className={classNames(
-        'border border-primary rounded-2xl h-full flex flex-col items-center text-2xl font-semibold',
-      )}
       {...tableProps}
       aria-label="Media Player Playlists"
       defaultSelectedKeys={selectedKey}

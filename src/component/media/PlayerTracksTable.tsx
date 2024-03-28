@@ -19,7 +19,6 @@ import {
 } from './hooks';
 import { PlayIcon, TrashIcon } from 'lucide-react';
 import { formatSecondsToMinutes } from './utils';
-import classNames from 'classnames';
 
 interface PlayerTracksTableProps {
   tableProps: Partial<TableProps>;
@@ -103,9 +102,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   );
 
   return (
-    <Table  className={classNames(
-      'border border-primary rounded-2xl w-full h-full flex flex-col items-center text-2xl font-semibold',
-    )}
+    <Table
       {...tableProps}
       aria-label="Media Player Tracks List"
       topContent={topContent}
