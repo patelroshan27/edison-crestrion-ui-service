@@ -15,6 +15,7 @@ import { PlusIcon } from 'lucide-react';
 import { TablePagination } from './TablePagination';
 import { useTablePagination } from './hooks';
 import { formatSecondsToMinutes } from './utils';
+import classNames from 'classnames';
 
 interface TracksTableProps {
   tableProps: Partial<TableProps>;
@@ -56,6 +57,9 @@ export const TracksTable: React.FC<TracksTableProps> = ({
 
   return (
     <Table
+      className={classNames(
+        'border border-primary rounded-2xl w-full h-full flex flex-col items-center text-2xl font-semibold',
+      )}
       {...tableProps}
       aria-label="Media Player Tracks List"
       topContent={topContent}

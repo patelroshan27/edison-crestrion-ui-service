@@ -103,7 +103,7 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
       value={trackTime}
       onChange={(v) => setTrackTime(v as number)}
       onChangeEnd={onTimeUpdate}
-      className="max-w-md mt-3 min-h-[50px] justify-end max-w-lg"
+      className="max-w-md min-h-[30px] justify-end max-w-lg" 
       classNames={{
         label: 'truncate',
         value: 'min-w-[50px] text-nowrap',
@@ -157,7 +157,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   return (
-    <Card className="h-[120px] w-full justify-center items-center mb-2">
+    <Card className="border border-primary h-[120px] w-full justify-center items-center mb-2">
       <div className="inline-flex justify-center items-center">
         <ButtonGroup variant="bordered">
           <ActionButton

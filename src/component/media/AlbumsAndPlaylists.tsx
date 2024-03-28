@@ -14,6 +14,7 @@ import {
   type AlbumsByName,
   useGetPlaylistsApi,
 } from './hooks';
+import classNames from 'classnames';
 
 interface AlbumsAndPlaylistsProps {
   onSelection: (params: SelectedMediaIds) => void;
@@ -53,16 +54,16 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
   }, []);
 
   const topContent = (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <ButtonGroup size="lg">
         <Button
-          className="text-2xl"
+          className={classNames('text-2xl', itemType === 'album' ? 'bg-primary text-primary-foreground' : 'bg-background text-primary',   )}
           onClick={() => setItemType('album')}
           color={itemType === 'album' ? 'primary' : 'default'}>
           Albums
         </Button>
         <Button
-          className="text-2xl"
+          className={classNames('text-2xl', itemType === 'playlist' ? 'bg-primary text-primary-foreground' : 'bg-background text-primary',   )}
           onClick={() => setItemType('playlist')}
           color={itemType === 'playlist' ? 'primary' : 'default'}>
           Playlists

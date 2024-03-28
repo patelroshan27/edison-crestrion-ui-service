@@ -16,7 +16,7 @@ export const TablePagination: React.FC<TablePaginationProps> = ({
   children,
 }) => {
   return (
-    <div className="py-2 px-2 flex justify-center items-center">
+    <div className="bg-primary-foreground border border-primary rounded-2xl py-2 px-2 flex justify-center items-center">
       <Pagination
         size="lg"
         showControls
