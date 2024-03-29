@@ -83,7 +83,7 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
   }, [updatePlayerTracks]);
 
   return (
-    <div className="flex">
+    <div className="flex h-[98%]">
       <AlbumsAndPlaylists
         onSelection={setSelectedIds}
         onAddToQueue={onAddToQueue}

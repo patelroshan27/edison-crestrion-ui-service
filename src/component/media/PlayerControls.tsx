@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Slider,
-  type SliderValue,
-} from '@nextui-org/react';
+import { Button, Card, Slider, type SliderValue } from '@nextui-org/react';
 import {
   PauseIcon,
   PlayIcon,
@@ -28,7 +22,7 @@ import {
   useSetPlayerTimeApi,
 } from './hooks';
 import { type PlayerStatus } from './types';
-import { formatSecondsToMinutes } from './utils';
+import { formatSecondsToMinutes, onMediaPlayerAction } from './utils';
 
 const STOPPED_UPDATE_INTERVAL = 1000 * 10;
 const PLAYING_UPDATE_INTERVAL = 1000;
@@ -129,7 +123,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       size="lg"
       variant="shadow"
       color={active ? 'primary' : 'default'}
-      className="w-14 ml-5 first:ml-0"
+      className="w-16 h-16 ml-6 first:ml-0"
       onClick={onClick}>
       <Icon size={36} />
     </Button>
@@ -150,59 +144,52 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   const repeat = usePlayerRepeatApi();
 
   const onPlayerAction = (apiPromise: Promise<void>): void => {
-    apiPromise
-      // wait 1s so muse API returns proper status
-      .then(() => setTimeout(updatePlayerStatus, 200))
-      .catch((err) => console.log(err));
+    onMediaPlayerAction(apiPromise, updatePlayerStatus);
   };
 
   return (
-    <Card className="h-[120px] w-full justify-center items-center mb-2">
+    <Card className="h-[130px] w-full justify-center items-center mb-2">
       <div className="inline-flex justify-center items-center">
-        <ButtonGroup variant="bordered">
-          <ActionButton
-            onClick={() => onPlayerAction(playPrevious({ playerId }))}
-            Icon={StepBackIcon}
-          />
-          <ActionButton
-            active={playerStatus?.play === 'on'}
-            onClick={() => onPlayerAction(play({ playerId }))}
-            Icon={PlayIcon}
-          />
-          <ActionButton
-            active={playerStatus?.pause === 'on'}
-            onClick={() => onPlayerAction(pause({ playerId }))}
-            Icon={PauseIcon}
-          />
-          <ActionButton
-            active={
-              playerStatus?.play === 'off' && playerStatus?.pause === 'off'
-            }
-            onClick={() => onPlayerAction(stop({ playerId }))}
-            Icon={StopCircleIcon}
-          />
-          <ActionButton
-            onClick={() => onPlayerAction(playNext({ playerId }))}
-            Icon={StepForwardIcon}
-          />
-          <ActionButton
-            active={playerStatus?.shuffle === 'on'}
-            onClick={() => onPlayerAction(shuffle({ playerId }))}
-            Icon={ShuffleIcon}
-          />
-          <ActionButton
-            active={playerStatus?.repeat === 'on'}
-            Icon={Repeat2Icon}
-            onClick={() =>
-              onPlayerAction(
-                repeat({
-                  playerId,
-                  repeat: playerStatus?.repeat === 'on' ? 'OFF' : 'ALL',
-                }),
-              )
-            }
-          />
-        </ButtonGroup>
+        <ActionButton
+          onClick={() => onPlayerAction(playPrevious({ playerId }))}
+          Icon={StepBackIcon}
+        />
+        <ActionButton
+          active={playerStatus?.play === 'on'}
+          onClick={() => onPlayerAction(play({ playerId }))}
+          Icon={PlayIcon}
+        />
+        <ActionButton
+          active={playerStatus?.pause === 'on'}
+          onClick={() => onPlayerAction(pause({ playerId }))}
+          Icon={PauseIcon}
+        />
+        <ActionButton
+          active={playerStatus?.play === 'off' && playerStatus?.pause === 'off'}
+          onClick={() => onPlayerAction(stop({ playerId }))}
+          Icon={StopCircleIcon}
+        />
+        <ActionButton
+          onClick={() => onPlayerAction(playNext({ playerId }))}
+          Icon={StepForwardIcon}
+        />
+        <ActionButton
+          active={playerStatus?.shuffle === 'on'}
+          onClick={() => onPlayerAction(shuffle({ playerId }))}
+          Icon={ShuffleIcon}
+        />
+        <ActionButton
+          active={playerStatus?.repeat === 'on'}
+          Icon={Repeat2Icon}
+          onClick={() =>
+            onPlayerAction(
+              repeat({
+                playerId,
+                repeat: playerStatus?.repeat === 'on' ? 'OFF' : 'ALL',
+              }),
+            )
+          }
+        />
       </div>
       <PlayerTrackSlider
         playerId={playerId}

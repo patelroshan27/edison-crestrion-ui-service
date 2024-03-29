@@ -168,19 +168,19 @@ function useBuildMediaRequest(): (
 ) => MediaPlayerCmd {
   return useCallback((cmdType, payload) => {
     return {
-        cmdType,
-        payload: {
-          ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
-          ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
-          ...(cmdType === 'getTracksById' || cmdType === 'addToPlayer'
-            ? {
-                albumIds: [],
-                playlistIds: [],
-                trackIds: [],
-              }
-            : {}),
-          ...payload,
-        },
+      cmdType,
+      payload: {
+        ...(cmdType === 'addToPlayer' ? { append: 'ON' } : {}),
+        ...(cmdType === 'shuffle' ? { shuffle: 'TOGGLE' } : {}),
+        ...(cmdType === 'getTracksById' || cmdType === 'addToPlayer'
+          ? {
+              albumIds: [],
+              playlistIds: [],
+              trackIds: [],
+            }
+          : {}),
+        ...payload,
+      },
     };
   }, []);
 }
