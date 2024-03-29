@@ -19,6 +19,7 @@ export interface CrestronConfigs {
 export type Page = string;
 export type LightApiType = 'zum' | 'pharos';
 export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
+export type AudioDspIdType = 'mandir' | 'bk';
 export type AudioApiCmdName =
   | 'Source'
   | 'Get Vol'
@@ -39,6 +40,7 @@ export interface CrestronWebrelayPayload {
 }
 
 export interface AudioApiPaylod {
+  dspId: AudioDspIdType;
   cmdType: AudioApiCmdType;
   cmdName: AudioApiCmdName;
   controlNumber: string;

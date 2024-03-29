@@ -216,6 +216,7 @@ const Configs: UIConfig = {
           getVolCmd: {
             type: 'audio',
             payload: {
+              dspId: 'mandir',
               cmdType: 'GS',
               cmdName: 'Get Vol',
               controlNumber: '11',
@@ -225,6 +226,7 @@ const Configs: UIConfig = {
           volChangeCmd: {
             type: 'audio',
             payload: {
+              dspId: 'mandir',
               cmdType: 'CS',
               cmdName: 'Vol Change',
               controlNumber: '11',
@@ -234,24 +236,27 @@ const Configs: UIConfig = {
           muteCmd: {
             type: 'audio',
             payload: {
-              cmdType: 'LP',
+              dspId: 'mandir',
+              cmdType: 'CS',
               cmdName: 'Vol Mute',
-              controlNumber: '11',
-              controlPosition: '',
+              controlNumber: '12',
+              controlPosition: '65535',
             },
           },
           unMuteCmd: {
             type: 'audio',
             payload: {
-              cmdType: 'LP',
+              dspId: 'mandir',
+              cmdType: 'CS',
               cmdName: 'Vol Unmute',
               controlNumber: '12',
-              controlPosition: '',
+              controlPosition: '0',
             },
           },
           resetCmd: {
             type: 'audio',
             payload: {
+              dspId: 'mandir',
               cmdType: 'LP',
               cmdName: 'Vol Reset',
               controlNumber: '10',
@@ -268,6 +273,7 @@ const Configs: UIConfig = {
           getVolCmd: {
             type: 'audio',
             payload: {
+              dspId: 'mandir',
               cmdType: 'GS',
               cmdName: 'Get Vol',
               controlNumber: '25',
@@ -277,6 +283,7 @@ const Configs: UIConfig = {
           volChangeCmd: {
             type: 'audio',
             payload: {
+              dspId: 'mandir',
               cmdType: 'CS',
               cmdName: 'Vol Change',
               controlNumber: '25',
@@ -294,6 +301,7 @@ const Configs: UIConfig = {
               {
                 type: 'audio',
                 payload: {
+                  dspId: 'mandir',
                   cmdType: 'GS',
                   cmdName: 'Source',
                   controlNumber: '2',
@@ -314,6 +322,7 @@ const Configs: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
                     controlNumber: '2',
@@ -331,6 +340,7 @@ const Configs: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
                     controlNumber: '2',
@@ -348,6 +358,7 @@ const Configs: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
                     controlNumber: '2',
@@ -365,6 +376,7 @@ const Configs: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
                     controlNumber: '2',
@@ -382,6 +394,7 @@ const Configs: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
                     controlNumber: '2',

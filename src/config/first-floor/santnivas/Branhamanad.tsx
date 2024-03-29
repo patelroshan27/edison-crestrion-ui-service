@@ -1,12 +1,17 @@
 import {
+  Bluetooth,
+  Flower2,
   Lightbulb,
   LightbulbOff,
+  ListMusic,
+  Mic2,
   Music2,
   PowerOff,
+  Speech,
   Sun,
   SunDim,
 } from 'lucide-react';
-import type { UIConfig } from 'config/Configs';
+import type { ApiCommand, UIConfig } from 'config/Configs';
 
 const Branhamanad: UIConfig = {
   rooms: [
@@ -192,6 +197,184 @@ const Branhamanad: UIConfig = {
               name: 'Dark Pink',
               color: 'rgb(252, 7, 234)',
               scene: '19',
+            },
+          ],
+        },
+      },
+    },
+    AUDIO: {
+      name: 'Audio',
+      icon: Music2,
+      className: '!grid-cols-[1fr_1fr_1fr]',
+      controls: {
+        speaker: {
+          kind: 'audio',
+          icon: Music2,
+          label: 'Master',
+          playLabel: 'Unmute',
+          pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'bk',
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '5',
+              controlPosition: '',
+            },
+          },
+          volChangeCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'bk',
+              cmdType: 'CS',
+              cmdName: 'Vol Change',
+              controlNumber: '5',
+              controlPosition: '',
+            },
+          },
+          muteCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'bk',
+              cmdType: 'CS',
+              cmdName: 'Vol Mute',
+              controlNumber: '4',
+              controlPosition: '65535',
+            },
+          },
+          unMuteCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'bk',
+              cmdType: 'CS',
+              cmdName: 'Vol Unmute',
+              controlNumber: '4',
+              controlPosition: '0',
+            },
+          },
+          resetCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'bk',
+              cmdType: 'LP',
+              cmdName: 'Vol Reset',
+              controlNumber: '1',
+              controlPosition: '',
+            },
+          },
+        },
+        sources: {
+          kind: 'group',
+          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          getActiveValue: (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            return sendCommands([
+              {
+                type: 'audio',
+                payload: {
+                  dspId: 'bk',
+                  cmdType: 'GS',
+                  cmdName: 'Source',
+                  controlNumber: '6',
+                  controlPosition: '',
+                },
+              },
+            ]).then((results) => (results[0] as number).toString());
+          },
+          parseActiveValueKey: (cmd: ApiCommand) =>
+            cmd.type === 'audio' ? cmd.payload.controlPosition : '',
+          controls: [
+            {
+              kind: 'toggle',
+              icon: Bluetooth,
+              title: 'Source',
+              label: 'Bluetooth',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'bk',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '6',
+                    controlPosition: '0',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: ListMusic,
+              title: 'Source',
+              label: 'Sabha Hall',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'bk',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '6',
+                    controlPosition: '16383',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              title: 'Source',
+              icon: Mic2,
+              label: 'Mandir',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'bk',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '6',
+                    controlPosition: '32766',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: Flower2,
+              title: 'Source',
+              label: 'AksharPith',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'bk',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '6',
+                    controlPosition: '49149',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: Speech,
+              title: 'Source',
+              label: 'Media Player',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'bk',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '6',
+                    controlPosition: '65535',
+                  },
+                },
+              ],
             },
           ],
         },

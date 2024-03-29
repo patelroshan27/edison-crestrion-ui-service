@@ -13,7 +13,7 @@ interface RoomSelectionProps {
 export const RoomSelection: React.FC<RoomSelectionProps> = ({
   className,
 }: RoomSelectionProps) => {
-  const [activePage, setActivePage] = useRecoilState(pageState);
+  const [, setActivePage] = useRecoilState(pageState);
   const [, setActiveConfig] = useRecoilState(activeConfigState);
   const [roomKey, setRoomKey] = useState<RoomKey>(defaultConfig.rooms[0]?.key);
 
