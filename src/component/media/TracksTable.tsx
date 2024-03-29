@@ -56,7 +56,7 @@ export const TracksTable: React.FC<TracksTableProps> = ({
   };
 
   return (
-    <Table
+    <Table className='border border-neutral-400 rounded-2xl'
       {...tableProps}
       aria-label="Media Player Tracks List"
       topContent={topContent}
@@ -66,11 +66,11 @@ export const TracksTable: React.FC<TracksTableProps> = ({
       <TableHeader columns={tracksColumns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
-      <TableBody emptyContent={`No tracks found`} items={filteredItems}>
+      <TableBody  emptyContent={`No tracks found`} items={filteredItems}>
         {(item) => (
           <TableRow
             key={item.trackId}
-            className="border-b-1 border-neutral-700">
+            className="border-b-1  border-neutral-700">
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}

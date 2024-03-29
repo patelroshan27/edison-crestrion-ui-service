@@ -33,7 +33,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
   return (
     <div
       className={classNames(
-        'flex justify-between space-x-2 px-6 py-1 w-full items-center border-b border-primary',
+        'flex justify-between space-x-2 px-6 py-1 w-full items-center border-b border-neutral-400',
         className,
       )}>
       <div className="flex items-center space-x-2">
@@ -45,7 +45,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
                   key={room.key}
                   type="button"
                   className={classNames(
-                    'border px-4 py-4 flex items-center rounded-lg text-2xl',
+                    'border border-neutral-400 px-4 py-4 flex items-center rounded-lg text-2xl',
                     room.key === roomKey
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-background text-primary',

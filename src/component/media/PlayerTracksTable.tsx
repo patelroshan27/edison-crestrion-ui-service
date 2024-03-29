@@ -95,14 +95,14 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   const bottomContent = (
     <TablePagination pages={pages} page={page} setPage={setPage}>
-      <Button className='border bg-primary-foreground ml-10 text-2xl' onClick={onClear} size="lg">
+      <Button className='border border-neutral-400 bg-primary-foreground ml-10 text-md' onClick={onClear} size="sm">
         Clear Player
       </Button>
     </TablePagination>
   );
 
   return (
-    <Table
+    <Table className='border border-neutral-400 rounded-2xl'
       {...tableProps}
       aria-label="Media Player Tracks List"
       topContent={topContent}

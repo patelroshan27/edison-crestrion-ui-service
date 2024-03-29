@@ -15,7 +15,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex justify-between space-x-2 px-6 py-1 w-full items-center border-b border-primary',
+        'flex justify-between space-x-2 px-6 py-1 w-full items-center border-b border-neutral-400',
         className,
       )}>
       <div className="flex items-center space-x-2">
@@ -26,7 +26,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               key={page}
               type="button"
               className={classNames(
-                'border px-4 py-3 flex items-center rounded-lg text-2xl',
+                'border border-neutral-400 px-4 py-3 flex items-center rounded-lg text-2xl',
                 activeTab === page
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-background text-primary',

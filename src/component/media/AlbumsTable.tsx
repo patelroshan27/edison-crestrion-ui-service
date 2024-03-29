@@ -73,7 +73,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   };
 
   return (
-    <Table
+    <Table className='rounded-2xl border border-neutral-400'
       {...tableProps}
       aria-label="Media Player Albums"
       defaultSelectedKeys={selectedKey}

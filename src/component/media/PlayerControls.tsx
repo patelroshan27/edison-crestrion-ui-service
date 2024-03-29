@@ -82,8 +82,8 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
   const sliderGetValue = (time: SliderValue): string =>
     trackDuration
       ? `${formatSecondsToMinutes(time as number)} of ${formatSecondsToMinutes(
-          trackDuration,
-        )}`
+        trackDuration,
+      )}`
       : '';
 
   return (
@@ -124,7 +124,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       size="lg"
       variant="shadow"
       className={classNames(
-        'w-16 h-16 ml-6 first:ml-0',
+        'w-16 h-16 ml-6 rounded-2xl border border-neutral-400 first:ml-0',
         active
           ? 'bg-primary text-primary-foreground'
           : 'bg-background text-primary',
@@ -153,7 +153,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   return (
-    <Card className="h-[130px] w-full justify-center items-center mb-2">
+    <Card className="h-[130px] w-full bg-backround justify-center items-center mb-2">
       <div className="inline-flex justify-center items-center">
         <ActionButton
           onClick={() => onPlayerAction(playPrevious({ playerId }))}
