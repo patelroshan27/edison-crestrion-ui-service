@@ -266,7 +266,7 @@ const Branhamanad: UIConfig = {
         },
         sources: {
           kind: 'group',
-          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          className: '!grid-cols [1fr_1fr_1fr]',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
