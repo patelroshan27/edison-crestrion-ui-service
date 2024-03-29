@@ -18,7 +18,7 @@ import {
   useTablePagination,
 } from './hooks';
 import { PlayIcon, TrashIcon } from 'lucide-react';
-import { formatSecondsToMinutes } from './utils';
+import { formatSecondsToMinutes, onMediaPlayerAction } from './utils';
 
 interface PlayerTracksTableProps {
   tableProps: Partial<TableProps>;
@@ -51,21 +51,21 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
 
   const onClear = (): void => {
-    clearPlayer({ playerId })
-      .then(onPlayerTracksChange)
-      .catch((err) => console.log(err));
+    onMediaPlayerAction(clearPlayer({ playerId }), onPlayerTracksChange);
   };
 
   const onPlay = (track: Track): void => {
-    playTrack({ playerId, trackId: track.trackId, trackStartTime: 0 })
-      .then(updatePlayerStatus)
-      .catch((err) => console.log(err));
+    onMediaPlayerAction(
+      playTrack({ playerId, trackId: track.trackId, trackStartTime: 0 }),
+      updatePlayerStatus,
+    );
   };
 
   const onRemove = (index: number): void => {
-    deletePlayerTracks({ playerId, trackIndexes: [`${index}`] })
-      .then(onPlayerTracksChange)
-      .catch((err) => console.log(err));
+    onMediaPlayerAction(
+      deletePlayerTracks({ playerId, trackIndexes: [`${index}`] }),
+      onPlayerTracksChange,
+    );
   };
 
   const renderCell = (track: PlayerTrack, key: string | number): ReactNode => {

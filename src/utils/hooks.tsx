@@ -14,7 +14,7 @@ import {
 } from '../config/Configs';
 import { useRecoilValue } from 'recoil';
 import { activeConfigState } from 'state/navigation';
-import { MediaPlayerCmd } from 'component/media/hooks';
+import { type MediaPlayerCmd } from 'component/media/hooks';
 
 // axios.interceptors.response.use(
 //   function (response) {
@@ -100,9 +100,7 @@ export function useAudioApiState(): (data: AudioApiPaylod) => Promise<unknown> {
   return useApiState<AudioApiPaylod, unknown>(config.audioApiPath as string);
 }
 
-export function useMediaApiState<T>(): (
-  data: MediaPlayerCmd,
-) => Promise<T> {
+export function useMediaApiState<T>(): (data: MediaPlayerCmd) => Promise<T> {
   const config = useRecoilValue(activeConfigState);
   return useApiState<MediaPlayerCmd, T>(config.mediaApiPath as string);
 }

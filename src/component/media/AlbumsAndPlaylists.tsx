@@ -56,13 +56,13 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
-          className="text-2xl"
+          className="text-2xl rounded-l-lg"
           onClick={() => setItemType('album')}
           color={itemType === 'album' ? 'primary' : 'default'}>
           Albums
         </Button>
         <Button
-          className="text-2xl"
+          className="text-2xl rounded-r-lg"
           onClick={() => setItemType('playlist')}
           color={itemType === 'playlist' ? 'primary' : 'default'}>
           Playlists

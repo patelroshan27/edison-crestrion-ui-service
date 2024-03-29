@@ -47,13 +47,13 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
-          className="text-2xl"
+          className="text-2xl rounded-l-lg"
           onClick={() => setTracksView('track')}
           color={tracksView === 'track' ? 'primary' : 'default'}>
           Tracks ({tracks.length})
         </Button>
         <Button
-          className="text-2xl"
+          className="text-2xl rounded-r-lg"
           onClick={() => setTracksView('playerTrack')}
           color={tracksView === 'playerTrack' ? 'primary' : 'default'}>
           Player Queue ({playerTracks.length})
