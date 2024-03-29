@@ -45,10 +45,10 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
                   key={room.key}
                   type="button"
                   className={classNames(
-                    'border px-4 py-4 flex items-center rounded-lg text-2xl',
+                    'px-4 py-4 flex items-center rounded-lg text-lg',
                     room.key === roomKey
                       ? 'bg-primary text-primary-foreground'
-                      : 'bg-background text-primary',
+                      : 'bg-white/10 text-primary',
                   )}
                   onClick={() => {
                     setRoomKey(room.key);
