@@ -306,7 +306,7 @@ const Branhamanad: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: ListMusic,
+              icon: Speech, 
               title: 'Source',
               label: 'Sabha Hall',
               apiCommands: [
@@ -325,7 +325,7 @@ const Branhamanad: UIConfig = {
             {
               kind: 'toggle',
               title: 'Source',
-              icon: Mic2,
+              icon: Flower2,
               label: 'Mandir',
               apiCommands: [
                 {
@@ -344,7 +344,7 @@ const Branhamanad: UIConfig = {
               kind: 'toggle',
               icon: Flower2,
               title: 'Source',
-              label: 'AksharPith',
+              label: 'Aksharpith',
               apiCommands: [
                 {
                   type: 'audio',
@@ -360,7 +360,7 @@ const Branhamanad: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: Speech,
+              icon: ListMusic,
               title: 'Source',
               label: 'Media Player',
               apiCommands: [
