@@ -16,7 +16,7 @@ const tableProps: Partial<TableProps> = {
   layout: 'fixed',
   classNames: {
     base: 'flex-grow-[1]',
-    wrapper: 'h-full justify-between gap-0',
+    wrapper: 'bg-background h-full justify-between gap-0',
     td: 'text-2xl first:truncate first:w-[65%]',
   },
 };
@@ -48,13 +48,13 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
-          className={classNames('text-2xl border border-neutral-400 rounded-l-lg', tracksView === 'track' ? 'bg-primary text-primary-foreground' : 'bg-background text-primary',   )}
+          className={classNames('text-2xl border border-neutral-400 rounded-l-lg', tracksView === 'track' ? 'bg-primary text-primary-foreground' : 'bg-default text-primary',   )}
           onClick={() => setTracksView('track')}
           color={tracksView === 'track' ? 'primary' : 'default'}>
           Tracks ({tracks.length})
         </Button>
         <Button
-          className={classNames('text-2xl border border-neutral-400 rounded-r-lg', tracksView === 'playerTrack' ? 'bg-primary text-primary-foreground' : 'bg-background text-primary',   )}
+          className={classNames('text-2xl border border-neutral-400 rounded-r-lg', tracksView === 'playerTrack' ? 'bg-primary text-primary-foreground' : 'bg-default text-primary',   )}
           onClick={() => setTracksView('playerTrack')}
           color={tracksView === 'playerTrack' ? 'primary' : 'default'}>
           Player Queue ({playerTracks.length})

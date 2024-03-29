@@ -25,6 +25,7 @@ export type AudioApiCmdName =
   | 'Get Vol'
   | 'Vol Change'
   | 'Vol Reset'
+  | 'Mute Status'
   | 'Vol Mute'
   | 'Vol Unmute';
 
@@ -107,6 +108,7 @@ export interface AudioControlData {
   getVolCmd: AudioApiCommand;
   volChangeCmd: AudioApiCommand;
   resetCmd?: AudioApiCommand;
+  getMuteStatusCmd?:AudioApiCommand;
   muteCmd?: AudioApiCommand;
   unMuteCmd?: AudioApiCommand;
 }

@@ -92,9 +92,10 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
       aria-label="player track time"
       maxValue={playerStatus?.track?.trackDuration ?? 100}
       minValue={0}
+        showOutline={true}
       label={playerStatus?.track?.trackName}
       getValue={sliderGetValue}
-      color="foreground"
+      color="secondary"
       value={trackTime}
       onChange={(v) => setTrackTime(v as number)}
       onChangeEnd={onTimeUpdate}
@@ -127,7 +128,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
         'w-16 h-16 ml-6 rounded-2xl border border-neutral-400 first:ml-0',
         active
           ? 'bg-primary text-primary-foreground'
-          : 'bg-background text-primary',
+          : 'bg-default text-primary',
       )}
       onClick={onClick}>
       <Icon size={36} />

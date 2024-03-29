@@ -39,6 +39,7 @@ const VolumeControl: React.FC<Props> = ({
     title,
     getVolCmd,
     volChangeCmd,
+    getMuteStatusCmd,
     muteCmd,
     unMuteCmd,
     resetCmd,
@@ -48,6 +49,7 @@ const VolumeControl: React.FC<Props> = ({
 
   const [level, setLevel] = useState(0);
   const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
     const onResetEvent = (): void => {
@@ -75,6 +77,17 @@ const VolumeControl: React.FC<Props> = ({
       })
       .catch((err) => console.log(err));
   }, []);
+
+
+  useEffect(() => {
+    if (!getMuteStatusCmd) return;
+    sendCommands([getMuteStatusCmd])
+      .then((data) => {
+        setMuted(Number(data) === 0);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
 
   const handleVolChange = (newLevel: number): void => {
     if (newLevel < MIN || newLevel > MAX) return;

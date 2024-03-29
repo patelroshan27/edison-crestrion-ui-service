@@ -233,6 +233,16 @@ const Configs: UIConfig = {
               controlPosition: '',
             },
           },
+          getMuteStatusCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'mandir',
+              cmdType: 'GS',
+              cmdName: 'Mute Status',
+              controlNumber: '12',
+              controlPosition: '',
+            },
+          },
           muteCmd: {
             type: 'audio',
             payload: {

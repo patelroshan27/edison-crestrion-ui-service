@@ -95,7 +95,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   const bottomContent = (
     <TablePagination pages={pages} page={page} setPage={setPage}>
-      <Button className='border border-neutral-400 bg-primary-foreground ml-10 text-md' onClick={onClear} size="sm">
+      <Button className='border border-neutral-400 bg-default ml-10 text-md' onClick={onClear} size="sm">
         Clear Player
       </Button>
     </TablePagination>

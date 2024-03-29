@@ -205,7 +205,7 @@ const Branhamanad: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_1fr_1fr]',
+      className: '!grid-cols-[1fr_2fr_1fr]',
       controls: {
         speaker: {
           kind: 'audio',
@@ -230,6 +230,16 @@ const Branhamanad: UIConfig = {
               cmdType: 'CS',
               cmdName: 'Vol Change',
               controlNumber: '5',
+              controlPosition: '',
+            },
+          },
+          getMuteStatusCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'bk',
+              cmdType: 'GS',
+              cmdName: 'Mute Status',
+              controlNumber: '4',
               controlPosition: '',
             },
           },
@@ -266,7 +276,7 @@ const Branhamanad: UIConfig = {
         },
         sources: {
           kind: 'group',
-          className: '!grid-cols [1fr_1fr_1fr]',
+          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
