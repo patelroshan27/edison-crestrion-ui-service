@@ -95,11 +95,11 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
         showOutline={true}
       label={playerStatus?.track?.trackName}
       getValue={sliderGetValue}
-      color="secondary"
+      color="primary"
       value={trackTime}
       onChange={(v) => setTrackTime(v as number)}
       onChangeEnd={onTimeUpdate}
-      className="max-w-md mt-3 min-h-[50px] justify-end max-w-lg"
+      className="max-w-md min-h-[48px] justify-end max-w-lg"
       classNames={{
         label: 'truncate',
         value: 'min-w-[50px] text-nowrap',
@@ -125,10 +125,10 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       size="lg"
       variant="shadow"
       className={classNames(
-        'w-16 h-16 ml-6 rounded-2xl border border-neutral-400 first:ml-0',
+        'w-16 h-16 ml-7 border border-neutral-300 first:ml-0',
         active
-          ? 'bg-primary text-primary-foreground'
-          : 'bg-default text-primary',
+          ? '!bg-active text-primary-foreground'
+          : 'bg-secondary text-primary',
       )}
       onClick={onClick}>
       <Icon size={36} />
@@ -154,7 +154,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   };
 
   return (
-    <Card className="h-[130px] w-full bg-backround justify-center items-center mb-2">
+    <Card className="h-[130px] w-full border border-neutral-400 bg-background justify-center items-center mb-2">
       <div className="inline-flex justify-center items-center">
         <ActionButton
           onClick={() => onPlayerAction(playPrevious({ playerId }))}

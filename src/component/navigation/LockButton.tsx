@@ -15,7 +15,7 @@ export const LockButton: React.FC = () => {
       <button
         type="button"
         className={classNames(
-          'px-4 py-[0.57rem] flex items-center rounded-lg text-lg bg-primary text-primary-foreground',
+          'px-4 py-[0.57rem] flex items-center rounded-lg text-lg !bg-active text-primary-foreground',
         )}
         onClick={() => {
           setIsLoggedIn(false);

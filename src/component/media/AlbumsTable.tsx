@@ -63,7 +63,8 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
         return album[key];
       case 'add':
         return (
-          <Button className='bg-primary-foreground'
+          <Button
+            className="border border-neutral-400 bg-secondary"
             isIconOnly
             onClick={() => onAddToQueue({ albumIds: album.albumIds })}>
             <PlusIcon size={30} />
@@ -73,7 +74,8 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   };
 
   return (
-    <Table className='rounded-2xl border border-neutral-400'
+    <Table
+      className="rounded-2xl border border-neutral-400"
       {...tableProps}
       aria-label="Media Player Albums"
       defaultSelectedKeys={selectedKey}

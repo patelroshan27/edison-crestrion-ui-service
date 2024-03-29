@@ -28,8 +28,8 @@ const tableProps: Partial<TableProps> = {
   selectionMode: 'single',
   classNames: {
     base: 'inline-flex w-2/5',
-    wrapper: 'bg-background justify-between h-full gap-0',
-    td: 'text-2xl !truncate first:w-[75%]',
+    wrapper: 'bg-background  justify-between h-full gap-0',
+    td: 'text-2xl text-primary !truncate first:w-[75%]',
   },
 };
 
@@ -57,13 +57,13 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
-          className={classNames('text-2xl border border-neutral-400  rounded-l-lg', itemType === 'album' ? 'bg-primary text-primary-foreground' : 'bg-default text-primary',   )}
+          className={classNames('text-2xl border border-neutral-400  rounded-l-lg', itemType === 'album' ? '!bg-active text-primary-foreground' : 'bg-secondary text-primary',   )}
           onClick={() => setItemType('album')}
           color={itemType === 'album' ? 'primary' : 'default'}>
           Albums
         </Button>
         <Button
-          className={classNames('text-2xl border border-neutral-400 rounded-r-lg', itemType === 'playlist' ? 'bg-primary text-primary-foreground' : 'bg-default text-primary',   )}
+          className={classNames('text-2xl border border-neutral-400 rounded-r-lg', itemType === 'playlist' ? '!bg-active text-primary-foreground' : 'bg-secondary text-primary',   )}
           onClick={() => setItemType('playlist')}
           color={itemType === 'playlist' ? 'primary' : 'default'}>
           Playlists

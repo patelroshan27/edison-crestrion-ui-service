@@ -26,9 +26,9 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               key={page}
               type="button"
               className={classNames(
-                'border border-neutral-400 bg-default px-4 py-3 flex items-center rounded-lg text-2xl',
+                'border border-neutral-400 bg-secondary px-4 py-3 flex items-center rounded-lg text-2xl',
                 activeTab === page
-                  ? 'bg-primary text-primary-foreground'
+                  ? '!bg-active text-primary-foreground'
                   : 'bg-background text-primary',
               )}
               onClick={() => {

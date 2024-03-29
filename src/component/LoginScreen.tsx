@@ -68,13 +68,13 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
         '',
       )}>
       <div className="flex flex-col items-center justify-center space-x-1">
-        <p className="text-4xl font-semibold bg-primary text-primary-foreground rounded-full px-5 py-5">
+        <p className="text-4xl font-semibold !bg-active text-primary-foreground rounded-full px-5 py-5">
           BAPS Shri Swaminarayan Mandir, Edison, NJ
         </p>
         <div className="flex flex-row items-center justify-center space-x-1">
           <div
             className={classNames(
-              'rounded-full px-6 py-2 bg-primary text-primary-foreground flex-col items-center justify-center',
+              'rounded-full px-6 py-2 !bg-active text-primary-foreground flex-col items-center justify-center',
               'text-3xl font-semibold my-4 mx-4',
             )}>
             {authID}
@@ -87,7 +87,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             {password.split('').map((char, index) => {
               return (
                 <div
-                  className="rounded-full h-4 w-4 bg-primary"
+                  className="rounded-full h-4 w-4 !bg-active"
                   key={`pass-char-${char}-${index}`}
                 />
               );
@@ -112,7 +112,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
                 key={digit}
                 className={classNames(
                   'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
-                  'text-5xl bg-primary text-background border-2 opacity-80 font-medium active:opacity-100 hover:opacity-100',
+                  'text-5xl !bg-active text-background border-2 opacity-80 font-medium active:opacity-100 hover:opacity-100',
                   digit === -1 ? 'scale-100' : 'scale-90',
                 )}
                 disabled={isLoading}

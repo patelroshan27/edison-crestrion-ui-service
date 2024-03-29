@@ -54,7 +54,8 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
         return playlist[key];
       case 'add':
         return (
-          <Button className='bg-primary-foreground'
+          <Button
+            className="border border-neutral-400 bg-secondary"
             isIconOnly
             onClick={() =>
               onAddToQueue({ playlistIds: [playlist.playlistId] })
@@ -66,7 +67,8 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
   };
 
   return (
-    <Table className='border border-neutral-400 rounded-2xl'
+    <Table
+      className="border border-neutral-400 rounded-2xl"
       {...tableProps}
       aria-label="Media Player Playlists"
       defaultSelectedKeys={selectedKey}

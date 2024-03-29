@@ -15,7 +15,6 @@ import { PlusIcon } from 'lucide-react';
 import { TablePagination } from './TablePagination';
 import { useTablePagination } from './hooks';
 import { formatSecondsToMinutes } from './utils';
-import classNames from 'classnames';
 
 interface TracksTableProps {
   tableProps: Partial<TableProps>;
@@ -46,7 +45,8 @@ export const TracksTable: React.FC<TracksTableProps> = ({
         return formatSecondsToMinutes(track[key]);
       case 'add':
         return (
-          <Button className='bg-primary-foreground'
+          <Button
+            className="border border-neutral-400 bg-secondary"
             isIconOnly
             onClick={() => onAddToQueue({ trackIds: [track.trackId] })}>
             <PlusIcon size={30} />
@@ -56,7 +56,8 @@ export const TracksTable: React.FC<TracksTableProps> = ({
   };
 
   return (
-    <Table className='border border-neutral-400 rounded-2xl'
+    <Table
+      className="border border-neutral-400 rounded-2xl"
       {...tableProps}
       aria-label="Media Player Tracks List"
       topContent={topContent}
@@ -66,7 +67,7 @@ export const TracksTable: React.FC<TracksTableProps> = ({
       <TableHeader columns={tracksColumns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
-      <TableBody  emptyContent={`No tracks found`} items={filteredItems}>
+      <TableBody emptyContent={`No tracks found`} items={filteredItems}>
         {(item) => (
           <TableRow
             key={item.trackId}

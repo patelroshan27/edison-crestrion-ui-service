@@ -28,8 +28,8 @@ module.exports = {
               DEFAULT: "#ffffff",
             },
             secondary: {
-              foreground: "#3f3f46",
-              DEFAULT: '#FEFCE8',
+              foreground: "#1a1715",
+              DEFAULT: '#1a1715',
             }
           },
         },

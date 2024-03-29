@@ -36,9 +36,9 @@ export const SimpleButton: React.FC<SimpleButtonProps> = ({
     <button
       disabled={disabled}
       className={classNames(
-        'transition-all rounded-lg flex px-4 py-4 justify-between border border-neutral-400 bg-default',
+        'transition-all rounded-lg flex px-4 py-4 justify-between border border-neutral-400 bg-secondary',
         'focus:outline-none outline-none space-x-4 items-center',
-        isOn ? 'bg-primary text-primary' : 'bg-background text-primary',
+        isOn ? '!bg-active text-primary' : 'bg-background text-primary',
         disabled && 'cursor-default',
         disabled && !isOn && 'bg-slate-600',
         className,
