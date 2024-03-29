@@ -54,7 +54,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
         return playlist[key];
       case 'add':
         return (
-          <Button
+          <Button className='bg-primary-foreground'
             isIconOnly
             onClick={() =>
               onAddToQueue({ playlistIds: [playlist.playlistId] })

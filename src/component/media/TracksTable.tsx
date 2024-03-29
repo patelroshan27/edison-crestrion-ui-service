@@ -15,6 +15,7 @@ import { PlusIcon } from 'lucide-react';
 import { TablePagination } from './TablePagination';
 import { useTablePagination } from './hooks';
 import { formatSecondsToMinutes } from './utils';
+import classNames from 'classnames';
 
 interface TracksTableProps {
   tableProps: Partial<TableProps>;
@@ -45,7 +46,7 @@ export const TracksTable: React.FC<TracksTableProps> = ({
         return formatSecondsToMinutes(track[key]);
       case 'add':
         return (
-          <Button
+          <Button className='bg-primary-foreground'
             isIconOnly
             onClick={() => onAddToQueue({ trackIds: [track.trackId] })}>
             <PlusIcon size={30} />

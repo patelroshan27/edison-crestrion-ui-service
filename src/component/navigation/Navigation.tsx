@@ -26,10 +26,10 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               key={page}
               type="button"
               className={classNames(
-                'px-4 py-3 flex items-center rounded-lg text-2xl',
+                'border px-4 py-3 flex items-center rounded-lg text-2xl',
                 activeTab === page
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-white/10 text-primary',
+                  : 'bg-background text-primary',
               )}
               onClick={() => {
                 setActivePage(page);

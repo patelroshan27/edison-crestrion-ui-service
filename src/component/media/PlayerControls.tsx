@@ -23,6 +23,7 @@ import {
 } from './hooks';
 import { type PlayerStatus } from './types';
 import { formatSecondsToMinutes, onMediaPlayerAction } from './utils';
+import classNames from 'classnames';
 
 const STOPPED_UPDATE_INTERVAL = 1000 * 10;
 const PLAYING_UPDATE_INTERVAL = 1000;
@@ -122,8 +123,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       isIconOnly
       size="lg"
       variant="shadow"
-      color={active ? 'primary' : 'default'}
-      className="w-16 h-16 ml-6 first:ml-0"
+      className={classNames(
+        'w-16 h-16 ml-6 first:ml-0',
+        active
+          ? 'bg-primary text-primary-foreground'
+          : 'bg-background text-primary',
+      )}
       onClick={onClick}>
       <Icon size={36} />
     </Button>

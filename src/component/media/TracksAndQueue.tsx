@@ -9,6 +9,7 @@ import {
 import { TracksTable } from './TracksTable';
 import { PlayerTracksTable } from './PlayerTracksTable';
 import { type SelectedMediaIds } from './MediaPlayer';
+import classNames from 'classnames';
 
 const tableProps: Partial<TableProps> = {
   hideHeader: true,
@@ -47,13 +48,13 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
-          className="text-2xl rounded-l-lg"
+          className={classNames('text-2xl rounded-l-lg', tracksView === 'track' ? 'bg-primary text-primary-foreground' : 'bg-background text-primary',   )}
           onClick={() => setTracksView('track')}
           color={tracksView === 'track' ? 'primary' : 'default'}>
           Tracks ({tracks.length})
         </Button>
         <Button
-          className="text-2xl rounded-r-lg"
+          className={classNames('text-2xl rounded-r-lg', tracksView === 'playerTrack' ? 'bg-primary text-primary-foreground' : 'bg-background text-primary',   )}
           onClick={() => setTracksView('playerTrack')}
           color={tracksView === 'playerTrack' ? 'primary' : 'default'}>
           Player Queue ({playerTracks.length})

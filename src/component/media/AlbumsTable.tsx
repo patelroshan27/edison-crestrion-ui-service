@@ -63,7 +63,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
         return album[key];
       case 'add':
         return (
-          <Button
+          <Button className='bg-primary-foreground'
             isIconOnly
             onClick={() => onAddToQueue({ albumIds: album.albumIds })}>
             <PlusIcon size={30} />

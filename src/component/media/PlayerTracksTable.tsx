@@ -79,14 +79,14 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
           playerStatus?.playerTrackIndex === track.index.toString();
         const color = isPlaying ? 'primary' : 'default';
         return (
-          <Button isIconOnly onClick={() => onPlay(track)} color={color}>
+          <Button className='bg-primary-foreground' isIconOnly onClick={() => onPlay(track)} color={color}>
             <PlayIcon size={30} />
           </Button>
         );
       }
       case 'remove':
         return (
-          <Button isIconOnly onClick={() => onRemove(track.index)}>
+          <Button className='bg-primary-foreground' isIconOnly onClick={() => onRemove(track.index)}>
             <TrashIcon size={30} />
           </Button>
         );
@@ -95,7 +95,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   const bottomContent = (
     <TablePagination pages={pages} page={page} setPage={setPage}>
-      <Button className="ml-10 text-2xl" onClick={onClear} size="lg">
+      <Button className='border bg-primary-foreground ml-10 text-2xl' onClick={onClear} size="lg">
         Clear Player
       </Button>
     </TablePagination>
