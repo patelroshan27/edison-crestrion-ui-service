@@ -125,7 +125,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       size="lg"
       variant="shadow"
       className={classNames(
-        'w-16 h-16 ml-7 border border-neutral-300 first:ml-0',
+        'w-16 h-16 ml-9 border border-neutral-300 first:ml-0',
         active
           ? '!bg-active text-primary-foreground'
           : 'bg-secondary text-primary',

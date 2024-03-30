@@ -21,18 +21,33 @@ module.exports = {
       themes: {
         dark: {
           colors: {
-            active: "#ffffff",
-            background: '#000000',
+            active: "#BF761B",
+            background: '#151212',
             primary: {
-              foreground: "#000000",
-              DEFAULT: "#ffffff",
+              foreground: "#151212",
+              DEFAULT: "#BF761B",
             },
             secondary: {
-              foreground: "#1a1715",
-              DEFAULT: '#1a1715',
+              foreground: "#3A3232",
+              DEFAULT: '#3A3232',
             }
           },
         },
+        light: {
+          colors: {
+            active: "#000000",
+            background: '#ffffff',
+            primary: {
+              foreground: "#DAA520",
+              DEFAULT: "#000000",
+            },
+            secondary: {
+              foreground: "#A6A1A1",
+              DEFAULT: '#A6A1A1',
+            }
+          },
+        },
+
       }
     })],
 }

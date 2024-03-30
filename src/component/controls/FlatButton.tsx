@@ -26,7 +26,7 @@ const FlatButton: React.FC<Props> = ({
       onClick={() => {
         onClick();
       }}>
-      <Icon className="w-8 h-8" />
+      <Icon className="w-14 h-14" />
       <p>{label}</p>
     </button>
   );

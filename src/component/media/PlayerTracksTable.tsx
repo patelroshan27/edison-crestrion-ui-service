@@ -46,13 +46,10 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   updatePlayerStatus,
 }) => {
   const playTrack = usePlayerPlayTrackApi();
-  const clearPlayer = useClearPlayerTracksApi();
   const deletePlayerTracks = useDeletePlayerTracksApi();
   const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
 
-  const onClear = (): void => {
-    onMediaPlayerAction(clearPlayer({ playerId }), onPlayerTracksChange);
-  };
+
 
   const onPlay = (track: Track): void => {
     onMediaPlayerAction(
@@ -102,12 +99,7 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
 
   const bottomContent = (
     <TablePagination pages={pages} page={page} setPage={setPage}>
-      <Button
-        className="border border-neutral-400 bg-secondary ml-10 text-md"
-        onClick={onClear}
-        size="sm">
-        Clear Player
-      </Button>
+     
     </TablePagination>
   );
 

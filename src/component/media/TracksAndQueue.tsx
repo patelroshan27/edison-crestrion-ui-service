@@ -10,6 +10,8 @@ import { TracksTable } from './TracksTable';
 import { PlayerTracksTable } from './PlayerTracksTable';
 import { type SelectedMediaIds } from './MediaPlayer';
 import classNames from 'classnames';
+import { onMediaPlayerAction } from './utils';
+import { useClearPlayerTracksApi } from './hooks';
 
 const tableProps: Partial<TableProps> = {
   hideHeader: true,
@@ -44,8 +46,14 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
   updatePlayerStatus,
   setTracksView,
 }) => {
+  const clearPlayer = useClearPlayerTracksApi();
+
+  const onClear = (): void => {
+    onMediaPlayerAction(clearPlayer({ playerId }), onPlayerTracksChange);
+  };
+
   const topContent = (
-    <div className="flex flex-col">
+    <div className="flex justify-center items-center">
       <ButtonGroup size="lg">
         <Button
           className={classNames(
@@ -67,9 +75,15 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
           )}
           onClick={() => setTracksView('playerTrack')}
           color={tracksView === 'playerTrack' ? 'primary' : 'default'}>
-          Player Queue ({playerTracks.length})
+          Queue ({playerTracks.length})
         </Button>
       </ButtonGroup>
+      <Button
+        className="text-2xl border border-neutral-400 rounded-lg ml-10 bg-secondary text-primary"
+        onClick={onClear}
+        size="lg">
+        Clear Queue
+      </Button>
     </div>
   );
 
