@@ -3,12 +3,12 @@ import Sarvasva from './first-floor/santnivas/Sarvasva';
 import BoysGym from './second-floor/BoysGym';
 import { type LucideIcon } from 'lucide-react';
 import GirlsGym from './second-floor/GirlsGym';
-import Branhamanad from './first-floor/santnivas/Branhamanad';
 import SantOffice1 from './first-floor/santnivas/SantOffice1';
 import SantOffice2 from './first-floor/santnivas/SantOffice2';
 import SantCorridor from './first-floor/santnivas/SantCorridor';
 import SantKitchen from './first-floor/santnivas/SantKitchen';
 import SantNivas from './first-floor/santnivas/SantNivas';
+import Bramhananad from './first-floor/santnivas/Bramhananad';
 
 export interface CrestronConfigs {
   host: string;
@@ -108,7 +108,7 @@ export interface AudioControlData {
   getVolCmd: AudioApiCommand;
   volChangeCmd: AudioApiCommand;
   resetCmd?: AudioApiCommand;
-  getMuteStatusCmd?:AudioApiCommand;
+  getMuteStatusCmd?: AudioApiCommand;
   muteCmd?: AudioApiCommand;
   unMuteCmd?: AudioApiCommand;
 }
@@ -149,7 +149,7 @@ export const CONFIGS = {
   sarvasva: Sarvasva,
   boysgym: BoysGym,
   girlsgym: GirlsGym,
-  branhamanad: Branhamanad,
+  bramhananad: Bramhananad,
   santoffice1: SantOffice1,
   santoffice2: SantOffice2,
   santcorridor: SantCorridor,

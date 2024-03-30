@@ -74,10 +74,14 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
           playerStatus?.playerTrackIndex === track.index.toString();
         return (
           <Button
-            className={classNames("border border-neutral-400", isPlaying ? '!bg-active text-primary-foreground' : 'bg-secondary text-primary' )}
+            className={classNames(
+              'border border-neutral-400',
+              isPlaying
+                ? '!bg-active text-primary-foreground'
+                : 'bg-secondary text-primary',
+            )}
             isIconOnly
-            onClick={() => onPlay(track)}
-            >
+            onClick={() => onPlay(track)}>
             <PlayIcon size={30} />
           </Button>
         );

@@ -57,13 +57,23 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
     <div className="flex flex-col">
       <ButtonGroup size="lg">
         <Button
-          className={classNames('text-2xl border border-neutral-400  rounded-l-lg', itemType === 'album' ? '!bg-active text-primary-foreground' : 'bg-secondary text-primary',   )}
+          className={classNames(
+            'text-2xl border border-neutral-400  rounded-l-lg',
+            itemType === 'album'
+              ? '!bg-active text-primary-foreground'
+              : 'bg-secondary text-primary',
+          )}
           onClick={() => setItemType('album')}
           color={itemType === 'album' ? 'primary' : 'default'}>
           Albums
         </Button>
         <Button
-          className={classNames('text-2xl border border-neutral-400 rounded-r-lg', itemType === 'playlist' ? '!bg-active text-primary-foreground' : 'bg-secondary text-primary',   )}
+          className={classNames(
+            'text-2xl border border-neutral-400 rounded-r-lg',
+            itemType === 'playlist'
+              ? '!bg-active text-primary-foreground'
+              : 'bg-secondary text-primary',
+          )}
           onClick={() => setItemType('playlist')}
           color={itemType === 'playlist' ? 'primary' : 'default'}>
           Playlists
