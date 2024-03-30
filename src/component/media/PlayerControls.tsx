@@ -82,8 +82,8 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
   const sliderGetValue = (time: SliderValue): string =>
     trackDuration
       ? `${formatSecondsToMinutes(time as number)} of ${formatSecondsToMinutes(
-        trackDuration,
-      )}`
+          trackDuration,
+        )}`
       : '';
 
   return (
@@ -92,7 +92,7 @@ const PlayerTrackSlider: React.FC<PlayerTrackSliderProps> = ({
       aria-label="player track time"
       maxValue={playerStatus?.track?.trackDuration ?? 100}
       minValue={0}
-        showOutline={true}
+      showOutline={true}
       label={playerStatus?.track?.trackName}
       getValue={sliderGetValue}
       color="primary"

@@ -47,7 +47,7 @@ root.render(
   <ThemeProvider theme={theme}>
     <NextUIProvider>
       <RecoilRoot>
-        <main className="dark text-foreground bg-background">
+        <main className="light text-foreground bg-background">
           <App />
         </main>
       </RecoilRoot>
