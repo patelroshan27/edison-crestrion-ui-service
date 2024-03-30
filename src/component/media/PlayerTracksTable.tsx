@@ -12,7 +12,6 @@ import React, { type ReactNode } from 'react';
 import { type PlayerStatus, type PlayerTrack, type Track } from './types';
 import { TablePagination } from './TablePagination';
 import {
-  useClearPlayerTracksApi,
   useDeletePlayerTracksApi,
   usePlayerPlayTrackApi,
   useTablePagination,
@@ -48,8 +47,6 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   const playTrack = usePlayerPlayTrackApi();
   const deletePlayerTracks = useDeletePlayerTracksApi();
   const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
-
-
 
   const onPlay = (track: Track): void => {
     onMediaPlayerAction(
@@ -98,9 +95,10 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
   };
 
   const bottomContent = (
-    <TablePagination pages={pages} page={page} setPage={setPage}>
-     
-    </TablePagination>
+    <TablePagination
+      pages={pages}
+      page={page}
+      setPage={setPage}></TablePagination>
   );
 
   return (

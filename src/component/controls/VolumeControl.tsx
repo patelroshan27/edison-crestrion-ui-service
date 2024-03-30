@@ -48,7 +48,6 @@ const VolumeControl: React.FC<Props> = ({
   const sendCommands = useApiCommands();
 
   const [level, setLevel] = useState(0);
-  const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(false);
 
   useEffect(() => {
@@ -78,7 +77,6 @@ const VolumeControl: React.FC<Props> = ({
       .catch((err) => console.log(err));
   }, []);
 
-
   useEffect(() => {
     if (!getMuteStatusCmd) return;
     sendCommands([getMuteStatusCmd])
@@ -87,7 +85,6 @@ const VolumeControl: React.FC<Props> = ({
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   const handleVolChange = (newLevel: number): void => {
     if (newLevel < MIN || newLevel > MAX) return;
@@ -178,7 +175,7 @@ const VolumeControl: React.FC<Props> = ({
               className={classNames(
                 'absolute z-1 bottom-0 w-full self-center shadow-md rounded-full',
                 'bg-gradient-to-t shadow-md',
-                playing
+                muted
                   ? 'from-amber-200 to-amber-700'
                   : 'from-red-200 to-red-700',
               )}
@@ -198,12 +195,16 @@ const VolumeControl: React.FC<Props> = ({
           />
           {muteCmd && unMuteCmd && (
             <FlatButton
-              className="bg-red-700 text-red-200"
-              label={playing ? pauseLabel : playLabel}
-              iconDef={playing ? Mic : MicOff}
+              className={classNames(
+                !muted
+                  ? 'bg-red-700 text-red-200'
+                  : 'bg-green-700 text-green-200',
+              )}
+              label={muted ? pauseLabel : playLabel}
+              iconDef={muted ? Mic : MicOff}
               onClick={() => {
-                sendCommands([playing ? muteCmd : unMuteCmd])
-                  .then(() => setPlaying(!playing))
+                sendCommands([muted ? muteCmd : unMuteCmd])
+                  .then(() => setMuted(!muted))
                   .catch((err) => console.log(err));
               }}
             />

@@ -4,7 +4,6 @@ import {
   Lightbulb,
   LightbulbOff,
   ListMusic,
-  Mic2,
   Music2,
   PowerOff,
   Speech,
@@ -316,7 +315,7 @@ const Branhamanad: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: Speech, 
+              icon: Speech,
               title: 'Source',
               label: 'Sabha Hall',
               apiCommands: [
