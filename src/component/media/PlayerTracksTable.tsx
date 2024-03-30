@@ -18,6 +18,7 @@ import {
 } from './hooks';
 import { PlayIcon, TrashIcon } from 'lucide-react';
 import { formatSecondsToMinutes, onMediaPlayerAction } from './utils';
+import classNames from 'classnames';
 
 interface PlayerTracksTableProps {
   tableProps: Partial<TableProps>;
@@ -71,13 +72,12 @@ export const PlayerTracksTable: React.FC<PlayerTracksTableProps> = ({
       case 'play': {
         const isPlaying =
           playerStatus?.playerTrackIndex === track.index.toString();
-        const color = isPlaying ? 'primary' : 'default';
         return (
           <Button
-            className="border border-neutral-400 bg-secondary"
+            className={classNames("border border-neutral-400", isPlaying ? '!bg-active text-primary-foreground' : 'bg-secondary text-primary' )}
             isIconOnly
             onClick={() => onPlay(track)}
-            color={color}>
+            >
             <PlayIcon size={30} />
           </Button>
         );

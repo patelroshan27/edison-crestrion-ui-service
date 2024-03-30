@@ -30,7 +30,7 @@ function withIndex(tracks: Track[]): PlayerTrack[] {
 }
 
 export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
-  const [tracksView, setTracksView] = useState<MediaItemType>('track');
+  const [tracksView, setTracksView] = useState<MediaItemType>('playerTrack');
   const [playerStatus, setPlayerStatus] = useState<PlayerStatus>();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [playerTracks, setPlayerTracks] = useState<PlayerTrack[]>([]);

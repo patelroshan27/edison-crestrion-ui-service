@@ -48,7 +48,7 @@ const VolumeControl: React.FC<Props> = ({
   const sendCommands = useApiCommands();
 
   const [level, setLevel] = useState(0);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   useEffect(() => {
     const onResetEvent = (): void => {
