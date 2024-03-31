@@ -30,7 +30,7 @@ function withIndex(tracks: Track[]): PlayerTrack[] {
 }
 
 export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
-  const [tracksView, setTracksView] = useState<MediaItemType>('playerTrack');
+  const [tracksView, setTracksView] = useState<MediaItemType>('track');
   const [playerStatus, setPlayerStatus] = useState<PlayerStatus>();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [playerTracks, setPlayerTracks] = useState<PlayerTrack[]>([]);
@@ -69,13 +69,14 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
 
   const onAddToQueue = useCallback(
     (idsToAdd: SelectedMediaIds): void => {
+      console.log(tracksView);
       if (tracksView !== 'playerTrack' && !idsToAdd.trackIds?.length)
         setTracksView('playerTrack');
       addToPlayer({ playerId, ...idsToAdd })
         .then(updatePlayerTracks)
         .catch((e) => console.log(e));
     },
-    [playerId, addToPlayer, getPlayerTracks],
+    [playerId, tracksView, addToPlayer, getPlayerTracks],
   );
 
   const onPlayerTracksChange = useCallback((): void => {

@@ -33,7 +33,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
   return (
     <div
       className={classNames(
-        'flex justify-between space-x-2 px-6 py-1 w-full items-center border-b border-neutral-400',
+        'flex justify-between space-x-2 px-6 py-2 w-full items-center border-b border-neutral-400',
         className,
       )}>
       <div className="flex items-center space-x-2">
