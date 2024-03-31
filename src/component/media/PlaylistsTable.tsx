@@ -80,8 +80,8 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
       <TableHeader columns={playlistColumns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
-      <TableBody emptyContent={`No playlists found`} items={filteredItems}>
-        {(item) => (
+      <TableBody emptyContent={`No playlists found`}>
+        {filteredItems.map((item) => (
           <TableRow
             key={item.playlistId}
             className="border-b-1 border-neutral-700">
@@ -92,7 +92,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
               </TableCell>
             )}
           </TableRow>
-        )}
+        ))}
       </TableBody>
     </Table>
   );

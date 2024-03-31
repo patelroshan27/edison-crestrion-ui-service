@@ -87,8 +87,8 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
       <TableHeader columns={albumColumns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
       </TableHeader>
-      <TableBody emptyContent={`No albums found`} items={filteredItems}>
-        {(album) => (
+      <TableBody emptyContent={`No albums found`}>
+        {filteredItems.map((album) => (
           <TableRow
             key={album.albumIds.join()}
             className="border-b-1 border-neutral-700">
@@ -99,7 +99,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
               </TableCell>
             )}
           </TableRow>
-        )}
+        ))}
       </TableBody>
     </Table>
   );
