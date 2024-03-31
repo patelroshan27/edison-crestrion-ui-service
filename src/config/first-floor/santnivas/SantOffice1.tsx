@@ -3,8 +3,8 @@ import type { UIConfig } from 'config/Configs';
 
 const SantOffice1: UIConfig = {
   rooms: [
-    { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice1', title: 'Office1' },
+    { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice2', title: 'Office2' },
     { key: 'bramhananad', title: 'Bramhananad' },
     { key: 'santcorridor', title: 'Corridor' },

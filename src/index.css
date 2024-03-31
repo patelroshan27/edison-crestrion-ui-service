@@ -34,6 +34,10 @@ html {
   font-size: 16px;
 }
 
-tr[data-selected="true"] {
+.dark tr[data-selected="true"] {
+  background-color: #3A3232 !important;
+}
+
+.light tr[data-selected="true"] {
   background-color: #A6A1A1 !important;
 }
