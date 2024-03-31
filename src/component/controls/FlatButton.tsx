@@ -19,7 +19,7 @@ const FlatButton: React.FC<Props> = ({
     <button
       type="button"
       className={classNames(
-        'flex flex-col space-x-1 rounded-lg py-3 text-xl items-center justify-center h-full',
+        'flex flex-col space-x-1 rounded-lg text-xl items-center justify-center h-full',
         'outline-none focus:outline-none',
         className ?? 'text-primary border border-neutral-400 bg-secondary',
       )}

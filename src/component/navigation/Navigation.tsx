@@ -15,7 +15,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex justify-between space-x-2 px-6 p-2 mb-2 w-full items-center border-b border-neutral-400',
+        'flex justify-between space-x-2 px-6 pt-2 pb-2 mb-2 w-full items-center border-b border-neutral-400',
         className,
       )}>
       <div className="flex items-center space-x-2">
