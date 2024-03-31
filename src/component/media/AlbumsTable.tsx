@@ -51,7 +51,7 @@ export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   }, [albumsByName]);
   const { page, pages, setPage, filteredItems } = useTablePagination(
     albumsList,
-    8,
+    7,
   );
 
   const renderAlbumCell = (

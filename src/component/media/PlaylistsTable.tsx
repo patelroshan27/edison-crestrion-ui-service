@@ -42,7 +42,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
 }) => {
   const { page, pages, setPage, filteredItems } = useTablePagination(
     playlists,
-    8,
+    7,
   );
 
   const renderPlaylistCell = (

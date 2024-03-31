@@ -142,7 +142,7 @@ interface UsePaginationResult<T> {
 }
 export const useTablePagination = <T>(
   items: T[],
-  rowsPerPage = 6,
+  rowsPerPage = 5,
 ): UsePaginationResult<T> => {
   const [page, setPage] = useState<number>(1);
   const adjustedRowsPerPage = hasRoomSelection ? rowsPerPage : rowsPerPage + 1;
