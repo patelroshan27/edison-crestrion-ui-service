@@ -15,9 +15,9 @@ import type { ApiCommand, UIConfig } from 'config/Configs';
 const Branhamanad: UIConfig = {
   rooms: [
     { key: 'bramhananad', title: 'Bramhananad' },
-    { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice1', title: 'Office1' },
     { key: 'santoffice2', title: 'Office2' },
+    { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
   ],
