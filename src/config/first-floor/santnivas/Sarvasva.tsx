@@ -49,7 +49,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '154', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '1' }] },
               ],
             },
             {
@@ -58,7 +58,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '154', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '2' }] },
               ],
             },
             {
@@ -67,7 +67,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '154', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '3' }] },
               ],
             },
             {
@@ -76,7 +76,7 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '154', scene: '16' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '16' }] },
               ],
             },
             {
@@ -85,8 +85,8 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '154', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: '154', scene: '01' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '2' }] },
+                { type: 'pharos', payloads: [{ room: 'sarvasva', scene: '01' }] },
               ],
             },
             {
@@ -95,15 +95,15 @@ const Configs: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '154', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: '154', scene: '00' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '16' }] },
+                { type: 'pharos', payloads: [{ room: 'sarvasva', scene: '00' }] },
               ],
             },
           ],
         },
         pharos: {
           kind: 'pharos',
-          room: '154',
+          room: 'sarvasva',
           colorStates: [
             {
               name: 'Off',

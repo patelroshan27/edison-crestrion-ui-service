@@ -48,7 +48,7 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '172', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '1' }] },
               ],
             },
             {
@@ -57,7 +57,7 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '172', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '2' }] },
               ],
             },
             {
@@ -66,7 +66,7 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '172', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '3' }] },
               ],
             },
             {
@@ -75,7 +75,7 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '172', scene: '16' }] },
+                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '16' }] },
               ],
             },
             {
@@ -84,8 +84,8 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '172', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: '172', scene: '01' }] },
+                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '2' }] },
+                { type: 'pharos', payloads: [{ room: 'bramhanand', scene: '01' }] },
               ],
             },
             {
@@ -94,15 +94,15 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '172', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: '172', scene: '00' }] },
+                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '16' }] },
+                { type: 'pharos', payloads: [{ room: 'bramhanand', scene: '00' }] },
               ],
             },
           ],
         },
         pharos: {
           kind: 'pharos',
-          room: '172',
+          room: 'bramhanand',
           colorStates: [
             {
               name: 'Off',

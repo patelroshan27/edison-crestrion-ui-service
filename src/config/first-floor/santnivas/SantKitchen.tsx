@@ -28,7 +28,7 @@ const SantKitchen: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '170', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'santkitchen', scene: '1' }] },
               ],
             },
             {
@@ -37,7 +37,7 @@ const SantKitchen: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '170', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'santkitchen', scene: '2' }] },
               ],
             },
             {
@@ -46,7 +46,7 @@ const SantKitchen: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '170', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'santkitchen', scene: '3' }] },
               ],
             },
             {
@@ -55,7 +55,7 @@ const SantKitchen: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '170', scene: '16' }] },
+                { type: 'zum', payloads: [{ room: 'santkitchen', scene: '16' }] },
               ],
             },
             {
@@ -64,8 +64,8 @@ const SantKitchen: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '170', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: '170', scene: '01' }] },
+                { type: 'zum', payloads: [{ room: 'santkitchen', scene: '2' }] },
+                { type: 'pharos', payloads: [{ room: 'santkitchen', scene: '01' }] },
               ],
             },
             {
@@ -74,15 +74,15 @@ const SantKitchen: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '170', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: '170', scene: '00' }] },
+                { type: 'zum', payloads: [{ room: 'santkitchen', scene: '16' }] },
+                { type: 'pharos', payloads: [{ room: 'santkitchen', scene: '00' }] },
               ],
             },
           ],
         },
         pharos: {
           kind: 'pharos',
-          room: '170',
+          room: 'santkitchen',
           colorStates: [
             {
               name: 'Off',

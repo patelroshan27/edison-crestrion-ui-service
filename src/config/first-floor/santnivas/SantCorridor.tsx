@@ -28,7 +28,7 @@ const SantCorridor: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '157', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'santcorridor', scene: '1' }] },
               ],
             },
             {
@@ -37,7 +37,7 @@ const SantCorridor: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '157', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'santcorridor', scene: '2' }] },
               ],
             },
             {
@@ -46,7 +46,7 @@ const SantCorridor: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '157', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'santcorridor', scene: '3' }] },
               ],
             },
             {
@@ -55,7 +55,7 @@ const SantCorridor: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '157', scene: '16' }] },
+                { type: 'zum', payloads: [{ room: 'santcorridor', scene: '16' }] },
               ],
             },
             {
@@ -64,8 +64,8 @@ const SantCorridor: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '157', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: '157', scene: '01' }] },
+                { type: 'zum', payloads: [{ room: 'santcorridor', scene: '2' }] },
+                { type: 'pharos', payloads: [{ room: 'santcorridor', scene: '01' }] },
               ],
             },
             {
@@ -74,15 +74,15 @@ const SantCorridor: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: '157', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: '157', scene: '00' }] },
+                { type: 'zum', payloads: [{ room: 'santcorridor', scene: '16' }] },
+                { type: 'pharos', payloads: [{ room: 'santcorridor', scene: '00' }] },
               ],
             },
           ],
         },
         pharos: {
           kind: 'pharos',
-          room: '157',
+          room: 'santcorridor',
           colorStates: [
             {
               name: 'Off',
