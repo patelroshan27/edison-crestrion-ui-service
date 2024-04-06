@@ -9,6 +9,8 @@ import SantCorridor from './first-floor/santnivas/SantCorridor';
 import SantKitchen from './first-floor/santnivas/SantKitchen';
 import SantNivas from './first-floor/santnivas/SantNivas';
 import Bramhananad from './first-floor/santnivas/Bramhananad';
+import Aksharpith from './first-floor/aksharpith/Aksharpith';
+import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
 
 export interface CrestronConfigs {
   host: string;
@@ -154,6 +156,8 @@ export const CONFIGS = {
   santoffice2: SantOffice2,
   santcorridor: SantCorridor,
   santkitchen: SantKitchen,
+  aksharpith: Aksharpith,
+  shayonafresh: ShayonaFresh,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
