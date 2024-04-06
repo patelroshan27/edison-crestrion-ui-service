@@ -39,5 +39,5 @@ html {
 }
 
 .light tr[data-selected="true"] {
-  background-color: #A6A1A1 !important;
+  background-color: #f2f2f2 !important;
 }

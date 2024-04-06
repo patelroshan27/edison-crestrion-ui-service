@@ -28,7 +28,10 @@ const SantOffice2: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'santoffice2', scene: '1' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'santoffice2', scene: '1' }],
+                },
               ],
             },
             {
@@ -37,7 +40,10 @@ const SantOffice2: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'santoffice2', scene: '2' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'santoffice2', scene: '2' }],
+                },
               ],
             },
             {
@@ -46,7 +52,10 @@ const SantOffice2: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'santoffice2', scene: '3' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'santoffice2', scene: '3' }],
+                },
               ],
             },
             {
@@ -55,7 +64,10 @@ const SantOffice2: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'santoffice2', scene: '16' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'santoffice2', scene: '16' }],
+                },
               ],
             },
             {
@@ -64,8 +76,14 @@ const SantOffice2: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'santoffice2', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: 'santoffice2', scene: '01' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'santoffice2', scene: '2' }],
+                },
+                {
+                  type: 'pharos',
+                  payloads: [{ room: 'santoffice2', scene: '01' }],
+                },
               ],
             },
             {
@@ -74,8 +92,14 @@ const SantOffice2: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'santoffice2', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: 'santoffice2', scene: '00' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'santoffice2', scene: '16' }],
+                },
+                {
+                  type: 'pharos',
+                  payloads: [{ room: 'santoffice2', scene: '00' }],
+                },
               ],
             },
           ],

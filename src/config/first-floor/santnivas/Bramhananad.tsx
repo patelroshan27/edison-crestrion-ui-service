@@ -75,7 +75,10 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '16' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'bramhanand', scene: '16' }],
+                },
               ],
             },
             {
@@ -85,7 +88,10 @@ const Branhamanad: UIConfig = {
               label: 'All On',
               apiCommands: [
                 { type: 'zum', payloads: [{ room: 'bramhanand', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: 'bramhanand', scene: '01' }] },
+                {
+                  type: 'pharos',
+                  payloads: [{ room: 'bramhanand', scene: '01' }],
+                },
               ],
             },
             {
@@ -94,8 +100,14 @@ const Branhamanad: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: 'bramhanand', scene: '00' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'bramhanand', scene: '16' }],
+                },
+                {
+                  type: 'pharos',
+                  payloads: [{ room: 'bramhanand', scene: '00' }],
+                },
               ],
             },
           ],

@@ -86,7 +86,10 @@ const Configs: UIConfig = {
               label: 'All On',
               apiCommands: [
                 { type: 'zum', payloads: [{ room: 'sarvasva', scene: '2' }] },
-                { type: 'pharos', payloads: [{ room: 'sarvasva', scene: '01' }] },
+                {
+                  type: 'pharos',
+                  payloads: [{ room: 'sarvasva', scene: '01' }],
+                },
               ],
             },
             {
@@ -96,7 +99,10 @@ const Configs: UIConfig = {
               label: 'All Off',
               apiCommands: [
                 { type: 'zum', payloads: [{ room: 'sarvasva', scene: '16' }] },
-                { type: 'pharos', payloads: [{ room: 'sarvasva', scene: '00' }] },
+                {
+                  type: 'pharos',
+                  payloads: [{ room: 'sarvasva', scene: '00' }],
+                },
               ],
             },
           ],
