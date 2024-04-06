@@ -113,7 +113,9 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
                 className={classNames(
                   'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
                   'text-5xl border-2 border-neutral-700 bg-neutral-400 rounded-full opacity-80 font-medium active:opacity-100 hover:opacity-100',
-                  digit === -1 ? '!bg-green-500 text-background' : '!bg-secondary-foreground text-primary',
+                  digit === -1
+                    ? '!bg-green-500 text-background'
+                    : '!bg-secondary-foreground text-primary',
                 )}
                 disabled={isLoading}
                 onClick={() => {
