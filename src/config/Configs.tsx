@@ -11,6 +11,7 @@ import SantNivas from './first-floor/santnivas/SantNivas';
 import Bramhananad from './first-floor/santnivas/Bramhananad';
 import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
+import SabhaHall from './second-floor/SabhaHall';
 
 export interface CrestronConfigs {
   host: string;
@@ -76,6 +77,7 @@ export interface ColorIntensity {
 export interface PharosControlData {
   kind: 'pharos';
   room: string;
+  className?: string;
   colorStates: ColorIntensity[];
 }
 
@@ -158,6 +160,7 @@ export const CONFIGS = {
   santkitchen: SantKitchen,
   aksharpith: Aksharpith,
   shayonafresh: ShayonaFresh,
+  sabhahall : SabhaHall
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

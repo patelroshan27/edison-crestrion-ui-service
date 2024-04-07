@@ -41,6 +41,8 @@ const Branhamanad: UIConfig = {
       controls: {
         lights: {
           kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -115,6 +117,7 @@ const Branhamanad: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'bramhanand',
+          className: 'row-span-4 col-span-3',
           colorStates: [
             {
               name: 'Off',
@@ -287,7 +290,7 @@ const Branhamanad: UIConfig = {
         },
         sources: {
           kind: 'group',
-          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          className: 'row-span-4 grid !grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr] gap-2',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {

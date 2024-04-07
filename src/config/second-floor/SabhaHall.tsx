@@ -1,24 +1,30 @@
-import { Lightbulb, LightbulbOff, PowerOff, Sun, SunDim } from 'lucide-react';
-import type { UIConfig } from 'config/Configs';
+import {
+  Bluetooth,
+  Flower2,
+  Lightbulb,
+  LightbulbOff,
+  ListMusic,
+  Mic2,
+  Music2,
+  PowerOff,
+  Speech,
+  Sun,
+  SunDim,
+} from 'lucide-react';
+import type { ApiCommand, UIConfig } from 'config/Configs';
 
-const SantOffice1: UIConfig = {
-  rooms: [
-    { key: 'santoffice1', title: 'Office1' },
-    { key: 'santoffice2', title: 'Office2' },
-    { key: 'sarvasva', title: 'Sarvasva' },
-    { key: 'bramhananad', title: 'Bramhananad' },
-    { key: 'santcorridor', title: 'Corridor' },
-    { key: 'santkitchen', title: 'Kitchen' },
-  ],
+const SabhaHall: UIConfig = {
+  rooms: [],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
-  authID: 'SantOffice1',
+  authID: 'SabhaHall',
+  lockTimeout: 20000000,
   crestronConfigs: {
-    host: '10.25.20.73',
+    host: '10.25.20.93',
     ipID: 19,
     port: 41794,
   },
@@ -30,7 +36,7 @@ const SantOffice1: UIConfig = {
         lights: {
           kind: 'group',
           className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+            'row-span-4 grid grid-cols-2 grid-rows-[1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -38,34 +44,7 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'santoffice1', scene: '1' }],
-                },
-              ],
-            },
-            {
-              kind: 'light',
-              icon: Sun,
-              title: 'Lights',
-              label: 'Medium',
-              apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'santoffice1', scene: '2' }],
-                },
-              ],
-            },
-            {
-              kind: 'light',
-              icon: SunDim,
-              title: 'Lights',
-              label: 'Low',
-              apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'santoffice1', scene: '3' }],
-                },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '1' }] },
               ],
             },
             {
@@ -74,10 +53,61 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'santoffice1', scene: '16' }],
-                },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '16' }] },
+              ],
+            },
+            {
+              kind: 'light',
+              icon: Sun,
+              title: 'Lights',
+              label: 'Med',
+              apiCommands: [
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '2' }] },
+              ],
+            },
+            {
+              kind: 'light',
+              icon: SunDim,
+              title: 'Lights',
+              label: 'Low',
+              apiCommands: [
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '3' }] },
+              ],
+            },
+            {
+              kind: 'light',
+              icon: SunDim,
+              title: 'Lights',
+              label: 'Stage On',
+              apiCommands: [
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '4' }] },
+              ],
+            },
+            {
+              kind: 'light',
+              icon: SunDim,
+              title: 'Lights',
+              label: 'Stage Off',
+              apiCommands: [
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '5' }] },
+              ],
+            },
+            {
+              kind: 'light',
+              icon: SunDim,
+              title: 'Lights',
+              label: 'Center On',
+              apiCommands: [
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '6' }] },
+              ],
+            },
+            {
+              kind: 'light',
+              icon: SunDim,
+              title: 'Lights',
+              label: 'Center Off',
+              apiCommands: [
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '7' }] },
               ],
             },
             {
@@ -86,13 +116,10 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'santoffice1', scene: '2' }],
-                },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '2' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'santoffice1', scene: '01' }],
+                  payloads: [{ room: 'sabhahall', scene: '01' }],
                 },
               ],
             },
@@ -102,13 +129,10 @@ const SantOffice1: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'santoffice1', scene: '16' }],
-                },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '16' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'santoffice1', scene: '00' }],
+                  payloads: [{ room: 'sabhahall', scene: '00' }],
                 },
               ],
             },
@@ -116,7 +140,7 @@ const SantOffice1: UIConfig = {
         },
         pharos: {
           kind: 'pharos',
-          room: 'santoffice1',
+          room: 'sabhahall',
           className: 'row-span-4 col-span-3',
           colorStates: [
             {
@@ -212,6 +236,26 @@ const SantOffice1: UIConfig = {
               color: 'rgb(252, 7, 234)',
               scene: '19',
             },
+            {
+              name: 'Dark Yellow',
+              color: 'rgb(255,185,29)',
+              scene: '20',
+            },
+            {
+              name: 'Dark Brown',
+              color: 'rgb(83,37,0)',
+              scene: '21',
+            },
+            {
+              name: 'Grey',
+              color: 'rgb(143,136,136)',
+              scene: '22',
+            },
+            {
+              name: 'Dark Red',
+              color: 'rgb(108,12,12)',
+              scene: '23',
+            }
           ],
         },
       },
@@ -219,4 +263,4 @@ const SantOffice1: UIConfig = {
   },
 };
 
-export default SantOffice1;
+export default SabhaHall;

@@ -37,6 +37,8 @@ const ShayonaFresh: UIConfig = {
       controls: {
         lights: {
           kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -123,6 +125,7 @@ const ShayonaFresh: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'shayonafresh',
+          className: 'row-span-4 col-span-3',
           colorStates: [
             {
               name: 'Off',

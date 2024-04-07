@@ -21,6 +21,7 @@ const Configs: UIConfig = {
     { key: 'bramhananad', title: 'Bramhananad' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
+    { key: 'sabhahall', title: 'SabhaHall' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
@@ -29,7 +30,7 @@ const Configs: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Sarvasva',
-  lockTimeout: 20000000,
+  lockTimeout: 200000000,
   crestronConfigs: {
     host: '10.25.20.81',
     ipID: 19,
@@ -42,6 +43,8 @@ const Configs: UIConfig = {
       controls: {
         lights: {
           kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -110,6 +113,7 @@ const Configs: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sarvasva',
+          className: 'row-span-4 col-span-3',
           colorStates: [
             {
               name: 'Off',
@@ -309,7 +313,7 @@ const Configs: UIConfig = {
         },
         sources: {
           kind: 'group',
-          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          className: 'row-span-4 grid !grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr] gap-2',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
