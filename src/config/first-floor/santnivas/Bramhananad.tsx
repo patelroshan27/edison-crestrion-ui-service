@@ -117,7 +117,7 @@ const Branhamanad: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'bramhanand',
-          className: 'row-span-4 col-span-3',
+          className: 'row-span-4 col-span-3 gap-16',
           colorStates: [
             {
               name: 'Off',

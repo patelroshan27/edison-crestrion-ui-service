@@ -103,7 +103,7 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
           return (
             <div
               key={`row-${index}`}
-              className="h-[9rem] flex items-center space-x-12   justify-center">
+              className={classNames('h-[9rem] flex items-center justify-center', className)}>
               {row}
             </div>
           );

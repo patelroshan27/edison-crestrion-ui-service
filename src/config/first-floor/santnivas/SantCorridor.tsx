@@ -109,7 +109,7 @@ const SantCorridor: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'santcorridor',
-          className: 'row-span-4 col-span-3',
+          className: 'row-span-4 col-span-3 gap-16',
           colorStates: [
             {
               name: 'Off',

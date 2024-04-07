@@ -255,7 +255,47 @@ const SabhaHall: UIConfig = {
               name: 'Dark Red',
               color: 'rgb(108,12,12)',
               scene: '23',
-            }
+            },
+            {
+              name: 'Dark Yellow',
+              color: 'rgb(255,185,29)',
+              scene: '24',
+            },
+            {
+              name: 'Dark Brown',
+              color: 'rgb(83,37,0)',
+              scene: '25',
+            },
+            {
+              name: 'Grey',
+              color: 'rgb(143,136,136)',
+              scene: '26',
+            },
+            {
+              name: 'Dark Red',
+              color: 'rgb(108,12,12)',
+              scene: '27',
+            },
+            {
+              name: 'Dark Yellow',
+              color: 'rgb(255,185,29)',
+              scene: '28',
+            },
+            {
+              name: 'Dark Brown',
+              color: 'rgb(83,37,0)',
+              scene: '29',
+            },
+            {
+              name: 'Dark Yellow',
+              color: 'rgb(255,185,29)',
+              scene: '30',
+            },
+            {
+              name: 'Dark Brown',
+              color: 'rgb(83,37,0)',
+              scene: '31',
+            },
           ],
         },
       },
