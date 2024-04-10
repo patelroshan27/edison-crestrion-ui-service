@@ -12,6 +12,7 @@ import Bramhananad from './first-floor/santnivas/Bramhananad';
 import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
 import SabhaHall from './second-floor/SabhaHall';
+import SecondFloorLobby from './second-floor/SecondFloorLobby';
 
 export interface CrestronConfigs {
   host: string;
@@ -161,6 +162,7 @@ export const CONFIGS = {
   aksharpith: Aksharpith,
   shayonafresh: ShayonaFresh,
   sabhahall: SabhaHall,
+  lobby260: SecondFloorLobby,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

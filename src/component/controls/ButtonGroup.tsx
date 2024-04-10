@@ -22,10 +22,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ data }) => {
   }, []);
 
   return (
-    <div
-      className={classNames(
-        data.className,
-      )}>
+    <div className={classNames(data.className)}>
       {data.controls.map((button) => {
         return (
           <Button

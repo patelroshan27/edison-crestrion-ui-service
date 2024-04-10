@@ -1,21 +1,12 @@
-import {
-  Bluetooth,
-  Flower2,
-  Lightbulb,
-  LightbulbOff,
-  ListMusic,
-  Mic2,
-  Music2,
-  PowerOff,
-  Speech,
-  Sun,
-  SunDim,
-} from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'config/Configs';
+import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
+import type { UIConfig } from 'config/Configs';
 import { sabhaHallColorStates } from 'config/ConfigData';
 
 const SabhaHall: UIConfig = {
-  rooms: [],
+  rooms: [
+    { key: 'sabhahall', title: 'SabhaHall' },
+    { key: 'lobby260', title: 'SecondFloor Lobby' },
+  ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',
