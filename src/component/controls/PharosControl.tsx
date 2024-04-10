@@ -39,7 +39,7 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
         'outline-none focus:outline-none border-4 flex items-center justify-center',
         'transition h-full rounded-[50%] border-neutral-400 overflow-hidden w-full max-w-[7rem] max-h-[7rem]',
         activeScene === scene
-          ? 'border border-primary rounded-2xl scale-100'
+          ? 'border border-active rounded-2xl scale-100'
           : 'scale-80',
         color,
       )}
