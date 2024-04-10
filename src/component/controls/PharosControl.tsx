@@ -38,12 +38,12 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
       className={classNames(
         'outline-none focus:outline-none border-4 flex items-center justify-center',
         'transition h-full rounded-[50%] border-neutral-400 overflow-hidden w-full max-w-[7rem] max-h-[7rem]',
-        activeScene === scene ? 'scale-100' : 'scale-80',
+        activeScene === scene
+          ? 'border border-primary rounded-2xl scale-100'
+          : 'scale-80',
+        color,
       )}
       type="button"
-      style={{
-        backgroundColor: iconDisplay != null ? 'rgba(255,255,255,0.1)' : color,
-      }}
       onClick={() => {
         sendPharosCmd([{ room, scene }].concat(extraPayloads ?? []))
           .then(() => onPharosCmd(scene))
@@ -103,7 +103,10 @@ const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
           return (
             <div
               key={`row-${index}`}
-              className={classNames('h-[9rem] flex items-center justify-center', className)}>
+              className={classNames(
+                'h-[9rem] flex items-center justify-center',
+                className,
+              )}>
               {row}
             </div>
           );

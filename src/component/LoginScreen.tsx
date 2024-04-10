@@ -94,7 +94,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             })}
           </div>
         </div>
-        <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center">
+        <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center pb-2">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1].map((digit) => {
             let display: React.ReactNode = digit;
             switch (digit) {

@@ -9,6 +9,7 @@ import { ThemeProvider } from 'react-jss';
 import 'index.css';
 import App from 'component/app/App';
 import { NextUIProvider } from '@nextui-org/react';
+import classNames from 'classnames';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -47,7 +48,7 @@ root.render(
   <ThemeProvider theme={theme}>
     <NextUIProvider>
       <RecoilRoot>
-        <main className="light text-foreground bg-background">
+        <main className={classNames('light text-foreground bg-background')}>
           <App />
         </main>
       </RecoilRoot>

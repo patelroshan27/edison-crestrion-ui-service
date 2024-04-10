@@ -160,7 +160,7 @@ export const CONFIGS = {
   santkitchen: SantKitchen,
   aksharpith: Aksharpith,
   shayonafresh: ShayonaFresh,
-  sabhahall : SabhaHall
+  sabhahall: SabhaHall,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
