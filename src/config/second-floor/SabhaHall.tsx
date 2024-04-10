@@ -81,7 +81,7 @@ const SabhaHall: UIConfig = {
               title: 'Lights',
               label: 'Stage On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '4' }] },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '5' }] },
               ],
             },
             {
@@ -90,7 +90,7 @@ const SabhaHall: UIConfig = {
               title: 'Lights',
               label: 'Stage Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '5' }] },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '4' }] },
               ],
             },
             {
@@ -99,7 +99,7 @@ const SabhaHall: UIConfig = {
               title: 'Lights',
               label: 'Center On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '6' }] },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '7' }] },
               ],
             },
             {
@@ -108,7 +108,7 @@ const SabhaHall: UIConfig = {
               title: 'Lights',
               label: 'Center Off',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '7' }] },
+                { type: 'zum', payloads: [{ room: 'sabhahall', scene: '6' }] },
               ],
             },
             {
