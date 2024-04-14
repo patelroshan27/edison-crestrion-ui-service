@@ -149,36 +149,6 @@ const Aksharpith: UIConfig = {
               controlPosition: '',
             },
           },
-          getMuteStatusCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'mandir',
-              cmdType: 'GS',
-              cmdName: 'Mute Status',
-              controlNumber: '',
-              controlPosition: '',
-            },
-          },
-          muteCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'mandir',
-              cmdType: 'CS',
-              cmdName: 'Vol Mute',
-              controlNumber: '',
-              controlPosition: '65535',
-            },
-          },
-          unMuteCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'mandir',
-              cmdType: 'CS',
-              cmdName: 'Vol Unmute',
-              controlNumber: '',
-              controlPosition: '0',
-            },
-          },
           resetCmd: {
             type: 'audio',
             payload: {
@@ -214,36 +184,6 @@ const Aksharpith: UIConfig = {
               cmdName: 'Vol Change',
               controlNumber: '6',
               controlPosition: '',
-            },
-          },
-          getMuteStatusCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'mandir',
-              cmdType: 'GS',
-              cmdName: 'Mute Status',
-              controlNumber: '',
-              controlPosition: '',
-            },
-          },
-          muteCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'mandir',
-              cmdType: 'CS',
-              cmdName: 'Vol Mute',
-              controlNumber: '',
-              controlPosition: '65535',
-            },
-          },
-          unMuteCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'mandir',
-              cmdType: 'CS',
-              cmdName: 'Vol Unmute',
-              controlNumber: '',
-              controlPosition: '0',
             },
           },
           resetCmd: {
