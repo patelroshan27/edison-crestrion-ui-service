@@ -6,12 +6,12 @@ import {
   ListMusic,
   Mic2,
   Music2,
-  PowerOff,
   Speech,
   Sun,
   SunDim,
 } from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'config/Configs';
+import { type ApiCommand, type UIConfig } from 'config/Configs';
+import { commonRoomColorStates } from 'config/ConfigData';
 
 const Configs: UIConfig = {
   rooms: [
@@ -21,6 +21,7 @@ const Configs: UIConfig = {
     { key: 'bramhananad', title: 'Bramhananad' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
+    { key: 'sabhahall', title: 'SabhaHall' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
@@ -29,7 +30,7 @@ const Configs: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Sarvasva',
-  lockTimeout: 20000000,
+  lockTimeout: 200000000,
   crestronConfigs: {
     host: '10.25.20.81',
     ipID: 19,
@@ -42,6 +43,8 @@ const Configs: UIConfig = {
       controls: {
         lights: {
           kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -110,101 +113,8 @@ const Configs: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sarvasva',
-          colorStates: [
-            {
-              name: 'Off',
-              color: 'rgba(255,255,255,0.1)',
-              icon: PowerOff,
-              scene: '00',
-            },
-            {
-              name: 'Light Orange',
-              color: 'rgb(225,169,104)',
-              scene: '01',
-            },
-            {
-              name: 'Dark Orange',
-              color: 'rgb(196,100,0)',
-              scene: '02',
-            },
-            { name: 'Blue', color: 'rgb(2,0,255)', scene: '03' },
-            {
-              name: 'Gold',
-              color: 'rgb(166,156,0)',
-              scene: '04',
-            },
-            {
-              name: 'Yellow',
-              color: 'rgb(225,220,114)',
-              scene: '05',
-            },
-            {
-              name: 'Bright Red',
-              color: 'rgb(252,86,86)',
-              scene: '06',
-            },
-            {
-              name: 'Purple',
-              color: 'rgb(171,145,248)',
-              scene: '07',
-            },
-            {
-              name: 'Dark Green',
-              color: 'rgb(54,143,15)',
-              scene: '08',
-            },
-            {
-              name: 'Sky Blue',
-              color: 'rgb(141,238,255)',
-              scene: '09',
-            },
-            {
-              name: 'White',
-              color: 'rgb(255,255,255)',
-              scene: '10',
-            },
-            {
-              name: 'Mint',
-              color: 'rgb(40,162,125)',
-              scene: '11',
-            },
-            {
-              name: 'Dark Pink',
-              color: 'rgb(248,82,143)',
-              scene: '12',
-            },
-            { name: 'Red', color: 'rgb(219,0,22)', scene: '13' },
-            {
-              name: 'Dark Purple',
-              color: 'rgb(63,13,100)',
-              scene: '14',
-            },
-            {
-              name: 'Dark Yellow',
-              color: 'rgb(255,185,29)',
-              scene: '15',
-            },
-            {
-              name: 'Dark Brown',
-              color: 'rgb(83,37,0)',
-              scene: '16',
-            },
-            {
-              name: 'Grey',
-              color: 'rgb(143,136,136)',
-              scene: '17',
-            },
-            {
-              name: 'Dark Red',
-              color: 'rgb(108,12,12)',
-              scene: '18',
-            },
-            {
-              name: 'Dark Pink',
-              color: 'rgb(252, 7, 234)',
-              scene: '19',
-            },
-          ],
+          className: 'row-span-4 col-span-3 gap-16',
+          colorStates: commonRoomColorStates,
         },
       },
     },
@@ -309,7 +219,8 @@ const Configs: UIConfig = {
         },
         sources: {
           kind: 'group',
-          className: '!grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid !grid-cols-2 !grid-rows-[1fr_1fr_1fr_1fr] gap-2',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {

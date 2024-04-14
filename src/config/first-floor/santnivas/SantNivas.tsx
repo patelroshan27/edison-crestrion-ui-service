@@ -21,6 +21,8 @@ const Configs: UIConfig = {
       controls: {
         lights: {
           kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -163,6 +165,7 @@ const Configs: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sarvasva',
+          className: 'row-span-4 col-span-3 gap-16',
           colorStates: [
             {
               name: 'Off',

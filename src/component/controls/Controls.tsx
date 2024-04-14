@@ -33,7 +33,7 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
         } else if (data.kind === 'pharos') {
           return (
             <PharosControl
-              className="row-span-4 col-span-3"
+              className={classNames(data.className)}
               key={key}
               config={data}
             />

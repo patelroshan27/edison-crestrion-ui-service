@@ -73,7 +73,11 @@
     "girlsgym:build": "REACT_APP_ROOM_CONFIG_NAME=girlsgym react-scripts build",
     "girlsgym:archive": "REACT_APP_ROOM_CONFIG_NAME=girlsgym ch5-cli archive -p girlsgym -P sampleSource=girlsgym -d build -o publish",
     "girlsgym:deploy": "REACT_APP_ROOM_CONFIG_NAME=girlsgym ch5-cli deploy -H 10.25.20.97 -t touchscreen publish/girlsgym.ch5z",
-    "girlsgym": "yarn girlsgym:build && yarn girlsgym:archive && yarn girlsgym:deploy"
+    "girlsgym": "yarn girlsgym:build && yarn girlsgym:archive && yarn girlsgym:deploy",
+    "sabhahall:build": "REACT_APP_ROOM_CONFIG_NAME=sabhahall react-scripts build",
+    "sabhahall:archive": "REACT_APP_ROOM_CONFIG_NAME=sabhahall ch5-cli archive -p sabhahall -P sampleSource=sabhahall -d build -o publish",
+    "sabhahall:deploy": "REACT_APP_ROOM_CONFIG_NAME=sabhahall ch5-cli deploy -H 10.25.20.93 -t touchscreen publish/sabhahall.ch5z",
+    "sabhahall": "yarn sabhahall:build && yarn sabhahall:archive && yarn sabhahall:deploy"
   },
   "eslintConfig": {
     "extends": [

@@ -22,11 +22,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ data }) => {
   }, []);
 
   return (
-    <div
-      className={classNames(
-        'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
-        data.className,
-      )}>
+    <div className={classNames(data.className)}>
       {data.controls.map((button) => {
         return (
           <Button

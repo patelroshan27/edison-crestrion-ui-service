@@ -55,7 +55,7 @@ export const SimpleButton: React.FC<SimpleButtonProps> = ({
       <div className={classNames('w-full text-start flex flex-col space-y-1')}>
         <p
           className={classNames(
-            'text-lg leading-none font-semibold',
+            'text-sm leading-none font-semibold',
             isOn ? 'text-primary-foreground' : 'text-primary',
           )}>
           {title ?? 'Button'}

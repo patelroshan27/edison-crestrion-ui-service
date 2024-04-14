@@ -15,7 +15,7 @@ import { AUDIO_RESET_EVENT } from 'utils/events';
 const MAX = 100;
 const MIN = 0;
 const STEP = 1;
-const MAX_DB_DECIMAL = 50000;
+const MAX_DB_DECIMAL = 56175; // 0 db volume
 
 function getPercentToDB(percent: number): number {
   return Math.round((percent / 100) * MAX_DB_DECIMAL);
