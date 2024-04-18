@@ -116,6 +116,7 @@ export interface AudioControlData {
   getMuteStatusCmd?: AudioApiCommand;
   muteCmd?: AudioApiCommand;
   unMuteCmd?: AudioApiCommand;
+  maxDB?: number;
 }
 
 export interface GroupControlData {
