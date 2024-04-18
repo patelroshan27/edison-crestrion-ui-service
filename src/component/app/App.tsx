@@ -7,9 +7,9 @@ import LogoScreenSaver from 'component/LogoScreenSaver';
 import LoginScreen from 'component/LoginScreen';
 import { RoomSelection } from 'component/navigation/RoomSelection';
 import { useRecoilState } from 'recoil';
-import { isLoggedInState } from 'state/navigation';
 import { LockButton } from 'component/navigation/LockButton';
 import { FIVE_MINUTES_IN_MS } from 'utils/Constants';
+import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
 
 const defaultConfig = getConfigs();
 const {
@@ -27,7 +27,8 @@ interface Props {
 }
 
 const App: React.FC<Props> = ({ className }) => {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  const [loggedInUser, setLoggedInUser] = useRecoilState(loggedInUserState);
+  const isLoggedIn = Boolean(loggedInUser.role);
   const shouldAskForLogin = authProviderURL != null && authID != null;
   const panelContent = (
     <div
@@ -46,7 +47,7 @@ const App: React.FC<Props> = ({ className }) => {
     let timeout: NodeJS.Timeout;
     if (isLoggedIn) {
       timeout = setTimeout(() => {
-        setIsLoggedIn(false);
+        setLoggedInUser(LOGGED_OUT_USER);
       }, lockTimeout);
     }
 

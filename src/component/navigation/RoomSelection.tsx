@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { useRecoilState } from 'recoil';
-import { activeConfigState, pageState } from 'state/navigation';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  activeConfigState,
+  loggedInUserState,
+  pageState,
+} from 'state/navigation';
 import { type RoomKey, getConfigs } from 'config/Configs';
+import { getAllowedPages } from 'utils/getAllowedPages';
 
 const defaultConfig = getConfigs();
 
@@ -15,6 +20,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
 }: RoomSelectionProps) => {
   const [, setActivePage] = useRecoilState(pageState);
   const [, setActiveConfig] = useRecoilState(activeConfigState);
+  const loggedInUser = useRecoilValue(loggedInUserState);
   const [roomKey, setRoomKey] = useState<RoomKey>(defaultConfig.rooms[0]?.key);
 
   useEffect(() => {
@@ -25,7 +31,7 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
     // if (!newConfig.pages[activePage]) {
     // }
     // always select first tab in case of multiple rooms
-    setActivePage(Object.keys(newConfig.pages)[0]);
+    setActivePage(getAllowedPages(newConfig, loggedInUser)[0]);
   }, [roomKey]);
 
   if (!defaultConfig.rooms.length) return null;

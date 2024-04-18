@@ -145,6 +145,7 @@ export interface PageData {
   name: string;
   icon: LucideIcon;
   className?: string;
+  requiredRoles?: string[];
   controls: { [key in string]: ControlData };
   style?: React.CSSProperties;
 }

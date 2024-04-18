@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import classNames from 'classnames';
 import { Check, Loader2 } from 'lucide-react';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { isLoggedInState } from 'state/navigation';
+import { useSetRecoilState } from 'recoil';
+import { loggedInUserState } from 'state/navigation';
 
 interface Props {
   authProviderURL: string;
@@ -14,7 +14,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const passWordRef = useRef<HTMLDivElement>(null);
-  const [, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  const setLoggedInUser = useSetRecoilState(loggedInUserState);
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
   const handleInvalidPassword = (): void => {
@@ -57,7 +57,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
     );
     if (response.status === 200) {
       setIsLoading(false);
-      setIsLoggedIn(true);
+      setLoggedInUser(response.data);
     }
   };
 

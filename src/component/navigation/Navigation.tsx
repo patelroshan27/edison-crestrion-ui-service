@@ -1,7 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { activeConfigState, pageState } from 'state/navigation';
+import {
+  activeConfigState,
+  loggedInUserState,
+  pageState,
+} from 'state/navigation';
+import { getAllowedPages } from 'utils/getAllowedPages';
 
 interface Props {
   className?: string;
@@ -10,7 +15,8 @@ interface Props {
 const Navigation: React.FC<Props> = ({ className }: Props) => {
   const activeConfig = useRecoilValue(activeConfigState);
   const [activeTab, setActivePage] = useRecoilState(pageState);
-  const pages = Object.keys(activeConfig.pages);
+  const loggedInUser = useRecoilValue(loggedInUserState);
+  const pages = getAllowedPages(activeConfig, loggedInUser);
 
   return (
     <div

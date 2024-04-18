@@ -26,6 +26,7 @@ const BoysGym: UIConfig = {
   pages: {
     'H&C': {
       name: 'Hoops & Curtain',
+      requiredRoles: ['sant', 'admin'],
       icon: Sun,
       className: '!grid-cols-3',
       controls: {
