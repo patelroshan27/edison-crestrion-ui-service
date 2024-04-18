@@ -13,9 +13,10 @@ export const activeConfigState = atom({
   default: defaultConfig,
 });
 
-export const isLoggedInState = atom({
-  key: 'nav/isLoggedInState',
-  default: false,
+export const LOGGED_OUT_USER = { role: '', name: '', passcode: '' };
+export const loggedInUserState = atom({
+  key: 'app/loggedInUserState',
+  default: LOGGED_OUT_USER,
 });
 
 export const webRelayPendingActionState = atom({

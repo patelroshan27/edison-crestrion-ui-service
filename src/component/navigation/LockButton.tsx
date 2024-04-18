@@ -3,12 +3,12 @@ import React from 'react';
 import { Lock } from 'lucide-react';
 import { getConfigs } from 'config/Configs';
 import { useSetRecoilState } from 'recoil';
-import { isLoggedInState } from 'state/navigation';
+import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
 
 const defaultConfig = getConfigs();
 
 export const LockButton: React.FC = () => {
-  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
+  const setLoggedInUser = useSetRecoilState(loggedInUserState);
 
   return (
     <div className="absolute right-5 top-2">
@@ -18,7 +18,7 @@ export const LockButton: React.FC = () => {
           'px-4 py-[0.57rem] flex items-center rounded-lg text-lg bg-red-700 text-red-200',
         )}
         onClick={() => {
-          setIsLoggedIn(false);
+          setLoggedInUser(LOGGED_OUT_USER);
         }}>
         <Lock className="mr-3 h-6 w-6 text-lg" />
         <div className="text-left flex flex-col">
