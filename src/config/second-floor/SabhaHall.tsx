@@ -24,6 +24,7 @@ const SabhaHall: UIConfig = {
     LIGHTS: {
       name: 'Lights',
       icon: Sun,
+      className: '!grid-rows-1 grid-cols-[1fr_2fr]',
       controls: {
         lights: {
           kind: 'group',
@@ -133,7 +134,7 @@ const SabhaHall: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sabhahall',
-          className: 'row-span-4 col-span-3',
+          className: 'row-span-4',
           colorStates: sabhaHallColorStates,
         },
       },

@@ -17,12 +17,12 @@ const MIN = 0;
 const STEP = 1;
 const MAX_DB_DECIMAL = 56175; // 0 db volume
 
-function getPercentToDB(percent: number): number {
-  return Math.round((percent / 100) * MAX_DB_DECIMAL);
+function getPercentToDB(percent: number, maxDB = MAX_DB_DECIMAL): number {
+  return Math.round((percent / 100) * maxDB);
 }
 
-function getDBToPercentage(db: number): number {
-  return Math.round((db * 100) / MAX_DB_DECIMAL);
+function getDBToPercentage(db: number, maxDB = MAX_DB_DECIMAL): number {
+  return Math.round((db * 100) / maxDB);
 }
 
 interface Props {
@@ -43,6 +43,7 @@ const VolumeControl: React.FC<Props> = ({
     muteCmd,
     unMuteCmd,
     resetCmd,
+    maxDB,
   },
 }: Props) => {
   const sendCommands = useApiCommands();
@@ -55,7 +56,7 @@ const VolumeControl: React.FC<Props> = ({
       setTimeout(() => {
         sendCommands([getVolCmd])
           .then((data) => {
-            const resetLevel = getDBToPercentage(Number(data));
+            const resetLevel = getDBToPercentage(Number(data), maxDB);
             setLevel(resetLevel);
           })
           .catch((err) => console.log(err));
@@ -72,7 +73,7 @@ const VolumeControl: React.FC<Props> = ({
   useEffect(() => {
     sendCommands([getVolCmd])
       .then((data) => {
-        setLevel(getDBToPercentage(Number(data)));
+        setLevel(getDBToPercentage(Number(data), maxDB));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -94,7 +95,7 @@ const VolumeControl: React.FC<Props> = ({
         type: volChangeCmd.type,
         payload: {
           ...volChangeCmd.payload,
-          controlPosition: getPercentToDB(newLevel).toString(),
+          controlPosition: getPercentToDB(newLevel, maxDB).toString(),
         },
       },
     ])

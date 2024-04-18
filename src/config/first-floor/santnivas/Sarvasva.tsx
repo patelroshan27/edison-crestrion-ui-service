@@ -1,6 +1,5 @@
 import {
   Bluetooth,
-  Flower2,
   Lightbulb,
   LightbulbOff,
   ListMusic,
@@ -10,6 +9,7 @@ import {
   Sun,
   SunDim,
 } from 'lucide-react';
+import { MandirSvg } from '../../../svgs/Mandir';
 import { type ApiCommand, type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
@@ -296,7 +296,7 @@ const Configs: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: Flower2,
+              icon: MandirSvg,
               title: 'Source',
               label: 'Mandir',
               apiCommands: [

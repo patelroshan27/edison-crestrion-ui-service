@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import { type LucideIcon } from 'lucide-react';
+import { type SvgIcon } from 'types/appState';
 
 export interface ButtonCommonProps {
   className?: string;
-  icon: LucideIcon;
-  iconOff?: LucideIcon;
+  icon: SvgIcon;
+  iconOff?: SvgIcon;
   label: string;
   labelOff?: string;
   title?: string;
