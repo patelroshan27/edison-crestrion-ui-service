@@ -199,7 +199,7 @@ const VolumeControl: React.FC<Props> = ({
               className={classNames(
                 !muted
                   ? 'bg-red-700 text-red-200'
-                  : 'bg-green-700 text-green-200',
+                  : 'border border-neutral-400 bg-secondary text-active',
               )}
               label={muted ? pauseLabel : playLabel}
               iconDef={muted ? Mic : MicOff}
