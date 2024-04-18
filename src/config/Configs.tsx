@@ -1,7 +1,6 @@
 import DefaultConfigs from 'config/DefaultConfigs';
 import Sarvasva from './first-floor/santnivas/Sarvasva';
 import BoysGym from './second-floor/BoysGym';
-import { type LucideIcon } from 'lucide-react';
 import GirlsGym from './second-floor/GirlsGym';
 import SantOffice1 from './first-floor/santnivas/SantOffice1';
 import SantOffice2 from './first-floor/santnivas/SantOffice2';
@@ -13,6 +12,7 @@ import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
 import SabhaHall from './second-floor/SabhaHall';
 import SecondFloorLobby from './second-floor/SecondFloorLobby';
+import { type SvgIcon } from 'types/appState';
 
 export interface CrestronConfigs {
   host: string;
@@ -69,7 +69,7 @@ export interface AudioApiCommand {
 
 export interface ColorIntensity {
   name: string;
-  icon?: LucideIcon;
+  icon?: SvgIcon;
   color: string;
   scene: string;
   extraPayloads?: LightsApiPayload[];
@@ -93,8 +93,8 @@ export type ApiCommand =
 
 export interface LightControlData {
   kind: 'light' | 'toggle';
-  icon: LucideIcon;
-  iconOff?: LucideIcon;
+  icon: SvgIcon;
+  iconOff?: SvgIcon;
   title?: string;
   label: string;
   labelOff?: string;
@@ -105,7 +105,7 @@ export interface LightControlData {
 
 export interface AudioControlData {
   kind: 'audio';
-  icon: LucideIcon;
+  icon: SvgIcon;
   title?: string;
   label: string;
   playLabel?: string;
@@ -144,7 +144,7 @@ export type ControlData =
 export interface PageData {
   code?: string;
   name: string;
-  icon: LucideIcon;
+  icon: SvgIcon;
   className?: string;
   requiredRoles?: string[];
   controls: { [key in string]: ControlData };

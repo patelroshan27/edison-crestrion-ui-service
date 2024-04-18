@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { type LucideIcon } from 'lucide-react';
 import React from 'react';
+import { type SvgIcon } from 'types/appState';
 
 interface Props {
   className?: string;
   label: string;
-  iconDef: LucideIcon;
+  iconDef: SvgIcon;
   onClick: () => any;
 }
 
