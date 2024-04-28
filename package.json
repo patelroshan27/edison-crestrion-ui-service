@@ -77,7 +77,12 @@
     "sabhahall:build": "REACT_APP_ROOM_CONFIG_NAME=sabhahall react-scripts build",
     "sabhahall:archive": "REACT_APP_ROOM_CONFIG_NAME=sabhahall ch5-cli archive -p sabhahall -P sampleSource=sabhahall -d build -o publish",
     "sabhahall:deploy": "REACT_APP_ROOM_CONFIG_NAME=sabhahall ch5-cli deploy -H 10.25.20.93 -t touchscreen publish/sabhahall.ch5z",
-    "sabhahall": "yarn sabhahall:build && yarn sabhahall:archive && yarn sabhahall:deploy"
+    "sabhahall": "yarn sabhahall:build && yarn sabhahall:archive && yarn sabhahall:deploy",
+    "mahima:build": "REACT_APP_ROOM_CONFIG_NAME=mahima react-scripts build",
+    "mahima:archive": "REACT_APP_ROOM_CONFIG_NAME=mahima ch5-cli archive -p mahima -P sampleSource=mahima -d build -o publish",
+    "mahima:deploy": "REACT_APP_ROOM_CONFIG_NAME=mahima ch5-cli deploy -H 10.25.20.74 -t touchscreen publish/mahima.ch5z --slow-mode",
+    "mahima": "yarn mahima:build && yarn mahima:archive && yarn mahima:deploy"
+
   },
   "eslintConfig": {
     "extends": [

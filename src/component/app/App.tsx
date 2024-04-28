@@ -8,16 +8,16 @@ import LoginScreen from 'component/LoginScreen';
 import { RoomSelection } from 'component/navigation/RoomSelection';
 import { useRecoilState } from 'recoil';
 import { LockButton } from 'component/navigation/LockButton';
-import { FIVE_MINUTES_IN_MS } from 'utils/Constants';
+import { FIFTEEN_MINUTES_IN_MS } from 'utils/Constants';
 import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
 
 const defaultConfig = getConfigs();
-const {
+const { 
   authProviderURL,
   authID,
   proximityActivity,
   touchActivity,
-  lockTimeout = FIVE_MINUTES_IN_MS,
+  lockTimeout = FIFTEEN_MINUTES_IN_MS,
 } = defaultConfig;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';

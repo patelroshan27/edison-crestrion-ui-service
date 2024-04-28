@@ -24,7 +24,7 @@ const Aksharpith: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Aksharpith',
-  lockTimeout: 20000000,
+  lockTimeout: 20_000_000,
   crestronConfigs: {
     host: '10.25.20.63',
     ipID: 19,
@@ -121,12 +121,12 @@ const Aksharpith: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_1fr_2fr]',
+      className: '!grid-cols-[1fr_1fr_1fr_2fr]',
       controls: {
-        speaker: {
+        aksharpith: {
           kind: 'audio',
           icon: Music2,
-          label: 'Master',
+          label: 'Aksharpith',
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
           getVolCmd: {
@@ -160,10 +160,47 @@ const Aksharpith: UIConfig = {
             },
           },
         },
-        shayonaspeaker: {
+        mandirfoyer: {
           kind: 'audio',
           icon: Music2,
-          label: 'Shayona Master',
+          label: 'Mandir Foyer',
+          playLabel: 'Unmute',
+          pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'mandir',
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '4',
+              controlPosition: '',
+            },
+          },
+          volChangeCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'mandir',
+              cmdType: 'CS',
+              cmdName: 'Vol Change',
+              controlNumber: '4',
+              controlPosition: '',
+            },
+          },
+          resetCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'mandir',
+              cmdType: 'LP',
+              cmdName: 'Vol Reset',
+              controlNumber: '1',
+              controlPosition: '',
+            },
+          },
+        },
+        shayonafresh: {
+          kind: 'audio',
+          icon: Music2,
+          label: 'Shayona Fresh',
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
           getVolCmd: {

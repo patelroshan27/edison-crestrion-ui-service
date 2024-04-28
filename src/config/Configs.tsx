@@ -13,6 +13,7 @@ import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
 import SabhaHall from './second-floor/SabhaHall';
 import SecondFloorLobby from './second-floor/SecondFloorLobby';
 import { type SvgIcon } from 'types/appState';
+import Mahima from './first-floor/boys/Mahima';
 
 export interface CrestronConfigs {
   host: string;
@@ -165,6 +166,7 @@ export const CONFIGS = {
   shayonafresh: ShayonaFresh,
   sabhahall: SabhaHall,
   lobby260: SecondFloorLobby,
+  mahima: Mahima,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
@@ -183,7 +185,7 @@ export interface UIConfig {
   audioApiPath?: string;
   mediaApiPath?: string;
   authID?: string;
-  crestronConfigs: CrestronConfigs;
+  crestronConfigs?: CrestronConfigs;
   id?: number | string;
   screenOff?: string;
   proximityActivity?: string;
