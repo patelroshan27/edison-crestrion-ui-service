@@ -7,7 +7,7 @@ import {
 import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
-const Mahima: UIConfig = {
+const Niyam: UIConfig = {
   rooms: [
   ],
   id: 123,
@@ -16,7 +16,7 @@ const Mahima: UIConfig = {
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
-  authID: 'Mahima',
+  authID: 'Niyam',
   lockTimeout: 20_000_000,
   pages: {
     LIGHTS: {
@@ -34,7 +34,7 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'niyam', scene: '1' }] },
               ],
             },
             {
@@ -43,7 +43,7 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'Crown',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'niyam', scene: '2' }] },
               ],
             },
             {
@@ -52,7 +52,7 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'Ceiling',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'niyam', scene: '3' }] },
               ],
             },
             {
@@ -63,7 +63,7 @@ const Mahima: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'mahima', scene: '16' }],
+                  payloads: [{ room: 'niyam', scene: '16' }],
                 },
               ],
             },
@@ -73,10 +73,10 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'niyam', scene: '1' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'mahima', scene: '01' }],
+                  payloads: [{ room: 'niyam', scene: '01' }],
                 },
               ],
             },
@@ -88,11 +88,11 @@ const Mahima: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'mahima', scene: '16' }],
+                  payloads: [{ room: 'niyam', scene: '16' }],
                 },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'mahima', scene: '00' }],
+                  payloads: [{ room: 'niyam', scene: '00' }],
                 },
               ],
             },
@@ -100,7 +100,7 @@ const Mahima: UIConfig = {
         },
         pharos: {
           kind: 'pharos',
-          room: 'mahima',
+          room: 'niyam',
           className: 'row-span-4 col-span-3',
           colorStates: commonRoomColorStates,
         },
@@ -109,4 +109,4 @@ const Mahima: UIConfig = {
   },
 };
 
-export default Mahima;
+export default Niyam;

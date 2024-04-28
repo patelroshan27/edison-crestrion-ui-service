@@ -81,8 +81,23 @@
     "mahima:build": "REACT_APP_ROOM_CONFIG_NAME=mahima react-scripts build",
     "mahima:archive": "REACT_APP_ROOM_CONFIG_NAME=mahima ch5-cli archive -p mahima -P sampleSource=mahima -d build -o publish",
     "mahima:deploy": "REACT_APP_ROOM_CONFIG_NAME=mahima ch5-cli deploy -H 10.25.20.74 -t touchscreen publish/mahima.ch5z --slow-mode",
-    "mahima": "yarn mahima:build && yarn mahima:archive && yarn mahima:deploy"
-
+    "mahima": "yarn mahima:build && yarn mahima:archive && yarn mahima:deploy",
+    "niyam:build": "REACT_APP_ROOM_CONFIG_NAME=niyam react-scripts build",
+    "niyam:archive": "REACT_APP_ROOM_CONFIG_NAME=niyam ch5-cli archive -p niyam -P sampleSource=niyam -d build -o publish",
+    "niyam:deploy": "REACT_APP_ROOM_CONFIG_NAME=niyam ch5-cli deploy -H 10.25.20.75 -t touchscreen publish/niyam.ch5z --slow-mode",
+    "niyam": "yarn niyam:build && yarn niyam:archive && yarn niyam:deploy",
+    "nischay:build": "REACT_APP_ROOM_CONFIG_NAME=nischay react-scripts build",
+    "nischay:archive": "REACT_APP_ROOM_CONFIG_NAME=nischay ch5-cli archive -p nischay -P sampleSource=nischay -d build -o publish",
+    "nischay:deploy": "REACT_APP_ROOM_CONFIG_NAME=nischay ch5-cli deploy -H 10.25.20.76 -t touchscreen publish/nischay.ch5z --slow-mode",
+    "nischay": "yarn nischay:build && yarn nischay:archive && yarn nischay:deploy",
+    "aatma:build": "REACT_APP_ROOM_CONFIG_NAME=aatma react-scripts build",
+    "aatma:archive": "REACT_APP_ROOM_CONFIG_NAME=aatma ch5-cli archive -p aatma -P sampleSource=aatma -d build -o publish",
+    "aatma:deploy": "REACT_APP_ROOM_CONFIG_NAME=aatma ch5-cli deploy -H 10.25.20.77 -t touchscreen publish/aatma.ch5z --slow-mode",
+    "aatma": "yarn aatma:build && yarn aatma:archive && yarn aatma:deploy",
+    "gnan:build": "REACT_APP_ROOM_CONFIG_NAME=gnan react-scripts build",
+    "gnan:archive": "REACT_APP_ROOM_CONFIG_NAME=gnan ch5-cli archive -p gnan -P sampleSource=gnan -d build -o publish",
+    "gnan:deploy": "REACT_APP_ROOM_CONFIG_NAME=gnan ch5-cli deploy -H 10.25.20.78 -t touchscreen publish/gnan.ch5z --slow-mode",
+    "gnan": "yarn gnan:build && yarn gnan:archive && yarn gnan:deploy"
   },
   "eslintConfig": {
     "extends": [

@@ -14,6 +14,10 @@ import SabhaHall from './second-floor/SabhaHall';
 import SecondFloorLobby from './second-floor/SecondFloorLobby';
 import { type SvgIcon } from 'types/appState';
 import Mahima from './first-floor/boys/Mahima';
+import Niyam from './first-floor/boys/Niyam';
+import Nischay from './first-floor/boys/Nischay';
+import Aatma from './first-floor/boys/Aatma';
+import Gnan from './first-floor/boys/Gnan';
 
 export interface CrestronConfigs {
   host: string;
@@ -167,6 +171,10 @@ export const CONFIGS = {
   sabhahall: SabhaHall,
   lobby260: SecondFloorLobby,
   mahima: Mahima,
+  niyam: Niyam,
+  nischay: Nischay,
+  aatma: Aatma,
+  gnan: Gnan,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
