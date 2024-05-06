@@ -7,7 +7,7 @@ import {
 import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
-const Nischay: UIConfig = {
+const Nishchay: UIConfig = {
   rooms: [
   ],
   id: 123,
@@ -16,7 +16,7 @@ const Nischay: UIConfig = {
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
-  authID: 'Nischay',
+  authID: 'Nishchay',
   lockTimeout: 20_000_000,
   pages: {
     LIGHTS: {
@@ -34,7 +34,7 @@ const Nischay: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'nischay', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'nishchay', scene: '1' }] },
               ],
             },
             {
@@ -43,7 +43,7 @@ const Nischay: UIConfig = {
               title: 'Lights',
               label: 'Crown',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'nischay', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'nishchay', scene: '2' }] },
               ],
             },
             {
@@ -52,7 +52,7 @@ const Nischay: UIConfig = {
               title: 'Lights',
               label: 'Ceiling',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'nischay', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'nishchay', scene: '3' }] },
               ],
             },
             {
@@ -63,7 +63,7 @@ const Nischay: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'nischay', scene: '16' }],
+                  payloads: [{ room: 'nishchay', scene: '16' }],
                 },
               ],
             },
@@ -73,10 +73,10 @@ const Nischay: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'nischay', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'nishchay', scene: '1' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'nischay', scene: '01' }],
+                  payloads: [{ room: 'nishchay', scene: '01' }],
                 },
               ],
             },
@@ -88,11 +88,11 @@ const Nischay: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'nischay', scene: '16' }],
+                  payloads: [{ room: 'nishchay', scene: '16' }],
                 },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'nischay', scene: '00' }],
+                  payloads: [{ room: 'nishchay', scene: '00' }],
                 },
               ],
             },
@@ -100,7 +100,7 @@ const Nischay: UIConfig = {
         },
         pharos: {
           kind: 'pharos',
-          room: 'nischay',
+          room: 'nishchay',
           className: 'row-span-4 col-span-3',
           colorStates: commonRoomColorStates,
         },
@@ -109,4 +109,4 @@ const Nischay: UIConfig = {
   },
 };
 
-export default Nischay;
+export default Nishchay;
