@@ -12,7 +12,7 @@ import {
 import { type ApiCommand, type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
-const Branhamanad: UIConfig = {
+const Bramhananad: UIConfig = {
   rooms: [
     { key: 'bramhananad', title: 'Bramhananad' },
     { key: 'santoffice1', title: 'Office1' },
@@ -27,7 +27,7 @@ const Branhamanad: UIConfig = {
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
-  authID: 'Branhamanad',
+  authID: 'Bramhananad',
   lockTimeout: 20000000,
   crestronConfigs: {
     host: '10.25.20.71',
@@ -325,4 +325,4 @@ const Branhamanad: UIConfig = {
   },
 };
 
-export default Branhamanad;
+export default Bramhananad;
