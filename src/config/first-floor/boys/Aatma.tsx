@@ -17,7 +17,6 @@ const Aatma: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Aatma',
-  lockTimeout: 20_000_000,
   pages: {
     LIGHTS: {
       name: 'Lights',

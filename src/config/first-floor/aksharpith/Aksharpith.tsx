@@ -24,7 +24,6 @@ const Aksharpith: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Aksharpith',
-  lockTimeout: 20_000_000,
   crestronConfigs: {
     host: '10.25.20.63',
     ipID: 19,

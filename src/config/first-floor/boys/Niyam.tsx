@@ -17,7 +17,6 @@ const Niyam: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Niyam',
-  lockTimeout: 20_000_000,
   pages: {
     LIGHTS: {
       name: 'Lights',

@@ -25,8 +25,8 @@ import { type PlayerStatus } from './types';
 import { formatSecondsToMinutes, onMediaPlayerAction } from './utils';
 import classNames from 'classnames';
 
-const STOPPED_UPDATE_INTERVAL = 1000 * 10;
-const PLAYING_UPDATE_INTERVAL = 1000;
+const STOPPED_UPDATE_INTERVAL = 3000 * 10;
+const PLAYING_UPDATE_INTERVAL = 10000;
 
 interface PlayerControlsProps {
   playerId: string;

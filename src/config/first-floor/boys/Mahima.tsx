@@ -17,7 +17,6 @@ const Mahima: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Mahima',
-  lockTimeout: 20_000_000,
   pages: {
     LIGHTS: {
       name: 'Lights',

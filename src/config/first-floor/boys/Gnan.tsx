@@ -17,7 +17,6 @@ const Gnan: UIConfig = {
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
   authID: 'Gnan',
-  lockTimeout: 20_000_000,
   pages: {
     LIGHTS: {
       name: 'Lights',

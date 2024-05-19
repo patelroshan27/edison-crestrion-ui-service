@@ -21,7 +21,6 @@ const Configs: UIConfig = {
     { key: 'bramhananad', title: 'Bramhananad' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
-    { key: 'sabhahall', title: 'SabhaHall' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
