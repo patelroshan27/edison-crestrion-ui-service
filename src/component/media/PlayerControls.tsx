@@ -197,11 +197,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
           }
         />
       </div>
-      <PlayerTrackSlider
-        playerId={playerId}
-        playerStatus={playerStatus}
-        updatePlayerStatus={updatePlayerStatus}
-      />
+      <div className="mt-4">{playerStatus?.track?.trackName}</div>
     </Card>
   );
 };
