@@ -18,6 +18,7 @@ import Niyam from './first-floor/boys/Niyam';
 import Aatma from './first-floor/boys/Aatma';
 import Gnan from './first-floor/boys/Gnan';
 import Nishchay from './first-floor/boys/Nishchay';
+import Master from './first-floor/santnivas/Master';
 
 export interface CrestronConfigs {
   host: string;
@@ -157,6 +158,7 @@ export interface PageData {
 }
 
 export const CONFIGS = {
+  master: Master,
   santnivas: SantNivas,
   sarvasva: Sarvasva,
   boysgym: BoysGym,

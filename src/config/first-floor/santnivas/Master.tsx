@@ -1,23 +1,24 @@
 import {
   Bluetooth,
-  Flower2,
   Lightbulb,
   LightbulbOff,
   ListMusic,
+  Mic2,
   Music2,
   Speech,
   Sun,
   SunDim,
 } from 'lucide-react';
+import { MandirSvg } from '../../../svgs/Mandir';
 import { type ApiCommand, type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
-const Bramhananad: UIConfig = {
+const Configs: UIConfig = {
   rooms: [
-    { key: 'bramhananad', title: 'Bramhananad' },
+    { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice1', title: 'Office1' },
     { key: 'santoffice2', title: 'Office2' },
-    { key: 'sarvasva', title: 'Sarvasva' },
+    { key: 'bramhananad', title: 'Bramhananad' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
   ],
@@ -27,10 +28,10 @@ const Bramhananad: UIConfig = {
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
-  authID: 'Bramhananad',
-  lockTimeout: 20000000,
+  authID: 'Master',
+  lockTimeout: 200000000,
   crestronConfigs: {
-    host: '10.25.20.71',
+    host: '10.25.20.81',
     ipID: 19,
     port: 41794,
   },
@@ -50,7 +51,7 @@ const Bramhananad: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '1' }] },
               ],
             },
             {
@@ -59,7 +60,7 @@ const Bramhananad: UIConfig = {
               title: 'Lights',
               label: 'Medium',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '2' }] },
               ],
             },
             {
@@ -68,7 +69,7 @@ const Bramhananad: UIConfig = {
               title: 'Lights',
               label: 'Low',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '3' }] },
               ],
             },
             {
@@ -77,10 +78,7 @@ const Bramhananad: UIConfig = {
               title: 'Lights',
               label: 'Off',
               apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'bramhanand', scene: '16' }],
-                },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '16' }] },
               ],
             },
             {
@@ -89,10 +87,10 @@ const Bramhananad: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'bramhanand', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '2' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'bramhanand', scene: '01' }],
+                  payloads: [{ room: 'sarvasva', scene: '01' }],
                 },
               ],
             },
@@ -102,13 +100,10 @@ const Bramhananad: UIConfig = {
               title: 'Lights',
               label: 'All Off',
               apiCommands: [
-                {
-                  type: 'zum',
-                  payloads: [{ room: 'bramhanand', scene: '16' }],
-                },
+                { type: 'zum', payloads: [{ room: 'sarvasva', scene: '16' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'bramhanand', scene: '00' }],
+                  payloads: [{ room: 'sarvasva', scene: '00' }],
                 },
               ],
             },
@@ -116,7 +111,7 @@ const Bramhananad: UIConfig = {
         },
         pharos: {
           kind: 'pharos',
-          room: 'bramhanand',
+          room: 'sarvasva',
           className: 'row-span-4 col-span-3 gap-16',
           colorStates: commonRoomColorStates,
         },
@@ -125,7 +120,7 @@ const Bramhananad: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_2fr_1fr]',
+      className: '!grid-cols-[1fr_1fr_2fr]',
       controls: {
         speaker: {
           kind: 'audio',
@@ -136,60 +131,87 @@ const Bramhananad: UIConfig = {
           getVolCmd: {
             type: 'audio',
             payload: {
-              dspId: 'bk',
+              dspId: 'mandir',
               cmdType: 'GS',
               cmdName: 'Get Vol',
-              controlNumber: '5',
+              controlNumber: '11',
               controlPosition: '',
             },
           },
           volChangeCmd: {
             type: 'audio',
             payload: {
-              dspId: 'bk',
+              dspId: 'mandir',
               cmdType: 'CS',
               cmdName: 'Vol Change',
-              controlNumber: '5',
+              controlNumber: '11',
               controlPosition: '',
             },
           },
           getMuteStatusCmd: {
             type: 'audio',
             payload: {
-              dspId: 'bk',
+              dspId: 'mandir',
               cmdType: 'GS',
               cmdName: 'Mute Status',
-              controlNumber: '4',
+              controlNumber: '12',
               controlPosition: '',
             },
           },
           muteCmd: {
             type: 'audio',
             payload: {
-              dspId: 'bk',
+              dspId: 'mandir',
               cmdType: 'CS',
               cmdName: 'Vol Mute',
-              controlNumber: '4',
+              controlNumber: '12',
               controlPosition: '65535',
             },
           },
           unMuteCmd: {
             type: 'audio',
             payload: {
-              dspId: 'bk',
+              dspId: 'mandir',
               cmdType: 'CS',
               cmdName: 'Vol Unmute',
-              controlNumber: '4',
+              controlNumber: '12',
               controlPosition: '0',
             },
           },
           resetCmd: {
             type: 'audio',
             payload: {
-              dspId: 'bk',
+              dspId: 'mandir',
               cmdType: 'LP',
               cmdName: 'Vol Reset',
-              controlNumber: '1',
+              controlNumber: '10',
+              controlPosition: '',
+            },
+          },
+        },
+        mediaplayer: {
+          kind: 'audio',
+          icon: Music2,
+          label: 'Media Player',
+          playLabel: 'Unmute',
+          pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'mandir',
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '25',
+              controlPosition: '',
+            },
+          },
+          volChangeCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'mandir',
+              cmdType: 'CS',
+              cmdName: 'Vol Change',
+              controlNumber: '25',
               controlPosition: '',
             },
           },
@@ -205,10 +227,10 @@ const Bramhananad: UIConfig = {
               {
                 type: 'audio',
                 payload: {
-                  dspId: 'bk',
+                  dspId: 'mandir',
                   cmdType: 'GS',
                   cmdName: 'Source',
-                  controlNumber: '6',
+                  controlNumber: '2',
                   controlPosition: '',
                 },
               },
@@ -226,65 +248,11 @@ const Bramhananad: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
-                    dspId: 'bk',
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
-                    controlNumber: '6',
+                    controlNumber: '2',
                     controlPosition: '0',
-                  },
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Speech,
-              title: 'Source',
-              label: 'Sabha Hall',
-              apiCommands: [
-                {
-                  type: 'audio',
-                  payload: {
-                    dspId: 'bk',
-                    cmdType: 'CS',
-                    cmdName: 'Source',
-                    controlNumber: '6',
-                    controlPosition: '16384',
-                  },
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              title: 'Source',
-              icon: Flower2,
-              label: 'Mandir',
-              apiCommands: [
-                {
-                  type: 'audio',
-                  payload: {
-                    dspId: 'bk',
-                    cmdType: 'CS',
-                    cmdName: 'Source',
-                    controlNumber: '6',
-                    controlPosition: '32766',
-                  },
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Flower2,
-              title: 'Source',
-              label: 'Aksharpith',
-              apiCommands: [
-                {
-                  type: 'audio',
-                  payload: {
-                    dspId: 'bk',
-                    cmdType: 'CS',
-                    cmdName: 'Source',
-                    controlNumber: '6',
-                    controlPosition: '49149',
                   },
                 },
               ],
@@ -298,11 +266,65 @@ const Bramhananad: UIConfig = {
                 {
                   type: 'audio',
                   payload: {
-                    dspId: 'bk',
+                    dspId: 'mandir',
                     cmdType: 'CS',
                     cmdName: 'Source',
-                    controlNumber: '6',
-                    controlPosition: '65535',
+                    controlNumber: '2',
+                    controlPosition: '13107',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              title: 'Source',
+              icon: Mic2,
+              label: 'Mic',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'mandir',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '26214',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: MandirSvg,
+              title: 'Source',
+              label: 'Mandir',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'mandir',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '39321',
+                  },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: Speech,
+              title: 'Source',
+              label: 'Sabha Hall',
+              apiCommands: [
+                {
+                  type: 'audio',
+                  payload: {
+                    dspId: 'mandir',
+                    cmdType: 'CS',
+                    cmdName: 'Source',
+                    controlNumber: '2',
+                    controlPosition: '52428',
                   },
                 },
               ],
@@ -318,11 +340,11 @@ const Bramhananad: UIConfig = {
       controls: {
         media: {
           kind: 'mediaPlayer',
-          playerId: '10',
+          playerId: '11',
         },
       },
     },
   },
 };
 
-export default Bramhananad;
+export default Configs;
