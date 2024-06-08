@@ -5,6 +5,7 @@ import { sabhaHallColorStates } from 'config/ConfigData';
 const SabhaHall: UIConfig = {
   rooms: [
     { key: 'sabhahall', title: 'SabhaHall' },
+    { key: 'boysgym', title: 'BoysGym' },    
     { key: 'lobby260', title: 'SecondFloor Lobby' },
   ],
   id: 123,
