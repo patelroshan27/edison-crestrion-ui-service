@@ -1,15 +1,9 @@
-import {
-  Lightbulb,
-  LightbulbOff,
-  Sun,
-  SunDim,
-} from 'lucide-react';
+import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
 const Gnan: UIConfig = {
-  rooms: [
-  ],
+  rooms: [],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',

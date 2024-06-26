@@ -1,5 +1,15 @@
-import { Bluetooth, Flower2, Lightbulb, LightbulbOff, ListMusic, Music2, Speech, Sun, SunDim } from 'lucide-react';
-import { ApiCommand, type UIConfig } from 'config/Configs';
+import {
+  Bluetooth,
+  Flower2,
+  Lightbulb,
+  LightbulbOff,
+  ListMusic,
+  Music2,
+  Speech,
+  Sun,
+  SunDim,
+} from 'lucide-react';
+import { type ApiCommand, type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
 const SantCorridor: UIConfig = {
@@ -317,7 +327,7 @@ const SantCorridor: UIConfig = {
                   },
                 },
               ],
-            },            
+            },
           ],
         },
       },
