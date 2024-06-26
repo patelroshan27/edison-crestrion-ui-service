@@ -19,6 +19,7 @@ import Aatma from './first-floor/boys/Aatma';
 import Gnan from './first-floor/boys/Gnan';
 import Nishchay from './first-floor/boys/Nishchay';
 import Master from './first-floor/santnivas/Master';
+import BanquetLarge from './basement/BanquetLarge';
 
 export interface CrestronConfigs {
   host: string;
@@ -177,6 +178,7 @@ export const CONFIGS = {
   nishchay: Nishchay,
   aatma: Aatma,
   gnan: Gnan,
+  banquetlarge: BanquetLarge
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
