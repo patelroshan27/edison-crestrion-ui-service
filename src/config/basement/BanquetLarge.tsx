@@ -27,6 +27,43 @@ const BanquetLarge: UIConfig = {
     port: 41794,
   },
   pages: {
+    VIDEO: {
+      name: 'Video',
+      icon: Sun,
+      controls: {
+        projectors: {
+          kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          controls: [
+            {
+              kind: 'toggle',
+              icon: Lightbulb,
+              title: 'Projector',
+              label: 'On',
+              apiCommands: [
+                { type : 'projector', payloads: [{ authId: 'BanquetLarge', action: 'poweron' }] },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: LightbulbOff,
+              title: 'Projector',
+              label: 'Off',
+              apiCommands: [
+                { type : 'projector', payloads: [{ authId: 'BanquetLarge', action: 'poweroff' }] },
+              ],
+            }
+          ],
+        },
+        pharos: {
+          kind: 'pharos',
+          room: 'aksharpith',
+          className: 'row-span-4 col-span-3',
+          colorStates: commonRoomColorStates,
+        },
+      },
+    },
     MEDIA: {
       name: 'Media Player',
       icon: Music2,

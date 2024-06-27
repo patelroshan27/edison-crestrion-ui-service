@@ -45,6 +45,11 @@ export interface LightsApiPayload {
   scene: string;
 }
 
+export interface ProjectorsApiPayload {
+  authId: 'BanquetLarge';
+  action: 'poweron' | 'poweroff';
+}
+
 export interface CrestronWebrelayPayload {
   authId: 'BoysGym' | 'GirlsGym';
   name: 'leftHoop' | 'rightHoop' | 'curtain';
@@ -67,6 +72,11 @@ export interface WebrelayApiCommand {
 export interface LightsApiCommand {
   type: LightApiType;
   payloads: LightsApiPayload[];
+}
+
+export interface ProjectorsApiCommand {
+  type: 'projector';
+  payloads: ProjectorsApiPayload[];
 }
 
 export interface AudioApiCommand {
@@ -96,7 +106,8 @@ export interface CrestronWebrelayConfig {
 export type ApiCommand =
   | LightsApiCommand
   | WebrelayApiCommand
-  | AudioApiCommand;
+  | AudioApiCommand
+  | ProjectorsApiCommand;
 
 export interface LightControlData {
   kind: 'light' | 'toggle';
