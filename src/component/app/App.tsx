@@ -12,7 +12,7 @@ import { FIFTEEN_MINUTES_IN_MS } from 'utils/Constants';
 import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
 
 const defaultConfig = getConfigs();
-const { 
+const {
   authProviderURL,
   authID,
   proximityActivity,

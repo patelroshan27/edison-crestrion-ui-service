@@ -196,6 +196,7 @@ export type RoomKey = keyof typeof CONFIGS;
 export interface Room {
   key: RoomKey;
   title: string;
+  group?: string;
 }
 
 export interface UIConfig {

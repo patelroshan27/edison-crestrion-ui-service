@@ -15,6 +15,7 @@ import { commonRoomColorStates } from 'config/ConfigData';
 
 const Configs: UIConfig = {
   rooms: [
+    // TODO add group property to each room line to add grouping row
     { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice1', title: 'Office1' },
     { key: 'santoffice2', title: 'Office2' },
