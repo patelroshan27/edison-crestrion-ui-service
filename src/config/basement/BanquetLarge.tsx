@@ -1,25 +1,14 @@
-import {
-  Bluetooth,
-  Flower2,
-  Lightbulb,
-  LightbulbOff,
-  ListMusic,
-  Mic2,
-  Music2,
-  Sun,
-  SunDim,
-} from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'config/Configs';
+import { Lightbulb, LightbulbOff, Music2, Sun } from 'lucide-react';
+import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
 const BanquetLarge: UIConfig = {
-  rooms: [
-    { key: 'banquetlarge', title: 'BanquetLarge' },
-  ],
+  rooms: [{ key: 'banquetlarge', title: 'BanquetLarge' }],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
+  projectorApiPath: '/video/projector/send',
   authID: 'BanquetLarge',
   crestronConfigs: {
     host: '10.25.20.98',
@@ -42,7 +31,10 @@ const BanquetLarge: UIConfig = {
               title: 'Projector',
               label: 'On',
               apiCommands: [
-                { type : 'projector', payloads: [{ authId: 'BanquetLarge', action: 'poweron' }] },
+                {
+                  type: 'projector',
+                  payloads: [{ authId: 'BanquetLarge', action: 'poweron' }],
+                },
               ],
             },
             {
@@ -51,9 +43,12 @@ const BanquetLarge: UIConfig = {
               title: 'Projector',
               label: 'Off',
               apiCommands: [
-                { type : 'projector', payloads: [{ authId: 'BanquetLarge', action: 'poweroff' }] },
+                {
+                  type: 'projector',
+                  payloads: [{ authId: 'BanquetLarge', action: 'poweroff' }],
+                },
               ],
-            }
+            },
           ],
         },
         pharos: {

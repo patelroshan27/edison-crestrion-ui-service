@@ -189,7 +189,7 @@ export const CONFIGS = {
   nishchay: Nishchay,
   aatma: Aatma,
   gnan: Gnan,
-  banquetlarge: BanquetLarge
+  banquetlarge: BanquetLarge,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
@@ -208,6 +208,7 @@ export interface UIConfig {
   zumApiPath?: string;
   audioApiPath?: string;
   mediaApiPath?: string;
+  projectorApiPath?: string;
   authID?: string;
   crestronConfigs?: CrestronConfigs;
   id?: number | string;
