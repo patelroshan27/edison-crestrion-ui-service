@@ -11,6 +11,7 @@ import {
   type LightsApiPayload,
   type ApiCommand,
   type AudioApiPaylod,
+  type ProjectorsApiPayload,
 } from '../config/Configs';
 import { useRecoilValue } from 'recoil';
 import { activeConfigState } from 'state/navigation';
@@ -105,6 +106,15 @@ export function useMediaApiState<T>(): (data: MediaPlayerCmd) => Promise<T> {
   return useApiState<MediaPlayerCmd, T>(config.mediaApiPath as string);
 }
 
+export function useProjectorApiState(): (
+  data: ProjectorsApiPayload[],
+) => Promise<unknown> {
+  const config = useRecoilValue(activeConfigState);
+  return useApiState<ProjectorsApiPayload[], unknown>(
+    config.projectorApiPath as string,
+  );
+}
+
 export function useApiCommands(): (
   commands: ApiCommand[],
 ) => Promise<unknown[]> {
@@ -112,6 +122,7 @@ export function useApiCommands(): (
   const sendZumCmd = useZumApiState();
   const sendWebRelayCmd = useWebRelayApiState();
   const sendAudioCmd = useAudioApiState();
+  const sendProjectorCmd = useProjectorApiState();
 
   return useCallback((commands: ApiCommand[]) => {
     const promises = commands
@@ -119,6 +130,8 @@ export function useApiCommands(): (
         if (command.type === 'pharos') return sendPharosCmd(command.payloads);
         if (command.type === 'zum') return sendZumCmd(command.payloads);
         if (command.type === 'audio') return sendAudioCmd(command.payload);
+        if (command.type === 'projector')
+          return sendProjectorCmd(command.payloads);
         if (command.type === 'webrelay')
           return sendWebRelayCmd(command.payload);
 
