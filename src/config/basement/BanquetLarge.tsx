@@ -50,13 +50,7 @@ const BanquetLarge: UIConfig = {
               ],
             },
           ],
-        },
-        pharos: {
-          kind: 'pharos',
-          room: 'aksharpith',
-          className: 'row-span-4 col-span-3',
-          colorStates: commonRoomColorStates,
-        },
+        }
       },
     },
     MEDIA: {
