@@ -1,6 +1,5 @@
 import { Lightbulb, LightbulbOff, Music2, Sun } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
-import { commonRoomColorStates } from 'config/ConfigData';
 
 const BanquetLarge: UIConfig = {
   rooms: [{ key: 'banquetlarge', title: 'BanquetLarge' }],
@@ -50,7 +49,7 @@ const BanquetLarge: UIConfig = {
               ],
             },
           ],
-        }
+        },
       },
     },
     MEDIA: {
