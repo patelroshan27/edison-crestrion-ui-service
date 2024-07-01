@@ -77,11 +77,10 @@ const GirlsGym: UIConfig = {
       name: 'Hoops & Curtain',
       requiredRoles: ['sant', 'admin'],
       icon: Sun,
-      className: '!grid-cols-3',
       controls: {
         leftHoop: {
           kind: 'group',
-          className: '!grid-rows-[1fr_1fr_1fr_1fr]',
+          className: 'grid grid-cols-1 gap-2 !grid-rows-[1fr_1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
@@ -122,7 +121,7 @@ const GirlsGym: UIConfig = {
         },
         curtains: {
           kind: 'group',
-          className: '!grid-rows-[1fr_1fr_1fr_1fr]',
+          className: 'grid grid-cols-1 gap-2 !grid-rows-[1fr_1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
@@ -163,7 +162,7 @@ const GirlsGym: UIConfig = {
         },
         rightHoop: {
           kind: 'group',
-          className: '!grid-rows-[1fr_1fr_1fr_1fr]',
+          className: 'grid grid-cols-1 gap-2 !grid-rows-[1fr_1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
