@@ -20,6 +20,7 @@ import Gnan from './first-floor/boys/Gnan';
 import Nishchay from './first-floor/boys/Nishchay';
 import Master from './first-floor/santnivas/Master';
 import BanquetLarge from './basement/BanquetLarge';
+import Pramukh from './first-floor/boys/Pramukh';
 
 export interface CrestronConfigs {
   host: string;
@@ -46,7 +47,7 @@ export interface LightsApiPayload {
 }
 
 export interface ProjectorsApiPayload {
-  authId: 'BanquetLarge';
+  authId: 'BanquetLarge' | 'Pramukh';
   action: 'poweron' | 'poweroff';
 }
 
@@ -190,6 +191,7 @@ export const CONFIGS = {
   aatma: Aatma,
   gnan: Gnan,
   banquetlarge: BanquetLarge,
+  pramukh: Pramukh
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
