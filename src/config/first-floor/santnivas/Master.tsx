@@ -41,7 +41,7 @@ const Configs: UIConfig = {
     { key: 'lobby260', title: 'SecondFloor Lobby', group: 'Sahajanand' },
     { key: 'boysgym', title: 'BoysGym', group: 'Sahajanand' },
     { key: 'girlsgym', title: 'GirlsGym', group: 'Sahajanand' },
-    { key: 'banquetlarge', title: 'BanquetLarge', group: 'Basement'}    
+    { key: 'banquetlarge', title: 'BanquetLarge', group: 'Basement' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',

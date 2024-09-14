@@ -36,7 +36,10 @@ const Yagnapurush: UIConfig = {
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'yagnapurush', scene: '1' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'yagnapurush', scene: '1' }],
+                },
               ],
             },
             {
@@ -45,7 +48,10 @@ const Yagnapurush: UIConfig = {
               title: 'Lights',
               label: 'Crown',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'yagnapurush', scene: '3' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'yagnapurush', scene: '3' }],
+                },
               ],
             },
             {
@@ -54,7 +60,10 @@ const Yagnapurush: UIConfig = {
               title: 'Lights',
               label: 'Ceiling',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'yagnapurush', scene: '2' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'yagnapurush', scene: '2' }],
+                },
               ],
             },
             {
@@ -75,7 +84,10 @@ const Yagnapurush: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'yagnapurush', scene: '1' }] },
+                {
+                  type: 'zum',
+                  payloads: [{ room: 'yagnapurush', scene: '1' }],
+                },
                 {
                   type: 'pharos',
                   payloads: [{ room: 'yagnapurush', scene: '01' }],

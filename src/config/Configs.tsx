@@ -216,7 +216,6 @@ export const CONFIGS = {
   samarpan: Samarpan,
   upasana: Upasana,
   yagnapurush: Yagnapurush,
-
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
