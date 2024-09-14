@@ -10,8 +10,7 @@ import {
 import type { UIConfig } from 'config/Configs';
 
 const GirlsGym: UIConfig = {
-  rooms: [    { key: 'girlsgym', title: 'GirlsGym' },
-  ],
+  rooms: [{ key: 'girlsgym', title: 'GirlsGym' }],
   id: 123,
   // proximityActivity: '71',
   // touchActivity: '72',
@@ -81,7 +80,8 @@ const GirlsGym: UIConfig = {
       controls: {
         leftHoop: {
           kind: 'group',
-          className: 'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
@@ -122,7 +122,8 @@ const GirlsGym: UIConfig = {
         },
         curtains: {
           kind: 'group',
-          className: 'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
@@ -163,7 +164,8 @@ const GirlsGym: UIConfig = {
         },
         rightHoop: {
           kind: 'group',
-          className: 'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
