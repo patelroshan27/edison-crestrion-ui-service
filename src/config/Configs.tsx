@@ -85,6 +85,15 @@ export interface AudioApiCommand {
   payload: AudioApiPaylod;
 }
 
+export interface SignalApiPayload {
+  signalName: string;
+}
+
+export interface SignalApiCommand {
+  type: 'signal';
+  payload: SignalApiPayload;
+}
+
 export interface ColorIntensity {
   name: string;
   icon?: SvgIcon;
@@ -108,6 +117,7 @@ export type ApiCommand =
   | LightsApiCommand
   | WebrelayApiCommand
   | AudioApiCommand
+  | SignalApiCommand
   | ProjectorsApiCommand;
 
 export interface LightControlData {
@@ -191,7 +201,7 @@ export const CONFIGS = {
   aatma: Aatma,
   gnan: Gnan,
   banquetlarge: BanquetLarge,
-  pramukh: Pramukh
+  pramukh: Pramukh,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

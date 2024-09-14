@@ -10,8 +10,7 @@ import {
 import type { UIConfig } from 'config/Configs';
 
 const BoysGym: UIConfig = {
-  rooms: [    { key: 'boysgym', title: 'BoysGym' },
-  ],
+  rooms: [{ key: 'boysgym', title: 'BoysGym' }],
   id: 123,
   // proximityActivity: '71',
   // touchActivity: '72',
@@ -32,7 +31,7 @@ const BoysGym: UIConfig = {
         lights: {
           kind: 'group',
           className:
-          'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr] gap-2',
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr] gap-2',
           controls: [
             {
               kind: 'light',
@@ -81,7 +80,8 @@ const BoysGym: UIConfig = {
       controls: {
         leftHoop: {
           kind: 'group',
-          className: 'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
@@ -122,7 +122,8 @@ const BoysGym: UIConfig = {
         },
         curtains: {
           kind: 'group',
-          className: 'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',
@@ -155,7 +156,8 @@ const BoysGym: UIConfig = {
         },
         rightHoop: {
           kind: 'group',
-          className: 'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
           controls: [
             {
               kind: 'toggle',

@@ -1,4 +1,12 @@
-import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
+import {
+  ArrowDownToLine,
+  ArrowUpToLine,
+  Lightbulb,
+  LightbulbOff,
+  PauseOctagon,
+  Sun,
+  SunDim,
+} from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
@@ -130,6 +138,49 @@ const Pramukh: UIConfig = {
                 {
                   type: 'projector',
                   payloads: [{ authId: 'Pramukh', action: 'poweroff' }],
+                },
+              ],
+            },
+          ],
+        },
+        screens: {
+          kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+          controls: [
+            {
+              kind: 'toggle',
+              icon: ArrowUpToLine,
+              title: 'Screen',
+              label: 'Up',
+              apiCommands: [
+                {
+                  type: 'signal',
+                  payload: { signalName: '31' },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: PauseOctagon,
+              title: 'Screen',
+              label: 'Stop',
+              apiCommands: [
+                {
+                  type: 'signal',
+                  payload: { signalName: '32' },
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: ArrowDownToLine,
+              title: 'Screen',
+              label: 'Down',
+              apiCommands: [
+                {
+                  type: 'signal',
+                  payload: { signalName: '33' },
                 },
               ],
             },

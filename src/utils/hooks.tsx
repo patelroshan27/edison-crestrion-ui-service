@@ -63,6 +63,13 @@ export function useDigitalState(signalName: string): boolean {
   return useSignalState<boolean>('boolean', signalName, false);
 }
 
+function sendSignalCmd(signalName: string, delay = 500): void {
+  CrComLib.publishEvent('boolean', signalName, true);
+  setTimeout(() => {
+    CrComLib.publishEvent('boolean', signalName, false);
+  }, delay);
+}
+
 function useApiState<D, R>(path: string): (data: D) => Promise<R> {
   return useCallback(async (data: D) => {
     return await axios
@@ -134,6 +141,8 @@ export function useApiCommands(): (
           return sendProjectorCmd(command.payloads);
         if (command.type === 'webrelay')
           return sendWebRelayCmd(command.payload);
+        if (command.type === 'signal')
+          return sendSignalCmd(command.payload.signalName);
 
         return undefined;
       })
