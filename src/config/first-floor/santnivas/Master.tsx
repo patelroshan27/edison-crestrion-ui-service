@@ -22,6 +22,7 @@ const Configs: UIConfig = {
     { key: 'bramhananad', title: 'Bramhananad', group: 'SantNivas' },
     { key: 'santcorridor', title: 'Corridor', group: 'SantNivas' },
     { key: 'santkitchen', title: 'Kitchen', group: 'SantNivas' },
+    { key: 'exterior', title: 'Exterior', group: 'SantNivas' },
     { key: 'aksharpith', title: 'Aksharpith', group: 'Mandir' },
     { key: 'shayonafresh', title: 'ShayonaFresh', group: 'Mandir' },
     { key: 'aatma', title: 'Aatma', group: 'Boys' },
