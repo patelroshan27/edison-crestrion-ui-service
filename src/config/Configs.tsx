@@ -67,7 +67,13 @@ export interface CrestronWebrelayPayload {
     | 'curtain'
     | 'woodbridgeSideLights'
     | 'turnpikeSideLights';
-  action: 'UP' | 'DOWN' | 'STOP' | 'ON' | 'OFF';
+  action: 'UP' | 'DOWN' | 'STOP' | 'TOGGLE' | 'STATUS';
+}
+
+export interface WebrelayExteriorStatusRes {
+  datavalues: {
+    relaystate: string;
+  };
 }
 
 export interface AudioApiPaylod {
