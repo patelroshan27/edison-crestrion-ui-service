@@ -28,6 +28,7 @@ import Prapti from './first-floor/girls/Prapti';
 import Ruchi from './first-floor/girls/Ruchi';
 import Samarpan from './first-floor/girls/Samarpan';
 import Upasana from './first-floor/girls/Upasana';
+import Exterior from './exterior/Exterior';
 
 export interface CrestronConfigs {
   host: string;
@@ -59,9 +60,20 @@ export interface ProjectorsApiPayload {
 }
 
 export interface CrestronWebrelayPayload {
-  authId: 'BoysGym' | 'GirlsGym';
-  name: 'leftHoop' | 'rightHoop' | 'curtain';
-  action: 'UP' | 'DOWN' | 'STOP';
+  authId: 'BoysGym' | 'GirlsGym' | 'ExteriorWoodbridge' | 'ExteriorTurnpike';
+  name:
+    | 'leftHoop'
+    | 'rightHoop'
+    | 'curtain'
+    | 'woodbridgeSideLights'
+    | 'turnpikeSideLights';
+  action: 'UP' | 'DOWN' | 'STOP' | 'TOGGLE' | 'STATUS';
+}
+
+export interface WebrelayExteriorStatusRes {
+  datavalues: {
+    relaystate: string;
+  };
 }
 
 export interface AudioApiPaylod {
@@ -216,6 +228,7 @@ export const CONFIGS = {
   samarpan: Samarpan,
   upasana: Upasana,
   yagnapurush: Yagnapurush,
+  exterior: Exterior,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;
