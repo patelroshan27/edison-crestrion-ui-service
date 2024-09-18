@@ -72,7 +72,7 @@ export interface CrestronWebrelayPayload {
 
 export interface WebrelayExteriorStatusRes {
   datavalues: {
-    relaystate: string;
+    relaystate: string[];
   };
 }
 
