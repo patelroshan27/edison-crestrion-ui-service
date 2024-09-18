@@ -40,7 +40,7 @@ const Exterior: UIConfig = {
               },
             ]).then((results) =>
               (results as WebrelayExteriorStatusRes[])[0].datavalues
-                .relaystate === '1'
+                .relaystate[0] === '1'
                 ? 'On'
                 : 'Off',
             );
@@ -51,6 +51,7 @@ const Exterior: UIConfig = {
               icon: ArrowUpToLine,
               title: 'Exterior Woodbridge',
               label: 'On',
+              labelOff: 'Off',
               apiCommands: [
                 {
                   type: 'webrelay',
@@ -98,7 +99,7 @@ const Exterior: UIConfig = {
               },
             ]).then((results) =>
               (results as WebrelayExteriorStatusRes[])[0].datavalues
-                .relaystate === '1'
+                .relaystate[0] === '1'
                 ? 'On'
                 : 'Off',
             );
@@ -109,6 +110,7 @@ const Exterior: UIConfig = {
               icon: ArrowUpToLine,
               title: 'Exterior Turnpike',
               label: 'On',
+              labelOff: 'Off',
               apiCommands: [
                 {
                   type: 'webrelay',

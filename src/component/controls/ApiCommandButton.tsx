@@ -24,6 +24,7 @@ export const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
     <SimpleButton
       {...props}
       isOn={activeValue === valueKey}
+      disabled={activeValue === valueKey}
       onClick={() => {
         sendCommands(apiCommands)
           .then(() => setActiveValue?.(valueKey))
