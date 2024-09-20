@@ -51,7 +51,6 @@ const Exterior: UIConfig = {
               icon: ArrowUpToLine,
               title: 'Exterior Woodbridge',
               label: 'On',
-              labelOff: 'Off',
               apiCommands: [
                 {
                   type: 'webrelay',
@@ -110,7 +109,6 @@ const Exterior: UIConfig = {
               icon: ArrowUpToLine,
               title: 'Exterior Turnpike',
               label: 'On',
-              labelOff: 'Off',
               apiCommands: [
                 {
                   type: 'webrelay',
