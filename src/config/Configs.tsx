@@ -29,6 +29,8 @@ import Ruchi from './first-floor/girls/Ruchi';
 import Samarpan from './first-floor/girls/Samarpan';
 import Upasana from './first-floor/girls/Upasana';
 import Exterior from './exterior/Exterior';
+import Sarvakarta from './first-floor/boys/Sarvakarta';
+import SampSquare from './first-floor/boys/SampSquare';
 
 export interface CrestronConfigs {
   host: string;
@@ -229,6 +231,8 @@ export const CONFIGS = {
   upasana: Upasana,
   yagnapurush: Yagnapurush,
   exterior: Exterior,
+  sarvakarta: Sarvakarta,
+  sampsquare: SampSquare,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

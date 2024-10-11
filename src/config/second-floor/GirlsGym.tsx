@@ -75,7 +75,7 @@ const GirlsGym: UIConfig = {
     },
     'H&C': {
       name: 'Hoops & Curtain',
-      requiredRoles: ['sant', 'admin'],
+      requiredRoles: ['Master', 'Admin'],
       icon: Sun,
       controls: {
         leftHoop: {
