@@ -10,6 +10,7 @@ import { useRecoilState } from 'recoil';
 import { LockButton } from 'component/navigation/LockButton';
 import { FIFTEEN_MINUTES_IN_MS } from 'utils/Constants';
 import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
+import { HealthMonitor } from './HealthMonitor';
 
 const defaultConfig = getConfigs();
 const {
@@ -69,6 +70,7 @@ const App: React.FC<Props> = ({ className }) => {
       ) : (
         <LoginScreen authID={authID} authProviderURL={authProviderURL} />
       )}
+      <HealthMonitor />
     </>
   );
 };

@@ -84,14 +84,17 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             className={classNames(
               'h-5 flex items-center justify-center space-x-3',
             )}>
-            {password.split('').map((char, index) => {
-              return (
-                <div
-                  className="rounded-full h-4 w-4 !bg-active"
-                  key={`pass-char-${char}-${index}`}
-                />
-              );
-            })}
+            {password
+              .split('')
+              .slice(0, 4)
+              .map((char, index) => {
+                return (
+                  <div
+                    className="rounded-full h-4 w-4 !bg-active"
+                    key={`pass-char-${char}-${index}`}
+                  />
+                );
+              })}
           </div>
         </div>
         <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center pb-2">
