@@ -1,5 +1,5 @@
 import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
-import type { UIConfig } from 'config/Configs';
+import type { ApiCommand, UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
 const Mahima: UIConfig = {
@@ -20,6 +20,15 @@ const Mahima: UIConfig = {
           kind: 'group',
           className:
             'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          getActiveValue: (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            return sendCommands([
+              { type: 'zum', payloads: [{ room: 'mahima' }] },
+            ]).then((results) => (results[0] as number).toString());
+          },
+          parseActiveValueKey: (cmd: ApiCommand) =>
+            cmd.type === 'zum' ? (cmd.payloads[0].scene as string) : '',
           controls: [
             {
               kind: 'light',
