@@ -53,7 +53,7 @@ export type AudioApiCmdName =
 
 export interface LightsApiPayload {
   room: string;
-  scene?: string;
+  scene: string;
 }
 
 export interface ProjectorsApiPayload {
