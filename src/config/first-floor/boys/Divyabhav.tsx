@@ -2,7 +2,7 @@ import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
 import type { ApiCommand, UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
-const Mahima: UIConfig = {
+const Aatma: UIConfig = {
   rooms: [],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
@@ -10,7 +10,7 @@ const Mahima: UIConfig = {
   zumApiPath: '/zum/send',
   audioApiPath: '/audio/send',
   mediaApiPath: '/mediaplayer/send',
-  authID: 'Mahima',
+  authID: 'Divyabhav',
   pages: {
     LIGHTS: {
       name: 'Lights',
@@ -20,23 +20,23 @@ const Mahima: UIConfig = {
           kind: 'group',
           className:
             'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
-          getActiveValue: (
-            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
-          ) => {
-            return sendCommands([
-              { type: 'zum', payloads: [{ room: 'mahima', scene: '' }] },
-            ]).then((results) => (results[0] as string[])[0]);
-          },
-          parseActiveValueKey: (cmd: ApiCommand) =>
-            cmd.type === 'zum' ? cmd.payloads[0].scene : '',
-          controls: [
+            getActiveValue: (
+              sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+            ) => {
+              return sendCommands([
+                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '' }] },
+              ]).then((results) => (results[0] as string[])[0]);
+            },
+            parseActiveValueKey: (cmd: ApiCommand) =>
+              cmd.type === 'zum' ? cmd.payloads[0].scene : '',
+            controls: [
             {
               kind: 'light',
               icon: Lightbulb,
               title: 'Lights',
               label: 'On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '1' }] },
+                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '1' }] },
               ],
             },
             {
@@ -45,7 +45,7 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'Crown',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '2' }] },
+                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '2' }] },
               ],
             },
             {
@@ -54,7 +54,7 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'Ceiling',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '3' }] },
+                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '3' }] },
               ],
             },
             {
@@ -65,7 +65,7 @@ const Mahima: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'mahima', scene: '10' }],
+                  payloads: [{ room: 'divyabhav', scene: '10' }],
                 },
               ],
             },
@@ -75,10 +75,10 @@ const Mahima: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'mahima', scene: '11' }] },
+                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '11' }] },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'mahima', scene: '01' }],
+                  payloads: [{ room: 'divyabhav', scene: '01' }],
                 },
               ],
             },
@@ -90,11 +90,11 @@ const Mahima: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'mahima', scene: '16' }],
+                  payloads: [{ room: 'divyabhav', scene: '16' }],
                 },
                 {
                   type: 'pharos',
-                  payloads: [{ room: 'mahima', scene: '00' }],
+                  payloads: [{ room: 'divyabhav', scene: '00' }],
                 },
               ],
             },
@@ -102,7 +102,7 @@ const Mahima: UIConfig = {
         },
         pharos: {
           kind: 'pharos',
-          room: 'mahima',
+          room: 'divyabhav',
           className: 'row-span-4 col-span-3',
           colorStates: commonRoomColorStates,
         },
@@ -111,4 +111,4 @@ const Mahima: UIConfig = {
   },
 };
 
-export default Mahima;
+export default Aatma;

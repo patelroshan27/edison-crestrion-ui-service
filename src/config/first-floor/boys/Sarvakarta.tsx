@@ -14,6 +14,7 @@ const Sarvasva: UIConfig = {
   rooms: [
     { key: 'sarvakarta', title: 'Sarvakarta' },
     { key: 'sampsquare', title: 'SampSquare' },
+    { key: 'divyabhav', title: 'Divyabhav' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
