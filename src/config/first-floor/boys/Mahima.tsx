@@ -25,7 +25,7 @@ const Mahima: UIConfig = {
           ) => {
             return sendCommands([
               { type: 'zum', payloads: [{ room: 'mahima', scene: '' }] },
-            ]).then((results) => { console.log(results); return (results[0] as string[])[0] });
+            ]).then((results) => (results[0] as string[])[0]);
           },
           parseActiveValueKey: (cmd: ApiCommand) =>
             cmd.type === 'zum' ? cmd.payloads[0].scene : '',
