@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Check, Loader2 } from 'lucide-react';
+import { Delete } from 'lucide-react';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { loggedInUserState } from 'state/navigation';
@@ -17,13 +17,13 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   const setLoggedInUser = useSetRecoilState(loggedInUserState);
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-  const handleInvalidPassword = (): void => {
+  const handleInvalidPassword = useCallback((): void => {
     passWordRef.current?.classList.add('animate-once', 'animate-shake');
     setTimeout(() => {
       passWordRef.current?.classList.remove('animate-once', 'animate-shake');
       setPassword('');
-    }, 250);
-  };
+    }, 200);
+  }, [setPassword]);
 
   const handleDigitClick = async (digit: number): Promise<void> => {
     // Don't do anything if we are already checking password
@@ -31,35 +31,36 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
       return;
     }
 
-    if (digit !== -1) {
-      // Update password on every tap
+    if (digit === -1 && password.length > 0) {
+      setPassword((prevPass) => prevPass.slice(0, -1));
+    } else if (digit !== -1) {
       setPassword((prevPass) => `${prevPass}${digit}`);
-    } else {
-      try {
-        setIsLoading(true);
-        // Validate with API to ensure that the password
-        // is correct
-        await handlePasswordCheck(authID, password);
-      } catch {
-        handleInvalidPassword();
-      } finally {
-        setIsLoading(false);
-      }
     }
   };
 
-  const handlePasswordCheck = async (
-    authID: string,
-    pass: string,
-  ): Promise<void> => {
-    const response = await axios.get(
-      `${apiBaseUrl}${authProviderURL}?name=${authID}&passcode=${pass}`,
-    );
-    if (response.status === 200) {
-      setIsLoading(false);
-      setLoggedInUser(response.data);
-    }
-  };
+  const handlePasswordCheck = useCallback(
+    async (authID: string, pass: string) => {
+      const response = await axios.get(
+        `${apiBaseUrl}${authProviderURL}?name=${authID}&passcode=${pass}`,
+      );
+      if (response.status === 200) {
+        setIsLoading(false);
+        setLoggedInUser(response.data);
+      }
+    },
+    [setIsLoading, setLoggedInUser],
+  );
+
+  useEffect(() => {
+    if (password.length < 4) return;
+
+    setIsLoading(true);
+    // Validate with API to ensure that the password
+    // is correct
+    handlePasswordCheck(authID, password)
+      .catch(() => handleInvalidPassword())
+      .finally(() => setIsLoading(false));
+  }, [password, setIsLoading, handlePasswordCheck, handleInvalidPassword]);
 
   return (
     <div
@@ -84,17 +85,16 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             className={classNames(
               'h-5 flex items-center justify-center space-x-3',
             )}>
-            {password
-              .split('')
-              .slice(0, 4)
-              .map((char, index) => {
-                return (
-                  <div
-                    className="rounded-full h-4 w-4 !bg-active"
-                    key={`pass-char-${char}-${index}`}
-                  />
-                );
-              })}
+            {new Array(4).fill(1).map((_, index) => {
+              return (
+                <div
+                  className={`rounded-full h-4 w-4 border border-black ${
+                    password.length > index ? 'bg-active' : ''
+                  }`}
+                  key={`pass-char-${index}`}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center pb-2">
@@ -102,11 +102,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             let display: React.ReactNode = digit;
             switch (digit) {
               case -1:
-                display = isLoading ? (
-                  <Loader2 className="h-12 w-12 animate-spin" />
-                ) : (
-                  <Check className="h-12 w-12" />
-                );
+                display = <Delete className="h-12 w-12" />;
                 break;
             }
 
@@ -117,7 +113,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
                   'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
                   'text-5xl border-2 border-neutral-700 bg-neutral-400 rounded-full opacity-80 font-medium active:opacity-100 hover:opacity-100',
                   digit === -1
-                    ? '!bg-green-500 text-background'
+                    ? '!bg-red-500 text-background'
                     : '!bg-secondary-foreground text-primary',
                 )}
                 disabled={isLoading}
