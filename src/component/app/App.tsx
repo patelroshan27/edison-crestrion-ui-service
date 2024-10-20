@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Body from 'component/Body';
 import Navigation from 'component/navigation/Navigation';
@@ -29,10 +29,12 @@ interface Props {
 
 const App: React.FC<Props> = ({ className }) => {
   const [loggedInUser, setLoggedInUser] = useRecoilState(loggedInUserState);
+  const [lastActionTime, setLastActionTime] = useState<number>();
   const isLoggedIn = Boolean(loggedInUser.role);
   const shouldAskForLogin = authProviderURL != null && authID != null;
   const panelContent = (
     <div
+      onClick={() => setLastActionTime(Date.now())}
       className={classNames(
         'w-screen h-screen overflow-hidden flex flex-col',
         className,
@@ -55,7 +57,7 @@ const App: React.FC<Props> = ({ className }) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [isLoggedIn]);
+  }, [isLoggedIn, lastActionTime]);
 
   return (
     <>
