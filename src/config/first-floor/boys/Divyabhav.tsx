@@ -1,8 +1,8 @@
 import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'config/Configs';
+import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
-const Aatma: UIConfig = {
+const Divyabhav: UIConfig = {
   rooms: [],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
@@ -102,4 +102,4 @@ const Aatma: UIConfig = {
   },
 };
 
-export default Aatma;
+export default Divyabhav;

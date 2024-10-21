@@ -1,5 +1,5 @@
 import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
-import type { ApiCommand, UIConfig } from 'config/Configs';
+import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 
 const Mahima: UIConfig = {
