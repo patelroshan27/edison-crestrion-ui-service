@@ -20,16 +20,7 @@ const Aatma: UIConfig = {
           kind: 'group',
           className:
             'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
-            getActiveValue: (
-              sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
-            ) => {
-              return sendCommands([
-                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '' }] },
-              ]).then((results) => (results[0] as string[])[0]);
-            },
-            parseActiveValueKey: (cmd: ApiCommand) =>
-              cmd.type === 'zum' ? cmd.payloads[0].scene : '',
-            controls: [
+          controls: [
             {
               kind: 'light',
               icon: Lightbulb,
@@ -65,7 +56,7 @@ const Aatma: UIConfig = {
               apiCommands: [
                 {
                   type: 'zum',
-                  payloads: [{ room: 'divyabhav', scene: '10' }],
+                  payloads: [{ room: 'divyabhav', scene: '16' }],
                 },
               ],
             },
@@ -75,7 +66,7 @@ const Aatma: UIConfig = {
               title: 'Lights',
               label: 'All On',
               apiCommands: [
-                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '11' }] },
+                { type: 'zum', payloads: [{ room: 'divyabhav', scene: '1' }] },
                 {
                   type: 'pharos',
                   payloads: [{ room: 'divyabhav', scene: '01' }],
