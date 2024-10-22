@@ -25,7 +25,6 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const [failureCount, setFailureCount] = useState(0);
   const requestsPerInterval = 4;
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const makeRequest = async (): Promise<void> => {
     try {
@@ -39,12 +38,12 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
   };
 
   useEffect((): (() => void) => {
-    intervalRef.current = setInterval((): void => {
+    const currentInterval = setInterval((): void => {
       void makeRequest();
     }, checkInterval / requestsPerInterval);
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (currentInterval) clearInterval(currentInterval);
     };
   }, [checkUrl, checkInterval, isOpen, onOpen, onClose]);
 
