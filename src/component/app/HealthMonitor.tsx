@@ -38,7 +38,7 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
     }
   };
 
-  useEffect((): (() => void) => {
+  useEffect(() => {
     intervalRef.current = setInterval((): void => {
       void makeRequest();
     }, checkInterval / requestsPerInterval);
