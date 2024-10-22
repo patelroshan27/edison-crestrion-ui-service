@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Delete } from 'lucide-react';
+import { XCircle } from 'lucide-react';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { loggedInUserState } from 'state/navigation';
@@ -102,7 +102,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             let display: React.ReactNode = digit;
             switch (digit) {
               case -1:
-                display = <Delete className="h-12 w-12" />;
+                display = <XCircle className="h-12 w-12" />;
                 break;
             }
 

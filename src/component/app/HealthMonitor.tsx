@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   Modal,
   ModalContent,
@@ -8,8 +8,8 @@ import {
   useDisclosure,
 } from '@nextui-org/modal';
 import { Button } from '@nextui-org/react';
-import axios from 'axios';
 import classNames from 'classnames';
+import axios from 'axios';
 
 interface HealthMonitorProps {
   checkUrl?: string;
@@ -21,26 +21,37 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 export const HealthMonitor: React.FC<HealthMonitorProps> = ({
   checkInterval = 60_000,
   checkUrl = `${baseUrl}/health`,
-}) => {
+}): JSX.Element => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const [failureCount, setFailureCount] = useState(0);
+  const requestsPerInterval = 4;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      axios
-        .get(checkUrl)
-        .then(() => {
-          if (isOpen) onClose();
-        })
-        .catch((err) => {
-          console.log(err);
-          if (!isOpen) onOpen();
-        });
-    }, checkInterval);
+  const makeRequest = async (): Promise<void> => {
+    try {
+      await axios.get(checkUrl);
+      setFailureCount(0); // Reset on success
+      if (isOpen) onClose();
+    } catch (err) {
+      console.error(err);
+      setFailureCount((prev) => prev + 1); // Increment on failure
+    }
+  };
+
+  useEffect((): (() => void) => {
+    const currentInterval = setInterval((): void => {
+      void makeRequest();
+    }, checkInterval / requestsPerInterval);
 
     return () => {
-      clearInterval(interval);
+      if (currentInterval) clearInterval(currentInterval);
     };
-  }, [isOpen, onClose, onOpen]);
+  }, [checkUrl, checkInterval, isOpen, onOpen, onClose]);
+
+  useEffect((): void => {
+    if (failureCount >= requestsPerInterval && !isOpen) {
+      onOpen();
+    }
+  }, [failureCount, isOpen, onOpen]);
 
   return (
     <Modal
