@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   Modal,
   ModalContent,
@@ -13,45 +13,62 @@ import axios from 'axios';
 
 interface HealthMonitorProps {
   checkUrl?: string;
-  checkInterval?: number;
+  checkInterval?: number; // Interval in milliseconds
 }
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 
-export const HealthMonitor: React.FC<HealthMonitorProps> = ({
-  checkInterval = 60_000,
-  checkUrl = `${baseUrl}/health`,
-}): JSX.Element => {
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-  const [failureCount, setFailureCount] = useState(0);
-  const requestsPerInterval = 4;
+// Define a custom hook for health checking
+const useHealthCheck = (
+  checkUrl: string,
+  requestsPerInterval: number,
+  interval: number,
+): number => {
+  const [failureCount, setFailureCount] = useState<number>(0);
 
-  const makeRequest = async (): Promise<void> => {
+  // Explicitly set the return type for makeRequest
+  const makeRequest = useCallback(async (): Promise<void> => {
     try {
       await axios.get(checkUrl);
       setFailureCount(0); // Reset on success
-      if (isOpen) onClose();
     } catch (err) {
-      console.error(err);
+      console.error('Health check failed:', err);
       setFailureCount((prev) => prev + 1); // Increment on failure
     }
-  };
+  }, [checkUrl]);
 
-  useEffect((): (() => void) => {
-    const currentInterval = setInterval((): void => {
-      void makeRequest();
-    }, checkInterval / requestsPerInterval);
+  useEffect(() => {
+    const currentInterval = setInterval(() => {
+      void makeRequest(); // Fire request without awaiting
+    }, interval / requestsPerInterval);
 
     return () => {
-      if (currentInterval) clearInterval(currentInterval);
+      clearInterval(currentInterval); // Cleanup interval on unmount
     };
-  }, [checkUrl, checkInterval, isOpen, onOpen, onClose]);
+  }, [makeRequest, interval, requestsPerInterval]);
 
-  useEffect((): void => {
+  return failureCount; // Explicit return type
+};
+
+export const HealthMonitor: React.FC<HealthMonitorProps> = ({
+  checkInterval = 60_000,
+  checkUrl = `${baseUrl}/health`,
+}) => {
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const requestsPerInterval = 4;
+  const failureCount = useHealthCheck(
+    checkUrl,
+    requestsPerInterval,
+    checkInterval,
+  );
+
+  useEffect(() => {
     if (failureCount >= requestsPerInterval && !isOpen) {
-      onOpen();
+      onOpen(); // Open modal if failures exceed threshold
+    } else if (failureCount < requestsPerInterval && isOpen) {
+      onClose(); // Close modal if errors are resolved
     }
-  }, [failureCount, isOpen, onOpen]);
+  }, [failureCount, isOpen, onOpen, onClose]);
 
   return (
     <Modal
