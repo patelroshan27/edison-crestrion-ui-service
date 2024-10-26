@@ -1,0 +1,60 @@
+import React from 'react';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@nextui-org/react';
+import { type Job } from './types';
+import { CheckCircle, CircleIcon, EditIcon, Trash2 } from 'lucide-react';
+
+interface JobListProps {
+  jobs: Job[];
+  onEdit: (job: Job) => void;
+  onDelete: (id: number) => void;
+}
+
+const JobList: React.FC<JobListProps> = ({ jobs, onEdit, onDelete }) => {
+  return (
+    <Table>
+      <TableHeader>
+        <TableColumn>Name</TableColumn>
+        <TableColumn>Description</TableColumn>
+        <TableColumn>Enabled</TableColumn>
+        <TableColumn>Edit</TableColumn>
+        <TableColumn>Delete</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {jobs.map((job) => (
+          <TableRow key={job._id}>
+            <TableCell>{job.name}</TableCell>
+            <TableCell className="overflow-ellipses">
+              {job.description}
+            </TableCell>
+            <TableCell>
+              {job.enabled ? <CheckCircle /> : <CircleIcon />}
+            </TableCell>
+            <TableCell>
+              <Button color="primary" onClick={() => onEdit(job)}>
+                <EditIcon />
+              </Button>
+            </TableCell>
+            <TableCell>
+              <Button
+                isIconOnly
+                color="danger"
+                onClick={() => job._id && onDelete(job._id)}>
+                <Trash2 />
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+export default JobList;

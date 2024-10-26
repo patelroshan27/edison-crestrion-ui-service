@@ -185,11 +185,16 @@ export interface MediaPlayerControlData {
   playerId: string;
 }
 
+export interface SchedulerData {
+  kind: 'scheduler';
+}
+
 export type ControlData =
   | LightControlData
   | PharosControlData
   | AudioControlData
   | MediaPlayerControlData
+  | SchedulerData
   | GroupControlData;
 
 export interface PageData {
