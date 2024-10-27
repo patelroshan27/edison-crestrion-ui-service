@@ -8,7 +8,6 @@ import {
   useDisclosure,
 } from '@nextui-org/modal';
 import { Button } from '@nextui-org/react';
-import classNames from 'classnames';
 import axios from 'axios';
 
 interface HealthMonitorProps {
@@ -74,35 +73,23 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      className={classNames(
-        'outline-none focus:outline-none',
-        'h-auto w-full flex items-center justify-center',
-        'text-lg border-2 border-red-700 bg-red-100',
-        'rounded-xl font-medium text-center',
-      )}>
+      hideCloseButton
+      className="bg-red-100 border-2 border-red-700 rounded-xl text-center">
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader
-              className={classNames(
-                'outline-none focus:outline-none',
-                'h-auto w-full flex items-center justify-center',
-                'text-lg border-2 border-red-700 bg-red-400',
-                'rounded font-large text-center',
-              )}>
+            <ModalHeader className="bg-red-400 text-white text-xl font-bold py-3 flex justify-center">
               Temporarily Offline
             </ModalHeader>
-            <ModalBody>
-              <p>The service is currently unavailable due to maintenance.</p>
+            <ModalBody className="py-6">
+              <p className="text-gray-800">
+                The service is currently unavailable due to maintenance.
+              </p>
             </ModalBody>
-            <ModalFooter>
+            <ModalFooter className="flex justify-center">
               <Button
-                className={classNames(
-                  'outline-none focus:outline-none',
-                  'h-auto w-full flex items-center justify-center',
-                  'text-lg border-2 border-red-700 bg-red-500',
-                  'rounded-xl font-large text-center',
-                )}
+                color="danger"
+                className="px-8 py-2 text-lg font-semibold transition-colors duration-200 ease-in-out bg-red-700 hover:bg-red-800"
                 onPress={onClose}>
                 Close
               </Button>
