@@ -15,7 +15,8 @@ export interface Schedule {
 }
 
 export interface JobAction {
-  type: string;
+  label: string;
+  commands: unknown[];
 }
 
 export interface Job {

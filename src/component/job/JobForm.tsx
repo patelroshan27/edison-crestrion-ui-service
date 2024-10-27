@@ -6,9 +6,12 @@ import {
   Select,
   Checkbox,
   SelectItem,
+  Chip,
+  Autocomplete,
+  AutocompleteItem,
 } from '@nextui-org/react';
 import { type Job, type Schedule, type JobAction } from './types';
-import { DAYS_OF_WEEK, MONTHS } from './jobUtils';
+import { DAYS_OF_WEEK, JOB_ACTIONS, JOB_ACTIONS_MAP, MONTHS } from './jobUtils';
 
 interface JobFormProps {
   job?: Job | null;
@@ -41,24 +44,23 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
     setSchedule((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Handle adding/removing actions
-  const handleAddAction = (): void => {
-    const newAction: JobAction = { type: '' }; // Adjust this based on your JobAction schema
-    setActions((prev) => [...prev, newAction]);
+  const handleRemoveAction = (action: JobAction): void => {
+    setActions((prev) => prev.filter((x) => x.label !== action.label));
   };
 
-  const handleRemoveAction = (index: number): void => {
-    setActions((prev) => prev.filter((_, i) => i !== index));
-  };
+  const handleActionChange = (id: string): void => {
+    const newAction = JOB_ACTIONS_MAP.get(id);
+    if (!newAction) return;
 
-  const handleActionChange = (
-    index: number,
-    key: keyof JobAction,
-    value: string,
-  ): void => {
     setActions((prev) => {
-      const updatedActions = [...prev];
-      updatedActions[index] = { ...updatedActions[index], [key]: value };
+      const updatedActions = [
+        ...prev,
+        {
+          label: `${newAction.authID} ${newAction.target} ${newAction.label}`,
+          commands: newAction.commands,
+        },
+      ];
+
       return updatedActions;
     });
   };
@@ -78,7 +80,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-col gap-2 md:flex-row">
         <div className="flex flex-col grow gap-2">
           <h3>Basic Info</h3>
           <Input
@@ -167,30 +169,27 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           </Select>
         </div>
 
-        <div className="flex flex-col grow gap-2">
+        <div className="flex flex-col grow gap-2 max-w-[35vw] max-w-xs">
           <h3>Actions</h3>
-          {actions.map((action, index) => (
-            <div key={index}>
-              <Select
-                label="Action Type"
-                value={action.type}
-                onSelectionChange={(value) =>
-                  handleActionChange(
-                    index,
-                    'type',
-                    Array.from(value as Set<string>)[0],
-                  )
-                }>
-                {['Pharos', 'Zum'].map((actionType) => (
-                  <SelectItem key={actionType}>{actionType}</SelectItem>
-                ))}
-              </Select>
-              <Button onClick={() => handleRemoveAction(index)}>
-                Remove Action
-              </Button>
-            </div>
-          ))}
-          <Button onClick={handleAddAction}>Add Action</Button>
+          <Autocomplete
+            label="Add Actions"
+            className="max-w-xs"
+            onSelectionChange={(value) =>
+              value && handleActionChange(value.toString())
+            }>
+            {JOB_ACTIONS.map((action) => (
+              <AutocompleteItem key={action.id}>
+                {`${action.authID} ${action.target} ${action.label}`}
+              </AutocompleteItem>
+            ))}
+          </Autocomplete>
+          <div className="flex flex-wrap gap-2 my-1">
+            {actions.map((action, i) => (
+              <Chip key={i} onClose={() => handleRemoveAction(action)}>
+                {action.label}
+              </Chip>
+            ))}
+          </div>
         </div>
       </div>
       <div className="flex gap-2 mb-3">
