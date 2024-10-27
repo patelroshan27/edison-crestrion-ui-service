@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { XCircle } from 'lucide-react';
+import { Delete } from 'lucide-react';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { loggedInUserState } from 'state/navigation';
@@ -63,67 +63,64 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   }, [password, setIsLoading, handlePasswordCheck, handleInvalidPassword]);
 
   return (
-    <div
-      className={classNames(
-        'flex items-center justify-center bg-background fixed top-0 left-0 h-screen w-screen z-10',
-        '',
-      )}>
-      <div className="flex flex-col items-center justify-center space-x-1">
-        <p className="text-4xl font-semibold  border border-neutral-700 bg-neutral-400 rounded-full !bg-secondary-foreground text-primary px-5 py-5">
+    <div className="flex items-center justify-center bg-background fixed top-0 left-0 h-screen w-screen z-10">
+      <div className="flex flex-col items-center justify-center w-full max-w-4xl px-4">
+        <p className="text-2xl sm:text-3xl md:text-4xl font-semibold border border-neutral-700 bg-neutral-400 rounded-full !bg-secondary-foreground text-primary px-3 py-3 sm:px-4 sm:py-4 md:px-5 md:py-5 text-center mb-4">
           BAPS Shri Swaminarayan Mandir, Edison, NJ
         </p>
-        <div className="flex flex-row items-center justify-center space-x-1">
-          <div
-            className={classNames(
-              'rounded-full px-6 py-2 border border-neutral-700 bg-neutral-400 rounded-full !bg-secondary-foreground text-primary flex-col items-center justify-center',
-              'text-3xl font-semibold my-4 mx-4',
-            )}>
+        <div className="flex flex-col sm:flex-row items-center justify-center w-full space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+          <div className="rounded-full px-4 py-2 border border-neutral-700 bg-neutral-400 !bg-secondary-foreground text-primary text-xl sm:text-2xl md:text-3xl font-semibold">
             {authID}
           </div>
           <div
             ref={passWordRef}
-            className={classNames(
-              'h-5 flex items-center justify-center space-x-3',
-            )}>
-            {new Array(4).fill(1).map((_, index) => {
-              return (
-                <div
-                  className={`rounded-full h-4 w-4 border border-black ${
-                    password.length > index ? 'bg-active' : ''
-                  }`}
-                  key={`pass-char-${index}`}
-                />
-              );
-            })}
+            className="flex items-center justify-center space-x-2 sm:space-x-3">
+            {new Array(4).fill(1).map((_, index) => (
+              <div
+                className={`rounded-full h-3 w-3 sm:h-4 sm:w-4 border border-black ${
+                  password.length > index ? 'bg-active' : ''
+                }`}
+                key={`pass-char-${index}`}
+              />
+            ))}
           </div>
         </div>
-        <div className="flex flex-wrap max-w-[40%] space-x-3 space-y-3 items-center justify-center pb-2">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1].map((digit) => {
-            let display: React.ReactNode = digit;
-            switch (digit) {
-              case -1:
-                display = <XCircle className="h-12 w-12" />;
-                break;
-            }
 
-            return (
-              <button
-                key={digit}
-                className={classNames(
-                  'outline-none focus:outline-none rounded-full h-32 w-32 flex items-center justify-center',
-                  'text-5xl border-2 border-neutral-700 bg-neutral-400 rounded-full opacity-80 font-medium active:opacity-100 hover:opacity-100',
-                  digit === -1
-                    ? '!bg-red-500 text-background'
-                    : '!bg-secondary-foreground text-primary',
-                )}
-                disabled={isLoading}
-                onClick={() => {
-                  handleDigitClick(digit).catch(console.log);
-                }}>
-                {display}
-              </button>
-            );
-          })}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full max-w-sm">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
+            <button
+              key={digit}
+              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-20 sm:w-20 md:h-28 md:w-28 text-2xl sm:text-3xl md:text-5xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              disabled={isLoading}
+              onClick={() => {
+                void handleDigitClick(digit);
+              }}>
+              {digit}
+            </button>
+          ))}
+
+          <div className="col-span-3 grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+            <button
+              className="invisible outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-20 sm:w-20 md:h-28 md:w-28 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              disabled={isLoading}>
+            </button>
+            <button
+              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-20 sm:w-20 md:h-28 md:w-28 text-2xl sm:text-3xl md:text-5xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              disabled={isLoading}
+              onClick={() => {
+                void handleDigitClick(0);
+              }}>
+              0
+            </button>
+            <button
+              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-20 sm:w-20 md:h-28 md:w-28 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              disabled={isLoading}
+              onClick={() => {
+                void handleDigitClick(-1);
+              }}>
+              <Delete className="h-5 w-5 sm:h-7 sm:w-7 md:h-10 md:w-10" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

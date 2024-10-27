@@ -11,20 +11,14 @@ export const LockButton: React.FC = () => {
   const setLoggedInUser = useSetRecoilState(loggedInUserState);
 
   return (
-    <div className="absolute right-5 top-2">
+    <div className="absolute right-2 sm:right-5 top-2">
       <button
         type="button"
-        className={classNames(
-          'px-4 py-[0.57rem] flex items-center rounded-lg text-lg bg-red-700 text-red-200',
-        )}
+        className="border border-neutral-400 bg-secondary px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-center rounded-lg text-xl sm:text-2xl text-primary-foreground w-16 sm:w-24 h-10 sm:h-14"
         onClick={() => {
           setLoggedInUser(LOGGED_OUT_USER);
         }}>
-        <Lock className="mr-3 h-6 w-6 text-lg" />
-        <div className="text-left flex flex-col">
-          <span className="leading-none text-md">Lock</span>
-          <span className="text-sm">{defaultConfig.authID}</span>
-        </div>
+        <Lock className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
       </button>
     </div>
   );
