@@ -141,7 +141,8 @@
     "ruchi:build": "REACT_APP_ROOM_CONFIG_NAME=ruchi react-scripts build",
     "ruchi:archive": "REACT_APP_ROOM_CONFIG_NAME=ruchi ch5-cli archive -p ruchi -P sampleSource=ruchi -d build -o publish",
     "ruchi:deploy": "REACT_APP_ROOM_CONFIG_NAME=ruchi ch5-cli deploy -H 10.25.20.91 -t touchscreen publish/ruchi.ch5z --slow-mode",
-    "ruchi": "yarn ruchi:build && yarn ruchi:archive && yarn ruchi:deploy"
+    "ruchi": "yarn ruchi:build && yarn ruchi:archive && yarn ruchi:deploy",
+    "deploy-all": "yarn bramhananad && yarn santoffice1 && yarn sarvasva && yarn aksharpith && yarn boysgym && yarn girlsgym && yarn sabhahall && yarn sabhahall1 && yarn sabhahall2 && yarn mahima && yarn niyam && yarn nishchay && yarn aatma && yarn gnan && yarn pramukh && yarn yogi && yarn sarvakarta && yarn yagnapurush && yarn ashro && yarn samarpan && yarn upasana && yarn prapti && yarn ruchi"
   },
   "eslintConfig": {
     "extends": [
