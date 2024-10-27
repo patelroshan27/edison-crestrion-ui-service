@@ -1,11 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import { Lock } from 'lucide-react';
-import { getConfigs } from 'config/Configs';
 import { useSetRecoilState } from 'recoil';
 import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
-
-const defaultConfig = getConfigs();
 
 export const LockButton: React.FC = () => {
   const setLoggedInUser = useSetRecoilState(loggedInUserState);

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
 import { Delete } from 'lucide-react';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
@@ -102,8 +101,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
           <div className="col-span-3 grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             <button
               className="invisible outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-20 sm:w-20 md:h-28 md:w-28 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
-              disabled={isLoading}>
-            </button>
+              disabled={isLoading}></button>
             <button
               className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-20 sm:w-20 md:h-28 md:w-28 text-2xl sm:text-3xl md:text-5xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
               disabled={isLoading}

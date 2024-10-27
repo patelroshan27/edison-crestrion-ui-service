@@ -53,19 +53,23 @@ const AppWrapper = (): JSX.Element => {
     <ThemeProvider theme={theme}>
       <NextUIProvider>
         <RecoilRoot>
-          <main className={classNames(isDarkTheme ? 'dark' : 'light', 'text-foreground bg-background')}>
+          <main
+            className={classNames(
+              isDarkTheme ? 'dark' : 'light',
+              'text-foreground bg-background',
+            )}>
             <App />
             <div className="absolute right-20 sm:right-32 top-2">
               <button
                 type="button"
                 className="relative inline-flex items-center h-10 sm:h-14 rounded-full w-16 sm:w-24 bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none"
-                onClick={toggleTheme}
-              >
+                onClick={toggleTheme}>
                 <span
                   className={`${
-                    isDarkTheme ? 'translate-x-8 sm:translate-x-12' : 'translate-x-0'
-                  } inline-block w-8 sm:w-12 h-8 sm:h-12 transform bg-white rounded-full transition-transform duration-200 ease-in-out`}
-                >
+                    isDarkTheme
+                      ? 'translate-x-8 sm:translate-x-12'
+                      : 'translate-x-0'
+                  } inline-block w-8 sm:w-12 h-8 sm:h-12 transform bg-white rounded-full transition-transform duration-200 ease-in-out`}>
                   {isDarkTheme ? (
                     <Moon className="h-6 w-6 sm:h-8 sm:w-8 text-gray-800 m-1 sm:m-2" />
                   ) : (
