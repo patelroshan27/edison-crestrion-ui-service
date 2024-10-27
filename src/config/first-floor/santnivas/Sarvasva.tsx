@@ -1,5 +1,6 @@
 import {
   Bluetooth,
+  Clock,
   Lightbulb,
   LightbulbOff,
   ListMusic,
@@ -341,6 +342,16 @@ const Configs: UIConfig = {
         media: {
           kind: 'mediaPlayer',
           playerId: '11',
+        },
+      },
+    },
+    SCHEDULER: {
+      name: 'Scheduler',
+      icon: Clock,
+      className: '!grid-cols-[1fr] !grid-rows-[1fr]',
+      controls: {
+        media: {
+          kind: 'scheduler',
         },
       },
     },

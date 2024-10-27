@@ -16,7 +16,11 @@ const JobExecutions: React.FC<JobExecutionsProps> = ({ job }) => {
 
   return (
     <>
-      <Button isIconOnly color="primary" onClick={() => openModal()}>
+      <Button
+        aria-label="View History"
+        isIconOnly
+        color="primary"
+        onClick={() => openModal()}>
         <History />
       </Button>
       <JobExecutionsHistory

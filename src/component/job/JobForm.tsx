@@ -202,9 +202,11 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
       </div>
       <div className="flex gap-2 mb-3">
         <Button type="submit">{job ? 'Update Job' : 'Create Job'}</Button>
-        <Button type="button" onClick={onCancel}>
-          Cancel
-        </Button>
+        {job && (
+          <Button type="button" onClick={onCancel}>
+            Cancel
+          </Button>
+        )}
       </div>
     </form>
   );

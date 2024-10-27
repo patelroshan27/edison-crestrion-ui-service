@@ -33,19 +33,22 @@ const JobList: React.FC<JobListProps> = ({ jobs, onEdit, onDelete }) => {
         {jobs.map((job) => (
           <TableRow key={job._id}>
             <TableCell>{job.name}</TableCell>
-            <TableCell className="overflow-ellipses">
-              {job.description}
-            </TableCell>
+            <TableCell className="overflow-hidden">{job.description}</TableCell>
             <TableCell>
               {job.enabled ? <CheckCircle /> : <CircleIcon />}
             </TableCell>
             <TableCell>
-              <Button color="primary" onClick={() => onEdit(job)}>
+              <Button
+                aria-label="Edit"
+                isIconOnly
+                color="primary"
+                onClick={() => onEdit(job)}>
                 <EditIcon />
               </Button>
             </TableCell>
             <TableCell>
               <Button
+                aria-label="Delete"
                 isIconOnly
                 color="danger"
                 onClick={() => job._id && onDelete(job._id)}>

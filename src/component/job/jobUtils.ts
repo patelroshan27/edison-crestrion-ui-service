@@ -82,9 +82,11 @@ const getActions = (): JobActionItem[] => {
     return [];
   });
 
-  return [...lightAndToggleCommands, ...pharosCommands].map((x, i) => ({
-    ...x,
-    id: `${x.authID ?? 'NoAuthID'}:${x.target ?? 'NoTarget'}:${x.label}:${i}`,
+  return [...lightAndToggleCommands, ...pharosCommands].map((command, i) => ({
+    ...command,
+    id: `${command.authID ?? 'NoAuthID'}:${command.target ?? 'NoTarget'}:${
+      command.label
+    }:${i}`,
   })) as JobActionItem[];
 };
 
