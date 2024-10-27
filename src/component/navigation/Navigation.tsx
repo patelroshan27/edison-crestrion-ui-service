@@ -21,10 +21,10 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'flex justify-between space-x-2 px-6 pt-2 pb-2 mb-2 w-full items-center border-b border-neutral-400',
+        'flex flex-wrap justify-between space-x-2 px-4 sm:px-5 md:px-6 pt-2 pb-2 mb-2 w-full items-center border-b border-neutral-400',
         className,
       )}>
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-wrap items-center space-x-2">
         {pages.map((page) => {
           const pageData = activeConfig.pages[page];
           return (
@@ -32,7 +32,7 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
               key={page}
               type="button"
               className={classNames(
-                'border border-neutral-400 bg-secondary px-3 py-3 flex items-center rounded-lg text-2xl',
+                'border border-neutral-400 bg-secondary px-2 sm:px-3 py-2 sm:py-3 flex items-center rounded-lg text-lg sm:text-xl md:text-2xl mb-2',
                 activeTab === page
                   ? '!bg-active text-primary-foreground'
                   : 'bg-background text-primary',

@@ -24,12 +24,12 @@ module.exports = {
             active: "#ffffff",
             background: '#000000',
             primary: {
-              foreground: "#151212",
+              foreground: "#374151",
               DEFAULT: "#ffffff",
             },
             secondary: {
-              foreground: "#111827",
-              DEFAULT: '#111827',
+              foreground: "#374151",
+              DEFAULT: '#374151',
             }
           },
         },

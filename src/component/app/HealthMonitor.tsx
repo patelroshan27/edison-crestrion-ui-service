@@ -4,11 +4,10 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from '@nextui-org/modal';
-import { Button } from '@nextui-org/react';
 import axios from 'axios';
+import { AlertTriangle } from 'lucide-react';
 
 interface HealthMonitorProps {
   checkUrl?: string;
@@ -74,26 +73,18 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       hideCloseButton
-      className="bg-red-100 border-2 border-red-700 rounded-xl text-center">
+      className="bg-red-100 border border-red-800 rounded-xl text-center">
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="bg-red-400 text-white text-xl font-bold py-3 flex justify-center">
-              Temporarily Offline
+            <ModalHeader className="bg-red-500 text-white text-xl font-bold py-3 flex justify-center items-center">
+              <AlertTriangle className="mr-2 text-2xl" /> Temporarily Offline
             </ModalHeader>
             <ModalBody className="py-6">
               <p className="text-gray-800">
                 The service is currently unavailable due to maintenance.
               </p>
             </ModalBody>
-            <ModalFooter className="flex justify-center">
-              <Button
-                color="danger"
-                className="px-8 py-2 text-lg font-semibold transition-colors duration-200 ease-in-out bg-red-700 hover:bg-red-800"
-                onPress={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
           </>
         )}
       </ModalContent>

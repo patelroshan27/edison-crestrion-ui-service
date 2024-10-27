@@ -31,11 +31,6 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
   useEffect(() => {
     const newConfig = getConfigs(roomKey);
     setActiveConfig(newConfig);
-
-    // if current page doesn't exist in new room than set first tab of new config
-    // if (!newConfig.pages[activePage]) {
-    // }
-    // always select first tab in case of multiple rooms
     setActivePage(getAllowedPages(newConfig, loggedInUser)[0]);
   }, [roomKey]);
 
@@ -51,53 +46,48 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
       if (curr.group) {
         prev[curr.group] = 1;
       }
-
       return prev;
     }, {}),
   );
 
   return (
     <>
-      <HeaderRow className={className}>
+      <HeaderRow className={classNames('flex-wrap', className)}>
         {groups.length > 0 &&
-          groups.map((group) => {
-            return (
-              <button
-                key={group}
-                type="button"
-                className={classNames(
-                  'border border-neutral-400 bg-secondary px-3 py-3 flex items-center rounded-lg text-2xl',
-                  group === selectedGroup
-                    ? '!bg-active text-primary-foreground'
-                    : 'bg-background text-primary',
-                )}
-                onClick={() => {
-                  setSelectedGroup(group);
-                }}>
-                {group}
-              </button>
-            );
-          })}
-      </HeaderRow>
-      <HeaderRow className={className}>
-        {rooms.map((room) => {
-          return (
+          groups.map((group) => (
             <button
-              key={room.key}
+              key={group}
               type="button"
               className={classNames(
-                'border border-neutral-400 bg-secondary px-3 py-3 flex items-center rounded-lg text-2xl',
-                room.key === roomKey
+                'border border-neutral-400 bg-secondary px-2 sm:px-3 py-2 sm:py-3 flex items-center rounded-lg text-lg sm:text-xl md:text-2xl mb-2',
+                group === selectedGroup
                   ? '!bg-active text-primary-foreground'
                   : 'bg-background text-primary',
               )}
               onClick={() => {
-                setRoomKey(room.key);
+                setSelectedGroup(group);
               }}>
-              {room.title}
+              {group}
             </button>
-          );
-        })}
+          ))}
+      </HeaderRow>
+      <HeaderRow className={classNames('flex-wrap', className)}>
+        {rooms.map((room) => (
+          <button
+            key={room.key}
+            type="button"
+            className={classNames(
+              'border border-neutral-400 bg-secondary px-2 sm:px-3 py-2 sm:py-3 flex items-center rounded-lg text-lg sm:text-xl md:text-2xl mb-2',
+              room.key === roomKey
+                ? '!bg-active text-primary-foreground'
+                : 'bg-background text-primary',
+            )}
+            onClick={() => {
+              setRoomKey(room.key);
+            }}>
+            {room.title}
+          </button>
+        ))}
       </HeaderRow>
     </>
   );
