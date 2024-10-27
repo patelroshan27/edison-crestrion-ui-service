@@ -11,7 +11,15 @@ import {
   AutocompleteItem,
 } from '@nextui-org/react';
 import { type Job, type Schedule, type JobAction } from './types';
-import { DAYS_OF_WEEK, JOB_ACTIONS, JOB_ACTIONS_MAP, MONTHS } from './jobUtils';
+import {
+  DAYS_OF_MONTH,
+  DAYS_OF_WEEK,
+  HOURS,
+  JOB_ACTIONS,
+  JOB_ACTIONS_MAP,
+  MINUTES,
+  MONTHS,
+} from './jobUtils';
 
 interface JobFormProps {
   job?: Job | null;
@@ -113,7 +121,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
                 Array.from(value as Set<number>),
               )
             }>
-            {Array.from({ length: 31 }, (_, i) => i + 1).map((dayOfMonth) => (
+            {DAYS_OF_MONTH.map((dayOfMonth) => (
               <SelectItem key={dayOfMonth}>{dayOfMonth.toString()}</SelectItem>
             ))}
           </Select>
@@ -152,7 +160,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
             onSelectionChange={(value) =>
               handleScheduleChange('hours', Array.from(value as Set<number>))
             }>
-            {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+            {HOURS.map((hour) => (
               <SelectItem key={hour}>{hour.toString()}</SelectItem>
             ))}
           </Select>
@@ -163,7 +171,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
             onSelectionChange={(value) =>
               handleScheduleChange('minutes', Array.from(value as Set<number>))
             }>
-            {Array.from({ length: 60 }, (_, i) => i).map((minute) => (
+            {MINUTES.map((minute) => (
               <SelectItem key={minute}>{minute.toString()}</SelectItem>
             ))}
           </Select>

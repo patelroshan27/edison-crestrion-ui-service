@@ -10,11 +10,12 @@ import {
 } from '@nextui-org/react';
 import { type Job } from './types';
 import { CheckCircle, CircleIcon, EditIcon, Trash2 } from 'lucide-react';
+import JobExecutions from './JobExecutions';
 
 interface JobListProps {
   jobs: Job[];
   onEdit: (job: Job) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, onEdit, onDelete }) => {
@@ -26,6 +27,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, onEdit, onDelete }) => {
         <TableColumn>Enabled</TableColumn>
         <TableColumn>Edit</TableColumn>
         <TableColumn>Delete</TableColumn>
+        <TableColumn>History</TableColumn>
       </TableHeader>
       <TableBody>
         {jobs.map((job) => (
@@ -49,6 +51,9 @@ const JobList: React.FC<JobListProps> = ({ jobs, onEdit, onDelete }) => {
                 onClick={() => job._id && onDelete(job._id)}>
                 <Trash2 />
               </Button>
+            </TableCell>
+            <TableCell>
+              <JobExecutions job={job} />
             </TableCell>
           </TableRow>
         ))}

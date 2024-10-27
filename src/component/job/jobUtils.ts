@@ -11,6 +11,10 @@ export const DAYS_OF_WEEK = moment.weekdays().map((label, index) => ({
   number: index,
 }));
 
+export const MINUTES = Array.from({ length: 60 }, (_, i) => i);
+export const HOURS = Array.from({ length: 24 }, (_, i) => i);
+export const DAYS_OF_MONTH = Array.from({ length: 31 }, (_, i) => i + 1);
+
 export interface JobActionItem {
   id: string;
   authID: string;

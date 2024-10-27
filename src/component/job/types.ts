@@ -20,7 +20,7 @@ export interface JobAction {
 }
 
 export interface Job {
-  _id?: number;
+  _id?: string;
   name: string;
   description: string;
   enabled: boolean;
@@ -34,4 +34,5 @@ export interface Job {
 export interface JobExecution {
   jobId: number;
   executionTime: Date;
+  error?: string;
 }
