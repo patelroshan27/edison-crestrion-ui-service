@@ -135,7 +135,7 @@ const Yagnapurush: UIConfig = {
           label: 'Master',
           playLabel: 'Unmute',
           pauseLabel: 'Mute',
-          maxDB: 48311,
+          maxDB: 49202,
           getVolCmd: {
             type: 'audio',
             payload: {
