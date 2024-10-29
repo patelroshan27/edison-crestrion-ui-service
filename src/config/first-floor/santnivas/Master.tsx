@@ -42,7 +42,7 @@ const Configs: UIConfig = {
     { key: 'upasana', title: 'Upasana', group: 'Girls' },
     { key: 'yagnapurush', title: 'Yagnapurush', group: 'Girls' },
     { key: 'sabhahall', title: 'Sabha Hall', group: 'Sahajanand' },
-    { key: 'lobby260', title: 'SecondFloor Lobby', group: 'Sahajanand' },
+    { key: 'lobby260', title: 'SF Foyer', group: 'Sahajanand' },
     { key: 'boysgym', title: 'BoysGym', group: 'Sahajanand' },
     { key: 'girlsgym', title: 'GirlsGym', group: 'Sahajanand' },
     { key: 'banquetlarge', title: 'BanquetLarge', group: 'Basement' },

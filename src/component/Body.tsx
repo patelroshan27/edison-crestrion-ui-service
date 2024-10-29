@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-const Body: React.FC<Props> = ({ className }: Props) => {
+const Body: React.FC<Props> = ({ className }) => {
   const activeConfig = useRecoilValue(activeConfigState);
   const activePage = useRecoilValue(pageState);
   const page = activeConfig.pages[activePage];
@@ -16,14 +16,19 @@ const Body: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'h-full w-full flex flex-col gap-6 px-5 pb-4',
+        'h-full w-full flex flex-col',
+        'gap-4 md:gap-5 lg:gap-6',
+        'px-0 sm:px-0 md:px-0 pt-4 pb-4',
+        'overflow-hidden',
         className,
       )}>
-      <Controls
-        configs={page.controls}
-        className={page.className}
-        style={page.style}
-      />
+      <div className="w-full h-full overflow-hidden">
+        <Controls
+          configs={page.controls}
+          className={page.className}
+          style={page.style}
+        />
+      </div>
     </div>
   );
 };

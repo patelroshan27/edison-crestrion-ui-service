@@ -5,7 +5,7 @@ import { sabhaHallColorStates } from 'config/ConfigData';
 const SabhaHall: UIConfig = {
   rooms: [
     { key: 'sabhahall', title: 'SabhaHall' },
-    { key: 'lobby260', title: 'SecondFloor Lobby' },
+    { key: 'lobby260', title: 'SF Foyer' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',

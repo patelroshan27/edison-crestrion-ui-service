@@ -15,7 +15,8 @@ module.exports = {
     parserOptions: {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        project: './tsconfig.json',
+        project: 'tsconfig.json',
+        tsconfigRootDir: __dirname,
     },
     "plugins": [
         "react",
@@ -31,7 +32,9 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/no-non-null-assertion" : "warn",
         "@typescript-eslint/consistent-type-imports": "warn",
-        "@typescript-eslint/no-empty-interface": "off"
+        "@typescript-eslint/no-empty-interface": "off",
+        "react/react-in-jsx-scope": "error",
+        "react/jsx-uses-react": "error",
     },
     settings: {
         "import/parsers": {

@@ -25,10 +25,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
   }, [setPassword]);
 
   const handleDigitClick = async (digit: number): Promise<void> => {
-    // Don't do anything if we are already checking password
-    if (isLoading) {
-      return;
-    }
+    if (isLoading) return;
 
     if (digit === -1 && password.length > 0) {
       setPassword((prevPass) => prevPass.slice(0, -1));
@@ -54,8 +51,6 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
     if (password.length < 4) return;
 
     setIsLoading(true);
-    // Validate with API to ensure that the password
-    // is correct
     handlePasswordCheck(authID, password)
       .catch(() => handleInvalidPassword())
       .finally(() => setIsLoading(false));
@@ -67,7 +62,7 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
         <p className="text-2xl sm:text-3xl md:text-4xl font-semibold border border-neutral-700 bg-neutral-400 rounded-full !bg-secondary-foreground text-primary px-3 py-3 sm:px-4 sm:py-4 md:px-5 md:py-5 text-center mb-4">
           BAPS Shri Swaminarayan Mandir, Edison, NJ
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center w-full space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center w-full space-y-2 sm:space-y-0 sm:space-x-4 mb-8">
           <div className="rounded-full px-4 py-2 border border-neutral-700 bg-neutral-400 !bg-secondary-foreground text-primary text-xl sm:text-2xl md:text-3xl font-semibold">
             {authID}
           </div>
@@ -85,11 +80,11 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 w-full max-w-sm">
+        <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 w-full max-w-sm">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
             <button
               key={digit}
-              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-18 sm:w-18 md:h-24 md:w-24 text-2xl sm:text-3xl md:text-4xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-20 w-20 sm:h-24 sm:w-24 md:h-24 md:w-24 text-2xl sm:text-3xl md:text-4xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
               disabled={isLoading}
               onClick={() => {
                 void handleDigitClick(digit);
@@ -98,12 +93,12 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
             </button>
           ))}
 
-          <div className="col-span-3 grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+          <div className="col-span-3 grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 mt-2 sm:mt-3 md:mt-4">
             <button
-              className="invisible outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-18 sm:w-18 md:h-24 md:w-24 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              className="invisible outline-none focus:outline-none flex items-center justify-center rounded-full h-20 w-20 sm:h-24 sm:w-24 md:h-24 md:w-24 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
               disabled={isLoading}></button>
             <button
-              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-18 sm:w-18 md:h-24 md:w-24 text-2xl sm:text-3xl md:text-4xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-20 w-20 sm:h-24 sm:w-24 md:h-24 md:w-24 text-2xl sm:text-3xl md:text-4xl border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
               disabled={isLoading}
               onClick={() => {
                 void handleDigitClick(0);
@@ -111,12 +106,12 @@ const LoginScreen: React.FC<Props> = ({ authProviderURL, authID }: Props) => {
               0
             </button>
             <button
-              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-14 w-14 sm:h-18 sm:w-18 md:h-24 md:w-24 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
+              className="outline-none focus:outline-none flex items-center justify-center rounded-full h-20 w-20 sm:h-24 sm:w-24 md:h-24 md:w-24 border-2 border-neutral-700 bg-neutral-400 opacity-80 font-medium active:opacity-100 hover:opacity-100 !bg-secondary-foreground text-primary"
               disabled={isLoading}
               onClick={() => {
                 void handleDigitClick(-1);
               }}>
-              <Delete className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
+              <Delete className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10" />
             </button>
           </div>
         </div>

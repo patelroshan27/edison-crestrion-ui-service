@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   activeConfigState,
@@ -9,6 +8,7 @@ import {
 import { type RoomKey, getConfigs } from 'config/Configs';
 import { getAllowedPages } from 'utils/getAllowedPages';
 import { HeaderRow } from './HeaderRow';
+import classNames from 'classnames';
 
 const defaultConfig = getConfigs();
 
@@ -50,45 +50,52 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
     }, {}),
   );
 
+  const selectedGroupName = selectedGroup ?? 'Select Group';
+  const selectedRoomName =
+    rooms.find((r) => r.key === roomKey)?.title ?? 'Select Room';
+
   return (
-    <>
-      <HeaderRow className={classNames('flex-wrap', className)}>
-        {groups.length > 0 &&
-          groups.map((group) => (
+    <div className="flex flex-row md:flex-col w-full">
+      {groups.length > 0 && (
+        <div className="w-[40%] md:w-auto pr-0.5 md:pr-0">
+          <HeaderRow label={selectedGroupName}>
+            {groups.map((group) => (
+              <button
+                key={group}
+                type="button"
+                className={classNames(
+                  selectedGroup === group
+                    ? '!bg-active text-primary-foreground'
+                    : 'bg-background text-primary',
+                )}
+                onClick={() => {
+                  setSelectedGroup(group);
+                }}>
+                {group}
+              </button>
+            ))}
+          </HeaderRow>
+        </div>
+      )}
+      <div className="w-[60%] md:w-auto pl-0.5 md:pl-0">
+        <HeaderRow label={selectedRoomName}>
+          {rooms.map((room) => (
             <button
-              key={group}
+              key={room.key}
               type="button"
               className={classNames(
-                'border border-neutral-400 bg-secondary px-2 sm:px-3 py-2 sm:py-3 flex items-center rounded-lg text-lg sm:text-xl md:text-2xl mb-2',
-                group === selectedGroup
+                room.key === roomKey
                   ? '!bg-active text-primary-foreground'
                   : 'bg-background text-primary',
               )}
               onClick={() => {
-                setSelectedGroup(group);
+                setRoomKey(room.key);
               }}>
-              {group}
+              {room.title}
             </button>
           ))}
-      </HeaderRow>
-      <HeaderRow className={classNames('flex-wrap', className)}>
-        {rooms.map((room) => (
-          <button
-            key={room.key}
-            type="button"
-            className={classNames(
-              'border border-neutral-400 bg-secondary px-2 sm:px-3 py-2 sm:py-3 flex items-center rounded-lg text-lg sm:text-xl md:text-2xl mb-2',
-              room.key === roomKey
-                ? '!bg-active text-primary-foreground'
-                : 'bg-background text-primary',
-            )}
-            onClick={() => {
-              setRoomKey(room.key);
-            }}>
-            {room.title}
-          </button>
-        ))}
-      </HeaderRow>
-    </>
+        </HeaderRow>
+      </div>
+    </div>
   );
 };

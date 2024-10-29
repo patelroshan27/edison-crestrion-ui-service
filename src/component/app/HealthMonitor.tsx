@@ -24,7 +24,6 @@ const useHealthCheck = (
 ): number => {
   const [failureCount, setFailureCount] = useState<number>(0);
 
-  // Explicitly set the return type for makeRequest
   const makeRequest = useCallback(async (): Promise<void> => {
     try {
       await axios.get(checkUrl);
@@ -45,7 +44,7 @@ const useHealthCheck = (
     };
   }, [makeRequest, interval, requestsPerInterval]);
 
-  return failureCount; // Explicit return type
+  return failureCount;
 };
 
 export const HealthMonitor: React.FC<HealthMonitorProps> = ({
@@ -73,15 +72,20 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       hideCloseButton
-      className="bg-red-100 border border-red-800 rounded-xl text-center">
+      className="bg-red-100 border border-red-800 rounded-xl text-center max-w-[90%] sm:max-w-[80%] md:max-w-[60%]"
+      classNames={{
+        base: 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[100]',
+        backdrop: 'z-[99]',
+      }}>
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="bg-red-500 text-white text-xl font-bold py-3 flex justify-center items-center">
-              <AlertTriangle className="mr-2 text-2xl" /> Temporarily Offline
+            <ModalHeader className="bg-red-500 text-white text-base sm:text-lg md:text-xl font-bold py-2 sm:py-3 flex justify-center items-center">
+              <AlertTriangle className="mr-2 h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />{' '}
+              Temporarily Offline
             </ModalHeader>
-            <ModalBody className="py-6">
-              <p className="text-gray-800">
+            <ModalBody className="py-4 sm:py-5 md:py-6">
+              <p className="text-gray-800 text-sm sm:text-base md:text-lg">
                 The service is currently unavailable due to maintenance.
               </p>
             </ModalBody>

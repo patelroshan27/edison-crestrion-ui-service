@@ -81,17 +81,20 @@ export const commonRoomColorStates: ColorIntensity[] = [
   },
   {
     name: 'White',
-    color: 'bg-white',
+    color:
+      'bg-white dark:bg-neutral-200 border-neutral-300 dark:border-neutral-600',
     scene: '68',
   },
   {
     name: 'Gray',
-    color: 'bg-neutral-200',
+    color:
+      'bg-neutral-200 dark:bg-neutral-600 border-neutral-400 dark:border-neutral-500',
     scene: '69',
   },
   {
     name: 'Off',
-    color: 'bg-white',
+    color:
+      'bg-neutral-100 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-400',
     icon: PowerOff,
     scene: '00',
   },
@@ -227,7 +230,8 @@ export const sabhaHallColorStates: ColorIntensity[] = [
   },
   {
     name: 'Off',
-    color: 'bg-white',
+    color:
+      'bg-neutral-100 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-400',
     icon: PowerOff,
     scene: '00',
   },
