@@ -32,6 +32,7 @@ import Exterior from './exterior/Exterior';
 import Sarvakarta from './first-floor/boys/Sarvakarta';
 import SampSquare from './first-floor/boys/SampSquare';
 import Divyabhav from './first-floor/boys/Divyabhav';
+import { type MediaPlayerCmd } from 'component/media/hooks';
 
 export interface CrestronConfigs {
   host: string;
@@ -92,6 +93,11 @@ export interface WebrelayApiCommand {
   payload: CrestronWebrelayPayload;
 }
 
+export interface MediaApiCommand {
+  type: 'media';
+  payload: MediaPlayerCmd;
+}
+
 export interface LightsApiCommand {
   type: LightApiType;
   payloads: LightsApiPayload[];
@@ -140,6 +146,7 @@ export type ApiCommand =
   | WebrelayApiCommand
   | AudioApiCommand
   | SignalApiCommand
+  | MediaApiCommand
   | ProjectorsApiCommand;
 
 export interface LightControlData {

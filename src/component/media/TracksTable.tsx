@@ -21,6 +21,7 @@ interface TracksTableProps {
   tracks: Track[];
   topContent: ReactNode;
   onAddToQueue: (params: SelectedMediaIds) => void;
+  rowsPerPage?: number;
 }
 
 const tracksColumns = [
@@ -33,9 +34,13 @@ export const TracksTable: React.FC<TracksTableProps> = ({
   tableProps,
   tracks,
   topContent,
+  rowsPerPage,
   onAddToQueue,
 }) => {
-  const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
+  const { page, pages, setPage, filteredItems } = useTablePagination(
+    tracks,
+    rowsPerPage,
+  );
 
   const renderCell = (track: Track, key: string | number): ReactNode => {
     switch (key) {

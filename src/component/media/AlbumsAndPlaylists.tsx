@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   ButtonGroup,
   type TableProps,
   type Selection,
 } from '@nextui-org/react';
-import { type MediaItemType, type Playlist } from './types';
+import { type MediaItemType } from './types';
 import { type SelectedMediaIds } from './MediaPlayer';
 import { AlbumsTable } from './AlbumsTable';
 import { PlaylistsTable } from './PlaylistsTable';
-import {
-  useGetAlbumsApi,
-  type AlbumsByName,
-  useGetPlaylistsApi,
-} from './hooks';
+import { useAlbumsAndPlaylists } from './hooks';
 import classNames from 'classnames';
 
 interface AlbumsAndPlaylistsProps {
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
+  rowsPerPage?: number;
 }
 
 const tableProps: Partial<TableProps> = {
@@ -36,22 +33,11 @@ const tableProps: Partial<TableProps> = {
 export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
   onSelection,
   onAddToQueue,
+  rowsPerPage,
 }) => {
-  const [albumsByName, setAlbumsByName] = useState<AlbumsByName>({});
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [selectedKey, setSelectedKey] = useState<Selection>();
   const [itemType, setItemType] = useState<MediaItemType>('playlist');
-  const getAlbums = useGetAlbumsApi();
-  const getPlaylists = useGetPlaylistsApi();
-
-  useEffect(() => {
-    getAlbums({})
-      .then(setAlbumsByName)
-      .catch((err) => console.log(err));
-    getPlaylists({})
-      .then(setPlaylists)
-      .catch((err) => console.log(err));
-  }, []);
+  const { albumsList, playlists } = useAlbumsAndPlaylists();
 
   const topContent = (
     <div className="flex flex-col">
@@ -87,10 +73,11 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
       tableProps={tableProps}
       selectedKey={selectedKey}
       setSelectedKey={setSelectedKey}
-      albumsByName={albumsByName}
+      albumsList={albumsList}
       onSelection={onSelection}
       onAddToQueue={onAddToQueue}
       topContent={topContent}
+      rowsPerPage={rowsPerPage}
     />
   ) : (
     <PlaylistsTable
@@ -101,6 +88,7 @@ export const AlbumsAndPlaylists: React.FC<AlbumsAndPlaylistsProps> = ({
       onSelection={onSelection}
       onAddToQueue={onAddToQueue}
       topContent={topContent}
+      rowsPerPage={rowsPerPage}
     />
   );
 };

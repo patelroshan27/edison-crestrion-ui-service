@@ -17,9 +17,12 @@ import {
   HOURS,
   JOB_ACTIONS,
   JOB_ACTIONS_MAP,
+  type JobActionItem,
   MINUTES,
   MONTHS,
 } from './jobUtils';
+import { MediaAction } from './MediaAction';
+import { DEFAULT_SELECT_PROPS } from './formUtils';
 
 interface JobFormProps {
   job?: Job | null;
@@ -33,6 +36,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
     job ? job.description : '',
   );
   const [enabled, setEnabled] = useState<boolean>(job ? job.enabled : true);
+  // TODO handle string values
   const [schedule, setSchedule] = useState<Schedule>(
     job?.schedule ?? {
       daysOfMonth: [],
@@ -56,8 +60,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
     setActions((prev) => prev.filter((x) => x.label !== action.label));
   };
 
-  const handleActionChange = (id: string): void => {
-    const newAction = JOB_ACTIONS_MAP.get(id);
+  const handleActionChange = (newAction?: JobActionItem): void => {
     if (!newAction) return;
 
     setActions((prev) => {
@@ -93,12 +96,15 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           <h3>Basic Info</h3>
           <Input
             label="Job Name"
+            variant="bordered"
             value={name}
+            isRequired
             onChange={(e) => setName(e.target.value)}
             required
           />
           <Textarea
             label="Description"
+            variant="bordered"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -112,6 +118,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
         <div className="flex flex-col grow gap-2">
           <h3>Schedule</h3>
           <Select
+            {...DEFAULT_SELECT_PROPS}
             label="Days of Month"
             selectionMode="multiple"
             selectedKeys={schedule.daysOfMonth}
@@ -127,6 +134,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           </Select>
 
           <Select
+            {...DEFAULT_SELECT_PROPS}
             label="Days of Week"
             selectionMode="multiple"
             selectedKeys={schedule.daysOfWeek}
@@ -142,6 +150,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           </Select>
 
           <Select
+            {...DEFAULT_SELECT_PROPS}
             label="Months"
             selectionMode="multiple"
             selectedKeys={schedule.months}
@@ -154,6 +163,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           </Select>
 
           <Select
+            {...DEFAULT_SELECT_PROPS}
             label="Hours"
             selectionMode="multiple"
             selectedKeys={schedule.hours}
@@ -166,6 +176,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           </Select>
 
           <Select
+            {...DEFAULT_SELECT_PROPS}
             label="Minute"
             selectedKeys={schedule.minutes}
             onSelectionChange={(value) =>
@@ -180,10 +191,11 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
         <div className="flex flex-col grow gap-2 max-w-[35vw] max-w-xs">
           <h3>Actions</h3>
           <Autocomplete
+            variant="bordered"
             label="Add Actions"
             className="max-w-xs"
             onSelectionChange={(value) =>
-              value && handleActionChange(value.toString())
+              value && handleActionChange(JOB_ACTIONS_MAP.get(value.toString()))
             }>
             {JOB_ACTIONS.map((action) => (
               <AutocompleteItem key={action.id}>
@@ -191,6 +203,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
               </AutocompleteItem>
             ))}
           </Autocomplete>
+          <MediaAction handleActionChange={handleActionChange} />
           <div className="flex flex-wrap gap-2 my-1">
             {actions.map((action, i) => (
               <Chip key={i} onClose={() => handleRemoveAction(action)}>
@@ -201,7 +214,9 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
         </div>
       </div>
       <div className="flex gap-2 mb-3">
-        <Button type="submit">{job ? 'Update Job' : 'Create Job'}</Button>
+        <Button color="primary" type="submit">
+          {job ? 'Update Job' : 'Create Job'}
+        </Button>
         {job && (
           <Button type="button" onClick={onCancel}>
             Cancel

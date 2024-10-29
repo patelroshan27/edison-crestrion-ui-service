@@ -8,6 +8,7 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL as string;
 const jobsUrl = `${baseUrl}/jobs`;
 
 const JobManager: React.FC = () => {
+  const [key, setKey] = useState(Math.random().toFixed(4));
   const [jobs, setJobs] = useState<Job[]>([]);
   const [editingJob, setEditingJob] = useState<Job | null>(null);
 
@@ -24,6 +25,7 @@ const JobManager: React.FC = () => {
     await axios.post(jobsUrl, newJob);
     await fetchJobs();
     setEditingJob(null);
+    setKey(Math.random().toFixed(4));
   };
 
   const handleUpdateJob = async (updatedJob: Job): Promise<void> => {
@@ -49,6 +51,7 @@ const JobManager: React.FC = () => {
         />
       ) : (
         <JobForm
+          key={key}
           onSubmit={handleCreateJob}
           onCancel={() => setEditingJob(null)}
         />

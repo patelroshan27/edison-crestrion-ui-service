@@ -1,3 +1,7 @@
+import {
+  type MediaPlayerCmd,
+  type MuseApiCmdType,
+} from 'component/media/hooks';
 import { type ApiCommand, CONFIGS } from 'config/Configs';
 import moment from 'moment';
 
@@ -23,33 +27,32 @@ export interface JobActionItem {
   commands: ApiCommand[];
 }
 
-const getActions = (): JobActionItem[] => {
-  const controls = Object.values(CONFIGS)
-    .filter((c) => c.authID !== 'Master')
-    .flatMap((config) => {
-      return Object.values(config.pages).map((p) => ({
-        authID: config.authID,
-        ...p,
-      }));
-    })
-    .flatMap((pageData) => {
-      return Object.values(pageData.controls).map((c) => ({
-        authID: pageData.authID,
+const CONTROLS = Object.values(CONFIGS)
+  .filter((c) => c.authID !== 'Master')
+  .flatMap((config) => {
+    return Object.values(config.pages).map((p) => ({
+      authID: config.authID,
+      ...p,
+    }));
+  })
+  .flatMap((pageData) => {
+    return Object.values(pageData.controls).map((c) => ({
+      authID: pageData.authID,
+      ...c,
+    }));
+  })
+  .flatMap((control) => {
+    if (control.kind === 'group') {
+      return Object.values(control.controls).map((c) => ({
+        authID: control.authID,
         ...c,
       }));
-    })
-    .flatMap((control) => {
-      if (control.kind === 'group') {
-        return Object.values(control.controls).map((c) => ({
-          authID: control.authID,
-          ...c,
-        }));
-      } else {
-        return [control];
-      }
-    });
-
-  const lightAndToggleCommands = controls.flatMap((control) => {
+    } else {
+      return [control];
+    }
+  });
+const getActions = (): JobActionItem[] => {
+  const lightAndToggleCommands = CONTROLS.flatMap((control) => {
     if (control.kind === 'light' || control.kind === 'toggle') {
       return {
         authID: control.authID,
@@ -62,7 +65,7 @@ const getActions = (): JobActionItem[] => {
     return [];
   });
 
-  const pharosCommands = controls.flatMap((control) => {
+  const pharosCommands = CONTROLS.flatMap((control) => {
     if (control.kind === 'pharos') {
       return control.colorStates.map((cs) => ({
         authID: control.authID,
@@ -92,3 +95,51 @@ const getActions = (): JobActionItem[] => {
 
 export const JOB_ACTIONS = getActions();
 export const JOB_ACTIONS_MAP = new Map(JOB_ACTIONS.map((x) => [x.id, x]));
+
+// media player related
+export const MEDIA_PLAYERS = CONTROLS.flatMap((control) => {
+  if (control.kind === 'mediaPlayer') {
+    return [{ authID: control.authID, playerId: control.playerId }];
+  }
+  return [];
+});
+
+export type SelectedApiCmdType = Extract<
+  MuseApiCmdType,
+  'addToPlayer' | 'clearPlayer' | 'repeat' | 'shuffle'
+>;
+export const MEDIA_PLAYER_ACTION_TYPES: Array<{
+  id: string;
+  type: SelectedApiCmdType;
+  label: string;
+  options: MediaPlayerCmd['payload'];
+}> = (
+  [
+    {
+      type: 'addToPlayer',
+      label: 'Add to Queue',
+      options: { append: 'ON' },
+    },
+    {
+      type: 'repeat',
+      label: 'Repeat All',
+      options: { repeat: 'ALL' },
+    },
+    {
+      type: 'repeat',
+      label: 'Repeat Off',
+      options: { repeat: 'OFF' },
+    },
+    {
+      type: 'clearPlayer',
+      label: 'Clear Queue',
+      options: {},
+    },
+    {
+      type: 'shuffle',
+      label: 'Shuffle',
+      options: { shuffle: 'TOGGLE' },
+    },
+  ] as const
+).map((x, i) => ({ id: `${x.type}${i}`, ...x }));
+
