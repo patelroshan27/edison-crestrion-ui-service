@@ -142,4 +142,3 @@ export const MEDIA_PLAYER_ACTION_TYPES: Array<{
     },
   ] as const
 ).map((x, i) => ({ id: `${x.type}${i}`, ...x }));
-

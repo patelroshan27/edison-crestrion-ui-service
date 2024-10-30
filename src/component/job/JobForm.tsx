@@ -10,7 +10,13 @@ import {
   Autocomplete,
   AutocompleteItem,
 } from '@nextui-org/react';
-import { type Job, type Schedule, type JobAction } from './types';
+import {
+  type Job,
+  type Schedule,
+  type JobAction,
+  type SchedulePreset,
+  type SchedulePresetType,
+} from './types';
 import {
   DAYS_OF_MONTH,
   DAYS_OF_WEEK,
@@ -46,6 +52,9 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
       minutes: [],
     },
   );
+  const [schedulePreset, setSchedulePreset] = useState<
+    SchedulePreset | undefined
+  >();
   const [actions, setActions] = useState<JobAction[]>(job?.actions ?? []);
 
   // Handle changes to the schedule
@@ -83,7 +92,7 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
       name,
       description,
       enabled,
-      schedule,
+      schedule: { ...schedule, preset: schedulePreset },
       actions,
     };
     onSubmit(newJob);
@@ -117,21 +126,44 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
 
         <div className="flex flex-col grow gap-2">
           <h3>Schedule</h3>
-          <Select
-            {...DEFAULT_SELECT_PROPS}
-            label="Days of Month"
-            selectionMode="multiple"
-            selectedKeys={schedule.daysOfMonth}
-            onSelectionChange={(value) =>
-              handleScheduleChange(
-                'daysOfMonth',
-                Array.from(value as Set<number>),
-              )
-            }>
-            {DAYS_OF_MONTH.map((dayOfMonth) => (
-              <SelectItem key={dayOfMonth}>{dayOfMonth.toString()}</SelectItem>
-            ))}
-          </Select>
+          <div className="flex">
+            <Select
+              {...DEFAULT_SELECT_PROPS}
+              classNames={{
+                trigger: 'rounded-none rounded-l-lg',
+              }}
+              label="Months"
+              selectionMode="multiple"
+              selectedKeys={schedule.months}
+              onSelectionChange={(value) =>
+                handleScheduleChange('months', Array.from(value as Set<number>))
+              }>
+              {MONTHS.map((month) => (
+                <SelectItem key={month.number}>{month.label}</SelectItem>
+              ))}
+            </Select>
+
+            <Select
+              {...DEFAULT_SELECT_PROPS}
+              classNames={{
+                trigger: 'rounded-none rounded-r-lg',
+              }}
+              label="Days of Month"
+              selectionMode="multiple"
+              selectedKeys={schedule.daysOfMonth}
+              onSelectionChange={(value) =>
+                handleScheduleChange(
+                  'daysOfMonth',
+                  Array.from(value as Set<number>),
+                )
+              }>
+              {DAYS_OF_MONTH.map((dayOfMonth) => (
+                <SelectItem key={dayOfMonth}>
+                  {dayOfMonth.toString()}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
 
           <Select
             {...DEFAULT_SELECT_PROPS}
@@ -149,43 +181,87 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
             ))}
           </Select>
 
-          <Select
-            {...DEFAULT_SELECT_PROPS}
-            label="Months"
-            selectionMode="multiple"
-            selectedKeys={schedule.months}
-            onSelectionChange={(value) =>
-              handleScheduleChange('months', Array.from(value as Set<number>))
-            }>
-            {MONTHS.map((month) => (
-              <SelectItem key={month.number}>{month.label}</SelectItem>
-            ))}
-          </Select>
-
-          <Select
-            {...DEFAULT_SELECT_PROPS}
-            label="Hours"
-            selectionMode="multiple"
-            selectedKeys={schedule.hours}
-            onSelectionChange={(value) =>
-              handleScheduleChange('hours', Array.from(value as Set<number>))
-            }>
-            {HOURS.map((hour) => (
-              <SelectItem key={hour}>{hour.toString()}</SelectItem>
-            ))}
-          </Select>
-
-          <Select
-            {...DEFAULT_SELECT_PROPS}
-            label="Minute"
-            selectedKeys={schedule.minutes}
-            onSelectionChange={(value) =>
-              handleScheduleChange('minutes', Array.from(value as Set<number>))
-            }>
-            {MINUTES.map((minute) => (
-              <SelectItem key={minute}>{minute.toString()}</SelectItem>
-            ))}
-          </Select>
+          <div className="flex">
+            <Select
+              {...DEFAULT_SELECT_PROPS}
+              label="Hours"
+              classNames={{
+                trigger: 'rounded-none rounded-l-lg',
+              }}
+              selectionMode="multiple"
+              selectedKeys={schedule.hours}
+              onSelectionChange={(value) =>
+                handleScheduleChange('hours', Array.from(value as Set<number>))
+              }>
+              {HOURS.map((hour) => (
+                <SelectItem key={hour}>{hour.toString()}</SelectItem>
+              ))}
+            </Select>
+            <Select
+              {...DEFAULT_SELECT_PROPS}
+              classNames={{
+                trigger: 'rounded-none rounded-r-lg',
+              }}
+              label="Minute"
+              selectedKeys={schedule.minutes}
+              onSelectionChange={(value) =>
+                handleScheduleChange(
+                  'minutes',
+                  Array.from(value as Set<number>),
+                )
+              }>
+              {MINUTES.map((minute) => (
+                <SelectItem key={minute}>{minute.toString()}</SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div className="text-center">
+            <Chip>Or</Chip>
+          </div>
+          <div className="flex">
+            <Select
+              {...DEFAULT_SELECT_PROPS}
+              label="Preset"
+              classNames={{
+                trigger: 'rounded-none rounded-l-lg',
+              }}
+              selectedKeys={schedulePreset?.type ? [schedulePreset?.type] : []}
+              onSelectionChange={(value) =>
+                setSchedulePreset((prev) => ({
+                  ...prev,
+                  type: Array.from(value)[0] as SchedulePresetType,
+                }))
+              }>
+              {['OnSunrise', 'OnSunset'].map((presetType) => (
+                <SelectItem key={presetType}>{presetType}</SelectItem>
+              ))}
+            </Select>
+            <Select
+              {...DEFAULT_SELECT_PROPS}
+              classNames={{
+                trigger: 'rounded-none rounded-r-lg',
+              }}
+              label="Offset Minutes"
+              selectedKeys={
+                schedulePreset?.offsetInMinutes
+                  ? [schedulePreset?.offsetInMinutes]
+                  : []
+              }
+              onSelectionChange={(value) =>
+                setSchedulePreset(
+                  (prev) =>
+                    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                    ({
+                      ...prev,
+                      offsetInMinutes: Array.from(value)[0],
+                    } as SchedulePreset),
+                )
+              }>
+              {MINUTES.map((minute) => (
+                <SelectItem key={minute}>{minute.toString()}</SelectItem>
+              ))}
+            </Select>
+          </div>
         </div>
 
         <div className="flex flex-col grow gap-2 max-w-[35vw] max-w-xs">

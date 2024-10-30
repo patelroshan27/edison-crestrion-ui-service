@@ -1,6 +1,6 @@
-type SchedulePresetType = 'OnSunrise' | 'OnSunset';
+export type SchedulePresetType = 'OnSunrise' | 'OnSunset';
 
-interface SchedulePreset {
+export interface SchedulePreset {
   type: SchedulePresetType;
   offsetInMinutes?: number;
 }
