@@ -67,10 +67,12 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
       data: data as MediaPlayerControlData,
     }));
 
-  // Add check for group controls
-  const hasGroupControls = Object.values(configs).some(
-    (data) => data.kind === 'group',
+  // Add a check for group controls
+  const groupControls = Object.entries(configs).filter(
+    ([_, data]) => data.kind === 'group'
   );
+
+  const hasGroupControls = groupControls.length > 0;
 
   return (
     <div className={classNames('h-full flex')} style={style}>
@@ -82,31 +84,28 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
             className={classNames(
               'h-full flex-shrink-0',
               'sm:w-1/5 md:w-1/5 lg:w-2/5',
+              'border-2 border-teal-500'
             )}>
-            {Object.keys(configs).map((key) => {
-              const data = configs[key];
-              if (data.kind === 'group') {
-                return (
-                  <div
-                    className={classNames(
-                      'h-full relative bg-background overflow-hidden',
-                    )}
-                    key={key}>
-                    <ButtonGroup data={data} containerWidth={containerWidth} />
-                  </div>
-                );
-              }
-              return null;
-            })}
+            {groupControls.map(([key, data]) => (
+              <div
+                className={classNames(
+                  'h-full relative bg-background overflow-hidden'
+                )}
+                key={key}>
+                <ButtonGroup data={data} containerWidth={containerWidth} />
+              </div>
+            ))}
           </div>
         )}
 
-        {/* Right Side Container - Adjust width based on whether ButtonGroup is present */}
+        {/* Right Side Container - Adjust width based on whether group controls exist */}
         <div
           className={classNames(
             'h-full flex-grow',
-            hasGroupControls ? 'sm:w-4/5 md:w-4/5 lg:w-3/5' : 'w-full', // Take full width if no ButtonGroup
-            'flex flex-row gap-4 p-4',
+            hasGroupControls
+              ? 'sm:w-4/5 md:w-4/5 lg:w-3/5'
+              : 'w-full', // Take full width if no group controls
+            'flex flex-row gap-4 p-4'
           )}>
           {/* Volume Controls Container - Only render if there are audio controls */}
           {audioControls.length > 0 && (
