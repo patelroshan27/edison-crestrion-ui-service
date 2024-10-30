@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Body from 'component/Body';
 import Navigation from 'component/navigation/Navigation';
-import { getConfigs } from 'config/Configs';
 import LogoScreenSaver from 'component/LogoScreenSaver';
 import LoginScreen from 'component/LoginScreen';
 import { RoomSelection } from 'component/navigation/RoomSelection';
 import { useRecoilState } from 'recoil';
-import { FIFTEEN_MINUTES_IN_MS } from 'utils/Constants';
 import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
 import { HealthMonitor } from './HealthMonitor';
+
+import { getConfigs } from 'config/Configs';
+import { FIFTEEN_MINUTES_IN_MS } from 'utils/Constants';
 
 const defaultConfig = getConfigs();
 const {
@@ -21,7 +22,6 @@ const {
 } = defaultConfig;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
 interface Props {
   className?: string;
 }

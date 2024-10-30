@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { type SvgIcon } from 'types/appState';
 
@@ -9,6 +9,8 @@ export interface ButtonCommonProps {
   label: string;
   labelOff?: string;
   title?: string;
+  hasTwoColumns?: boolean;
+  containerWidth?: number;
 }
 
 interface SimpleButtonProps extends ButtonCommonProps {
@@ -27,10 +29,26 @@ export const SimpleButton: React.FC<SimpleButtonProps> = ({
   title,
   onClick,
   disabled,
+  hasTwoColumns,
+  containerWidth,
 }: SimpleButtonProps) => {
+  const [isMediumScreen, setIsMediumScreen] = useState(false);
   const IconWithOff = isOn ? Icon : IconOff;
   const IconDisplay = IconWithOff ?? Icon;
   const offLabel = labelOff ?? label;
+  useEffect(() => {
+    const isMediaMedium = containerWidth
+      ? containerWidth >= 410 && containerWidth <= 1030
+      : false;
+    setIsMediumScreen(isMediaMedium);
+  }, [containerWidth]);
+
+  console.log('SimpleButton:', {
+    label,
+    hasTwoColumns,
+    isMediumScreen,
+    containerWidth,
+  });
 
   const displayLabel = (text: string): string => text.replace(' Lights', '');
 
@@ -38,52 +56,64 @@ export const SimpleButton: React.FC<SimpleButtonProps> = ({
     <button
       disabled={disabled}
       className={classNames(
-        'transition-all rounded-lg flex items-center',
-        'border border-neutral-400 bg-secondary',
+        'flex items-center',
+        'justify-start',
+        'gap-3',
+        isMediumScreen
+          ? hasTwoColumns
+            ? 'gap-4'
+            : 'gap-8'
+          : 'gap-3 lg:gap-16',
+        'p-4',
+        isMediumScreen ? (hasTwoColumns ? 'w-[95%]' : 'w-full') : 'w-full',
+        'transition-all duration-200',
         'focus:outline-none outline-none',
-        // Base sizing and spacing - increased width for small screens
-        'h-[3.2rem] px-1 py-1 w-[7.5rem]',
-        // Tablet sizing and spacing
-        'md:h-20 md:px-1.5 md:py-1 md:w-[9.5rem]',
-        // Desktop sizing and spacing (1027x800)
-        'lg:h-30 lg:px-2 lg:py-1 lg:w-[11rem]',
-        // Colors and states
+        'rounded-lg',
+        isMediumScreen ? (hasTwoColumns ? 'px-3' : 'px-5') : 'px-4 lg:px-10',
         isOn
-          ? '!bg-active text-primary-foreground'
-          : 'bg-background text-primary',
-        disabled && 'cursor-default',
-        disabled && !isOn && 'bg-slate-600',
+          ? 'bg-secondary text-white'
+          : 'bg-default-100 text-default-800 hover:bg-default-200',
+        disabled && 'cursor-default opacity-50',
         className,
       )}
       onClick={() => {
         onClick(!isOn);
       }}>
-      <IconDisplay
-        className={classNames(
-          'shrink-0',
-          'h-4 w-4',
-          'md:h-5 md:w-5',
-          'lg:h-6 lg:w-6',
-          isOn ? 'text-primary-foreground' : 'text-primary',
-        )}
-      />
       <div
         className={classNames(
-          'ml-1 md:ml-1 lg:ml-1.5',
-          'flex-1 min-w-0',
-          'pr-1',
+          'flex items-center',
+          'w-full',
+          isMediumScreen
+            ? hasTwoColumns
+              ? 'gap-4'
+              : 'gap-8'
+            : 'gap-3 lg:gap-16',
         )}>
-        <p
+        <IconDisplay
           className={classNames(
-            'leading-tight font-semibold tracking-wide',
-            'text-base',
-            'md:text-lg',
-            'lg:text-2xl',
-            'whitespace-nowrap overflow-hidden text-ellipsis',
-            isOn ? 'text-primary-foreground' : 'text-primary',
+            'shrink-0',
+            isMediumScreen
+              ? hasTwoColumns
+                ? 'text-5xl'
+                : 'text-8xl'
+              : 'text-3xl lg:text-[10rem]',
+            isOn ? 'text-white' : 'text-default-800',
+          )}
+        />
+        <span
+          className={classNames(
+            isMediumScreen
+              ? hasTwoColumns
+                ? 'text-3xl'
+                : 'text-5xl'
+              : 'text-xl lg:text-7xl',
+            'whitespace-nowrap text-ellipsis',
+            'min-w-0 flex-1',
+            'text-left font-semibold',
+            isOn ? 'text-white' : 'text-default-800',
           )}>
           {isOn ? displayLabel(label) : displayLabel(offLabel)}
-        </p>
+        </span>
       </div>
     </button>
   );

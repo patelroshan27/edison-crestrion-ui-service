@@ -1,5 +1,5 @@
 import type { ControlData } from 'config/Configs';
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Button from 'component/controls/Button';
 import VolumeControl from 'component/controls/VolumeControl';
 import PharosControl from 'component/controls/PharosControl';
@@ -14,67 +14,92 @@ interface Props {
 }
 
 const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+
+  useEffect(() => {
+    const updateWidth = (): void => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.clientWidth);
+      }
+    };
+
+    updateWidth();
+    const resizeObserver = new ResizeObserver(updateWidth);
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   return (
     <div
-      className={classNames(
-        'grid h-full',
-        'max-w-[380px] mx-auto',
-        'w-full lg:max-w-none',
-        'grid-cols-4 grid-rows-[1fr_1fr_1fr_1fr]',
-        'gap-x-2 gap-y-2',
-        'md:gap-x-3 md:gap-y-3',
-        'lg:gap-x-4 lg:gap-y-3',
-        className,
-      )}
+      className={classNames('h-full flex border-2 border-blue-500')}
       style={style}>
-      <div className="col-span-4 flex flex-row items-start relative">
+      <div className="flex flex-row w-full h-full">
         {/* ButtonGroup Container */}
-        {Object.keys(configs).map((key) => {
-          const data = configs[key];
-          if (data.kind === 'group') {
-            return (
-              <div
-                className={classNames(
-                  'w-[150px]',
-                  'flex-shrink-0',
-                  'px-0.5 sm:px-2 md:px-3 lg:px-4',
-                  'relative z-20',
-                  'bg-background',
-                )}
-                key={key}>
-                <ButtonGroup data={data} />
-              </div>
-            );
-          }
-          return null;
-        })}
+        <div
+          ref={containerRef}
+          className={classNames(
+            'h-full flex-shrink-0',
+            'sm:w-1/5', // Small screen: 20%
+            'md:w-1/5', // Medium screen: 20%
+            'lg:w-2/5', // Large screen: 40%
+          )}>
+          {Object.keys(configs).map((key) => {
+            const data = configs[key];
+            if (data.kind === 'group') {
+              return (
+                <div
+                  className={classNames(
+                    'h-full relative bg-background overflow-hidden',
+                    'border-2 border-green-500',
+                  )}
+                  key={key}>
+                  <ButtonGroup data={data} containerWidth={containerWidth} />
+                </div>
+              );
+            }
+            return null;
+          })}
+        </div>
 
         {/* PharosControl Container */}
-        {Object.keys(configs).map((key) => {
-          const data = configs[key];
-          if (data.kind === 'pharos') {
-            return (
-              <div
-                className={classNames(
-                  'absolute',
-                  'z-10',
-                  'left-[140px]',
-                  'w-[220px]',
-                  'pl-1',
-                  'sm:left-[7rem] sm:w-[calc(100%-7rem)]',
-                  'md:left-[11.5rem] md:w-[calc(100%-11.5rem)]',
-                  'lg:left-[13rem] lg:w-[calc(100%-13rem)]',
-                )}
-                key={key}>
-                <PharosControl
-                  className={classNames(data.className)}
-                  config={data}
-                />
-              </div>
-            );
-          }
-          return null;
-        })}
+        <div
+          className={classNames(
+            'h-full flex-grow',
+            'sm:w-4/5', // Small screen: 80%
+            'md:w-4/5', // Medium screen: 80%
+            'lg:w-3/5', // Large screen: 60%
+          )}>
+          {Object.keys(configs).map((key) => {
+            const data = configs[key];
+            if (data.kind === 'pharos') {
+              return (
+                <div
+                  className={classNames(
+                    'h-full w-full bg-background overflow-hidden',
+                    'border-2 border-purple-500',
+                    'px-2',
+                  )}
+                  key={key}>
+                  <PharosControl
+                    className={classNames(
+                      data.className,
+                      'h-full w-full',
+                      'flex flex-col gap-2',
+                    )}
+                    config={data}
+                    containerWidth={containerWidth}
+                  />
+                </div>
+              );
+            }
+            return null;
+          })}
+        </div>
       </div>
 
       {/* Other controls */}
@@ -82,13 +107,17 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
         const data = configs[key];
         if (data.kind === 'light' || data.kind === 'toggle') {
           return (
-            <div className="flex" key={key}>
+            <div className={classNames('flex')} key={key}>
               <Button config={data} />
             </div>
           );
         } else if (data.kind === 'audio') {
           return (
-            <VolumeControl className="row-span-4" key={key} config={data} />
+            <VolumeControl
+              className={classNames('row-span-4')}
+              key={key}
+              config={data}
+            />
           );
         } else if (data.kind === 'mediaPlayer') {
           return <MediaPlayer key={key} playerId={data.playerId} />;

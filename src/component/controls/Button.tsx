@@ -9,11 +9,15 @@ interface Props {
   activeValue?: string | number;
   setActiveValue?: (val: string | number) => void;
   parseActiveValueKey?: (cmd: ApiCommand) => string;
+  hasTwoColumns?: boolean;
+  containerWidth?: number;
 }
 
 const Button: React.FC<Props> = ({
   className,
   config: { apiCommands, webRelayConfig, ...configProps },
+  hasTwoColumns,
+  containerWidth,
   ...props
 }: Props) => {
   if (apiCommands) {
@@ -23,6 +27,8 @@ const Button: React.FC<Props> = ({
         {...props}
         className={className}
         apiCommands={apiCommands}
+        hasTwoColumns={hasTwoColumns}
+        containerWidth={containerWidth}
       />
     );
   }
@@ -34,6 +40,8 @@ const Button: React.FC<Props> = ({
         {...props}
         className={className}
         webRelayConfig={webRelayConfig}
+        hasTwoColumns={hasTwoColumns}
+        containerWidth={containerWidth}
       />
     );
   }

@@ -8,6 +8,8 @@ interface ApiCommandButtonProps extends ButtonCommonProps {
   activeValue?: string | number;
   setActiveValue?: (val: string | number) => void;
   parseActiveValueKey?: (cmd: ApiCommand) => string;
+  hasTwoColumns?: boolean;
+  containerWidth?: number;
 }
 
 export const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
@@ -15,6 +17,8 @@ export const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
   activeValue,
   setActiveValue,
   parseActiveValueKey,
+  hasTwoColumns,
+  containerWidth,
   ...props
 }) => {
   const sendCommands = useApiCommands();
@@ -25,6 +29,8 @@ export const ApiCommandButton: React.FC<ApiCommandButtonProps> = ({
       {...props}
       isOn={activeValue === valueKey}
       disabled={activeValue === valueKey}
+      hasTwoColumns={hasTwoColumns}
+      containerWidth={containerWidth}
       onClick={() => {
         sendCommands(apiCommands)
           .then(() => setActiveValue?.(valueKey))
