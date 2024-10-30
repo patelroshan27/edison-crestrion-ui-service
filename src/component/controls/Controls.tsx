@@ -1,4 +1,9 @@
-import type { ControlData } from 'config/Configs';
+import type {
+  AudioControlData,
+  ControlData,
+  LightControlData,
+  MediaPlayerControlData,
+} from 'config/Configs';
 import React, { useRef, useEffect, useState } from 'react';
 import Button from 'component/controls/Button';
 import VolumeControl from 'component/controls/VolumeControl';
@@ -34,96 +39,148 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
     return () => resizeObserver.disconnect();
   }, []);
 
-  return (
-    <div
-      className={classNames('h-full flex border-2 border-blue-500')}
-      style={style}>
-      <div className="flex flex-row w-full h-full">
-        {/* ButtonGroup Container */}
-        <div
-          ref={containerRef}
-          className={classNames(
-            'h-full flex-shrink-0',
-            'sm:w-1/5', // Small screen: 20%
-            'md:w-1/5', // Medium screen: 20%
-            'lg:w-2/5', // Large screen: 40%
-          )}>
-          {Object.keys(configs).map((key) => {
-            const data = configs[key];
-            if (data.kind === 'group') {
-              return (
-                <div
-                  className={classNames(
-                    'h-full relative bg-background overflow-hidden',
-                    'border-2 border-green-500',
-                  )}
-                  key={key}>
-                  <ButtonGroup data={data} containerWidth={containerWidth} />
-                </div>
-              );
-            }
-            return null;
-          })}
-        </div>
+  const hasPharosControl = Object.values(configs).some(
+    (data) => data.kind === 'pharos',
+  );
 
-        {/* PharosControl Container */}
+  // Group audio controls together with type assertion
+  const audioControls = Object.entries(configs)
+    .filter(([_, data]) => data.kind === 'audio')
+    .map(([key, data]) => ({
+      key,
+      data: data as AudioControlData,
+    }));
+
+  // Get other controls (light/toggle) with proper type assertion
+  const otherControls = Object.entries(configs)
+    .filter(([_, data]) => data.kind === 'light' || data.kind === 'toggle')
+    .map(([key, data]) => ({
+      key,
+      data: data as LightControlData, // Type assertion here
+    }));
+
+  // Add media controls grouping
+  const mediaControls = Object.entries(configs)
+    .filter(([_, data]) => data.kind === 'mediaPlayer')
+    .map(([key, data]) => ({
+      key,
+      data: data as MediaPlayerControlData,
+    }));
+
+  // Add check for group controls
+  const hasGroupControls = Object.values(configs).some(
+    (data) => data.kind === 'group',
+  );
+
+  return (
+    <div className={classNames('h-full flex')} style={style}>
+      <div className="flex flex-row w-full h-full gap-4">
+        {/* ButtonGroup Container - Only render if there are group controls */}
+        {hasGroupControls && (
+          <div
+            ref={containerRef}
+            className={classNames(
+              'h-full flex-shrink-0',
+              'sm:w-1/5 md:w-1/5 lg:w-2/5',
+            )}>
+            {Object.keys(configs).map((key) => {
+              const data = configs[key];
+              if (data.kind === 'group') {
+                return (
+                  <div
+                    className={classNames(
+                      'h-full relative bg-background overflow-hidden',
+                    )}
+                    key={key}>
+                    <ButtonGroup data={data} containerWidth={containerWidth} />
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </div>
+        )}
+
+        {/* Right Side Container - Adjust width based on whether ButtonGroup is present */}
         <div
           className={classNames(
             'h-full flex-grow',
-            'sm:w-4/5', // Small screen: 80%
-            'md:w-4/5', // Medium screen: 80%
-            'lg:w-3/5', // Large screen: 60%
+            hasGroupControls ? 'sm:w-4/5 md:w-4/5 lg:w-3/5' : 'w-full', // Take full width if no ButtonGroup
+            'flex flex-row gap-4 p-4',
           )}>
-          {Object.keys(configs).map((key) => {
-            const data = configs[key];
-            if (data.kind === 'pharos') {
-              return (
-                <div
-                  className={classNames(
-                    'h-full w-full bg-background overflow-hidden',
-                    'border-2 border-purple-500',
-                    'px-2',
-                  )}
-                  key={key}>
-                  <PharosControl
-                    className={classNames(
-                      data.className,
-                      'h-full w-full',
-                      'flex flex-col gap-2',
-                    )}
-                    config={data}
-                    containerWidth={containerWidth}
-                  />
+          {/* Volume Controls Container - Only render if there are audio controls */}
+          {audioControls.length > 0 && (
+            <div
+              className={classNames(
+                'flex flex-col gap-4',
+                'sm:w-[45%] md:w-[50%] lg:w-[35%]',
+              )}>
+              {audioControls.map(({ key, data }) => (
+                <VolumeControl
+                  key={key}
+                  className="flex-shrink-0 w-full"
+                  config={data}
+                  containerWidth={containerWidth}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Other Buttons - Only render if there are other controls */}
+          {otherControls.length > 0 && (
+            <div className={classNames('flex flex-row flex-wrap gap-4')}>
+              {otherControls.map(({ key, data }) => (
+                <div className="flex" key={key}>
+                  <Button config={data} containerWidth={containerWidth} />
                 </div>
-              );
-            }
-            return null;
-          })}
+              ))}
+            </div>
+          )}
+
+          {/* Media Player Controls */}
+          {mediaControls.length > 0 && (
+            <div className="w-full flex-grow">
+              {mediaControls.map(({ key, data }) => (
+                <div
+                  key={key}
+                  className="h-full w-full bg-background overflow-hidden px-2">
+                  <MediaPlayer playerId={data.playerId} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* PharosControl */}
+          {hasPharosControl && (
+            <div className="w-full flex-grow">
+              {Object.keys(configs).map((key) => {
+                const data = configs[key];
+                if (data.kind === 'pharos') {
+                  return (
+                    <div
+                      className={classNames(
+                        'h-full w-full bg-background overflow-hidden px-2',
+                        'flex justify-start',
+                      )}
+                      key={key}>
+                      <PharosControl
+                        className={classNames(
+                          data.className,
+                          'h-full w-full',
+                          'flex flex-col gap-2',
+                        )}
+                        config={data}
+                        containerWidth={containerWidth}
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Other controls */}
-      {Object.keys(configs).map((key) => {
-        const data = configs[key];
-        if (data.kind === 'light' || data.kind === 'toggle') {
-          return (
-            <div className={classNames('flex')} key={key}>
-              <Button config={data} />
-            </div>
-          );
-        } else if (data.kind === 'audio') {
-          return (
-            <VolumeControl
-              className={classNames('row-span-4')}
-              key={key}
-              config={data}
-            />
-          );
-        } else if (data.kind === 'mediaPlayer') {
-          return <MediaPlayer key={key} playerId={data.playerId} />;
-        }
-        return null;
-      })}
     </div>
   );
 };

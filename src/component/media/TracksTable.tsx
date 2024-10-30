@@ -35,7 +35,10 @@ export const TracksTable: React.FC<TracksTableProps> = ({
   topContent,
   onAddToQueue,
 }) => {
-  const { page, pages, setPage, filteredItems } = useTablePagination(tracks);
+  const { page, pages, setPage, filteredItems } = useTablePagination(
+    tracks,
+    10,
+  );
 
   const renderCell = (track: Track, key: string | number): ReactNode => {
     switch (key) {

@@ -68,7 +68,7 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
 
   return (
     <Table
-      className="border border-neutral-400 rounded-2xl"
+      className="border rounded-2xl"
       {...tableProps}
       aria-label="Media Player Playlists"
       defaultSelectedKeys={selectedKey}

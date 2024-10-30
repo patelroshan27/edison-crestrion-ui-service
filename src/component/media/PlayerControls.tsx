@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Card, Slider, type SliderValue } from '@nextui-org/react';
 import {

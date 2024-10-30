@@ -14,6 +14,7 @@ interface PharosColorControlProps extends ColorIntensity {
   onPharosCmd: (scene: string) => void;
   isLastInRow?: boolean;
   isSabhaHall?: boolean;
+  totalButtons: number;
 }
 
 const PharosColorControl: React.FC<PharosColorControlProps> = ({
@@ -27,6 +28,7 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
   onPharosCmd,
   isLastInRow = false,
   isSabhaHall = false,
+  totalButtons,
 }) => {
   const sendPharosCmd = usePharosApiState();
 
@@ -48,7 +50,10 @@ const PharosColorControl: React.FC<PharosColorControlProps> = ({
         'outline-none focus:outline-none border-4',
         'flex items-center justify-center',
         'transition rounded-[50%] overflow-hidden',
-        'w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32',
+        'w-16 h-16',
+        'sm:w-14 sm:h-14',
+        'md:w-10 md:h-10',
+        'lg:w-28 lg:h-28',
         activeScene === scene
           ? 'border border-active rounded-2xl scale-100'
           : 'scale-90 hover:scale-95',
@@ -80,6 +85,8 @@ const PharosControl: React.FC<Props> = ({
   const [isMediumScreen, setIsMediumScreen] = useState(false);
   const isSabhaHall = config.colorStates.length > 20;
 
+  const totalButtons = config.colorStates.length;
+
   // Screen size detection
   useEffect(() => {
     const isMediaMedium = containerWidth
@@ -89,10 +96,12 @@ const PharosControl: React.FC<Props> = ({
   }, [containerWidth]);
   // Calculate items per row based on screen size
   const getItemsPerRow = (): number => {
-    if (isSabhaHall) {
-      return isMediumScreen ? 5 : window.innerWidth >= 1024 ? 5 : 3;
+    if (totalButtons > 30) {
+      return isMediumScreen ? 6 : window.innerWidth >= 1024 ? 7 : 4;
+    } else if (totalButtons > 20) {
+      return isMediumScreen ? 5 : window.innerWidth >= 1024 ? 6 : 4;
     }
-    return isMediumScreen ? 5 : window.innerWidth >= 1024 ? 5 : 3;
+    return isMediumScreen ? 4 : window.innerWidth >= 1024 ? 5 : 3;
   };
 
   // Distribute items into rows
@@ -113,9 +122,9 @@ const PharosControl: React.FC<Props> = ({
       key={`row-${rowIndex}`}
       className={classNames(
         'flex items-center justify-center w-full',
-        // Gap between buttons in a row
-        'gap-2 md:gap-4 lg:gap-6',
-        // Margin between rows
+        totalButtons > 20
+          ? 'gap-1 md:gap-2 lg:gap-4'
+          : 'gap-2 md:gap-4 lg:gap-6',
         'mb-2 md:mb-4 lg:mb-6',
       )}>
       {row.map((item, colIndex) => (
@@ -130,6 +139,7 @@ const PharosControl: React.FC<Props> = ({
             onPharosCmd={setActiveScene}
             isLastInRow={colIndex === row.length - 1}
             isSabhaHall={isSabhaHall}
+            totalButtons={totalButtons}
           />
         </div>
       ))}
@@ -141,14 +151,14 @@ const PharosControl: React.FC<Props> = ({
       className={classNames(
         'flex flex-col w-full h-full',
         'overflow-hidden',
-        'p-2 md:p-4 lg:p-6',
+        'p-2 md:p-3 lg:p-4',
         className,
       )}>
       <div
         className={classNames(
           'grid w-full h-full',
-          'auto-rows-fr', // Equal height rows
-          'gap-2 md:gap-4 lg:gap-6',
+          'auto-rows-fr',
+          'gap-2 md:gap-3 lg:gap-4',
         )}>
         {colorPalettes}
       </div>
