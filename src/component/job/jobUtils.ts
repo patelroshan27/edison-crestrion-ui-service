@@ -67,19 +67,21 @@ const getActions = (): JobActionItem[] => {
 
   const pharosCommands = CONTROLS.flatMap((control) => {
     if (control.kind === 'pharos') {
-      return control.colorStates.map((cs) => ({
-        authID: control.authID,
-        target: 'Pharos Lights',
-        label: cs.name,
-        commands: [
-          {
-            type: 'pharos',
-            payloads: [{ room: control.room, scene: cs.scene }].concat(
-              cs.extraPayloads ?? [],
-            ),
-          },
-        ],
-      }));
+      return control.colorStates
+        .filter((cs) => /on|off|white/i.test(cs.name))
+        .map((cs) => ({
+          authID: control.authID,
+          target: 'Pharos Lights',
+          label: cs.name,
+          commands: [
+            {
+              type: 'pharos',
+              payloads: [{ room: control.room, scene: cs.scene }].concat(
+                cs.extraPayloads ?? [],
+              ),
+            },
+          ],
+        }));
     }
 
     return [];
