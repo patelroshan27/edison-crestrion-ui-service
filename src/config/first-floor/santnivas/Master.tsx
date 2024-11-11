@@ -19,7 +19,7 @@ const Configs: UIConfig = {
     { key: 'sarvasva', title: 'Sarvasva', group: 'SantNivas' },
     { key: 'santoffice1', title: 'Office1', group: 'SantNivas' },
     { key: 'santoffice2', title: 'Office2', group: 'SantNivas' },
-    { key: 'bramhananad', title: 'Bramhananad', group: 'SantNivas' },
+    { key: 'bramhanand', title: 'Bramhanand', group: 'SantNivas' },
     { key: 'santcorridor', title: 'Corridor', group: 'SantNivas' },
     { key: 'santkitchen', title: 'Kitchen', group: 'SantNivas' },
     { key: 'exterior', title: 'Exterior', group: 'SantNivas' },

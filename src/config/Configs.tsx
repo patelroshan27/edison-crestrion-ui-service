@@ -7,7 +7,7 @@ import SantOffice2 from './first-floor/santnivas/SantOffice2';
 import SantCorridor from './first-floor/santnivas/SantCorridor';
 import SantKitchen from './first-floor/santnivas/SantKitchen';
 import SantNivas from './first-floor/santnivas/SantNivas';
-import Bramhananad from './first-floor/santnivas/Bramhananad';
+import Bramhanand from './first-floor/santnivas/Bramhanand';
 import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
 import SabhaHall from './second-floor/SabhaHall';
@@ -220,7 +220,7 @@ export const CONFIGS = {
   sarvasva: Sarvasva,
   boysgym: BoysGym,
   girlsgym: GirlsGym,
-  bramhananad: Bramhananad,
+  bramhanand: Bramhanand,
   santoffice1: SantOffice1,
   santoffice2: SantOffice2,
   santcorridor: SantCorridor,
