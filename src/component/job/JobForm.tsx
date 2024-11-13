@@ -282,7 +282,11 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
           <MediaAction handleActionChange={handleActionChange} />
           <div className="flex flex-wrap gap-2 my-1">
             {actions.map((action, i) => (
-              <Chip key={i} onClose={() => handleRemoveAction(action)}>
+              <Chip
+                size="md"
+                key={i}
+                onClose={() => handleRemoveAction(action)}
+                classNames={{ base: 'whitespace-normal' }}>
                 {action.label}
               </Chip>
             ))}

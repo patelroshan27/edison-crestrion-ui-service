@@ -32,12 +32,12 @@ const MediaActionBuilder: React.FC<MediaActionBuilderProps> = ({
   handleActionChange,
 }) => {
   const [playerId, setPlayerId] = useState<string>();
-  const [typeId, setTypeId] = useState<string>();
+  const [typeIds, setTypeIds] = useState<string[]>([]);
   const [selectedIds, setSelectedIds] = useState<SelectedMediaIds>();
 
   const resetAndClose = () => {
     setPlayerId(undefined);
-    setTypeId(undefined);
+    setTypeIds([]);
     setSelectedIds(undefined);
     onClose();
   };
@@ -69,37 +69,37 @@ const MediaActionBuilder: React.FC<MediaActionBuilderProps> = ({
   const onActionAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    const actionMatch = MEDIA_PLAYER_ACTION_TYPES.find((x) => x.id === typeId);
+    const actionMatches = MEDIA_PLAYER_ACTION_TYPES.filter((x) =>
+      typeIds.includes(x.id),
+    );
     const playerMatch = MEDIA_PLAYERS.find((x) => x.playerId === playerId);
 
-    if (!actionMatch || !playerMatch) return;
+    if (!actionMatches.length || !playerMatch) return;
 
     const newAction: JobActionItem = {
       id: '',
-      label: actionMatch.label,
+      label: actionMatches.map((a) => a.label).join(','),
       authID: playerMatch.authID as string,
       target: 'MediaPlayer',
-      commands: [
-        {
-          type: 'media',
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      commands: actionMatches.map((a) => ({
+        type: 'media',
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        payload: {
+          cmdType: a.type,
           payload: {
-            cmdType: actionMatch.type,
-            payload: {
-              ...actionMatch.options,
-              ...selectedIds,
-              playerId: playerMatch.playerId,
-            },
-          } as MediaPlayerCmd,
-        },
-      ],
+            ...a.options,
+            ...(a.type === 'addToPlayer' ? selectedIds : {}),
+            playerId: playerMatch.playerId,
+          },
+        } as MediaPlayerCmd,
+      })),
     };
 
     handleActionChange(newAction);
     resetAndClose();
   };
 
-  const showMediaSelection = typeId?.startsWith('addToPlayer');
+  const showMediaSelection = typeIds.includes('addToPlayer0');
 
   return (
     <Modal isOpen={isOpen} onClose={resetAndClose} size="full">
@@ -131,9 +131,10 @@ const MediaActionBuilder: React.FC<MediaActionBuilderProps> = ({
                   label="Type"
                   placeholder="Select Action Type"
                   isRequired
-                  selectedKeys={typeId && [typeId]}
+                  selectionMode="multiple"
+                  selectedKeys={typeIds}
                   onSelectionChange={(value) =>
-                    setTypeId(Array.from(value as Set<string>)[0])
+                    setTypeIds(Array.from(value as Set<string>))
                   }>
                   {MEDIA_PLAYER_ACTION_TYPES.map((type) => (
                     <SelectItem key={type.id}>{type.label}</SelectItem>
