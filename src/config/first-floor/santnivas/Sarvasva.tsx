@@ -40,11 +40,12 @@ const Configs: UIConfig = {
     LIGHTS: {
       name: 'Lights',
       icon: Sun,
+      className: 'mob:grid-cols-1 mob:gap-0',
       controls: {
         lights: {
           kind: 'group',
           className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2 mob:row-span-1 mob:row-span-1',
           controls: [
             {
               kind: 'light',
@@ -113,7 +114,8 @@ const Configs: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sarvasva',
-          className: 'row-span-4 col-span-3 gap-16',
+          className:
+            'row-span-4 col-span-3 gap-16 mob:row-span-1 mob:row-span-1 mob:gap-4',
           colorStates: commonRoomColorStates,
         },
       },
@@ -121,7 +123,8 @@ const Configs: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_1fr_2fr]',
+      className:
+        '!grid-cols-[1fr_1fr_2fr] mob:!grid-cols-none mob:grid-rows-none',
       controls: {
         speaker: {
           kind: 'audio',

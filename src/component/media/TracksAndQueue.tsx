@@ -57,7 +57,7 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
       <ButtonGroup size="lg">
         <Button
           className={classNames(
-            'text-2xl border border-neutral-400 rounded-l-lg',
+            'text-2xl border border-neutral-400 mob:text-sm',
             tracksView === 'track'
               ? '!bg-active text-primary-foreground'
               : 'bg-secondary text-primary',
@@ -68,7 +68,7 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
         </Button>
         <Button
           className={classNames(
-            'text-2xl border border-neutral-400 rounded-r-lg',
+            'text-2xl border border-neutral-400 rounded-r-lg mob:text-sm',
             tracksView === 'playerTrack'
               ? '!bg-active text-primary-foreground'
               : 'bg-secondary text-primary',
@@ -79,7 +79,7 @@ export const TracksAndQueue: React.FC<TracksAndQueueProps> = ({
         </Button>
       </ButtonGroup>
       <Button
-        className="text-2xl border border-neutral-400 rounded-lg ml-10 bg-secondary text-primary"
+        className="text-2xl border border-neutral-400 rounded-lg ml-10 bg-secondary text-primary mob:text-sm"
         onClick={onClear}
         size="lg">
         Clear Queue

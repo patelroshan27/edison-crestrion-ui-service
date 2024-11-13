@@ -125,7 +125,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       size="lg"
       variant="shadow"
       className={classNames(
-        'w-16 h-16 ml-9 border border-neutral-300 first:ml-0',
+        'w-16 h-16 border border-neutral-300 first:ml-0',
         active
           ? '!bg-active text-primary-foreground'
           : 'bg-secondary text-primary',
@@ -155,7 +155,7 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
 
   return (
     <Card className="h-[130px] w-full border border-neutral-400 bg-background justify-center items-center mb-2">
-      <div className="inline-flex justify-center items-center">
+      <div className="inline-flex justify-evenly items-center w-full">
         <ActionButton
           onClick={() => onPlayerAction(playPrevious({ playerId }))}
           Icon={StepBackIcon}

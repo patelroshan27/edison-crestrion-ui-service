@@ -24,8 +24,8 @@ const tableProps: Partial<TableProps> = {
   color: 'primary',
   selectionMode: 'single',
   classNames: {
-    base: 'inline-flex w-2/5',
-    wrapper: 'bg-background  justify-between h-full gap-0',
+    base: 'inline-flex w-2/5 mob:w-full',
+    wrapper: 'bg-background justify-between h-full gap-0',
     td: 'text-2xl text-primary !truncate first:w-[75%]',
   },
 };

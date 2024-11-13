@@ -16,7 +16,7 @@ const Body: React.FC<Props> = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'h-full w-full flex flex-col gap-6 px-5 pb-4',
+        'h-full w-full flex flex-col gap-6 px-5 pb-4 mob:px-1',
         className,
       )}>
       <Controls

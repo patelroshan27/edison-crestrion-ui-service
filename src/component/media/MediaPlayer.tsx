@@ -84,12 +84,12 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({ playerId }) => {
   }, [updatePlayerTracks]);
 
   return (
-    <div className="flex h-[98%] bg-backround">
+    <div className="flex h-[98%] bg-backround mob:flex-wrap mob:gap-2 min-w-0">
       <AlbumsAndPlaylists
         onSelection={setSelectedIds}
         onAddToQueue={onAddToQueue}
       />
-      <div className="flex flex-col w-full bg-backround ml-2">
+      <div className="flex flex-col w-full bg-backround ml-2 mob:ml-0">
         <PlayerControls
           playerId={playerId}
           playerStatus={playerStatus}
