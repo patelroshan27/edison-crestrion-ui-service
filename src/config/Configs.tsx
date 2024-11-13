@@ -6,7 +6,6 @@ import SantOffice1 from './first-floor/santnivas/SantOffice1';
 import SantOffice2 from './first-floor/santnivas/SantOffice2';
 import SantCorridor from './first-floor/santnivas/SantCorridor';
 import SantKitchen from './first-floor/santnivas/SantKitchen';
-import SantNivas from './first-floor/santnivas/SantNivas';
 import Bramhanand from './first-floor/santnivas/Bramhanand';
 import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
@@ -216,7 +215,6 @@ export interface PageData {
 
 export const CONFIGS = {
   master: Master,
-  santnivas: SantNivas,
   sarvasva: Sarvasva,
   boysgym: BoysGym,
   girlsgym: GirlsGym,
