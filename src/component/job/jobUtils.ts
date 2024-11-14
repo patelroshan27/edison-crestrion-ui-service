@@ -108,7 +108,7 @@ export const MEDIA_PLAYERS = CONTROLS.flatMap((control) => {
 
 export type SelectedApiCmdType = Extract<
   MuseApiCmdType,
-  'addToPlayer' | 'clearPlayer' | 'repeat' | 'shuffle'
+  'addToPlayer' | 'clearPlayer' | 'repeat' | 'shuffle' | 'play'
 >;
 export const MEDIA_PLAYER_ACTION_TYPES: Array<{
   id: string;
@@ -139,8 +139,19 @@ export const MEDIA_PLAYER_ACTION_TYPES: Array<{
     },
     {
       type: 'shuffle',
-      label: 'Shuffle',
-      options: { shuffle: 'TOGGLE' },
+      label: 'Shuffle On',
+      options: { shuffle: 'ON' },
+    },
+    {
+      type: 'shuffle',
+      label: 'Shuffle Off',
+      options: { shuffle: 'OFF' },
     },
   ] as const
-).map((x, i) => ({ id: `${x.type}${i}`, ...x }));
+).map((x, i) => ({
+  id: `${x.type}${
+    (x.options[Object.keys(x.options)[0] as keyof typeof x.options] ??
+      '') as string
+  }`,
+  ...x,
+}));

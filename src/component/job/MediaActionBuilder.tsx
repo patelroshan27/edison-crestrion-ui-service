@@ -19,6 +19,7 @@ import { type MediaPlayerCmd } from 'component/media/hooks';
 import { MediaSelection } from './MediaSelection';
 import { type SelectedMediaIds } from 'component/media/MediaPlayer';
 import uniq from 'lodash/uniq';
+import { type ApiCommand } from 'config/Configs';
 
 interface MediaActionBuilderProps {
   isOpen: boolean;
@@ -76,30 +77,57 @@ const MediaActionBuilder: React.FC<MediaActionBuilderProps> = ({
 
     if (!actionMatches.length || !playerMatch) return;
 
-    const newAction: JobActionItem = {
-      id: '',
-      label: actionMatches.map((a) => a.label).join(','),
-      authID: playerMatch.authID as string,
-      target: 'MediaPlayer',
-      commands: actionMatches.map((a) => ({
-        type: 'media',
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        payload: {
-          cmdType: a.type,
+    actionMatches
+      .map<JobActionItem>((action) => {
+        const command = {
+          type: 'media' as const,
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           payload: {
-            ...a.options,
-            ...(a.type === 'addToPlayer' ? selectedIds : {}),
-            playerId: playerMatch.playerId,
-          },
-        } as MediaPlayerCmd,
-      })),
-    };
+            cmdType: action.type,
+            payload: {
+              ...action.options,
+              ...(action.type === 'addToPlayer' ? selectedIds : {}),
+              playerId: playerMatch.playerId,
+            },
+          } as MediaPlayerCmd,
+        };
 
-    handleActionChange(newAction);
+        // if we are adding to queue, we also need to clear & play
+        const commands: ApiCommand[] =
+          action.type === 'addToPlayer'
+            ? [
+                {
+                  type: 'media',
+                  payload: {
+                    cmdType: 'clearPlayer',
+                    payload: { playerId: playerMatch.playerId },
+                  },
+                },
+                command,
+                {
+                  type: 'media',
+                  payload: {
+                    cmdType: 'play',
+                    payload: { playerId: playerMatch.playerId },
+                  },
+                },
+              ]
+            : [command];
+
+        return {
+          id: '',
+          label: action.label,
+          authID: playerMatch.authID as string,
+          target: 'MediaPlayer',
+          commands,
+        };
+      })
+      .forEach(handleActionChange);
+
     resetAndClose();
   };
 
-  const showMediaSelection = typeIds.includes('addToPlayer0');
+  const showMediaSelection = typeIds.includes('addToPlayerON');
 
   return (
     <Modal isOpen={isOpen} onClose={resetAndClose} size="full">
