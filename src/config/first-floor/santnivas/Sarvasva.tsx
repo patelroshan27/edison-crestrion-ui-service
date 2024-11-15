@@ -1,5 +1,6 @@
 import {
   Bluetooth,
+  Clock,
   Lightbulb,
   LightbulbOff,
   ListMusic,
@@ -18,7 +19,7 @@ const Configs: UIConfig = {
     { key: 'sarvasva', title: 'Sarvasva' },
     { key: 'santoffice1', title: 'Office1' },
     { key: 'santoffice2', title: 'Office2' },
-    { key: 'bramhananad', title: 'Bramhananad' },
+    { key: 'bramhanand', title: 'Bramhanand' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
   ],
@@ -341,6 +342,16 @@ const Configs: UIConfig = {
         media: {
           kind: 'mediaPlayer',
           playerId: '11',
+        },
+      },
+    },
+    SCHEDULER: {
+      name: 'Scheduler',
+      icon: Clock,
+      className: '!grid-cols-[1fr] !grid-rows-[1fr]',
+      controls: {
+        media: {
+          kind: 'scheduler',
         },
       },
     },

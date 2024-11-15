@@ -9,24 +9,21 @@ import {
   TableRow,
   type TableProps,
 } from '@nextui-org/react';
-import React, { useMemo, type ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { type SelectedMediaIds } from './MediaPlayer';
 import { PlusIcon } from 'lucide-react';
 import { TablePagination } from './TablePagination';
-import { type AlbumsByName, useTablePagination } from './hooks';
+import { type AlbumView, useTablePagination } from './hooks';
 
 interface AlbumsTableProps {
   tableProps: Partial<TableProps>;
-  albumsByName: AlbumsByName;
+  albumsList: AlbumView[];
   topContent: ReactNode;
   selectedKey?: Selection;
+  rowsPerPage?: number;
   setSelectedKey: (key: Selection) => void;
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
-}
-interface AlbumView {
-  albumName: string;
-  albumIds: string[];
 }
 
 const albumColumns = [
@@ -36,22 +33,17 @@ const albumColumns = [
 
 export const AlbumsTable: React.FC<AlbumsTableProps> = ({
   tableProps,
-  albumsByName,
+  albumsList,
   topContent,
   selectedKey,
   setSelectedKey,
   onAddToQueue,
   onSelection,
+  rowsPerPage,
 }) => {
-  const albumsList: AlbumView[] = useMemo(() => {
-    return Object.keys(albumsByName).map((k) => ({
-      albumName: albumsByName[k][0]?.albumName,
-      albumIds: albumsByName[k].map((a) => a.albumId),
-    }));
-  }, [albumsByName]);
   const { page, pages, setPage, filteredItems } = useTablePagination(
     albumsList,
-    7,
+    rowsPerPage ?? 7,
   );
 
   const renderAlbumCell = (

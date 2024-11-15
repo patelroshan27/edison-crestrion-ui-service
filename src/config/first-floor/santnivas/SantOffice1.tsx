@@ -7,7 +7,7 @@ const SantOffice1: UIConfig = {
     { key: 'santoffice1', title: 'Office1' },
     { key: 'santoffice2', title: 'Office2' },
     { key: 'sarvasva', title: 'Sarvasva' },
-    { key: 'bramhananad', title: 'Bramhananad' },
+    { key: 'bramhanand', title: 'Bramhanand' },
     { key: 'santcorridor', title: 'Corridor' },
     { key: 'santkitchen', title: 'Kitchen' },
   ],

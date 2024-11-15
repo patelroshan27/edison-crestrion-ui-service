@@ -6,7 +6,7 @@ import {
   type PlayerTime,
 } from './types';
 import { useMediaApiState } from 'utils/hooks';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getConfigs } from 'config/Configs';
 
 type MediaPlayerApiCmdType = 'getAlbums' | 'getPlaylists3';
@@ -20,7 +20,7 @@ type BasePlayerApiCmdType =
   | 'next2'
   | 'getPlayerTime'
   | 'getPlayerStatus';
-type MuseApiCmdType =
+export type MuseApiCmdType =
   | BasePlayerApiCmdType
   | MediaPlayerApiCmdType
   | 'addToPlayer'
@@ -283,4 +283,73 @@ export function useDeletePlayerTracksApi(): MediaApi<
   DeleteTracksPlayerRequest
 > {
   return useMediaApiRequest('deleteFromPlayer');
+}
+
+export interface AlbumView {
+  albumName: string;
+  albumIds: string[];
+}
+
+interface UseAlbumsAndPlaylists {
+  albumsByName: AlbumsByName;
+  playlists: Playlist[];
+  albumsList: AlbumView[];
+}
+export function useAlbumsAndPlaylists(): UseAlbumsAndPlaylists {
+  const [albumsByName, setAlbumsByName] = useState<AlbumsByName>({});
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const getAlbums = useGetAlbumsApi();
+  const getPlaylists = useGetPlaylistsApi();
+
+  useEffect(() => {
+    getAlbums({})
+      .then(setAlbumsByName)
+      .catch((err) => console.log(err));
+    getPlaylists({})
+      .then(setPlaylists)
+      .catch((err) => console.log(err));
+  }, []);
+
+  return useMemo(
+    () => ({
+      albumsByName,
+      playlists,
+      albumsList: Object.keys(albumsByName).map((k) => ({
+        albumName: albumsByName[k][0]?.albumName,
+        albumIds: albumsByName[k].map((a) => a.albumId),
+      })),
+    }),
+    [albumsByName, playlists],
+  );
+}
+
+interface UseAlbumsAndPlaylistsById {
+  albumsById: Record<string, Album>;
+  playlistsById: Record<string, Playlist>;
+}
+
+export function useAlbumsAndPlaylistsById(): UseAlbumsAndPlaylistsById {
+  const { albumsByName, playlists } = useAlbumsAndPlaylists();
+
+  return useMemo(
+    () => ({
+      albumsById: Object.values(albumsByName)
+        .flat()
+        .reduce(
+          (prev, album) => ({
+            ...prev,
+            [album.albumId]: album,
+          }),
+          {},
+        ),
+      playlistsById: playlists.reduce(
+        (prev, playlist) => ({
+          ...prev,
+          [playlist.playlistId]: playlist,
+        }),
+        {},
+      ),
+    }),
+    [albumsByName, playlists],
+  );
 }

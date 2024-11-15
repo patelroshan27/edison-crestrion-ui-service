@@ -6,8 +6,7 @@ import SantOffice1 from './first-floor/santnivas/SantOffice1';
 import SantOffice2 from './first-floor/santnivas/SantOffice2';
 import SantCorridor from './first-floor/santnivas/SantCorridor';
 import SantKitchen from './first-floor/santnivas/SantKitchen';
-import SantNivas from './first-floor/santnivas/SantNivas';
-import Bramhananad from './first-floor/santnivas/Bramhananad';
+import Bramhanand from './first-floor/santnivas/Bramhanand';
 import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
 import SabhaHall from './second-floor/SabhaHall';
@@ -32,6 +31,7 @@ import Exterior from './exterior/Exterior';
 import Sarvakarta from './first-floor/boys/Sarvakarta';
 import SampSquare from './first-floor/boys/SampSquare';
 import Divyabhav from './first-floor/boys/Divyabhav';
+import { type MediaPlayerCmd } from 'component/media/hooks';
 
 export interface CrestronConfigs {
   host: string;
@@ -59,7 +59,7 @@ export interface LightsApiPayload {
 
 export interface ProjectorsApiPayload {
   authId: 'BanquetLarge' | 'Pramukh' | 'Yogi' | 'Yagnapurush';
-  action: 'poweron' | 'poweroff';
+  action: 'poweron' | 'poweroff' | 'hdmi';
 }
 
 export interface CrestronWebrelayPayload {
@@ -90,6 +90,11 @@ export interface AudioApiPaylod {
 export interface WebrelayApiCommand {
   type: 'webrelay';
   payload: CrestronWebrelayPayload;
+}
+
+export interface MediaApiCommand {
+  type: 'media';
+  payload: MediaPlayerCmd;
 }
 
 export interface LightsApiCommand {
@@ -140,6 +145,7 @@ export type ApiCommand =
   | WebrelayApiCommand
   | AudioApiCommand
   | SignalApiCommand
+  | MediaApiCommand
   | ProjectorsApiCommand;
 
 export interface LightControlData {
@@ -185,11 +191,16 @@ export interface MediaPlayerControlData {
   playerId: string;
 }
 
+export interface SchedulerData {
+  kind: 'scheduler';
+}
+
 export type ControlData =
   | LightControlData
   | PharosControlData
   | AudioControlData
   | MediaPlayerControlData
+  | SchedulerData
   | GroupControlData;
 
 export interface PageData {
@@ -204,11 +215,10 @@ export interface PageData {
 
 export const CONFIGS = {
   master: Master,
-  santnivas: SantNivas,
   sarvasva: Sarvasva,
   boysgym: BoysGym,
   girlsgym: GirlsGym,
-  bramhananad: Bramhananad,
+  bramhanand: Bramhanand,
   santoffice1: SantOffice1,
   santoffice2: SantOffice2,
   santcorridor: SantCorridor,

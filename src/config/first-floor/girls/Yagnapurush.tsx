@@ -6,6 +6,7 @@ import {
   LightbulbOff,
   Music2,
   PauseOctagon,
+  Projector,
   Speech,
   Sun,
   SunDim,
@@ -297,7 +298,7 @@ const Yagnapurush: UIConfig = {
           controls: [
             {
               kind: 'toggle',
-              icon: Lightbulb,
+              icon: Projector,
               title: 'Projector',
               label: 'On',
               apiCommands: [
@@ -309,13 +310,25 @@ const Yagnapurush: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: LightbulbOff,
+              icon: Projector,
               title: 'Projector',
               label: 'Off',
               apiCommands: [
                 {
                   type: 'projector',
                   payloads: [{ authId: 'Yagnapurush', action: 'poweroff' }],
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: Projector,
+              title: 'Video',
+              label: 'HDMI',
+              apiCommands: [
+                {
+                  type: 'projector',
+                  payloads: [{ authId: 'Yagnapurush', action: 'hdmi' }],
                 },
               ],
             },

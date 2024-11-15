@@ -50,10 +50,10 @@
     "eject": "react-scripts eject",
     "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "postinstall": "patch-package",
-    "bramhananad:build": "REACT_APP_ROOM_CONFIG_NAME=bramhananad react-scripts build",
-    "bramhananad:archive": "REACT_APP_ROOM_CONFIG_NAME=bramhananad ch5-cli archive -p bramhananad -P sampleSource=bramhananad -d build -o publish",
-    "bramhananad:deploy": "REACT_APP_ROOM_CONFIG_NAME=bramhananad ch5-cli deploy -H 10.25.20.71 -t touchscreen publish/bramhananad.ch5z --slow-mode",
-    "bramhananad": "yarn bramhananad:build && yarn bramhananad:archive && yarn bramhananad:deploy",
+    "bramhanand:build": "REACT_APP_ROOM_CONFIG_NAME=bramhanand react-scripts build",
+    "bramhanand:archive": "REACT_APP_ROOM_CONFIG_NAME=bramhanand ch5-cli archive -p bramhanand -P sampleSource=bramhanand -d build -o publish",
+    "bramhanand:deploy": "REACT_APP_ROOM_CONFIG_NAME=bramhanand ch5-cli deploy -H 10.25.20.71 -t touchscreen publish/bramhanand.ch5z --slow-mode",
+    "bramhanand": "yarn bramhanand:build && yarn bramhanand:archive && yarn bramhanand:deploy",
     "santoffice1:build": "REACT_APP_ROOM_CONFIG_NAME=santoffice1 react-scripts build",
     "santoffice1:archive": "REACT_APP_ROOM_CONFIG_NAME=santoffice1 ch5-cli archive -p santoffice1 -P sampleSource=santoffice1 -d build -o publish",
     "santoffice1:deploy": "REACT_APP_ROOM_CONFIG_NAME=santoffice1 ch5-cli deploy -H 10.25.20.73 -t touchscreen publish/santoffice1.ch5z --slow-mode",
@@ -142,7 +142,7 @@
     "ruchi:archive": "REACT_APP_ROOM_CONFIG_NAME=ruchi ch5-cli archive -p ruchi -P sampleSource=ruchi -d build -o publish",
     "ruchi:deploy": "REACT_APP_ROOM_CONFIG_NAME=ruchi ch5-cli deploy -H 10.25.20.91 -t touchscreen publish/ruchi.ch5z --slow-mode",
     "ruchi": "yarn ruchi:build && yarn ruchi:archive && yarn ruchi:deploy",
-    "deploy-all": "yarn bramhananad && yarn santoffice1 && yarn sarvasva && yarn aksharpith && yarn boysgym && yarn girlsgym && yarn sabhahall && yarn sabhahall1 && yarn sabhahall2 && yarn mahima && yarn niyam && yarn nishchay && yarn aatma && yarn gnan && yarn pramukh && yarn yogi && yarn sarvakarta && yarn yagnapurush && yarn ashro && yarn samarpan && yarn upasana && yarn prapti && yarn ruchi"
+    "deploy-all": "yarn bramhanand && yarn santoffice1 && yarn sarvasva && yarn aksharpith && yarn boysgym && yarn girlsgym && yarn sabhahall && yarn sabhahall1 && yarn sabhahall2 && yarn mahima && yarn niyam && yarn nishchay && yarn aatma && yarn gnan && yarn pramukh && yarn yogi && yarn sarvakarta && yarn yagnapurush && yarn ashro && yarn samarpan && yarn upasana && yarn prapti && yarn ruchi"
   },
   "eslintConfig": {
     "extends": [

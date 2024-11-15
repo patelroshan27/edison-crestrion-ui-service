@@ -31,7 +31,10 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/no-non-null-assertion" : "warn",
         "@typescript-eslint/consistent-type-imports": "warn",
-        "@typescript-eslint/no-empty-interface": "off"
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "error",
     },
     settings: {
         "import/parsers": {

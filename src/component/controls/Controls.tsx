@@ -7,6 +7,7 @@ import PharosControl from 'component/controls/PharosControl';
 import classNames from 'classnames';
 import { ButtonGroup } from './ButtonGroup';
 import { MediaPlayer } from 'component/media/MediaPlayer';
+import JobManager from 'component/job/JobManager';
 
 interface Props {
   className?: string;
@@ -42,6 +43,8 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
           return <ButtonGroup key={key} data={data} />;
         } else if (data.kind === 'mediaPlayer') {
           return <MediaPlayer key={key} playerId={data.playerId} />;
+        } else if (data.kind === 'scheduler') {
+          return <JobManager key={key} />;
         }
         return null;
       })}

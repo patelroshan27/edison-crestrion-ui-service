@@ -21,6 +21,7 @@ interface PlaylistsTableProps {
   playlists: Playlist[];
   topContent: ReactNode;
   selectedKey?: Selection;
+  rowsPerPage?: number;
   setSelectedKey: (key: Selection) => void;
   onSelection: (params: SelectedMediaIds) => void;
   onAddToQueue: (params: SelectedMediaIds) => void;
@@ -39,10 +40,11 @@ export const PlaylistsTable: React.FC<PlaylistsTableProps> = ({
   setSelectedKey,
   onAddToQueue,
   onSelection,
+  rowsPerPage,
 }) => {
   const { page, pages, setPage, filteredItems } = useTablePagination(
     playlists,
-    7,
+    rowsPerPage ?? 7,
   );
 
   const renderPlaylistCell = (
