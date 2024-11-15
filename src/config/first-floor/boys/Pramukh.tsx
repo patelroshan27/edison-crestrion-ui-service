@@ -6,6 +6,9 @@ import {
   LightbulbOff,
   Music2,
   PauseOctagon,
+  Power,
+  Projector,
+  ProjectorIcon,
   Speech,
   Sun,
   SunDim,
@@ -285,7 +288,7 @@ const Pramukh: UIConfig = {
           controls: [
             {
               kind: 'toggle',
-              icon: Lightbulb,
+              icon: Projector,
               title: 'Projector',
               label: 'On',
               apiCommands: [
@@ -297,13 +300,25 @@ const Pramukh: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: LightbulbOff,
+              icon: Projector,
               title: 'Projector',
               label: 'Off',
               apiCommands: [
                 {
                   type: 'projector',
                   payloads: [{ authId: 'Pramukh', action: 'poweroff' }],
+                },
+              ],
+            },
+            {
+              kind: 'toggle',
+              icon: Projector,
+              title: 'Video',
+              label: 'HDMI',
+              apiCommands: [
+                {
+                  type: 'projector',
+                  payloads: [{ authId: 'Pramukh', action: 'hdmi' }],
                 },
               ],
             },

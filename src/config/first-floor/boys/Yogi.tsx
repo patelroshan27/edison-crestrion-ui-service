@@ -6,6 +6,7 @@ import {
   LightbulbOff,
   Music2,
   PauseOctagon,
+  Projector,
   Speech,
   Sun,
   SunDim,
@@ -329,7 +330,7 @@ const Yogi: UIConfig = {
           controls: [
             {
               kind: 'toggle',
-              icon: Lightbulb,
+              icon: Projector,
               title: 'Projector',
               label: 'On',
               apiCommands: [
@@ -341,7 +342,7 @@ const Yogi: UIConfig = {
             },
             {
               kind: 'toggle',
-              icon: LightbulbOff,
+              icon: Projector,
               title: 'Projector',
               label: 'Off',
               apiCommands: [
@@ -351,7 +352,18 @@ const Yogi: UIConfig = {
                 },
               ],
             },
-          ],
+            {
+              kind: 'toggle',
+              icon: Projector,
+              title: 'Video',
+              label: 'HDMI',
+              apiCommands: [
+                {
+                  type: 'projector',
+                  payloads: [{ authId: 'Yogi', action: 'hdmi' }],
+                },
+              ],
+            },          ],
         },
         screens: {
           kind: 'group',
