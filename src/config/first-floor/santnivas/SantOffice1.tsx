@@ -1,6 +1,11 @@
 import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
 import { type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
+import {
+  lightControlResponsive,
+  pageResponsive,
+  pharosResponsive,
+} from 'config/responsive';
 
 const SantOffice1: UIConfig = {
   rooms: [
@@ -26,12 +31,12 @@ const SantOffice1: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2 ${lightControlResponsive}`,
           controls: [
             {
               kind: 'light',
@@ -118,7 +123,7 @@ const SantOffice1: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'santoffice1',
-          className: 'row-span-4 col-span-3 gap-16',
+          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },

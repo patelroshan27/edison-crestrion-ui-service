@@ -1,6 +1,7 @@
 import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 import { sabhaHallColorStates } from 'config/ConfigData';
+import { pageResponsive } from 'config/responsive';
 
 const SabhaHall: UIConfig = {
   rooms: [
@@ -24,12 +25,11 @@ const SabhaHall: UIConfig = {
     LIGHTS: {
       name: 'Lights',
       icon: Sun,
-      className: '!grid-rows-1 grid-cols-[1fr_2fr]',
+      className: `!grid-rows-1 grid-cols-[1fr_2fr] ${pageResponsive}`,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-2 grid-rows-[1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-2 grid-rows-[1fr_1fr_1fr_1fr_1fr] gap-2`,
           controls: [
             {
               kind: 'light',
@@ -134,7 +134,7 @@ const SabhaHall: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sabhahall',
-          className: 'row-span-4',
+          className: `row-span-4`,
           colorStates: sabhaHallColorStates,
         },
       },

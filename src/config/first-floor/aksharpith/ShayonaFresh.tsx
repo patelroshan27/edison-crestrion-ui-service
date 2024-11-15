@@ -1,6 +1,11 @@
 import { Lightbulb, LightbulbOff, Sun, SunDim } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
+import {
+  lightControlResponsive,
+  pageResponsive,
+  pharosResponsive,
+} from 'config/responsive';
 
 const ShayonaFresh: UIConfig = {
   rooms: [
@@ -22,12 +27,12 @@ const ShayonaFresh: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2 ${lightControlResponsive}`,
           controls: [
             {
               kind: 'light',
@@ -114,7 +119,7 @@ const ShayonaFresh: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'shayonafresh',
-          className: 'row-span-4 col-span-3',
+          className: `row-span-4 col-span-3 ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },

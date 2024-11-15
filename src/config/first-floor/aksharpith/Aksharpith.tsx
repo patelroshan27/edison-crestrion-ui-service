@@ -11,6 +11,12 @@ import {
 } from 'lucide-react';
 import type { ApiCommand, UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
+import {
+  audioResponsive,
+  lightControlResponsive,
+  pageResponsive,
+  pharosResponsive,
+} from 'config/responsive';
 
 const Aksharpith: UIConfig = {
   rooms: [
@@ -32,12 +38,12 @@ const Aksharpith: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2 ${lightControlResponsive}`,
           controls: [
             {
               kind: 'light',
@@ -112,7 +118,7 @@ const Aksharpith: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'aksharpith',
-          className: 'row-span-4 col-span-3',
+          className: `row-span-4 col-span-3 ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },
@@ -120,7 +126,7 @@ const Aksharpith: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_1fr_1fr_2fr]',
+      className: `!grid-cols-[1fr_1fr_1fr_2fr] ${audioResponsive}`,
       controls: {
         aksharpith: {
           kind: 'audio',

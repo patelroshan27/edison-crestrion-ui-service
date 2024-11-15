@@ -1,6 +1,7 @@
 import { Sun } from 'lucide-react';
 import { type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
+import { pageResponsive, pharosResponsive } from 'config/responsive';
 
 const SecondFloorLobby: UIConfig = {
   rooms: [],
@@ -18,12 +19,13 @@ const SecondFloorLobby: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         pharos: {
           kind: 'pharos',
           room: 'lobby260',
-          className: 'row-span-4 col-span-3 gap-16',
+          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },

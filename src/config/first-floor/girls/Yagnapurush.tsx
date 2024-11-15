@@ -17,6 +17,12 @@ import type { ApiCommand, UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 import { MandirSvg } from 'svgs/Mandir';
 import { type ProjectorStatusResponse } from 'types/apiResponses';
+import {
+  audioResponsive,
+  lightControlResponsive,
+  pageResponsive,
+  pharosResponsive,
+} from 'config/responsive';
 
 const Yagnapurush: UIConfig = {
   rooms: [],
@@ -31,12 +37,12 @@ const Yagnapurush: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2 ${lightControlResponsive}`,
           controls: [
             {
               kind: 'light',
@@ -123,7 +129,7 @@ const Yagnapurush: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'yagnapurush',
-          className: 'row-span-4 col-span-3',
+          className: `row-span-4 col-span-3 ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },
@@ -131,7 +137,7 @@ const Yagnapurush: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_2fr]',
+      className: `!grid-cols-[1fr_2fr] ${audioResponsive}`,
       controls: {
         speaker: {
           kind: 'audio',
@@ -292,6 +298,7 @@ const Yagnapurush: UIConfig = {
     },
     VIDEO: {
       name: 'Video',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         screens: {
