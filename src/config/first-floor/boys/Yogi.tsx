@@ -355,7 +355,7 @@ const Yogi: UIConfig = {
             {
               kind: 'toggle',
               icon: Projector,
-              title: 'Video',
+              title: 'Source',
               label: 'HDMI',
               apiCommands: [
                 {
