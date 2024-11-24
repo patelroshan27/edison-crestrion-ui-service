@@ -167,7 +167,8 @@ export interface ApiToggleButtonData {
   title?: string;
   label: string;
   labelOff?: string;
-  apiCommands: ApiCommand[];
+  onApiCommands: ApiCommand[];
+  offApiCommands?: ApiCommand[];
   getActiveState: (
     sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
   ) => Promise<boolean>;
