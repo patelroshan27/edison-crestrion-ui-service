@@ -1,4 +1,11 @@
-import { Lightbulb, LightbulbOff, Music2, Sun } from 'lucide-react';
+import {
+  Lightbulb,
+  LightbulbOff,
+  Mic,
+  MicOff,
+  Music2,
+  Sun,
+} from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 
 const BanquetLarge: UIConfig = {
@@ -55,7 +62,7 @@ const BanquetLarge: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_1fr_1fr]',
+      className: '!grid-cols-[1fr_1fr_1fr_1fr]',
       controls: {
         mediaplayer: {
           kind: 'audio',
@@ -82,26 +89,6 @@ const BanquetLarge: UIConfig = {
               cmdName: 'Vol Change',
               controlNumber: '3',
               controlPosition: '',
-            },
-          },
-          getMuteStatusCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'basement',
-              cmdType: 'GS',
-              cmdName: 'Mute Status',
-              controlNumber: '5',
-              controlPosition: '',
-            },
-          },
-          muteCmd: {
-            type: 'audio',
-            payload: {
-              dspId: 'basement',
-              cmdType: 'CS',
-              cmdName: 'Vol Mute',
-              controlNumber: '5',
-              controlPosition: '65535',
             },
           },
           unMuteCmd: {
@@ -169,6 +156,40 @@ const BanquetLarge: UIConfig = {
               controlNumber: '14',
               controlPosition: '',
             },
+          },
+        },
+        extra: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Volume',
+          label: 'On',
+          labelOff: 'Muted',
+          apiCommands: [
+            {
+              type: 'audio',
+              payload: {
+                dspId: 'basement',
+                cmdType: 'CS',
+                cmdName: 'Vol Mute',
+                controlNumber: '5',
+                controlPosition: '65535',
+              },
+            },
+          ],
+          getActiveState: async (sendCommands) => {
+            return sendCommands([
+              {
+                type: 'audio',
+                payload: {
+                  dspId: 'basement',
+                  cmdType: 'GS',
+                  cmdName: 'Mute Status',
+                  controlNumber: '5',
+                  controlPosition: '',
+                },
+              },
+            ]).then((results) => !(Number(results) === 0));
           },
         },
       },
