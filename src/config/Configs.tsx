@@ -160,6 +160,19 @@ export interface LightControlData {
   apiCommands?: ApiCommand[];
 }
 
+export interface ApiToggleButtonData {
+  kind: 'apiToggle';
+  icon: SvgIcon;
+  iconOff?: SvgIcon;
+  title?: string;
+  label: string;
+  labelOff?: string;
+  apiCommands: ApiCommand[];
+  getActiveState: (
+    sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+  ) => Promise<boolean>;
+}
+
 export interface AudioControlData {
   kind: 'audio';
   icon: SvgIcon;
@@ -201,6 +214,7 @@ export type ControlData =
   | AudioControlData
   | MediaPlayerControlData
   | SchedulerData
+  | ApiToggleButtonData
   | GroupControlData;
 
 export interface PageData {

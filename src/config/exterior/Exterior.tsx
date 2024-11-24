@@ -1,4 +1,4 @@
-import { Sun, ArrowUpToLine, PauseOctagon } from 'lucide-react';
+import { Sun, LightbulbIcon, LightbulbOffIcon } from 'lucide-react';
 import type {
   ApiCommand,
   UIConfig,
@@ -23,10 +23,8 @@ const Exterior: UIConfig = {
       icon: Sun,
       controls: {
         exteriorWoodbridge: {
-          kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
-          getActiveValue: (
+          kind: 'apiToggle',
+          getActiveState: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
             return sendCommands([
@@ -38,53 +36,31 @@ const Exterior: UIConfig = {
                   action: 'STATUS',
                 },
               },
-            ]).then((results) =>
-              (results as WebrelayExteriorStatusRes[])[0].datavalues
-                .relaystate[0] === '1'
-                ? 'On'
-                : 'Off',
+            ]).then(
+              (results) =>
+                (results as WebrelayExteriorStatusRes[])[0].datavalues
+                  .relaystate[0] === '1',
             );
           },
-          controls: [
+          apiCommands: [
             {
-              kind: 'toggle',
-              icon: ArrowUpToLine,
-              title: 'Exterior Woodbridge',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'webrelay',
-                  payload: {
-                    authId: 'ExteriorWoodbridge',
-                    name: 'woodbridgeSideLights',
-                    action: 'TOGGLE',
-                  },
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: PauseOctagon,
-              title: 'Exterior Woodbridge',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'webrelay',
-                  payload: {
-                    authId: 'ExteriorWoodbridge',
-                    name: 'woodbridgeSideLights',
-                    action: 'TOGGLE',
-                  },
-                },
-              ],
+              type: 'webrelay',
+              payload: {
+                authId: 'ExteriorWoodbridge',
+                name: 'woodbridgeSideLights',
+                action: 'TOGGLE',
+              },
             },
           ],
+          icon: LightbulbIcon,
+          iconOff: LightbulbOffIcon,
+          title: 'Exterior Woodbridge',
+          label: 'On',
+          labelOff: 'Off',
         },
         exteriorTurnpike: {
-          kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
-          getActiveValue: (
+          kind: 'apiToggle',
+          getActiveState: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
             return sendCommands([
@@ -96,47 +72,27 @@ const Exterior: UIConfig = {
                   action: 'STATUS',
                 },
               },
-            ]).then((results) =>
-              (results as WebrelayExteriorStatusRes[])[0].datavalues
-                .relaystate[0] === '1'
-                ? 'On'
-                : 'Off',
+            ]).then(
+              (results) =>
+                (results as WebrelayExteriorStatusRes[])[0].datavalues
+                  .relaystate[0] === '1',
             );
           },
-          controls: [
+          apiCommands: [
             {
-              kind: 'toggle',
-              icon: ArrowUpToLine,
-              title: 'Exterior Turnpike',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'webrelay',
-                  payload: {
-                    authId: 'ExteriorTurnpike',
-                    name: 'turnpikeSideLights',
-                    action: 'TOGGLE',
-                  },
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: PauseOctagon,
-              title: 'Exterior Turnpike',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'webrelay',
-                  payload: {
-                    authId: 'ExteriorTurnpike',
-                    name: 'turnpikeSideLights',
-                    action: 'TOGGLE',
-                  },
-                },
-              ],
+              type: 'webrelay',
+              payload: {
+                authId: 'ExteriorTurnpike',
+                name: 'turnpikeSideLights',
+                action: 'TOGGLE',
+              },
             },
           ],
+          icon: LightbulbIcon,
+          iconOff: LightbulbOffIcon,
+          title: 'Exterior Turnpike',
+          label: 'On',
+          labelOff: 'Off',
         },
       },
     },

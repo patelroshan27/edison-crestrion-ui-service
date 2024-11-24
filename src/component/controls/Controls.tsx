@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { ButtonGroup } from './ButtonGroup';
 import { MediaPlayer } from 'component/media/MediaPlayer';
 import JobManager from 'component/job/JobManager';
+import { ApiToggleButton } from './ApiToggleButton';
 
 interface Props {
   className?: string;
@@ -27,6 +28,8 @@ const Controls: React.FC<Props> = ({ className, configs, style }: Props) => {
         const data = configs[key];
         if (data.kind === 'light' || data.kind === 'toggle') {
           return <Button key={key} config={data} />;
+        } else if (data.kind === 'apiToggle') {
+          return <ApiToggleButton key={key} {...data} />;
         } else if (data.kind === 'audio') {
           return (
             <VolumeControl className="row-span-4" key={key} config={data} />
