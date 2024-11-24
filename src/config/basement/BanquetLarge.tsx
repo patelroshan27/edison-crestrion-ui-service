@@ -52,6 +52,127 @@ const BanquetLarge: UIConfig = {
         },
       },
     },
+    AUDIO: {
+      name: 'Audio',
+      icon: Music2,
+      className: '!grid-cols-[1fr_1fr_1fr]',
+      controls: {
+        mediaplayer: {
+          kind: 'audio',
+          icon: Music2,
+          maxDB: 44420,
+          label: 'Media Player',
+          playLabel: 'Unmute',
+          pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '3',
+              controlPosition: '',
+            },
+          },
+          volChangeCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'CS',
+              cmdName: 'Vol Change',
+              controlNumber: '3',
+              controlPosition: '',
+            },
+          },
+          getMuteStatusCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'GS',
+              cmdName: 'Mute Status',
+              controlNumber: '5',
+              controlPosition: '',
+            },
+          },
+          muteCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'CS',
+              cmdName: 'Vol Mute',
+              controlNumber: '5',
+              controlPosition: '65535',
+            },
+          },
+          unMuteCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'CS',
+              cmdName: 'Vol Unmute',
+              controlNumber: '5',
+              controlPosition: '0',
+            },
+          },
+        },
+        mic1: {
+          kind: 'audio',
+          icon: Music2,
+          label: 'Mic 1',
+          maxDB: 56199,
+          playLabel: 'Unmute',
+          pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '13',
+              controlPosition: '',
+            },
+          },
+          volChangeCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'CS',
+              cmdName: 'Vol Change',
+              controlNumber: '13',
+              controlPosition: '',
+            },
+          },
+        },
+        mic2: {
+          kind: 'audio',
+          icon: Music2,
+          label: 'Mic 2',
+          maxDB: 56199,
+          playLabel: 'Unmute',
+          pauseLabel: 'Mute',
+          getVolCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'GS',
+              cmdName: 'Get Vol',
+              controlNumber: '14',
+              controlPosition: '',
+            },
+          },
+          volChangeCmd: {
+            type: 'audio',
+            payload: {
+              dspId: 'basement',
+              cmdType: 'CS',
+              cmdName: 'Vol Change',
+              controlNumber: '14',
+              controlPosition: '',
+            },
+          },
+        },
+      },
+    },
     MEDIA: {
       name: 'Media Player',
       icon: Music2,

@@ -42,7 +42,7 @@ export interface CrestronConfigs {
 export type Page = string;
 export type LightApiType = 'zum' | 'pharos';
 export type AudioApiCmdType = 'CS' | 'LP' | 'GS';
-export type AudioDspIdType = 'mandir' | 'bk' | 'iBk';
+export type AudioDspIdType = 'mandir' | 'bk' | 'iBk' | 'basement';
 export type AudioApiCmdName =
   | 'Source'
   | 'Get Vol'
