@@ -4,6 +4,7 @@ import type {
   UIConfig,
   WebrelayExteriorStatusRes,
 } from 'config/Configs';
+import { getWebrelayToggleCmd } from 'config/webrelayConfigUtils';
 
 const Exterior: UIConfig = {
   rooms: [{ key: 'exterior', title: 'Exterior' }],
@@ -42,15 +43,11 @@ const Exterior: UIConfig = {
                   .relaystate[0] === '1',
             );
           },
-          apiCommands: [
-            {
-              type: 'webrelay',
-              payload: {
-                authId: 'ExteriorWoodbridge',
-                name: 'woodbridgeSideLights',
-                action: 'TOGGLE',
-              },
-            },
+          onApiCommands: [
+            getWebrelayToggleCmd({
+              authId: 'ExteriorWoodbridge',
+              name: 'woodbridgeSideLights',
+            }),
           ],
           icon: LightbulbIcon,
           iconOff: LightbulbOffIcon,
@@ -78,15 +75,11 @@ const Exterior: UIConfig = {
                   .relaystate[0] === '1',
             );
           },
-          apiCommands: [
-            {
-              type: 'webrelay',
-              payload: {
-                authId: 'ExteriorTurnpike',
-                name: 'turnpikeSideLights',
-                action: 'TOGGLE',
-              },
-            },
+          onApiCommands: [
+            getWebrelayToggleCmd({
+              authId: 'ExteriorTurnpike',
+              name: 'turnpikeSideLights',
+            }),
           ],
           icon: LightbulbIcon,
           iconOff: LightbulbOffIcon,

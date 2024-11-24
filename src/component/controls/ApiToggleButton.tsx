@@ -4,14 +4,16 @@ import { type ButtonCommonProps, SimpleButton } from './SimpleButton';
 import { type ApiCommand } from 'config/Configs';
 
 interface ApiToggleButtonProps extends ButtonCommonProps {
-  apiCommands: ApiCommand[];
+  onApiCommands: ApiCommand[];
+  offApiCommands?: ApiCommand[];
   getActiveState: (
     sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
   ) => Promise<boolean>;
 }
 
 export const ApiToggleButton: React.FC<ApiToggleButtonProps> = ({
-  apiCommands,
+  onApiCommands,
+  offApiCommands,
   ...props
 }) => {
   const [isPending, setIsPending] = useState(false);
@@ -32,7 +34,9 @@ export const ApiToggleButton: React.FC<ApiToggleButtonProps> = ({
       disabled={isPending}
       onClick={() => {
         setIsPending(true);
-        sendCommands(apiCommands)
+        const cmds =
+          isActive && offApiCommands ? offApiCommands : onApiCommands;
+        sendCommands(cmds)
           .then(() => setActive((prev) => !prev))
           .catch((err) => console.log(err))
           .finally(() => setIsPending(false));

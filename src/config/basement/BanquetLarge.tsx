@@ -7,6 +7,11 @@ import {
   Sun,
 } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
+import {
+  getMuteCommand,
+  getMuteStatusFn,
+  getUnMuteCommand,
+} from 'config/audioConfigUtils';
 
 const BanquetLarge: UIConfig = {
   rooms: [{ key: 'banquetlarge', title: 'BanquetLarge' }],
@@ -165,32 +170,9 @@ const BanquetLarge: UIConfig = {
           title: 'Volume',
           label: 'On',
           labelOff: 'Muted',
-          apiCommands: [
-            {
-              type: 'audio',
-              payload: {
-                dspId: 'basement',
-                cmdType: 'CS',
-                cmdName: 'Vol Mute',
-                controlNumber: '5',
-                controlPosition: '65535',
-              },
-            },
-          ],
-          getActiveState: async (sendCommands) => {
-            return sendCommands([
-              {
-                type: 'audio',
-                payload: {
-                  dspId: 'basement',
-                  cmdType: 'GS',
-                  cmdName: 'Mute Status',
-                  controlNumber: '5',
-                  controlPosition: '',
-                },
-              },
-            ]).then((results) => !(Number(results) === 0));
-          },
+          onApiCommands: [getMuteCommand('basement', '5')],
+          offApiCommands: [getUnMuteCommand('basement', '5')],
+          getActiveState: getMuteStatusFn('basement', '5'),
         },
       },
     },
