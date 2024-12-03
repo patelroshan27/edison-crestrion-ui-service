@@ -4,6 +4,8 @@ import {
   Bluetooth,
   Lightbulb,
   LightbulbOff,
+  Mic,
+  MicOff,
   Music2,
   PauseOctagon,
   Projector,
@@ -291,35 +293,42 @@ const Yagnapurush: UIConfig = {
       name: 'Video',
       icon: Sun,
       controls: {
-        projectors: {
+        projector: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Volume',
+          label: 'On',
+          labelOff: 'Off',
+          onApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Yagnapurush', action: 'ON' }],
+            },
+          ],
+          offApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Yagnapurush', action: 'OFF' }],
+            },
+          ],
+          getActiveState: async (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            const results = await sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Yagnapurush', action: 'STATUS' }],
+              },
+            ]);
+            return results[0] === 'on';
+          },
+        },
+        projectorSource: {
           kind: 'group',
           className:
             'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Yagnapurush', action: 'poweron' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Yagnapurush', action: 'poweroff' }],
-                },
-              ],
-            },
             {
               kind: 'toggle',
               icon: Projector,
@@ -328,7 +337,13 @@ const Yagnapurush: UIConfig = {
               apiCommands: [
                 {
                   type: 'projector',
-                  payloads: [{ authId: 'Yagnapurush', action: 'hdmi' }],
+                  payloads: [
+                    {
+                      authId: 'Yagnapurush',
+                      action: 'SOURCE',
+                      videoSource: '',
+                    },
+                  ],
                 },
               ],
             },

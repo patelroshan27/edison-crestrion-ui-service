@@ -4,11 +4,11 @@ import {
   Bluetooth,
   Lightbulb,
   LightbulbOff,
+  Mic,
+  MicOff,
   Music2,
   PauseOctagon,
-  Power,
   Projector,
-  ProjectorIcon,
   Speech,
   Sun,
   SunDim,
@@ -281,35 +281,42 @@ const Pramukh: UIConfig = {
       name: 'Video',
       icon: Sun,
       controls: {
-        projectors: {
+        projector: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Projector',
+          label: 'On',
+          labelOff: 'Off',
+          onApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Pramukh', action: 'ON' }],
+            },
+          ],
+          offApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Pramukh', action: 'OFF' }],
+            },
+          ],
+          getActiveState: async (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            const results = await sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Pramukh', action: 'STATUS' }],
+              },
+            ]);
+            return results[0] === 'on';
+          },
+        },
+        projectorSource: {
           kind: 'group',
           className:
             'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
           controls: [
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'poweron' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'poweroff' }],
-                },
-              ],
-            },
             {
               kind: 'toggle',
               icon: Projector,
@@ -318,7 +325,7 @@ const Pramukh: UIConfig = {
               apiCommands: [
                 {
                   type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'hdmi' }],
+                  payloads: [{ authId: 'Pramukh', action: 'SOURCE' }],
                 },
               ],
             },

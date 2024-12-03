@@ -4,6 +4,8 @@ import {
   Bluetooth,
   Lightbulb,
   LightbulbOff,
+  Mic,
+  MicOff,
   Music2,
   PauseOctagon,
   Projector,
@@ -323,7 +325,38 @@ const Yogi: UIConfig = {
       name: 'Video',
       icon: Sun,
       controls: {
-        projectors: {
+        projector: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Projector',
+          label: 'On',
+          labelOff: 'Off',
+          onApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Yogi', action: 'ON' }],
+            },
+          ],
+          offApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Yogi', action: 'OFF' }],
+            },
+          ],
+          getActiveState: async (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            const results = await sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Yogi', action: 'STATUS' }],
+              },
+            ]);
+            return results[0] === 'on';
+          },
+        },
+        projectorSource: {
           kind: 'group',
           className:
             'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
@@ -331,39 +364,18 @@ const Yogi: UIConfig = {
             {
               kind: 'toggle',
               icon: Projector,
-              title: 'Projector',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Yogi', action: 'poweron' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Yogi', action: 'poweroff' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Projector,
               title: 'Source',
-              label: 'HDMI',
+              label: 'HDMI1',
               apiCommands: [
                 {
                   type: 'projector',
-                  payloads: [{ authId: 'Yogi', action: 'hdmi' }],
+                  payloads: [
+                    { authId: 'Yogi', action: 'SOURCE', videoSource: '' },
+                  ],
                 },
               ],
-            },          ],
+            },
+          ],
         },
         screens: {
           kind: 'group',

@@ -59,7 +59,8 @@ export interface LightsApiPayload {
 
 export interface ProjectorsApiPayload {
   authId: 'BanquetLarge' | 'Pramukh' | 'Yogi' | 'Yagnapurush';
-  action: 'poweron' | 'poweroff' | 'hdmi';
+  action: 'ON' | 'OFF' | 'STATUS' | 'SOURCE';
+  videoSource?: string;
 }
 
 export interface CrestronWebrelayPayload {

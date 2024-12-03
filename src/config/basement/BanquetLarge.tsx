@@ -1,12 +1,5 @@
-import {
-  Lightbulb,
-  LightbulbOff,
-  Mic,
-  MicOff,
-  Music2,
-  Sun,
-} from 'lucide-react';
-import type { UIConfig } from 'config/Configs';
+import { Mic, MicOff, Music2, Projector, Sun } from 'lucide-react';
+import type { ApiCommand, UIConfig } from 'config/Configs';
 import {
   getMuteCommand,
   getMuteStatusFn,
@@ -27,43 +20,6 @@ const BanquetLarge: UIConfig = {
     port: 41794,
   },
   pages: {
-    VIDEO: {
-      name: 'Video',
-      icon: Sun,
-      controls: {
-        projectors: {
-          kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
-          controls: [
-            {
-              kind: 'toggle',
-              icon: Lightbulb,
-              title: 'Projector',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'BanquetLarge', action: 'poweron' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: LightbulbOff,
-              title: 'Projector',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'BanquetLarge', action: 'poweroff' }],
-                },
-              ],
-            },
-          ],
-        },
-      },
-    },
     AUDIO: {
       name: 'Audio',
       icon: Music2,
@@ -168,8 +124,8 @@ const BanquetLarge: UIConfig = {
           icon: Mic,
           iconOff: MicOff,
           title: 'Volume',
-          label: 'On',
-          labelOff: 'Muted',
+          label: 'Mute',
+          labelOff: 'Unmute',
           onApiCommands: [getMuteCommand('basement', '5')],
           offApiCommands: [getUnMuteCommand('basement', '5')],
           getActiveState: getMuteStatusFn('basement', '5'),
@@ -184,6 +140,80 @@ const BanquetLarge: UIConfig = {
         media: {
           kind: 'mediaPlayer',
           playerId: '14',
+        },
+      },
+    },
+    VIDEO: {
+      name: 'Video',
+      icon: Sun,
+      controls: {
+        projector: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Projector',
+          label: 'On',
+          labelOff: 'Off',
+          onApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'BanquetLarge', action: 'ON' }],
+            },
+          ],
+          offApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'BanquetLarge', action: 'OFF' }],
+            },
+          ],
+          getActiveState: async (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            const results = await sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'BanquetLarge', action: 'STATUS' }],
+              },
+            ]);
+            console.log(results);
+            return (results[0] as any)[0].power === 'ON';
+          },
+        },
+        projectorSource: {
+          kind: 'group',
+          className:
+            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          getActiveValue: (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            return sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'BanquetLarge', action: 'STATUS' }],
+              },
+            ]).then((results) => (results[0] as any)[0].source);
+          },
+
+          controls: [
+            {
+              kind: 'toggle',
+              icon: Projector,
+              title: 'Source',
+              label: 'VIDEO',
+              apiCommands: [
+                {
+                  type: 'projector',
+                  payloads: [
+                    {
+                      authId: 'BanquetLarge',
+                      action: 'SOURCE',
+                      videoSource: '',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
       },
     },
