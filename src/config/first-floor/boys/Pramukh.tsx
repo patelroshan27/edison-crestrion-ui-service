@@ -4,11 +4,11 @@ import {
   Bluetooth,
   Lightbulb,
   LightbulbOff,
+  Mic,
+  MicOff,
   Music2,
   PauseOctagon,
-  Power,
   Projector,
-  ProjectorIcon,
   Speech,
   Sun,
   SunDim,
@@ -16,6 +16,7 @@ import {
 import type { ApiCommand, UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 import { MandirSvg } from 'svgs/Mandir';
+import { type ProjectorStatusResponse } from 'types/apiResponses';
 
 const Pramukh: UIConfig = {
   rooms: [],
@@ -281,49 +282,6 @@ const Pramukh: UIConfig = {
       name: 'Video',
       icon: Sun,
       controls: {
-        projectors: {
-          kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
-          controls: [
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'poweron' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Projector',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'poweroff' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Source',
-              label: 'HDMI',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'hdmi' }],
-                },
-              ],
-            },
-          ],
-        },
         screens: {
           kind: 'group',
           className:
@@ -362,6 +320,73 @@ const Pramukh: UIConfig = {
                 {
                   type: 'signal',
                   payload: { signalName: '33' },
+                },
+              ],
+            },
+          ],
+        },
+        projector: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Projector',
+          label: 'On',
+          labelOff: 'Off',
+          onApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Pramukh', action: 'ON' }],
+            },
+          ],
+          offApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Pramukh', action: 'OFF' }],
+            },
+          ],
+          getActiveState: async (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            const results = await sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Pramukh', action: 'STATUS' }],
+              },
+            ]);
+            return (results as ProjectorStatusResponse[])[0][0].power === 'ON';
+          },
+        },
+        projectorSource: {
+          kind: 'group',
+          className: 'grid',
+          getActiveValue: (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            return sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Pramukh', action: 'STATUS' }],
+              },
+            ]).then(
+              (results) => (results as ProjectorStatusResponse[])[0][0].source,
+            );
+          },
+          controls: [
+            {
+              kind: 'toggle',
+              icon: Projector,
+              title: 'Projector Source',
+              label: 'HDMI',
+              apiCommands: [
+                {
+                  type: 'projector',
+                  payloads: [
+                    {
+                      authId: 'Pramukh',
+                      action: 'SOURCE',
+                      videoSource: 'hdmi',
+                    },
+                  ],
                 },
               ],
             },

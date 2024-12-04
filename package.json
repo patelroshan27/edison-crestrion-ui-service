@@ -142,7 +142,11 @@
     "ruchi:archive": "REACT_APP_ROOM_CONFIG_NAME=ruchi ch5-cli archive -p ruchi -P sampleSource=ruchi -d build -o publish",
     "ruchi:deploy": "REACT_APP_ROOM_CONFIG_NAME=ruchi ch5-cli deploy -H 10.25.20.91 -t touchscreen publish/ruchi.ch5z --slow-mode",
     "ruchi": "yarn ruchi:build && yarn ruchi:archive && yarn ruchi:deploy",
-    "deploy-all": "yarn bramhanand && yarn santoffice1 && yarn sarvasva && yarn aksharpith && yarn boysgym && yarn girlsgym && yarn sabhahall && yarn sabhahall1 && yarn sabhahall2 && yarn mahima && yarn niyam && yarn nishchay && yarn aatma && yarn gnan && yarn pramukh && yarn yogi && yarn sarvakarta && yarn yagnapurush && yarn ashro && yarn samarpan && yarn upasana && yarn prapti && yarn ruchi"
+    "banquetlarge:build": "REACT_APP_ROOM_CONFIG_NAME=banquetlarge react-scripts build",
+    "banquetlarge:archive": "REACT_APP_ROOM_CONFIG_NAME=banquetlarge ch5-cli archive -p banquetlarge -P sampleSource=banquetlarge -d build -o publish",
+    "banquetlarge:deploy": "REACT_APP_ROOM_CONFIG_NAME=banquetlarge ch5-cli deploy -H 10.25.20.98 -t touchscreen publish/banquetlarge.ch5z --slow-mode",
+    "banquetlarge": "yarn banquetlarge:build && yarn banquetlarge:archive && yarn banquetlarge:deploy",
+    "deploy-all": "yarn bramhanand && yarn santoffice1 && yarn sarvasva && yarn aksharpith && yarn boysgym && yarn girlsgym && yarn sabhahall && yarn sabhahall1 && yarn sabhahall2 && yarn mahima && yarn niyam && yarn nishchay && yarn aatma && yarn gnan && yarn pramukh && yarn yogi && yarn sarvakarta && yarn yagnapurush && yarn ashro && yarn samarpan && yarn upasana && yarn prapti && yarn ruchi && yarn banquetlarge"
   },
   "eslintConfig": {
     "extends": [
