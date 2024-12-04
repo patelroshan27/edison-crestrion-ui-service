@@ -5,6 +5,7 @@ import {
   getMuteStatusFn,
   getUnMuteCommand,
 } from 'config/audioConfigUtils';
+import { type ProjectorStatusResponse } from 'types/apiResponses';
 
 const BanquetLarge: UIConfig = {
   rooms: [{ key: 'banquetlarge', title: 'BanquetLarge' }],
@@ -175,14 +176,12 @@ const BanquetLarge: UIConfig = {
                 payloads: [{ authId: 'BanquetLarge', action: 'STATUS' }],
               },
             ]);
-            console.log(results);
-            return (results[0] as any)[0].power === 'ON';
+            return (results as ProjectorStatusResponse[])[0][0].power === 'ON';
           },
         },
         projectorSource: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: 'grid',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
@@ -191,14 +190,15 @@ const BanquetLarge: UIConfig = {
                 type: 'projector',
                 payloads: [{ authId: 'BanquetLarge', action: 'STATUS' }],
               },
-            ]).then((results) => (results[0] as any)[0].source);
+            ]).then(
+              (results) => (results as ProjectorStatusResponse[])[0][0].source,
+            );
           },
-
           controls: [
             {
               kind: 'toggle',
               icon: Projector,
-              title: 'Source',
+              title: 'Projector Source',
               label: 'VIDEO',
               apiCommands: [
                 {
@@ -207,7 +207,7 @@ const BanquetLarge: UIConfig = {
                     {
                       authId: 'BanquetLarge',
                       action: 'SOURCE',
-                      videoSource: '',
+                      videoSource: 'video',
                     },
                   ],
                 },

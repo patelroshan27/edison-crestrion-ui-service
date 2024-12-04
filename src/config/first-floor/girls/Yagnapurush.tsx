@@ -16,6 +16,7 @@ import {
 import type { ApiCommand, UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 import { MandirSvg } from 'svgs/Mandir';
+import { type ProjectorStatusResponse } from 'types/apiResponses';
 
 const Yagnapurush: UIConfig = {
   rooms: [],
@@ -293,62 +294,6 @@ const Yagnapurush: UIConfig = {
       name: 'Video',
       icon: Sun,
       controls: {
-        projector: {
-          kind: 'apiToggle',
-          icon: Mic,
-          iconOff: MicOff,
-          title: 'Volume',
-          label: 'On',
-          labelOff: 'Off',
-          onApiCommands: [
-            {
-              type: 'projector',
-              payloads: [{ authId: 'Yagnapurush', action: 'ON' }],
-            },
-          ],
-          offApiCommands: [
-            {
-              type: 'projector',
-              payloads: [{ authId: 'Yagnapurush', action: 'OFF' }],
-            },
-          ],
-          getActiveState: async (
-            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
-          ) => {
-            const results = await sendCommands([
-              {
-                type: 'projector',
-                payloads: [{ authId: 'Yagnapurush', action: 'STATUS' }],
-              },
-            ]);
-            return results[0] === 'on';
-          },
-        },
-        projectorSource: {
-          kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
-          controls: [
-            {
-              kind: 'toggle',
-              icon: Projector,
-              title: 'Source',
-              label: 'HDMI',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [
-                    {
-                      authId: 'Yagnapurush',
-                      action: 'SOURCE',
-                      videoSource: '',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
         screens: {
           kind: 'group',
           className:
@@ -387,6 +332,73 @@ const Yagnapurush: UIConfig = {
                 {
                   type: 'signal',
                   payload: { signalName: '33' },
+                },
+              ],
+            },
+          ],
+        },
+        projector: {
+          kind: 'apiToggle',
+          icon: Mic,
+          iconOff: MicOff,
+          title: 'Volume',
+          label: 'On',
+          labelOff: 'Off',
+          onApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Yagnapurush', action: 'ON' }],
+            },
+          ],
+          offApiCommands: [
+            {
+              type: 'projector',
+              payloads: [{ authId: 'Yagnapurush', action: 'OFF' }],
+            },
+          ],
+          getActiveState: async (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            const results = await sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Yagnapurush', action: 'STATUS' }],
+              },
+            ]);
+            return (results as ProjectorStatusResponse[])[0][0].power === 'ON';
+          },
+        },
+        projectorSource: {
+          kind: 'group',
+          className: 'grid',
+          getActiveValue: (
+            sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
+          ) => {
+            return sendCommands([
+              {
+                type: 'projector',
+                payloads: [{ authId: 'Yagnapurush', action: 'STATUS' }],
+              },
+            ]).then(
+              (results) => (results as ProjectorStatusResponse[])[0][0].source,
+            );
+          },
+          controls: [
+            {
+              kind: 'toggle',
+              icon: Projector,
+              title: 'Projector Source',
+              label: 'HDMI',
+              apiCommands: [
+                {
+                  type: 'projector',
+                  payloads: [
+                    {
+                      authId: 'Yagnapurush',
+                      action: 'SOURCE',
+                      videoSource: 'hdmi',
+                    },
+                  ],
                 },
               ],
             },
