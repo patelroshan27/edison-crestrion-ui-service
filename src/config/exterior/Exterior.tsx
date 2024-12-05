@@ -5,7 +5,7 @@ import type {
   WebrelayExteriorStatusRes,
 } from 'config/Configs';
 import { getWebrelayToggleCmd } from 'config/webrelayConfigUtils';
-import { pageResponsive } from 'config/responsive';
+import { flexResponsive } from 'config/responsive';
 
 const Exterior: UIConfig = {
   rooms: [{ key: 'exterior', title: 'Exterior' }],
@@ -22,7 +22,7 @@ const Exterior: UIConfig = {
   pages: {
     Lights: {
       name: 'Lights',
-      className: pageResponsive,
+      className: flexResponsive,
       icon: Sun,
       controls: {
         exteriorWoodbridge: {

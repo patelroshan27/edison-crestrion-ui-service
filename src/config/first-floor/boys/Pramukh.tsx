@@ -289,36 +289,6 @@ const Pramukh: UIConfig = {
       className: pageResponsive,
       icon: Sun,
       controls: {
-        projectors: {
-          kind: 'group',
-          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2`,
-          controls: [
-            {
-              kind: 'toggle',
-              icon: Lightbulb,
-              title: 'Projector',
-              label: 'On',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'ON' }],
-                },
-              ],
-            },
-            {
-              kind: 'toggle',
-              icon: LightbulbOff,
-              title: 'Projector',
-              label: 'Off',
-              apiCommands: [
-                {
-                  type: 'projector',
-                  payloads: [{ authId: 'Pramukh', action: 'OFF' }],
-                },
-              ],
-            },
-          ],
-        },
         screens: {
           kind: 'group',
           className:

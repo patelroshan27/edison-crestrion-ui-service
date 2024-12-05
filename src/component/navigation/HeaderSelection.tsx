@@ -47,7 +47,9 @@ export const HeaderSelection = <T extends string>({
         label={label}
         placeholder={placeholder}
         selectedKeys={selected ? [selected] : []}
-        onSelectionChange={(val) => onSelect(Array.from(val)[0] as T)}
+        onSelectionChange={(val) =>
+          Array.from(val).length && onSelect(Array.from(val)[0] as T)
+        }
         variant="bordered"
         className={`hidden mob:block m-1 w-auto ${className ?? ''}`}>
         {items.map((item) => (
