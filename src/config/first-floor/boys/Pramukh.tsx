@@ -365,7 +365,7 @@ const Pramukh: UIConfig = {
         },
         projectorSource: {
           kind: 'group',
-          className: 'grid',
+          className: 'grid gap-2',
           getActiveValue: (
             sendCommands: (commands: ApiCommand[]) => Promise<unknown[]>,
           ) => {
@@ -383,7 +383,7 @@ const Pramukh: UIConfig = {
               kind: 'toggle',
               icon: Projector,
               title: 'Projector Source',
-              label: 'HDMI',
+              label: 'HDMI1',
               apiCommands: [
                 {
                   type: 'projector',
@@ -396,7 +396,7 @@ const Pramukh: UIConfig = {
                   ],
                 },
               ],
-            },
+            }
           ],
         },
       },
