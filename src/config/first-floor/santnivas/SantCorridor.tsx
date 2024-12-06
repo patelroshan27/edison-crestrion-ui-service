@@ -11,6 +11,12 @@ import {
 } from 'lucide-react';
 import { type ApiCommand, type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
+import {
+  audioResponsive,
+  lightControlResponsive,
+  pageResponsive,
+  pharosResponsive,
+} from 'config/responsive';
 
 const SantCorridor: UIConfig = {
   rooms: [],
@@ -28,12 +34,12 @@ const SantCorridor: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr] gap-2 ${lightControlResponsive}`,
           controls: [
             {
               kind: 'light',
@@ -120,7 +126,7 @@ const SantCorridor: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'santcorridor',
-          className: 'row-span-4 col-span-3 gap-16',
+          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },
@@ -128,7 +134,7 @@ const SantCorridor: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: '!grid-cols-[1fr_2fr_1fr]',
+      className: `!grid-cols-[1fr_2fr_1fr] ${audioResponsive}`,
       controls: {
         speaker: {
           kind: 'audio',

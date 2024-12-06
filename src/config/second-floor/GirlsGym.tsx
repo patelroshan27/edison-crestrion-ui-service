@@ -8,6 +8,7 @@ import {
   ArrowDownToLine,
 } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
+import { lightControlResponsive, pageResponsive } from 'config/responsive';
 
 const GirlsGym: UIConfig = {
   rooms: [{ key: 'girlsgym', title: 'GirlsGym' }],
@@ -26,12 +27,12 @@ const GirlsGym: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
+      className: pageResponsive,
       icon: Sun,
       controls: {
         lights: {
           kind: 'group',
-          className:
-            'row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr] gap-2',
+          className: `row-span-4 grid grid-cols-1 grid-rows-[1fr_1fr_1fr_1fr] gap-2 ${lightControlResponsive}`,
           controls: [
             {
               kind: 'light',
@@ -75,13 +76,14 @@ const GirlsGym: UIConfig = {
     },
     'H&C': {
       name: 'Hoops & Curtain',
+      className: pageResponsive,
       requiredRoles: ['Master', 'Admin'],
       icon: Sun,
       controls: {
         leftHoop: {
           kind: 'group',
           className:
-            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr] mob:row-span-1 mob:row-span-1',
           controls: [
             {
               kind: 'toggle',
@@ -123,7 +125,7 @@ const GirlsGym: UIConfig = {
         curtains: {
           kind: 'group',
           className:
-            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr] mob:row-span-1 mob:row-span-1',
           controls: [
             {
               kind: 'toggle',
@@ -165,7 +167,7 @@ const GirlsGym: UIConfig = {
         rightHoop: {
           kind: 'group',
           className:
-            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr]',
+            'row-span-4 grid grid-cols-1 gap-2 grid-rows-[1fr_1fr_1fr] mob:row-span-1 mob:row-span-1',
           controls: [
             {
               kind: 'toggle',

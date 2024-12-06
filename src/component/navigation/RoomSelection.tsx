@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   activeConfigState,
@@ -8,7 +7,7 @@ import {
 } from 'state/navigation';
 import { type RoomKey, getConfigs } from 'config/Configs';
 import { getAllowedPages } from 'utils/getAllowedPages';
-import { HeaderRow } from './HeaderRow';
+import { HeaderSelection } from './HeaderSelection';
 
 const defaultConfig = getConfigs();
 
@@ -54,51 +53,27 @@ export const RoomSelection: React.FC<RoomSelectionProps> = ({
 
       return prev;
     }, {}),
-  );
+  ).map((g) => ({ title: g, key: g }));
 
   return (
     <>
-      <HeaderRow className={className}>
-        {groups.length > 0 &&
-          groups.map((group) => {
-            return (
-              <button
-                key={group}
-                type="button"
-                className={classNames(
-                  'border border-neutral-400 bg-secondary px-3 py-3 flex items-center rounded-lg text-2xl',
-                  group === selectedGroup
-                    ? '!bg-active text-primary-foreground'
-                    : 'bg-background text-primary',
-                )}
-                onClick={() => {
-                  setSelectedGroup(group);
-                }}>
-                {group}
-              </button>
-            );
-          })}
-      </HeaderRow>
-      <HeaderRow className={className}>
-        {rooms.map((room) => {
-          return (
-            <button
-              key={room.key}
-              type="button"
-              className={classNames(
-                'border border-neutral-400 bg-secondary px-3 py-3 flex items-center rounded-lg text-2xl',
-                room.key === roomKey
-                  ? '!bg-active text-primary-foreground'
-                  : 'bg-background text-primary',
-              )}
-              onClick={() => {
-                setRoomKey(room.key);
-              }}>
-              {room.title}
-            </button>
-          );
-        })}
-      </HeaderRow>
+      <HeaderSelection
+        items={groups}
+        onSelect={setSelectedGroup}
+        selected={selectedGroup}
+        label="Group"
+        placeholder="Select Group"
+        className={className}
+      />
+
+      <HeaderSelection
+        items={rooms}
+        onSelect={setRoomKey}
+        selected={roomKey}
+        label="Room"
+        placeholder="Select Room"
+        className={className}
+      />
     </>
   );
 };
