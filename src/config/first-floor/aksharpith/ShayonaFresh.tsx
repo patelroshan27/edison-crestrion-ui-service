@@ -9,8 +9,7 @@ import {
 
 const ShayonaFresh: UIConfig = {
   rooms: [
-    { key: 'shayonafresh', title: 'ShayonaFresh' },
-    { key: 'aksharpith', title: 'Aksharpith' },
+    { key: 'shayonafresh', title: 'ShayonaFresh' }
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',

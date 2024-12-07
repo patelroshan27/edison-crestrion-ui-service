@@ -25,6 +25,7 @@ const Configs: UIConfig = {
     { key: 'exterior', title: 'Exterior', group: 'SantNivas' },
     { key: 'aksharpith', title: 'Aksharpith', group: 'Mandir' },
     { key: 'shayonafresh', title: 'ShayonaFresh', group: 'Mandir' },
+    { key: 'ffcorridor', title: 'FFCorridor', group: 'Mandir' },
     { key: 'sarvakarta', title: 'SarvaKarta', group: 'Boys' },
     { key: 'sampsquare', title: 'SampSquare', group: 'Boys' },
     { key: 'divyabhav', title: 'Divyabhav', group: 'Boys' },

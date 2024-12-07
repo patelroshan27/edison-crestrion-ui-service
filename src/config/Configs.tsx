@@ -9,6 +9,7 @@ import SantKitchen from './first-floor/santnivas/SantKitchen';
 import Bramhanand from './first-floor/santnivas/Bramhanand';
 import Aksharpith from './first-floor/aksharpith/Aksharpith';
 import ShayonaFresh from './first-floor/aksharpith/ShayonaFresh';
+import FFCorridor from './first-floor/aksharpith/FFCorridor';
 import SabhaHall from './second-floor/SabhaHall';
 import SecondFloorLobby from './second-floor/SecondFloorLobby';
 import { type SvgIcon } from 'types/appState';
@@ -31,6 +32,7 @@ import Exterior from './exterior/Exterior';
 import Sarvakarta from './first-floor/boys/Sarvakarta';
 import SampSquare from './first-floor/boys/SampSquare';
 import Divyabhav from './first-floor/boys/Divyabhav';
+
 import { type MediaPlayerCmd } from 'component/media/hooks';
 
 export interface CrestronConfigs {
@@ -240,6 +242,7 @@ export const CONFIGS = {
   santcorridor: SantCorridor,
   santkitchen: SantKitchen,
   aksharpith: Aksharpith,
+  ffcorridor: FFCorridor,
   shayonafresh: ShayonaFresh,
   sabhahall: SabhaHall,
   lobby260: SecondFloorLobby,
@@ -260,7 +263,7 @@ export const CONFIGS = {
   exterior: Exterior,
   sarvakarta: Sarvakarta,
   sampsquare: SampSquare,
-  divyabhav: Divyabhav,
+  divyabhav: Divyabhav,  
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

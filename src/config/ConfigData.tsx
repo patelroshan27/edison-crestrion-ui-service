@@ -236,3 +236,164 @@ export const sabhaHallColorStates: ColorIntensity[] = [
     scene: '00',
   },
 ];
+
+export const mandirColorStates: ColorIntensity[] = [
+  {
+    name: 'Sky Blue/Light Sky Blue',
+    color: 'bg-sky-600',
+    scene: '01',
+  },
+  {
+    name: 'Purple/Light Purple',
+    color: 'bg-purple-500',
+    scene: '02',
+  },
+  {
+    name: 'Orange/Light Orange',
+    color: 'bg-orange-500',
+    scene: '03',
+  },
+  {
+    name: 'Yellow/Yellow Green',
+    color: 'bg-yellow-300',
+    scene: '04',
+  },
+  {
+    name: 'Pink/Light Pink',
+    color: 'bg-pink-500',
+    scene: '05',
+  },
+  {
+    name: 'Gold/Light Gold',
+    color: 'bg-amber-500',
+    scene: '06',
+  },
+  {
+    name: 'Rose Pink',
+    color: 'bg-rose-300',
+    scene: '07',
+  },
+  {
+    name: 'Orange',
+    color: 'bg-orange-500',
+    scene: '08',
+  },
+  {
+    name: 'Sky Blue',
+    color: 'bg-sky-600',
+    scene: '09',
+  },
+  {
+    name: 'Purple',
+    color: 'bg-purple-500',
+    scene: '10',
+  },
+  {
+    name: 'Mint',
+    color: 'bg-emerald-300',
+    scene: '11',
+  },
+  {
+    name: 'Gold',
+    color: 'bg-amber-500',
+    scene: '12',
+  },
+  {
+    name: 'Purple/SKy Blue/Light Sky Blue',
+    color: 'bg-gradient-to-r from-purple-500 via-sky-600 to-white-500',
+    scene: '13',
+  },
+  {
+    name: 'Mint/Purple/Light Purple',
+    color: 'bg-gradient-to-r from-mint-500 via-purple-500 to-white-500',
+    scene: '14',
+  },
+  {
+    name: 'Pink/Orange/Light Orange',
+    color: 'bg-gradient-to-r from-pink-500 via-orange-500 to-white-500',
+    scene: '15',
+  },
+  {
+    name: 'Sky Blue/Yellow/Light Yellow',
+    color: 'bg-gradient-to-r from-sky-600 via-yellow-300 to-white-500',
+    scene: '16',
+  },
+  {
+    name: 'Rose Pink/Blue/Light Blue',
+    color: 'bg-gradient-to-r from-rose-300 via-blue-700 to-white-500',
+    scene: '17',
+  },
+  {
+    name: 'Yellow/Pink/Light Pink',
+    color: 'bg-gradient-to-r from-yellow-300 via-pink-500 to-white-500',
+    scene: '18',
+  },
+  {
+    name: 'Light Sky Blue/Sky Blue',
+    color: 'bg-gradient-to-r from-sky-600 via-sky-500 to-white-500',
+    scene: '19',
+  },
+  {
+    name: 'Light Purple/Purple',
+    color: 'bg-gradient-to-r from-purple-500 via-purple-400 to-white-500',
+    scene: '20',
+  },
+  {
+    name: 'Light Orange/Orange',
+    color: 'bg-gradient-to-r from-orange-500 via-orange-400 to-white-500',
+    scene: '21',
+  },
+  {
+    name: 'Light Yellow/Yellow',
+    color: 'bg-gradient-to-r from-yellow-300 via-yellow-400 to-white-500',
+    scene: '22',
+  },
+  {
+    name: 'Light Pink/Pink',
+    color: 'bg-gradient-to-r from-pink-500 via-pink-400 to-white-500',
+    scene: '23',
+  },
+  {
+    name: 'Light Gold/Gold',
+    color: 'bg-gradient-to-r from-amber-500 via-amber-400 to-white-500',
+    scene: '24',
+  },
+  {
+    name: 'Purple/SKy Blue/Light Sky Blue',
+    color: 'bg-gradient-to-r from-purple-500 via-sky-600 to-white-500',
+    scene: '25',
+  },
+  {
+    name: 'Mint/Purple/Light Purple',
+    color: 'bg-gradient-to-r from-mint-500 via-purple-500 to-white-500',
+    scene: '26',
+  },
+  {
+    name: 'Pink/Orange/Light Orange',
+    color: 'bg-gradient-to-r from-pink-500 via-orange-500 to-white-500',
+    scene: '27',
+  },
+  {
+    name: 'Sky Blue/Yellow/Light Yellow',
+    color: 'bg-gradient-to-r from-sky-600 via-yellow-300 to-white-500',
+    scene: '28',
+  },
+  {
+    name: 'Rose Pink/Blue/Light Blue',
+    color: 'bg-gradient-to-r from-rose-300 via-blue-700 to-white-500',
+    scene: '29',
+  },
+  {
+    name: 'Yellow/Pink/Light Pink',
+    color: 'bg-gradient-to-r from-yellow-300 via-pink-500 to-white-500',
+    scene: '30',
+  },
+  {
+    name: 'Off',
+    color:
+    'bg-neutral-100 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-400',
+    icon: PowerOff,
+    scene: '00',
+  }
+];
+

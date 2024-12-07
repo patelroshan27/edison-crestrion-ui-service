@@ -22,6 +22,7 @@ const Aksharpith: UIConfig = {
   rooms: [
     { key: 'aksharpith', title: 'Aksharpith' },
     { key: 'shayonafresh', title: 'ShayonaFresh' },
+    { key: 'ffcorridor', title: 'FFCorridor' },
   ],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
