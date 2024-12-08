@@ -263,7 +263,7 @@ export const CONFIGS = {
   exterior: Exterior,
   sarvakarta: Sarvakarta,
   sampsquare: SampSquare,
-  divyabhav: Divyabhav,  
+  divyabhav: Divyabhav,
 } as const;
 
 export type RoomKey = keyof typeof CONFIGS;

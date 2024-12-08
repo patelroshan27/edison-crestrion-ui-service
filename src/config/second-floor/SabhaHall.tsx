@@ -134,7 +134,7 @@ const SabhaHall: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sabhahall',
-          className: `row-span-4`,
+          className: `[&>*]:h-[6rem] [&>*]:w-[6rem]`,
           colorStates: sabhaHallColorStates,
         },
       },

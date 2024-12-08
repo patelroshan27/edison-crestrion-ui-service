@@ -1,15 +1,10 @@
 import { Sun } from 'lucide-react';
 import type { UIConfig } from 'config/Configs';
 import { mandirColorStates } from 'config/ConfigData';
-import {
-  pageResponsive,
-  pharosResponsive,
-} from 'config/responsive';
+import { pageResponsive, pharosResponsive } from 'config/responsive';
 
 const FFCorridor: UIConfig = {
-  rooms: [
-    { key: 'ffcorridor', title: 'FFCorridor' }
-  ],
+  rooms: [{ key: 'ffcorridor', title: 'FFCorridor' }],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',
@@ -25,13 +20,13 @@ const FFCorridor: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
-      className: pageResponsive,
+      className: `!grid-cols-1 ${pageResponsive}`,
       icon: Sun,
       controls: {
         pharos: {
           kind: 'pharos',
           room: 'ffcorridor',
-          className: `row-span-4 col-span-3 ${pharosResponsive}`,
+          className: `${pharosResponsive}`,
           colorStates: mandirColorStates,
         },
       },

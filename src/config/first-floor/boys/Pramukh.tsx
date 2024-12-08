@@ -396,7 +396,7 @@ const Pramukh: UIConfig = {
                   ],
                 },
               ],
-            }
+            },
           ],
         },
       },

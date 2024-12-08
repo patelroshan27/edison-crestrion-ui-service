@@ -19,13 +19,13 @@ const SecondFloorLobby: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
-      className: pageResponsive,
+      className: `!grid-cols-1 ${pageResponsive}`,
       icon: Sun,
       controls: {
         pharos: {
           kind: 'pharos',
           room: 'lobby260',
-          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
+          className: `[&>*]:h-[9rem] [&>*]:w-[9rem] ${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },

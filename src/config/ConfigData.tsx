@@ -391,9 +391,8 @@ export const mandirColorStates: ColorIntensity[] = [
   {
     name: 'Off',
     color:
-    'bg-neutral-100 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-400',
+      'bg-neutral-100 dark:bg-neutral-800 border-neutral-500 dark:border-neutral-400',
     icon: PowerOff,
     scene: '00',
-  }
+  },
 ];
-

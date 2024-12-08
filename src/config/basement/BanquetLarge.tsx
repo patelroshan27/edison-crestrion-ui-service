@@ -6,7 +6,7 @@ import {
   getUnMuteCommand,
 } from 'config/audioConfigUtils';
 import { type ProjectorStatusResponse } from 'types/apiResponses';
-import { flexResponsive } from 'config/responsive';
+import { pageResponsive } from 'config/responsive';
 
 const BanquetLarge: UIConfig = {
   rooms: [{ key: 'banquetlarge', title: 'BanquetLarge' }],
@@ -25,7 +25,7 @@ const BanquetLarge: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: `!grid-cols-[1fr_1fr_1fr_1fr] ${flexResponsive}`,
+      className: `!grid-cols-[1fr_1fr_1fr_1fr] ${pageResponsive}`,
       controls: {
         mediaplayer: {
           kind: 'audio',
@@ -148,7 +148,7 @@ const BanquetLarge: UIConfig = {
     VIDEO: {
       name: 'Video',
       icon: Sun,
-      className: flexResponsive,
+      className: pageResponsive,
       controls: {
         projector: {
           kind: 'apiToggle',

@@ -8,9 +8,7 @@ import {
 } from 'config/responsive';
 
 const ShayonaFresh: UIConfig = {
-  rooms: [
-    { key: 'shayonafresh', title: 'ShayonaFresh' }
-  ],
+  rooms: [{ key: 'shayonafresh', title: 'ShayonaFresh' }],
   id: 123,
   authProviderURL: '/crestron/passcodes/validate',
   pharosApiPath: '/pharos/send',

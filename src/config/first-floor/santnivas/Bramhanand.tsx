@@ -43,7 +43,7 @@ const Bramhanand: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
-      className: pageResponsive,
+      className: `grid-cols-[1fr_3fr] ${pageResponsive}`,
       icon: Sun,
       controls: {
         lights: {
@@ -123,7 +123,7 @@ const Bramhanand: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'bramhanand',
-          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
+          className: `${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },
