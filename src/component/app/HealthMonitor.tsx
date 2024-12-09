@@ -4,7 +4,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from '@nextui-org/modal';
 import { Button } from '@nextui-org/react';
@@ -74,39 +73,37 @@ export const HealthMonitor: React.FC<HealthMonitorProps> = ({
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
+      hideCloseButton
+      placement="center"
       className={classNames(
         'outline-none focus:outline-none',
-        'h-auto w-full flex items-center justify-center',
-        'text-lg border-2 border-red-700 bg-red-100',
+        'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+        'text-lg border-1 border-red-700 bg-red-100',
         'rounded-xl font-medium text-center',
+        'max-w-md w-full',
+        'h-auto',
       )}>
-      <ModalContent>
-        {(onClose) => (
+      <ModalContent
+        className={classNames(
+          'flex flex-col items-center justify-center',
+          'w-full',
+          'min-h-0',
+        )}>
+        {() => (
           <>
             <ModalHeader
               className={classNames(
                 'outline-none focus:outline-none',
-                'h-auto w-full flex items-center justify-center',
-                'text-lg border-2 border-red-700 bg-red-400',
-                'rounded font-large text-center',
+                'w-full flex items-center justify-center',
+                'text-lg bg-red-400',
+                'rounded-t font-large text-center',
+                'py-3',
               )}>
               Temporarily Offline
             </ModalHeader>
-            <ModalBody>
+            <ModalBody className="text-center py-4">
               <p>The service is currently unavailable due to maintenance.</p>
             </ModalBody>
-            <ModalFooter>
-              <Button
-                className={classNames(
-                  'outline-none focus:outline-none',
-                  'h-auto w-full flex items-center justify-center',
-                  'text-lg border-2 border-red-700 bg-red-500',
-                  'rounded-xl font-large text-center',
-                )}
-                onPress={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
           </>
         )}
       </ModalContent>
