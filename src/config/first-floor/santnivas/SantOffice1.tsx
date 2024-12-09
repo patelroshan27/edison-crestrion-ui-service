@@ -31,7 +31,7 @@ const SantOffice1: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
-      className: pageResponsive,
+      className: `grid-cols-[1fr_3fr] ${pageResponsive}`,
       icon: Sun,
       controls: {
         lights: {
@@ -123,7 +123,7 @@ const SantOffice1: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'santoffice1',
-          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
+          className: pharosResponsive,
           colorStates: commonRoomColorStates,
         },
       },

@@ -1,9 +1,8 @@
-export const pageResponsive = 'mob:grid-cols-1 mob:!grid-rows-none mob:gap-2';
-
-export const flexResponsive = 'mob:mt-2 mob:flex mob:flex-col';
+export const pageResponsive =
+  'mob:mt-2 mob:flex mob:flex-col mob:h-auto mob:pb-10';
 
 export const lightControlResponsive = 'mob:row-span-1';
 
-export const pharosResponsive = 'mob:row-span-1 mob:gap-2';
+export const pharosResponsive = 'mob:[&>*]:h-[6rem] mob:[&>*]:w-[6rem]';
 
 export const audioResponsive = 'mob:!grid-cols-none mob:grid-rows-none';

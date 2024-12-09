@@ -23,7 +23,7 @@ const SantKitchen: UIConfig = {
   pages: {
     LIGHTS: {
       name: 'Lights',
-      className: pageResponsive,
+      className: `grid-cols-[1fr_3fr] ${pageResponsive}`,
       icon: Sun,
       controls: {
         lights: {
@@ -115,7 +115,7 @@ const SantKitchen: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'santkitchen',
-          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
+          className: pharosResponsive,
           colorStates: commonRoomColorStates,
         },
       },

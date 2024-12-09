@@ -8,8 +8,6 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { usePharosApiState } from 'utils/hooks';
 
-const MAX_ROWS = 4;
-
 interface PharosColorControlProps extends ColorIntensity {
   room: string;
   activeScene?: string;
@@ -61,57 +59,37 @@ interface Props {
 
 const CustomControl: React.FC<Props> = ({ className, config }: Props) => {
   const [activeScene, setActiveScene] = useState<string>();
-  const rowModulous = Math.min(
-    Math.ceil(config.colorStates.length / MAX_ROWS),
-    4,
-  );
 
-  const rows: ColorIntensity[][] = config.colorStates.reduce<
-    ColorIntensity[][]
-  >((acc, item, index) => {
-    const rowIndex = index % rowModulous;
-    if (acc[rowIndex] == null) {
-      acc[rowIndex] = [];
-    }
-    acc[rowIndex].push(item);
-    return acc;
-  }, []);
-
-  const colorPalettes = rows.map((row, index) => {
-    return row.map((item) => {
-      return (
-        <PharosColorControl
-          {...item}
-          room={config.room}
-          key={`${config.room}${item.scene}`}
-          activeScene={activeScene}
-          extraPayloads={item.extraPayloads}
-          onPharosCmd={setActiveScene}
-        />
-      );
-    });
+  const colorPalettes = config.colorStates.map((item) => {
+    return (
+      <PharosColorControl
+        {...item}
+        room={config.room}
+        key={`${config.room}${item.scene}`}
+        activeScene={activeScene}
+        extraPayloads={item.extraPayloads}
+        onPharosCmd={setActiveScene}
+      />
+    );
   });
 
   return (
     <div
       className={classNames(
-        'flex w-full h-full items-center justify-center',
+        'flex w-full h-full items-center justify-center flex-wrap justify-between',
         className,
       )}>
-      <div className="grid w-full">
-        {colorPalettes.map((row, index) => {
-          return (
-            <div
-              key={`row-${index}`}
-              className={classNames(
-                'h-[9rem] flex items-center justify-center',
-                className,
-              )}>
-              {row}
-            </div>
-          );
-        })}
-      </div>
+      {colorPalettes.map((row, index) => {
+        return (
+          <div
+            key={`row-${index}`}
+            className={classNames(
+              'h-[8rem] w-[8rem] flex items-center justify-center',
+            )}>
+            {row}
+          </div>
+        );
+      })}
     </div>
   );
 };

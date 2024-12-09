@@ -14,9 +14,8 @@ import { MandirSvg } from '../../../svgs/Mandir';
 import { type ApiCommand, type UIConfig } from 'config/Configs';
 import { commonRoomColorStates } from 'config/ConfigData';
 import {
-  audioResponsive,
-  lightControlResponsive,
   pageResponsive,
+  lightControlResponsive,
   pharosResponsive,
 } from 'config/responsive';
 
@@ -46,7 +45,7 @@ const Configs: UIConfig = {
     LIGHTS: {
       name: 'Lights',
       icon: Sun,
-      className: pageResponsive,
+      className: `grid-cols-[1fr_3fr] ${pageResponsive}`,
       controls: {
         lights: {
           kind: 'group',
@@ -119,7 +118,7 @@ const Configs: UIConfig = {
         pharos: {
           kind: 'pharos',
           room: 'sarvasva',
-          className: `row-span-4 col-span-3 gap-16 ${pharosResponsive}`,
+          className: `${pharosResponsive}`,
           colorStates: commonRoomColorStates,
         },
       },
@@ -127,7 +126,7 @@ const Configs: UIConfig = {
     AUDIO: {
       name: 'Audio',
       icon: Music2,
-      className: `!grid-cols-[1fr_1fr_2fr] ${audioResponsive}`,
+      className: `!grid-cols-[1fr_1fr_2fr] ${pageResponsive}`,
       controls: {
         speaker: {
           kind: 'audio',
@@ -343,7 +342,7 @@ const Configs: UIConfig = {
     MEDIA: {
       name: 'Media Player',
       icon: Music2,
-      className: '!grid-cols-[1fr] !grid-rows-[1fr]',
+      className: `!grid-cols-[1fr] !grid-rows-[1fr] ${pageResponsive}`,
       controls: {
         media: {
           kind: 'mediaPlayer',
@@ -354,7 +353,7 @@ const Configs: UIConfig = {
     SCHEDULER: {
       name: 'Scheduler',
       icon: Clock,
-      className: '!grid-cols-[1fr] !grid-rows-[1fr]',
+      className: `!grid-cols-[1fr] !grid-rows-[1fr] ${pageResponsive}`,
       controls: {
         media: {
           kind: 'scheduler',
