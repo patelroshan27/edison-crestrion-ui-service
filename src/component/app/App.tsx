@@ -7,7 +7,6 @@ import LogoScreenSaver from 'component/LogoScreenSaver';
 import LoginScreen from 'component/LoginScreen';
 import { RoomSelection } from 'component/navigation/RoomSelection';
 import { useRecoilState } from 'recoil';
-import { LockButton } from 'component/navigation/LockButton';
 import { FIFTEEN_MINUTES_IN_MS } from 'utils/Constants';
 import { LOGGED_OUT_USER, loggedInUserState } from 'state/navigation';
 import { HealthMonitor } from './HealthMonitor';
@@ -41,7 +40,6 @@ const App: React.FC<Props> = ({ className }) => {
       )}>
       <RoomSelection className="grow-0 shrink-0" />
       <Navigation className="grow-0 shrink-0" />
-      <LockButton />
       <Body className="w-full h-full overflow-x-hidden overflow-y-auto no-scrollbar" />
     </div>
   );
